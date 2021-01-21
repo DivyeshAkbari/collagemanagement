@@ -135,7 +135,7 @@
 							
 							</div>
 						</div>
-						<div id="message">
+						<div id="message" >
 							<!-- <h3>Password must contain the following:</h3> -->
 							<p id="letter" class="invalid">A lowercase letter</p>
 							<p id="capital" class="invalid">A capital (uppercase) letter</p>
@@ -319,22 +319,7 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-  $('#ourForm').submit(function(e){
-      var form = this;
-      e.preventDefault();
-      // Check Passwords are the same
-      if( $('#ppsw').val()==$('#password').val() ) {
-          // Submit Form
-          alert('Passwords Match, submitting form');
-          form.submit();
-      } else {
-          // Complain bitterly
-          alert('Password Mismatch');
-          return false;
-      }
-  });
-});
+
 
 
 </script>

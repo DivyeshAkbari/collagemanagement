@@ -66,7 +66,7 @@ public class Collagedaoimpl implements CollageDao
 	public User getlogindetails(Connection connection, User user)
 	{
 		User u1=null;
-		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_email=? AND  c_password=?");	
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_email=? AND  c_password=? AND i_status=1 ");	
 			  )
 		{		
 			p1.setString(1, user.getEmail());

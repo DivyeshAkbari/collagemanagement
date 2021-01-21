@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.collagemanagement.bean.Log"%>
+    <%@ page import="com.collagemanagement.bean.User"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,6 +58,11 @@
 	<!-- REVOLUTION SLIDER END -->	
 </head>
 <body id="bg">
+
+
+<% HttpSession httpSession = request.getSession(false);%>
+<% User u1=(User) httpSession.getAttribute("uname");%>
+
 <div class="page-wraper">
 <div id="loading-icon-bx"></div>
 	<!-- Header Top ==== -->
@@ -77,9 +84,24 @@
 									<option data-icon="flag flag-us">English US</option>
 								</select>
 							</li> -->
-							<li><a href="login.jsp">Login</a></li>
+							
+							
+							<%if(null!=httpSession && null==u1){%>
+                               <li><a href="login.jsp">Login </a> </li>                                    
+                             <%}else{ %>
+                                <li><a href="Logout">Logout </a></li>
+                                <li><a href="#">Welcome <%=u1.getMiddlename() %></a></li>
+                                
+                                <%if(u1.getRole().equals("STUDENT")){%>
+                                
+                                <li><a href="EditStudentDetails">Edit</a></li>
+                                <%}else{ %>
+                                <li><a href="EditFacultyDetails">Edit</a></li>
+                                <%} %>
+                             <%} %>
+                                
 							<li><a href="register.jsp">As a Student</a></li>
-							 <li><a href="register1.jsp">As a Faculty</a></li>
+			 				 <li><a href="register1.jsp">As a Faculty</a></li>
 							<!-- <li>
 								<select class="header-lang-bx">
 									<option><a href="register.jsp">As a Student</a></option>

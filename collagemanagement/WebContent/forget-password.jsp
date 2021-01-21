@@ -4,6 +4,25 @@
 <html lang="en">
 
 <head>
+<script src="assets/js/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("input[type=email]").blur(function() {
+		var str = $("#mail").val();
+		$.get("Forget", {
+			email : str
+		}).done(function(data)  {
+
+			if (data == "false") 
+			{
+				alert("This email id is Not exist in our database");	
+			}
+		});	
+	});
+});
+	
+</script>
+
 
 	<!-- META ============================================= -->
 	<meta charset="utf-8">
@@ -51,6 +70,7 @@
 	
 </head>
 <body id="bg">
+
 <div class="page-wraper">
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
@@ -63,13 +83,13 @@
 					<h2 class="title-head">Forget <span>Password</span></h2>
 					<p>Login Your Account <a href="login.jsp">Click here</a></p>
 				</div>	
-				<form class="contact-bx">
+				<form class="contact-bx" action="Forget" method="post">
 					<div class="row placeani">
 						<div class="col-lg-12">
 							<div class="form-group">
 								<div class="input-group">
 									<label>Your Email Address</label>
-									<input name="dzName" type="email" required="" class="form-control">
+									<input name="email" id="mail" type="email" required="" class="form-control">
 								</div>
 							</div>
 						</div>

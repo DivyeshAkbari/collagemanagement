@@ -1,44 +1,36 @@
 package com.collagemanagement.servlet;
 
-
-import com.collagemanagement.encryptpassword.TrippleDes;
-import com.collagemanagement.service.impl.Collageserviceimpl;
-import com.collagemanagement.bean.User;
-//import com.collagemanagement.emailverification.Main;
-import com.collagemanagement.emailverification.SendEmail;
-
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Random;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import com.collagemanagement.bean.Stream;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.collagemanagement.bean.User;
+import com.collagemanagement.emailverification.SendEmail;
+import com.collagemanagement.encryptpassword.TrippleDes;
+import com.collagemanagement.service.impl.Collageserviceimpl;
+
 /**
- * Servlet implementation class Divyesh
+ * Servlet implementation class Registrationstudent
  */
-public class Registration extends HttpServlet{
+public class Registrationstudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 	
 	Collageserviceimpl college =new Collageserviceimpl(); 
-	User u1=new User();
+	
 	SendEmail m1=new SendEmail();
 	String message=null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Registration() {
+    public Registrationstudent() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,8 +39,7 @@ public class Registration extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		// TODO Auto-generated method stub
 		String str=request.getParameter("email");
 		
 		System.out.println("Email id :- "+str);		
@@ -64,13 +55,15 @@ public class Registration extends HttpServlet{
 		{
 			response.getWriter().append("false");
 		}
-}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		User u1=new User();
 		
 		String role=request.getParameter("role");
 		String fname=request.getParameter("firstname");
@@ -156,15 +149,6 @@ public class Registration extends HttpServlet{
 		{
 			response.sendRedirect("register.jsp");
 		}
-		
-//		String username=u1.getEmail();
-//		if(message.equalsIgnoreCase("Registrationsuccess"))
-//		{
-//			m1.sendmail(username,"You Have SuccessFully Registered In our website ");
-//		}
-//			
-//		
-//		RequestDispatcher d1=request.getRequestDispatcher("login.jsp");
-//		d1.forward(request,response);
 	}
 }
+

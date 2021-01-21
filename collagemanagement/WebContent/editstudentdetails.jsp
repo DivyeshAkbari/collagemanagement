@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+	<%@page import="com.collagemanagement.bean.User"%>
+	<%@page import="java.util.List"%>
 	<%@page import="com.collagemanagement.bean.Stream"%>
-<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,11 +87,11 @@ $(document).ready(function() {
 </style>
 
 </head>
-
 <jsp:include page ="/FetchHobby"/>
- 
- <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
-<body id="bg">
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
+	<% List<User> user =(List)request.getAttribute("user"); %>
+	<% User u1=user.get(0); %>
+	<body id="bg">
 	<div class="page-wraper">
 		<div id="loading-icon-bx"></div>
 		<div class="account-form">
@@ -104,22 +104,17 @@ $(document).ready(function() {
 				<div class="account-container">
 					<div class="heading-bx left">
 						<h2 class="title-head">
-							Sign Up <span>Now</span>
-						</h2>
-						<h2 class="title-head">
-							<span>As a Student</span>
-						</h2>
 						<p>
-							Login Your Account <a href="login.jsp">Click here</a>
+							Update Your Information
 						</p>
 					</div>
-					<form class="contact-bx" action="Registrationstudent" method="post" enctype="multipart/form-data" >
+					<form class="contact-bx" action="UpdateStudentDetails" method="post" enctype="multipart/form-data" >
 						<div class="row placeani">
 							<div class="col-md-6">
 								<div class="form-group">
 									<div class="input-group">
 										<input type="hidden" name="role" value="STUDENT"></input>
-										 <label>FirstName</label> <input name="firstname" type="text" autocomplete="off"
+										 <label>FirstName</label> <input name="firstname" value="<%=u1.getFirstname() %>" type="text" autocomplete="off"
 											required="" class="form-control">
 									</div>
 								</div>
@@ -127,7 +122,7 @@ $(document).ready(function() {
 								<!-- <div class="col-lg-12"> -->
 								<div class="form-group">
 									<div class="input-group">
-										<label>Middle Name</label> <input name="middlename"
+										<label>Middle Name</label> <input name="middlename" value="<%=u1.getMiddlename() %>"
 											type="text" autocomplete="off" required=""
 											class="form-control">
 									</div>
@@ -136,33 +131,34 @@ $(document).ready(function() {
 								<!-- <div class="col-lg-12"> -->
 								<div class="form-group">
 									<div class="input-group">
-										<label>Last Name</label> <input name="lastname" type="text"
+										<label>Last Name</label> <input name="lastname" value="<%=u1.getLastname() %>" type="text"
 											autocomplete="off" required="" class="form-control">
 									</div>
 								</div>
 								<!-- </div> -->
 								<!-- <div class="col-lg-12"> -->
 								<div class="form-group">
-									<select class="form-control" name="stream">
-										<option class="hidden" value="" disabled selected hidden>Choose
-											your Stream</option>
+									<select class="form-control" name="stream" value="<%=u1.getStream() %>">
+										<option class="hidden" selected="" disabled=""><%=u1.getStream() %></option>
+							
+										<option>
 										<%
 											for(int i=0;i<Streamlist.size();i++){
 										%>
 										<%
 											Stream s=Streamlist.get(i);
 										%>
-											<option value="<%=s.getStreamname()%>"> <%=s.getStreamname()%> </option>
+											<option value="<%=s.getStreamname()%>"> <%=s.getStreamname()%>  </option>
 										<%
 											}
-										%>
+										%></option>
 									</select>
 								</div>
 								<!-- </div> -->
 								<!-- <div class="col-lg-12"> -->
 								<div class="form-group">
 									<div class="input-group">
-										<label>Your Semester</label> <input name="semester"
+										<label>Your Semester</label> <input name="semester" value="<%=u1.getSemester() %>"
 											type="text" autocomplete="off" required=""
 											class="form-control">
 									</div>
@@ -171,8 +167,7 @@ $(document).ready(function() {
 								<!-- <div class="col-lg-12"> -->
 								<div class="form-group">
 									<select class="form-control" name="division">
-										<option class="hidden" selected="" disabled="">Choose
-											your Division</option>
+										<option class="hidden" selected="" disabled=""><%=u1.getDivision() %></option>
 										<option>A</option>
 										<option>B</option>
 										<option>C</option>
@@ -181,21 +176,24 @@ $(document).ready(function() {
 								</div>
 								<!-- </div> -->
 								<!-- <div class="col-lg-12"> -->
-								<div class="form-group">
+								<!--   <div class="form-group">
 									<div class="maxl">
 										<label class="radio inline"> <input type="radio"
-											name="gender" value="male" checked=""> <span> Male </span>
+											name="gender" value="<%=u1.getXender() %>"> <span>
+												<%=u1.getXender() %> </span>
 										</label> <label class="radio inline"> <input type="radio"
-											name="gender" value="female" checked=""> <span>Female </span>
+										name="gender" value="<%=u1.getXender() %>"> <span><%=u1.getXender() %></span>
 										</label>
 									</div>
-									<!-- </div> -->
+									
+									
 								</div>
+								-->
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<div class="input-group">
-										<label>Your Email Address</label> <input name="email"
+										<label>Your Email Address</label> <input name="email" value="<%=u1.getEmail() %>"
 											id="mail" type="email" autocomplete="off" required=""
 											class="form-control">
 									</div>
@@ -206,7 +204,7 @@ $(document).ready(function() {
 									<div class="input-group">
 										<label>Your Password</label> <input autocomplete="off"
 											class="form-control" id="password" type="password"
-											name="password" onkeyup='check();'
+											name="password" value="<%=u1.getPassword() %>" onkeyup='check();'
 											pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 											required> <i toggle="#password-field"
 											class="fa fa-fw fa-eye field_icon toggle-password"></i>
@@ -229,7 +227,7 @@ $(document).ready(function() {
 									<div class="form-group">
 										<div class="input-group">
 											<label>Your Number</label> <input autocomplete="off"
-												minlength="10" maxlength="10" name="number" type="text"
+												minlength="10" maxlength="10" name="number"  value="<%=u1.getContactno() %>" type="text"
 												required="" class="form-control">
 										</div>
 									</div>
@@ -239,27 +237,19 @@ $(document).ready(function() {
 								<div class="form-group">
 									<div class="input-group">
 										<label>Your Address</label>
-										<textarea autocomplete="off" name="address" type="Address"
+										<textarea autocomplete="off" name="address" 
 											required="" class="form-control" cols="30" rows="4"
-											maxlength="100" placeholder="Enter Your Address *"> </textarea>
+											maxlength="100"  placeholder="Enter Your Address *"><%=u1.getAddress() %> </textarea>
 									</div>
 								</div>
 								<!-- </div> -->
-								<!-- <div class="col-lg-12"> -->
-								<div class="form-group">
-									<div class="input-group">
-										<image id="profileImage" src="assets/images/profile.png" />
-										<input id="imageUpload" type="file" name="profile_photo"
-											placeholder="Photo" capture> <br> <span>
-											Upload your photo</span>
-									</div>
-								</div>
+								<!-- <div class="col-lg-12"> --
 							</div>
 							<!-- </div> -->
 							<div class="col-lg-12 m-b30">
 
 								<button name="submit" type="submit" value="Submit"
-									class="btn button-md">Sign Up</button>
+									class="btn button-md">Update</button>
 
 							</div>
 							<!-- <div class="col-lg-12">

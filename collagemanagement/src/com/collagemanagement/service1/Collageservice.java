@@ -1,0 +1,28 @@
+package com.collagemanagement.service1;
+
+import java.util.List;
+
+import com.collagemanagement.bean.Log;
+import com.collagemanagement.bean.Stream;
+import com.collagemanagement.bean.User;
+
+public interface Collageservice 
+{
+	public String saveuserdetails(User u1);
+
+	public User fetchlogindetails(User u1);
+	
+	public String getemail(String str);
+
+	public User getfirstname(String username);
+	
+	public String Updatepassword(User user);
+	
+	public List<User> getuserdetails(String email);
+	
+	public String updatestudentdetails(User u1, String email);
+	
+	public List<Stream> fetchstreamdetails();
+	
+	public String activateaccount(String email, String hash);
+}

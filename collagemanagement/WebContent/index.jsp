@@ -128,7 +128,8 @@
                 <div class="container clearfix">
 					<!-- Header Logo ==== -->
 					<div class="menu-logo">
-						<a href="index.jsp"><img src="assets/images/logo-white.png" alt=""></a>
+						<a href="index.jsp"><img  height="100px" width="100px" src="assets/images/Educhamp_logo.png" alt=""></a>
+						<a href="index.jsp"><img    src="assets/images/logo-whiteeeee.png" alt=""></a>
 					</div>
 					<!-- Mobile Nav Button ==== -->
                     <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,17 +138,7 @@
 						<span></span>
 					</button>
 					<!-- Author Nav ==== -->
-                    <div class="secondary-menu">
-                        <div class="secondary-inner">
-                            <ul>
-								<li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
-								<!-- Search Button ==== -->
-								<li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
-							</ul>
-						</div>
-                    </div>
+                    
 					<!-- Search Box ==== -->
                     <div class="nav-search-bar">
                         <form action="#">
@@ -256,11 +247,7 @@
 								</ul>
 							</li>
 						</ul>
-						<div class="nav-social-link">
-							<a href="javascript:;"><i class="fa fa-facebook"></i></a>
-							<a href="javascript:;"><i class="fa fa-google-plus"></i></a>
-							<a href="javascript:;"><i class="fa fa-linkedin"></i></a>
-						</div>
+						
                     </div>
 					<!-- Navigation Menu END ==== -->
                 </div>

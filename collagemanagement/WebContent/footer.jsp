@@ -6,7 +6,8 @@
 				<div class="container">
 					<div class="d-flex align-items-stretch">
 						<div class="pt-logo mr-auto">
-							<a href="index.jsp"><img src="assets/images/logo-white.png" alt=""/></a>
+							<a href="index.jsp"><img height="50px" width="50px" src="assets/images/Educhamp_logo.png" alt=""/></a>
+								<a href="index.jsp"><img    height="100px" width="100px"src="assets/images/logo-whiteeeee.png" alt=""></a>
 						</div>
 						<div class="pt-social-link">
 							<ul class="list-inline m-a0">

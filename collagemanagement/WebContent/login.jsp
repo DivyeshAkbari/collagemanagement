@@ -54,6 +54,7 @@
 <body id="bg">
 
 <% String message=(String)request.getAttribute("message"); %>
+<% String message1=(String)request.getAttribute("message1"); %>
 <div class="page-wraper">
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
@@ -63,6 +64,11 @@
 		<div class="account-form-inner">
 			<div class="account-container">
 				<div class="heading-bx left">
+					
+					<% if(message1!=null)
+					{%>
+						 <span><%=message1 %></span>
+					<%} %>
 					<h2 class="title-head">Login to your <span>Account</span></h2>
 					<p>Don't have an account? Registered As Student <a href="register.jsp">Click here</a></p>
 					<p>Don't have an account? Registered As Faculty <a href="register1.jsp">Click here</a></p>

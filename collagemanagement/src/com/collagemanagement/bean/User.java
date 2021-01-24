@@ -19,7 +19,9 @@ public class User
 	private String confirm_password;
 	private String qualification;
 	private String myHash;
-	
+	private int id;
+	private String URL;
+		
 	public String getUserProfilepicString() {
 		return userProfilepicString;
 	}
@@ -146,6 +148,19 @@ public class User
 	public void setMyHash(String myHash) {
 		this.myHash = myHash;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getURL() {
+		return URL;
+	}
+	public void setURL(String uRL) {
+		URL = uRL;
+	}
+	
 }
 
 

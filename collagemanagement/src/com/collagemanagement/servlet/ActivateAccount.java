@@ -32,26 +32,28 @@ public class ActivateAccount extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
+		System.out.println("Get Method from Activate Account");
 		String email = request.getParameter("key1");
 		String hash = request.getParameter("key2");
-	
-		System.out.println("servlet called AA");
-		try {
-			td=new TrippleDes();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
-		String Decryptedemail=td.decrypt(email);
-		String message=college.activateaccount(Decryptedemail,hash);
+		System.out.println("servlet called AA");
+//		try {
+//			td=new TrippleDes();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+	//	String Decryptedemail=td.decrypt(email);
+		String message=college.activateaccount(email,hash);
 		
 		System.out.println("Activate Account Servlet  Message"+message);
 		
 		if(message.equals("success"))
 		{
-			response.sendRedirect("login.jsp");					
+			request.setAttribute("message1","Your Account has been verified.");
+			response.sendRedirect("login.jsp");
 			System.out.println("Account Successfully Verified.");
 		}
 		else
@@ -65,9 +67,6 @@ public class ActivateAccount extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
-		doGet(request, response);
-		
-			
+		doGet(request, response);		
 	}
 }

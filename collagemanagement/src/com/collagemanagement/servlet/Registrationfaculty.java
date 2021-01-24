@@ -1,6 +1,7 @@
 package com.collagemanagement.servlet;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import com.collagemanagement.bean.User;
 import com.collagemanagement.emailverification.SendEmail;
@@ -77,6 +80,11 @@ public class Registrationfaculty extends HttpServlet {
 		String qualification=request.getParameter("qualification");
 		
 		
+		Random theRandom = new Random();
+		theRandom.nextInt(999999);
+		String myHash = DigestUtils.md5Hex("" +	theRandom);
+		
+		
 		if(null!=part) {
 			System.out.println("File Name" + part.getName());
 			System.out.println("File Name 2" + part.getSubmittedFileName());
@@ -120,19 +128,22 @@ public class Registrationfaculty extends HttpServlet {
 		u1.setAddress(address);
 		u1.setRole(role);
 		u1.setQualification(qualification);
+		u1.setMyHash(myHash);
 		
+		String url= request.getRequestURI();
+		u1.setURL(url);
 		
+		System.out.println("URL is "+url);
 		String message=collage.saveuserdetails(u1);		
 		System.out.println(message);
 		
-		
-		String username=u1.getEmail();
-		if(message.equalsIgnoreCase("Registrationsuccess"))
+		if(message.equals("Registrationsuccess"))
 		{
-			m1.sendmail(username,"You Have SuccessFully Registered In our website As a faculty ");
+			response.sendRedirect("verify.jsp");
 		}
-			
-		RequestDispatcher d1=request.getRequestDispatcher("login.jsp");
-		d1.forward(request,response);
+		else
+		{
+			response.sendRedirect("register.jsp");
+		}		
 	}
 }

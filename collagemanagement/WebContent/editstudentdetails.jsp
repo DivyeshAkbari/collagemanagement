@@ -252,6 +252,8 @@ $(document).ready(function() {
 									class="btn button-md">Update</button>
 
 							</div>
+							
+							
 							<!-- <div class="col-lg-12">
 							<h6>Sign Up with Social media</h6>
 							<div class="d-flex">

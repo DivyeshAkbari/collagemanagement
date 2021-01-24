@@ -144,8 +144,21 @@ public class Registration extends HttpServlet{
 		u1.setMyHash(myHash);
 	//	u1.setQualification(qualification);
 		
+//		System.out.println("URI is "  + request.getRequestURI());
+//		System.out.println("URL is "  + request.getRequestURL());
+//		System.out.println("Context Path: " +request.getContextPath());
+//		
+//		String finalString = request.getRequestURL().toString().replace(request.getRequestURI(), "") + request.getContextPath().concat("/ActivateAccount");
+//		System.out.println("Final String: " +finalString);
+//		
+//		u1.setURL(finalString);
+//		
 		
+		
+		//System.out.println("URL is "+url);
 		message=college.saveuserdetails(u1);		
+		
+		
 		System.out.println(message);
 		
 		if(message.equals("Registrationsuccess"))

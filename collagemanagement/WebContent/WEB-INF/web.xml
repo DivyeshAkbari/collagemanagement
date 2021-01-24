@@ -219,4 +219,44 @@
     <servlet-name>Registrationstudent</servlet-name>
     <url-pattern>/Registrationstudent</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentData</display-name>
+    <servlet-name>StudentData</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.StudentData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentData</servlet-name>
+    <url-pattern>/StudentData</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveStudentdetails</display-name>
+    <servlet-name>RemoveStudentdetails</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.RemoveStudentdetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveStudentdetails</servlet-name>
+    <url-pattern>/RemoveStudentdetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FacultyData</display-name>
+    <servlet-name>FacultyData</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.FacultyData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacultyData</servlet-name>
+    <url-pattern>/FacultyData</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveFacultydetails</display-name>
+    <servlet-name>RemoveFacultydetails</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.RemoveFacultydetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveFacultydetails</servlet-name>
+    <url-pattern>/RemoveFacultydetails</url-pattern>
+  </servlet-mapping>
 </web-app>

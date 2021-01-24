@@ -18,7 +18,7 @@
 	
 	<!-- FOOTER -->
 	<footer class="footer mt-5 text-muted text-center text-small">
-      <p>Email Verification &copy; 2018, All Rights Reserved.</p>
+      <p>Email Verification &copy; 2021, All Rights Reserved by CollegeManagement System </p>
     </footer>
 </body>
 </html>

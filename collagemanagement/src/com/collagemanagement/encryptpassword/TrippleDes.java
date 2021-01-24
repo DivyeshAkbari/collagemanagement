@@ -48,9 +48,14 @@ public class TrippleDes
         String decryptedText=null;
         try {
             cipher.init(Cipher.DECRYPT_MODE, key);
+            System.out.println("1");
+           
             byte[] encryptedText = Base64.decodeBase64(encryptedString);
+            System.out.println("2");
             byte[] plainText = cipher.doFinal(encryptedText);
+            System.out.println("3");
             decryptedText= new String(plainText);
+            System.out.println("Decrpted Text"+ decryptedText);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.collagemanagement.bean.Log;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.Collagedaoimpl;
@@ -232,5 +231,83 @@ public class Collageserviceimpl  implements Collageservice
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+	public List<User> getstudentdetails()
+	{
+		List<User> user=null;
+		try(Connection connection=getconnection();
+			  )
+		{
+				user=dao.fetchstudentdetails(connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+
+	public String deletstudentdetails(String id)
+	{
+		try(Connection connection=getconnection();
+			  )
+		{
+				int i1=dao.removestudentdetails(connection,id);
+				if(i1>0)
+				{
+					return "deleted";
+				}
+				else
+				{
+					return "not";
+				}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public List<User> getFacultydetails()
+	{
+		List<User> user=null;
+		try(Connection connection=getconnection();
+			  )
+		{
+				user=dao.fetchfacultydetails(connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+
+	public String deletfacultydetails(String id)
+	{
+		try(Connection connection=getconnection();
+				  )
+			{
+					int i1=dao.removefacultydetails(connection,id);
+					if(i1>0)
+					{
+						return "deleted";
+					}
+					else
+					{
+						return "not";
+					}
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 	}
 }

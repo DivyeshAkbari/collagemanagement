@@ -92,16 +92,24 @@
                                 <li><a href="Logout">Logout </a></li>
                                 <li><a href="#">Welcome <%=u1.getMiddlename() %></a></li>
                                 
-                                <%if(u1.getRole().equals("STUDENT")){%>
+                                <%if(u1.getRole().equals("STUDENT") || u1.getRole().equals("ADMIN"))
+                                {%>
                                 
                                 <li><a href="EditStudentDetails">Edit</a></li>
                                 <%}else{ %>
                                 <li><a href="EditFacultyDetails">Edit</a></li>
                                 <%} %>
                              <%} %>
-                                
+                             
+                             
+                             <%if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
+                             {%>
+                                	<li><a href="StudentData">StudentDetails</a></li>
+                                	<li><a href="FacultyData">FacultyDetails</a></li>
+                              <%}else{ %>  
 							<li><a href="register.jsp">As a Student</a></li>
 			 				 <li><a href="register1.jsp">As a Faculty</a></li>
+			 				 <%} %>
 							<!-- <li>
 								<select class="header-lang-bx">
 									<option><a href="register.jsp">As a Student</a></option>

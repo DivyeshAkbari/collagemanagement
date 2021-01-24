@@ -39,6 +39,7 @@ public class Collagedaoimpl implements CollageDao
 			p1.setString(14,u1.getQualification());
 			p1.setString(15, u1.getMyHash());
 			
+			
 			insertedRaws=p1.executeUpdate();	
 			
 			if(insertedRaws==1)
@@ -47,7 +48,8 @@ public class Collagedaoimpl implements CollageDao
 				System.out.println("Sending Mail... ");
 							
 				SendingEmail se = new SendingEmail(u1.getEmail(),u1.getMyHash());
-				se.sendMail();
+				Thread t1=new Thread(se);
+				t1.start();
 			}
 		}
 		
@@ -84,7 +86,8 @@ public class Collagedaoimpl implements CollageDao
 				}
 			}
 		}
-		catch (SQLException e) {
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -154,7 +157,9 @@ public class Collagedaoimpl implements CollageDao
 			p1.setString(2, user.getEmail());
 			
 			return p1.executeUpdate();
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -278,14 +283,15 @@ public class Collagedaoimpl implements CollageDao
 					try(PreparedStatement p2=connection.prepareStatement("Update user_table  set i_status=1 where c_email=? AND c_hash=? "); 
 						  )
 					{
-						p1.setString(1, email);
-						p1.setString(2, hash);
+						p2.setString(1, email);
+						p2.setString(2, hash);
 						
-						return p1.executeUpdate();
+						return p2.executeUpdate();
 					}
 				}
 			}
 		} 
+		
 		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
@@ -293,4 +299,94 @@ public class Collagedaoimpl implements CollageDao
 		}
 		return 0;
 	}
+	public List<User> fetchstudentdetails(Connection connection)
+	{
+		String s1="STUDENT";
+		List<User> userlist=new ArrayList<>();
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_roll='"+s1+"' AND i_status=1");
+				ResultSet r1=p1.executeQuery();
+			  )
+		{
+			while(r1.next())
+			{
+				User user=new User();
+				user.setId(r1.getInt(1));
+				user.setFirstname(r1.getString(2));
+				user.setMiddlename(r1.getString(3));
+				user.setLastname(r1.getString(4));
+				user.setEmail(r1.getString(5));
+				user.setXender(r1.getString(6));
+				user.setAddress(r1.getString("c_address"));
+				user.setStream(r1.getString("c_stream"));
+				user.setDivision(r1.getString("c_division"));
+				userlist.add(user);		
+			}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userlist;
+	}
+
+	public int removestudentdetails(Connection connection, String id) 
+	{
+		try(PreparedStatement p1=connection.prepareStatement("Update  user_table set i_status=0 where i_user_id='"+id+"' ");	
+			)
+		{
+			return p1.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public List<User> fetchfacultydetails(Connection connection)
+	{
+		String s1="FACULTY";
+		List<User> userlist=new ArrayList<>();
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_roll='"+s1+"' AND i_status=1");
+				ResultSet r1=p1.executeQuery();
+			  )
+		{
+			while(r1.next())
+			{
+				User user=new User();
+				user.setId(r1.getInt(1));
+				user.setFirstname(r1.getString(2));
+				user.setMiddlename(r1.getString(3));
+				user.setLastname(r1.getString(4));
+				user.setEmail(r1.getString(5));
+				user.setXender(r1.getString(6));
+				user.setAddress(r1.getString("c_address"));
+				user.setQualification(r1.getString("c_qulification"));
+				userlist.add(user);		
+			}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userlist;
+	}
+
+	public int removefacultydetails(Connection connection, String id) 
+	{
+		try(PreparedStatement p1=connection.prepareStatement("Update  user_table set i_status=0 where i_user_id='"+id+"' ");	
+				)
+			{
+				return p1.executeUpdate();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;	
+		}
 }

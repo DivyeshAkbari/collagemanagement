@@ -25,4 +25,12 @@ public interface Collageservice
 	public List<Stream> fetchstreamdetails();
 	
 	public String activateaccount(String email, String hash);
+	
+	public List<User> getstudentdetails();
+	
+	public String deletstudentdetails(String id);
+	
+	public List<User> getFacultydetails();
+	
+	public String deletfacultydetails(String id);
 }

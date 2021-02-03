@@ -47,7 +47,7 @@
     <div class="row no-gutters min-vh-100"> 
       <!-- Welcome Text
       ========================= -->
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="hero-wrap d-flex align-items-center h-100">
           <div class="hero-mask opacity-8 bg-primary"></div>
           <div class="hero-bg hero-bg-scroll" style="background-image:url('assets/images/background/bg2.jpg');"></div>

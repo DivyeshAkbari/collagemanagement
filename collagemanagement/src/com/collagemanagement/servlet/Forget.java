@@ -61,7 +61,7 @@ public class Forget extends HttpServlet {
 	
 		String email=request.getParameter("email");
 		System.out.println("Email is "+email);
-		request.setAttribute("message","opt has been sent to your email id go and check your email");
+		request.setAttribute("message","otp has been sent to your email id go and check your email");
 		String otp=GenerateOTP.generateOTP();
 		m1.sendmail(email, "Your Opt is "+otp);
 		

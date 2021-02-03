@@ -18,7 +18,7 @@ import com.collagemanagement.other.GenerateOTP;
 public class ResendOTP1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	SendEmail m1= new SendEmail();
+	//SendEmail m1= new SendEmail();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,7 +42,7 @@ public class ResendOTP1 extends HttpServlet {
 		ServletContext OTP=getServletContext();
 		OTP.setAttribute("OPTnewvalue", otp);
 		
-		m1.sendmail(mail,"OTP is "+otp);
+		//m1.sendmail(mail,"OTP is "+otp);
 		
 		ServletContext Value=getServletContext();
 		Value.setAttribute("value",1);

@@ -19,7 +19,7 @@ import com.collagemanagement.service.impl.Collageserviceimpl;
  */
 public class Forget extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	SendEmail m1=new SendEmail();
+	
 	Collageserviceimpl collage =new Collageserviceimpl();
 	TrippleDes td;
     /**
@@ -59,11 +59,16 @@ public class Forget extends HttpServlet {
 	{
 		// TODO Auto-generated method stub
 	
+		
+		
 		String email=request.getParameter("email");
 		System.out.println("Email is "+email);
 		request.setAttribute("message","otp has been sent to your email id go and check your email");
 		String otp=GenerateOTP.generateOTP();
-		m1.sendmail(email, "Your Opt is "+otp);
+		SendEmail m1=new SendEmail(email,"Your Opt is "+otp);
+		Thread t1=new Thread(m1);
+		t1.start();
+		
 		
 		System.out.println("Resend Pela no otp "+otp);
 		request.setAttribute("emailid",email);

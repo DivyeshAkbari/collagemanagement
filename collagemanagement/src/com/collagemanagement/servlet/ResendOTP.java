@@ -18,7 +18,7 @@ public class ResendOTP extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	
-	SendEmail m1=new SendEmail();
+	//SendEmail m1=new SendEmail();
 	TrippleDes td;
 	//SendEmail m1= new SendEmail();
     /**
@@ -40,7 +40,7 @@ public class ResendOTP extends HttpServlet {
 		System.out.println("Resend Email is "+Email);	
 		
 		String otp=GenerateOTP.generateOTP();
-		m1.sendmail(Email, "Your Opt is "+otp);
+		//m1.sendmail(Email, "Your Opt is "+otp);
 		
 		System.out.println("Resend OTP is "+otp);
 		request.setAttribute("NewMessage","New  opt has been sent to your email id");

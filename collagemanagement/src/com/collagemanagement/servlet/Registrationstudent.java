@@ -27,7 +27,7 @@ public class Registrationstudent extends HttpServlet {
 	
 	Collageserviceimpl college =new Collageserviceimpl(); 
 	
-	SendEmail m1=new SendEmail();
+	//SendEmail m1=new SendEmail();
 	String message=null;
     /**
      * @see HttpServlet#HttpServlet()

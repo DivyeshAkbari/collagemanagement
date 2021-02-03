@@ -27,9 +27,7 @@ public class SendingEmail implements Runnable
 	{
 		this.userEmail = userEmail;
 		this.myHash = myHash;
-		
 	}
-
 	
 	@Override
 	public void run() 

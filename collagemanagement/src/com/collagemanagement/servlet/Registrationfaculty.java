@@ -64,7 +64,7 @@ public class Registrationfaculty extends HttpServlet {
 		doGet(request, response);
 		
 		User u1=new User();
-		SendEmail m1=new SendEmail();
+		//SendEmail m1=new SendEmail();
 		
 		String role=request.getParameter("role");
 		String fname=request.getParameter("firstname");

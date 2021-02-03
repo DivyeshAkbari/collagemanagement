@@ -39,7 +39,6 @@ public class Collagedaoimpl implements CollageDao
 			p1.setString(14,u1.getQualification());
 			p1.setString(15, u1.getMyHash());
 			
-			
 			insertedRaws=p1.executeUpdate();	
 			
 			if(insertedRaws==1)

@@ -17,6 +17,7 @@ import com.collagemanagement.emailverification.SendEmail;
 import com.collagemanagement.encryptpassword.TrippleDes;
 import com.collagemanagement.service.impl.Collageserviceimpl;
 
+
 /**
  * Servlet implementation class Registrationstudent
  */
@@ -85,7 +86,7 @@ public class Registrationstudent extends HttpServlet {
 			System.out.println("File Name" + part.getName());
 			System.out.println("File Name 2" + part.getSubmittedFileName());
 			System.out.println("File Size :: " + part.getSize());
-			u1.setUserProfilepicStream( part.getInputStream());
+			u1.setUserProfilepicStream(part.getInputStream());
 		}
 		
 		// Generate Hash Code which helps in creating Activation Link
@@ -133,7 +134,7 @@ public class Registrationstudent extends HttpServlet {
 		u1.setEmail(email);
 		u1.setPassword(encryptedpassword);
 		u1.setContactno(number);
-		u1.setAddress(address);
+		u1.setAddress(address);    
 		u1.setRole(role);
 		u1.setMyHash(myHash);
 	//	u1.setQualification(qualification);

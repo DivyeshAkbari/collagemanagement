@@ -90,7 +90,7 @@ $(document).ready(function() {
 
 <jsp:include page ="/FetchHobby"/>
  
- <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
 <body id="bg">
 	<div class="page-wraper">
 		<div id="loading-icon-bx"></div>
@@ -147,12 +147,13 @@ $(document).ready(function() {
 										<option class="hidden" value="" disabled selected hidden>Choose
 											your Stream</option>
 										<%
-											for(int i=0;i<Streamlist.size();i++){
+											for(int i=0;i<Streamlist.size();i++)
+											{
 										%>
 										<%
 											Stream s=Streamlist.get(i);
 										%>
-											<option value="<%=s.getStreamname()%>"> <%=s.getStreamname()%> </option>
+											<option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> </option>
 										<%
 											}
 										%>

@@ -84,6 +84,7 @@ public class Login extends HttpServlet {
 			System.out.println(user.getPassword());
 			HttpSession httpSession=request.getSession();
 			httpSession.setAttribute("uname",user);
+			
 			ServletContext Email=getServletContext();
 			Email.setAttribute("email",user.getEmail());
 			request.getRequestDispatcher("index.jsp").forward(request, response);

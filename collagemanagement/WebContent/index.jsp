@@ -77,6 +77,7 @@
 						</ul>
 					</div>
 					<div class="topbar-right">
+					
 						<ul>
 							<!-- <li>
 								<select class="header-lang-bx">
@@ -106,9 +107,10 @@
                              {%>
                                 	<li><a href="StudentData">StudentDetails</a></li>
                                 	<li><a href="FacultyData">FacultyDetails</a></li>
+                                	<li><a href="register1.jsp"> As a Faculty</a></li>
                               <%}else{ %>  
 							<li><a href="register.jsp">As a Student</a></li>
-			 				 <li><a href="register1.jsp">As a Faculty</a></li>
+			 				 
 			 				 <%} %>
 							<!-- <li>
 								<select class="header-lang-bx">
@@ -119,6 +121,7 @@
 							
 						
 						</ul>
+						
 					</div>
 				</div>
 			</div>
@@ -194,6 +197,8 @@
 									<!-- <li><a href="profile.jsp">Profile</a></li> -->
 									<li><a href="membership.jsp">Membership</a></li>
 									<li><a href="error-404.jsp">404 Page</a></li>
+									<li><a href="Result.jsp">Result</a></li>
+									
 								</ul>
 							</li>
 							<li class="add-mega-menu"><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>

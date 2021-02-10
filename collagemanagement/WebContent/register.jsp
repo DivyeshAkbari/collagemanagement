@@ -3,6 +3,7 @@
 	
 	<%@page import="com.collagemanagement.bean.Stream"%>
 <%@page import="java.util.List"%>
+<%@page import="com.collagemanagement.bean.Semester"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,6 +92,10 @@ $(document).ready(function() {
 <jsp:include page ="/FetchHobby"/>
  
 <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
+
+<jsp:include page ="/Fetchsemdetails"/>
+ 
+<% List<Semester> Semlist= (List)request.getAttribute("SemList"); %>
 <body id="bg">
 	<div class="page-wraper">
 		<div id="loading-icon-bx"></div>
@@ -162,11 +167,25 @@ $(document).ready(function() {
 								<!-- </div> -->
 								<!-- <div class="col-lg-12"> -->
 								<div class="form-group">
-									<div class="input-group">
-										<label>Your Semester</label> <input name="semester"
-											type="text" autocomplete="off" required=""
-											class="form-control">
-									</div>
+									<div class="form-group">
+									<select class="form-control" name="semester">
+										<option class="hidden" value="" disabled selected hidden>Choose
+											your Semester</option>
+											
+										<%
+											for(int i=0;i<Semlist.size();i++)
+											{
+										%>
+										<%
+											Semester s=Semlist.get(i);
+										%>
+											<option value="<%=s.getSemid()%>"> <%=s.getSemid()%> </option>
+										<%
+											}
+										%>
+										
+									</select>
+								</div>
 								</div>
 								<!-- </div> -->
 								<!-- <div class="col-lg-12"> -->
@@ -292,6 +311,7 @@ $(document).ready(function() {
 	<script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
 	<script src="assets/js/functions.js"></script>
 	<script src="assets/js/contact.js"></script>
+	
 	
 	<script>
 $('#password, #confirm_password').on('keyup', function () {

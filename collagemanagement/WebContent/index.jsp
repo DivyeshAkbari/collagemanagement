@@ -201,8 +201,11 @@
 									<li><a href="AddQuestion.jsp">Add Question</a></li>
 									<li><a href="QuestionDetails.jsp">Question Display</a></li>
 									
-									
-									
+										<% if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
+					{%>
+						 <li><a href="ResultFileUpload.jsp">Upload Result File </a></li>
+					<%} %>
+				
 									
 									
 								</ul>

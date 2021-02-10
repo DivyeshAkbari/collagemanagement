@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
 //import com.collagemanagement.bean.Log;
 import com.collagemanagement.bean.User;
@@ -393,4 +394,28 @@ public class Collagedaoimpl implements CollageDao
 			}
 			return 0;	
 		}
+
+	@Override
+	public List<Semester> getSemDetais(Connection connection)
+	{
+		List<Semester> semlist=new ArrayList<>();
+		
+		try(PreparedStatement p1=connection.prepareStatement("Select semester_id from semester_table");
+				ResultSet r1=p1.executeQuery();
+			  )
+		{
+			while(r1.next())
+			{
+				Semester sem=new Semester();
+				sem.setSemid(r1.getInt(1));
+				semlist.add(sem);
+			}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return semlist;
+	}
 }

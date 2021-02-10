@@ -198,6 +198,12 @@
 									<li><a href="membership.jsp">Membership</a></li>
 									<li><a href="error-404.jsp">404 Page</a></li>
 									<li><a href="Result.jsp">Result</a></li>
+									<li><a href="AddQuestion.jsp">Add Question</a></li>
+									<li><a href="QuestionDetails.jsp">Question Display</a></li>
+									
+									
+									
+									
 									
 								</ul>
 							</li>
@@ -1091,7 +1097,7 @@
 <script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
 <script src="assets/js/functions.js"></script>
 <script src="assets/js/contact.js"></script>
-<script src='assets/vendors/switcher/switcher.js'></script>
+
 <!-- Revolution JavaScripts Files -->
 <script src="assets/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
 <script src="assets/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>

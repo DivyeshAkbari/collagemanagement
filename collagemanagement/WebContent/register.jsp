@@ -292,7 +292,7 @@ $(document).ready(function() {
 	<script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
 	<script src="assets/js/functions.js"></script>
 	<script src="assets/js/contact.js"></script>
-	<script src='assets/vendors/switcher/switcher.js'></script>
+	
 	<script>
 $('#password, #confirm_password').on('keyup', function () {
   if ($('#password').val() == $('#confirm_password').val()) {

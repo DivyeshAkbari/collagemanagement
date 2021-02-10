@@ -29,7 +29,8 @@
                 <div class="container clearfix">
 					<!-- Header Logo ==== -->
 					<div class="menu-logo">
-						<a href="index.jsp"><img src="assets/images/logo.png" alt=""></a>
+						<a href="index.jsp"><img src="assets/images/Educhamp_logo.png" alt=""></a>
+						<a href="index.jsp"><img    src="assets/images/Black.png" alt=""></a>
 					</div>
 					<!-- Mobile Nav Button ==== -->
                     <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,17 +39,7 @@
 						<span></span>
 					</button>
 					<!-- Author Nav ==== -->
-                    <div class="secondary-menu">
-                        <div class="secondary-inner">
-                            <ul>
-								<li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
-								<!-- Search Button ==== -->
-								<li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
-							</ul>
-						</div>
-                    </div>
+                    
 					<!-- Search Box ==== -->
                     <div class="nav-search-bar">
                         <form action="#">
@@ -86,6 +77,7 @@
 									
 									<li><a href="membership.jsp">Membership</a></li>
 									<li><a href="error-404.jsp">404 Page</a></li>
+									<li><a href="Result.jsp">Result</a></li>
 								</ul>
 							</li>
 							<li class="add-mega-menu"><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>

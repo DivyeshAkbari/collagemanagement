@@ -126,7 +126,7 @@
   <ul class="mb-0">
     <!-- <li class="blue" data-toggle="tooltip" title="Blue" data-path="#"></li>
     <li class="indigo" data-toggle="tooltip" title="Indigo" data-path="http://demo.harnishdesign.net/html/oxyy/css/color-indigo.css"></li> -->
-    <li class="purple" data-toggle="tooltip" title="Purple" data-path="http://demo.harnishdesign.net/html/oxyy/css/color-purple.css"></li>
+    <li class="Red" data-toggle="tooltip" title="Red" data-path="http://demo.harnishdesign.net/html/oxyy/css/color-purple.css"></li>
     <!-- <li class="pink" data-toggle="tooltip" title="Pink" data-path="http://demo.harnishdesign.net/html/oxyy/css/color-pink.css"></li>
     <li class="red" data-toggle="tooltip" title="Red" data-path="http://demo.harnishdesign.net/html/oxyy/css/color-red.css"></li>
     <li class="orange" data-toggle="tooltip" title="Orange" data-path="http://demo.harnishdesign.net/html/oxyy/css/color-orange.css"></li>

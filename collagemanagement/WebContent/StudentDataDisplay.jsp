@@ -38,7 +38,7 @@
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
                         <div class="section-body">
-                     <h2 class="section-title">DataTables</h2>
+                     <h2 class="section-title">Student DataTable</h2>
                     <!-- <p class="section-lead">We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.</p> -->
 
                     <div class="row">

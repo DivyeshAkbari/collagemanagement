@@ -72,6 +72,7 @@ public class Collagedaoimpl implements CollageDao
 		{		
 			p1.setString(1, user.getEmail());
 			p1.setString(2, user.getPassword());
+			
 			try(ResultSet r1=p1.executeQuery();
 				 )
 			{
@@ -82,6 +83,10 @@ public class Collagedaoimpl implements CollageDao
 					u1.setPassword(r1.getString("c_password"));	
 					u1.setMiddlename(r1.getString("c_middle_name"));
 					u1.setRole(r1.getString("c_roll"));
+					u1.setSemester(r1.getInt("i_semester_id"));
+					u1.setId(r1.getInt("i_user_id"));
+					u1.setFirstname(r1.getString("c_First_Name"));
+				
 				}
 			}
 		}

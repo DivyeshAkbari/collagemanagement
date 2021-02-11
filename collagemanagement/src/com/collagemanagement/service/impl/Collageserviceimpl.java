@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.Collagedaoimpl;
@@ -309,5 +310,19 @@ public class Collageserviceimpl  implements Collageservice
 				e.printStackTrace();
 			}
 			return null;
+	}
+
+
+	public List<Semester> fetchSemDetails() 
+	{
+		try(Connection connection=getconnection();
+			  )
+		{
+			return dao.getSemDetais(connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -418,4 +418,5 @@ public class Collagedaoimpl implements CollageDao
 		}
 		return semlist;
 	}
+	
 }

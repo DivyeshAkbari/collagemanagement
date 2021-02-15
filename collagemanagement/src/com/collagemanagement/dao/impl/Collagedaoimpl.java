@@ -400,7 +400,7 @@ public class Collagedaoimpl implements CollageDao
 	{
 		List<Semester> semlist=new ArrayList<>();
 		
-		try(PreparedStatement p1=connection.prepareStatement("Select semester_id from semester_table");
+		try(PreparedStatement p1=connection.prepareStatement("Select i_Semester_id from semester_table");
 				ResultSet r1=p1.executeQuery();
 			  )
 		{

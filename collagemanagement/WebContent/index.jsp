@@ -28,7 +28,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
 	
 	<!-- PAGE TITLE HERE ============================================= -->
-	<title>EduChamp : Education HTML Template </title>
+	<title>EduChamp</title>
 	
 	<!-- MOBILE SPECIFIC ============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -198,8 +198,13 @@
 									<li><a href="membership.jsp">Membership</a></li>
 									<li><a href="error-404.jsp">404 Page</a></li>
 									<li><a href="Result.jsp">Result</a></li>
-									<li><a href="AddQuestion.jsp">Add Question</a></li>
-									<li><a href="QuestionDetails.jsp">Question Display</a></li>
+									<li><a target="_blank" href="QuestionDetails.jsp" >Question Display</a></li>					
+										<% if(null!=u1 && "STUDENT".equalsIgnoreCase(u1.getRole()))
+										{%>
+									
+											<li><a href="AddQuestion.jsp">Add Question</a></li>
+										<%} %>
+				
 									
 										<% if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
 					{%>

@@ -369,4 +369,24 @@
     <servlet-name>Insertans</servlet-name>
     <url-pattern>/Insertans</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Addteacher</display-name>
+    <servlet-name>Addteacher</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.Addteacher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Addteacher</servlet-name>
+    <url-pattern>/Addteacher</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>fetchsemester</display-name>
+    <servlet-name>fetchsemester</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.fetchsemester</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fetchsemester</servlet-name>
+    <url-pattern>/fetchsemester</url-pattern>
+  </servlet-mapping>
 </web-app>

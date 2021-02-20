@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@page import="com.collagemanagement.bean.Stream"%>
+<%@page import="java.util.List"%>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -34,7 +37,55 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    
+   <script>
+//    		$(document).ready(function(){
+//    			$("#stream_check").click(function(){
+//    				var a = $('#stream_check').val(this.checked);
+			
+//    				$("#edit-previous").click(function(){
+//    				  alert("The paragraph was clicked.");
+//    				});
+   				
+//    				$.ajax({
+//    					method:"post",
+//    					url: "fetchsemester",
+//    					data: { name : a}
+//    				})
+//    				.done(function(msg){
+//    					$("#id_sem").children().remove();
+//    					var obj = JQuery.parseJSON(msg);
+//    					$.each(obj,function(key,value){
+//    						$("#id_sem").append('<input type="checkbox" value="">');
+//    					});
+//    				});
+//    			});
+//    		});
+   		
+   </script>
+	<style>
+	.content {
+    display: none;
+	}
+	button {
+    margin-top: 30px;
+	}
+	.back {
+   	 display: none;
+	}
+	.next {
+  	  margin-left: 50px;
+	}
+	.end {
+    display: none;
+	}
+	</style>
 </head>
+
+<jsp:include page ="/FetchHobby"/>
+ 
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
+
 
 <body>
     <!-- Preloader Start Here -->
@@ -277,10 +328,18 @@
                                 </div>
                             </div>
                         </div>
+<!--                         division for next previous button  -->
+					
+                        <div class="content-holder">
+                         <div class="content" id="content-1" data-id='1' style="display: block;">
                         <form class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>First Name *</label>
+                                    <input type="text" placeholder="" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Middle Name *</label>
                                     <input type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -293,91 +352,141 @@
                                         <option value="">Please Select Gender *</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
-                                        <option value="3">Others</option>
+<!--                                         <option value="3">Others</option> -->
                                     </select>
                                 </div>
+
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Date Of Birth *</label>
-                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker">
-                                    <i class="far fa-calendar-alt"></i>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>ID No</label>
+                                    <label>Qualification</label>
                                     <input type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Blood Group *</label>
-                                    <select class="select2">
-                                        <option value="">Please Select Group *</option>
-                                        <option value="1">A+</option>
-                                        <option value="2">A-</option>
-                                        <option value="3">B+</option>
-                                        <option value="3">B-</option>
-                                        <option value="3">O+</option>
-                                        <option value="3">O-</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Religion *</label>
-                                    <select class="select2">
-                                        <option value="">Please Select Religion *</option>
-                                        <option value="1">Islam</option>
-                                        <option value="2">Hindu</option>
-                                        <option value="3">Christian</option>
-                                        <option value="3">Buddish</option>
-                                        <option value="3">Others</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>E-Mail</label>
-                                    <input type="email" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class *</label>
-                                    <select class="select2">
-                                        <option value="">Please Select Class *</option>
-                                        <option value="1">Play</option>
-                                        <option value="2">Nursery</option>
-                                        <option value="3">One</option>
-                                        <option value="3">Two</option>
-                                        <option value="3">Three</option>
-                                        <option value="3">Four</option>
-                                        <option value="3">Five</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Section *</label>
-                                    <select class="select2">
-                                        <option value="">Please Select Section *</option>
-                                        <option value="1">Pink</option>
-                                        <option value="2">Blue</option>
-                                        <option value="3">Bird</option>
-                                        <option value="3">Rose</option>
-                                        <option value="3">Red</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Address</label>
-                                    <input type="text" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Phone</label>
+                                    <label>Mobile Number</label>
                                     <input type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group">
-                                    <label>Short BIO</label>
+                                    <label>Address</label>
                                     <textarea class="textarea form-control" name="message" id="form-message" cols="10" rows="9"></textarea>
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
-                                    <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
+                                    <label class="text-dark-medium">Upload Faculty Photo (150px X 150px)</label>
                                     <input type="file" class="form-control-file">
                                 </div>
+								 
+<!-- 								<button type="button" class="back">Back</button> -->
+				
+							   
                                 <div class="col-12 form-group mg-t-8">
-                                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
-                                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                   <button type="button" id="next" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Next</button>
                                 </div>
                             </div>
                         </form>
+                        </div>
+                        </div>
+<!--                         content holder end -->
+<!-- 					below is division-2  -->
+					 <div class="end" data-id='2'>
+   						 
+							<form class="new-added-form">
+                            <div class="row">
+
+									<div class="col-lg-12 form-group">
+                                    <label>Which stream</label>
+                                    <% 
+                                    for(int i=0;i<Streamlist.size();i++){
+                                    
+                                    	Stream s = Streamlist.get(i);
+                                    %>
+                                    <div class="stream" >
+                                    <input name="stream_checkbox" class="stream_check" type="checkbox" placeholder="" class="" value="<%=s.getStreamid()%>">
+                                     <%=s.getStreamname()%>
+                                     <div id="id_sem<%=s.getStreamid() %>" class="col-lg-12 form-group">
+    								</div>
+                                     </div>
+                                    <% 
+                                    }
+                                    %>
+                                    
+                                 
+                                </div>
+                                
+                                
+                        
+    						
+<!--     						<div id="id_sem" class="col-lg-12 form-group"> -->
+<!--     						</div> -->
+
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Date Of Birth *</label> -->
+<!--                                     <input type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker"> -->
+<!--                                     <i class="far fa-calendar-alt"></i> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>ID No</label> -->
+<!--                                     <input type="text" placeholder="" class="form-control"> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Blood Group *</label> -->
+<!--                                     <select class="select2"> -->
+<!--                                         <option value="">Please Select Group *</option> -->
+<!--                                         <option value="1">A+</option> -->
+<!--                                         <option value="2">A-</option> -->
+<!--                                         <option value="3">B+</option> -->
+<!--                                         <option value="3">B-</option> -->
+<!--                                         <option value="3">O+</option> -->
+<!--                                         <option value="3">O-</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Religion *</label> -->
+<!--                                     <select class="select2"> -->
+<!--                                         <option value="">Please Select Religion *</option> -->
+<!--                                         <option value="1">Islam</option> -->
+<!--                                         <option value="2">Hindu</option> -->
+<!--                                         <option value="3">Christian</option> -->
+<!--                                         <option value="3">Buddish</option> -->
+<!--                                         <option value="3">Others</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
+                                 
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Class *</label> -->
+<!--                                     <select class="select2"> -->
+<!--                                         <option value="">Please Select Class *</option> -->
+<!--                                         <option value="1">Play</option> -->
+<!--                                         <option value="2">Nursery</option> -->
+<!--                                         <option value="3">One</option> -->
+<!--                                         <option value="3">Two</option> -->
+<!--                                         <option value="3">Three</option> -->
+<!--                                         <option value="3">Four</option> -->
+<!--                                         <option value="3">Five</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Section *</label> -->
+<!--                                     <select class="select2"> -->
+<!--                                         <option value="">Please Select Section *</option> -->
+<!--                                         <option value="1">Pink</option> -->
+<!--                                         <option value="2">Blue</option> -->
+<!--                                         <option value="3">Bird</option> -->
+<!--                                         <option value="3">Rose</option> -->
+<!--                                         <option value="3">Red</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
+                                
+                                <div class="col-12 form-group mg-t-8">
+                                   <button type="button" id="edit-previous">Edit Previous Options</button>
+     								<button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                         			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                </div>
+                                
+                                
+                            </div>
+                        </form>
+
+
+    					 
+					</div>
                     </div>
                 </div>
                 <!-- Add New Teacher Area End Here -->
@@ -388,7 +497,7 @@
         </div>
         <!-- Page Area End Here -->
     </div>
-    <!-- jquery-->
+   <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->
     <script src="js/plugins.js"></script>
@@ -406,6 +515,121 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script>
+	$(document).on('click', '.toggle-password', function() {
+	
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	
+	var input = $("#password");
+	input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});
+	
+	</script>
+	<script>
+	$('body').on('click', '#next', function() { 
+	    var id = $('.content:visible').data('id');
+	    var nextId = $('.content:visible').data('id')+1;
+	    $('[data-id="'+id+'"]').hide();
+	    $('[data-id="'+nextId+'"]').show();
+	    
+	    if($('.back:hidden').length == 1){
+	        $('.back').show();
+	    }
+	    if(nextId == 2){
+			$('.content-holder').hide();
+			$('.end').show();
+	    }
+	});
+
+	$('body').on('click', '#edit-previous', function() { 
+		$('.end').hide();
+	    $('.content-holder').show();
+	    $('#content-1').show();
+	});
+	</script>
+	<script>
+	
+	$(document).ready(function(){
+		//var values = [];
+		var value;
+		
+		$('.stream_check').change(function() {
+			value = ($(this).val());
+			var id = "id_sem"+value;
+	        if(this.checked) {
+	            
+	        	$.ajax({
+					method:"post",
+					url: "fetchsemester",
+					data: { name : value}
+				})
+				.done(function(msg){
+					//var id = "id_sem"+value;
+					
+					//$("#id_sem").children().remove();
+					//$("#id_sem").remove();
+					$("#"+id).empty();
+					//alert(value);
+					var obj = jQuery.parseJSON(msg);
+					
+					$.each(obj,function(key,value){
+						
+						$("#"+id).append('<input type="checkbox" value='+value.i_semester_value+'>'+value.semValue+'');
+					});
+				});//ajax
+	        	
+	        }//if
+	        else{
+	        	//alert("else");
+				$("#"+id).empty();
+	        }
+	        
+	       // $('#textbox1').val(this.checked);        
+	    });
+// 		$(".stream_check").change(function(){
+// 			value = ($(this).val());
+// 			var id = "id_sem"+value;
+// 			if($(".stream_check").is(":checked")){
+// 				//values.push($(this).val());
+				
+				
+				
+				
+				
+// 			}//if
+// 			else{
+				
+// 			}
+			
+			//alert(values);
+			
+// 		});
+	});
+			
+			
+// 			$('input[name="stream_checkbox"]:checked').each(function() {
+// 				values.push($(this).val()); 
+// 				});
+// 			alert(values);
+			//console.log(values);
+			///var a = $('#stream_check').val(this.checked);
+			
+			
+// 			$.ajax({
+// 				method:"post",
+// 				url: "fetchsemester",
+// 				data: { name : a}
+// 			})
+// 			.done(function(msg){
+// 				$("#id_sem").children().remove();
+// 				var obj = JQuery.parseJSON(msg);
+// 				$.each(obj,function(key,value){
+// 					$("#id_sem").append('<input type="checkbox" value="">');
+// 				});
+// 			});
+		
+// 	});	
+    </script>
 
 </body>
 

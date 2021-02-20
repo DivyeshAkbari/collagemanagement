@@ -371,6 +371,36 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>FAtchsubjectdetails</display-name>
+    <servlet-name>FAtchsubjectdetails</servlet-name>
+    <servlet-class>com.collagemanagement.Result.Servlet.FAtchsubjectdetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FAtchsubjectdetails</servlet-name>
+    <url-pattern>/FAtchsubjectdetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Fetchsemesterid</display-name>
+    <servlet-name>Fetchsemesterid</servlet-name>
+    <servlet-class>com.collagemanagement.Result.Servlet.Fetchsemesterid</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fetchsemesterid</servlet-name>
+    <url-pattern>/Fetchsemesterid</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetResultinformation</display-name>
+    <servlet-name>GetResultinformation</servlet-name>
+    <servlet-class>com.collagemanagement.Result.Servlet.GetResultinformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetResultinformation</servlet-name>
+    <url-pattern>/GetResultinformation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Addteacher</display-name>
     <servlet-name>Addteacher</servlet-name>
     <servlet-class>com.collagemanagement.addteacher.servlet.Addteacher</servlet-class>

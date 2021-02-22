@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Semester1;
+import com.collagemanagement.bean.Subject;
 import com.collagemanagement.dao.impl.TeacherDaoImpl;
 import com.collagemanagement.dao1.TeacherDao;
 import com.collagemanagement.service1.TeacherService;
@@ -44,5 +45,22 @@ public class TeacherServiceimpl implements TeacherService {
 		String password = "root";
 		
 		return DriverManager.getConnection(url,username, password);
+	}
+
+	public List<Subject> fetchSubject(String streamId, String semValue) {
+		// TODO Auto-generated method stub
+		List<Subject> subjectList = null;
+		try(Connection connection = getConnection();){
+			
+			//	semesterlist = 
+			System.out.println("Stream id in service impl: "+streamId+" and sem value is: "+semValue);
+				
+				return teacherdao.getSubjects(streamId,semValue,connection);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return subjectList;
 	}
 }

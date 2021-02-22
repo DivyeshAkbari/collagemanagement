@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.collagemanagement.bean.Semester1;
+import com.collagemanagement.bean.Subject;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
 import com.google.gson.Gson;
@@ -44,8 +45,11 @@ public class fetchsemester extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		///doGet(request, response);
-		
-		System.out.println("in fetchsem servlet");
+		int cnt=0;
+		String semValue;
+		//System.out.println("sem value default is: "+semValue);
+		cnt++;
+		System.out.println("in fetchsem servlet "+cnt);
 		
 		//String[] streamId = request.getParameterValues("name[]");  //. getClass(). getName()
 		
@@ -55,12 +59,24 @@ public class fetchsemester extends HttpServlet {
 		
 		List<Semester1> semlist = ts.fetchSemester(streamId);
 		
+		semValue = request.getParameter("name1");
+		System.out.println("value of semester id is: "+semValue);
+		
+		List<Subject> sublist = ts.fetchSubject(streamId,semValue);
+//		System.out.println("subject list is.......");
+//		
+//		System.out.println(sublist);
 		//System.out.println(semlist);
 		
+		
 		String json = new Gson().toJson(semlist);
-		System.out.println("json: "+json);
+		System.out.println("semList: "+semlist);
+		System.out.println("json of semester: "+json);
 		
 		response.getWriter().append(json);
+		
+		String json1 = new Gson().toJson(sublist);
+		System.out.println("json of subjects: "+json1);
 		
 	}
 

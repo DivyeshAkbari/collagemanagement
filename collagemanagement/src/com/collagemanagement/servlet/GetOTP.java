@@ -50,6 +50,11 @@ public class GetOTP extends HttpServlet {
 		System.out.println("otp2 is "+otp2);
 		System.out.println("otp3 is "+otp3);
 		
+	
+		String Email=request.getParameter("email");
+		
+		System.out.println("Abhi maza aayega na bhidu "+Email);
+		
 		 String s5;
 		 s5=otp.concat(otp1).concat(otp2).concat(otp3);
 		
@@ -57,7 +62,6 @@ public class GetOTP extends HttpServlet {
 		
 		String generatedOTP =request.getParameter("GeneratedOTP");
 	
-		
 		//System.out.println("Resend Otp from  get OTP "+generatedOTP);
 		try 
 		{
@@ -73,6 +77,7 @@ public class GetOTP extends HttpServlet {
 	    System.out.println("Resend Otp from  get OTP "+DecryptedOTP);
 		if(s5.equalsIgnoreCase(DecryptedOTP))
 		{
+			request.setAttribute("Emailid", Email);
 			RequestDispatcher dispacher=request.getRequestDispatcher("Updatepassword.jsp");
 			dispacher.forward(request, response);
 		}

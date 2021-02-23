@@ -64,8 +64,10 @@ public class Login extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		
 		String  encryptedpassword=td.encrypt(password);
 		System.out.println("Encryped password is "+encryptedpassword);
+		
 		
 		//Log login =new Log();
 		u1.setEmail(username);
@@ -73,7 +75,8 @@ public class Login extends HttpServlet {
 		
 		 User user=new User();
 		 user=collage.fetchlogindetails(u1);
-		 		
+		 	
+		 
 		if(user==null)
 		{
 			 request.setAttribute("message","please enter correct value");
@@ -84,9 +87,6 @@ public class Login extends HttpServlet {
 			System.out.println(user.getPassword());
 			HttpSession httpSession=request.getSession();
 			httpSession.setAttribute("uname",user);
-			
-			ServletContext Email=getServletContext();
-			Email.setAttribute("email",user.getEmail());
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}

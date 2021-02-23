@@ -20,6 +20,7 @@ import com.collagemanagement.service.impl.Collageserviceimpl;
 public class Forget extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	String email;
 	Collageserviceimpl collage =new Collageserviceimpl();
 	TrippleDes td;
     /**
@@ -37,19 +38,19 @@ public class Forget extends HttpServlet {
 		// TODO Auto-generated method stub
 		//System.out.println("Do Get");
 		
-//         email=request.getParameter("email");
-//		
-//		 message=collage.getemail(email);
-//
-//		if(message.equalsIgnoreCase("found"))
-//		{ 
-//			response.getWriter().append("true");
-//		}
-//		else
-//		{
-//			response.getWriter().append("false");
-//		}	
+         email=request.getParameter("email");
 		
+		 String  message=collage.getemail(email);
+
+		if(message.equalsIgnoreCase("found"))
+		{ 
+			response.getWriter().append("true");
+		}
+		else
+		{
+			System.out.println("Else");
+			response.getWriter().append("false");
+		}	
 	}
 
 	/**
@@ -59,13 +60,11 @@ public class Forget extends HttpServlet {
 	{
 		// TODO Auto-generated method stub
 	
-		
-		
 		String email=request.getParameter("email");
 		System.out.println("Email is "+email);
 		request.setAttribute("message","otp has been sent to your email id go and check your email");
 		String otp=GenerateOTP.generateOTP();
-		SendEmail m1=new SendEmail(email,"Your Opt is "+otp);
+		SendEmail m1=new SendEmail(email,"Your Otp is "+otp);
 		Thread t1=new Thread(m1);
 		t1.start();
 		

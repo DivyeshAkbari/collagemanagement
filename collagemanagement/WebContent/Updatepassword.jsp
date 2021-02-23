@@ -95,6 +95,8 @@
 <body id="bg">
 
 <%String message=(String)request.getAttribute("Message"); %>
+<%String Emailid=(String)request.getAttribute("Emailid"); %>
+
 <div class="page-wraper">
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
@@ -115,6 +117,8 @@
 						<div class="col-lg-12">
 							<div class="form-group">
 								<div class="input-group">
+								<input type="hidden" name="email" value="<%=Emailid%>">
+								
 									<label>Password </label>
 									<input name="password" id="ppsw"   type="password" required="" class="form-control" onkeyup='check();' />
 								</div>

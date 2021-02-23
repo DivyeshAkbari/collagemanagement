@@ -47,10 +47,9 @@ public class UpdatePassword extends HttpServlet {
 		
 		User user=new User();
 		TrippleDes t1=null;
-		ServletContext Email=getServletContext();
-		String Emailvalue=(String)Email.getAttribute("emailvalue");
 		
-		System.out.println("Servlet Context Email is "+Emailvalue);
+		String Emailid=request.getParameter("email");
+		
 		String password=request.getParameter("password");
 		String confirm_password=request.getParameter("psw");
 		
@@ -65,7 +64,8 @@ public class UpdatePassword extends HttpServlet {
 		
 		user.setPassword(password);
 		user.setConfirm_password(encrypt_password);
-		user.setEmail(Emailvalue);
+		user.setEmail(Emailid);
+		
 		if(password.equals(confirm_password))
 		{
 			String message=collage.Updatepassword(user);

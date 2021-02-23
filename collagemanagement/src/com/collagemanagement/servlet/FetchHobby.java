@@ -35,7 +35,6 @@ public class FetchHobby extends HttpServlet {
 		List<Stream> streamlist=collage.fetchstreamdetails();
 		request.setAttribute("Streamlist",streamlist);
 		
-		
 		System.out.println(streamlist);		
 	}
 

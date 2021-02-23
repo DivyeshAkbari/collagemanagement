@@ -50,8 +50,7 @@ public class Login extends HttpServlet {
 			 
 		 System.out.println("email is "+username);
 		 System.out.println("password is "+password);
-		 System.out.println(u1);
-		
+		 	
 		 
 		 System.out.println("This is login serverlet");
 		 
@@ -75,6 +74,7 @@ public class Login extends HttpServlet {
 		u1.setEmail(username);
 		u1.setPassword(encryptedpassword);
 		
+		System.out.println("U1 is "+u1);
 		 User user=new User();
 		 user=collage.fetchlogindetails(u1);
 		 	
@@ -86,7 +86,7 @@ public class Login extends HttpServlet {
 		}
 		else
 		{
-			System.out.println(user.getPassword());
+			System.out.println("Password is "+user.getPassword());
 			HttpSession httpSession=request.getSession();
 			httpSession.setAttribute("uname",user);
 			request.getRequestDispatcher("index.jsp").forward(request, response);

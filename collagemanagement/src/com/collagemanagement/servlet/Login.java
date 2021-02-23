@@ -53,6 +53,8 @@ public class Login extends HttpServlet {
 		 System.out.println(u1);
 		
 		 
+		 System.out.println("This is login serverlet");
+		 
 		TrippleDes td=null;
 		try 
 		{

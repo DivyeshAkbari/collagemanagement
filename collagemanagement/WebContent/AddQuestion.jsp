@@ -93,7 +93,7 @@ $(document).ready(function() {
                     <h2 class="title-head"><span>As a Faculty</span></h2>
 					<p>Login Your Account <a href="login.jsp">Click here</a></p>
 				</div>	
-				<form class="contact-bx" action="AddQuestion" method="post" >
+				<form class="contact-bx" action="AddQuestion" method="post">
 					<div class="row placeani">
 						<div class="col-md-6">
 							<div class="form-group">

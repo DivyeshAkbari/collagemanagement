@@ -15,8 +15,10 @@ public interface QuoraSessionDao {
 	
 	public int insertanswerdetails(Connection connection,Answer ans);
 
-	public List<Answer> fetchansdetails(Connection connection, String id);
-
 	public List<QuoraSession> getquestiondetails(Connection c1, String id);
+
+	public List<Answer> selectanswer(Connection connection, String id);
+
+
 
 }

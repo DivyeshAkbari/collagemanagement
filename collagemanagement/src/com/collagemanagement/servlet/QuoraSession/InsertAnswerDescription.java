@@ -1,12 +1,16 @@
 package com.collagemanagement.servlet.QuoraSession;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.collagemanagement.bean.Answer;
+import com.collagemanagement.bean.User;
 import com.collagemanagement.service.impl.QuoraSessionServiceImpl;
 import com.collagemanagement.service1.QuoraSessionService;
 
@@ -32,7 +36,7 @@ public class InsertAnswerDescription extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
+		response.getWriter().append("Served at: ").append("Hello");
 	}
 
 	/**
@@ -41,23 +45,34 @@ public class InsertAnswerDescription extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Sevlet called");
+		HttpSession httpSession = request.getSession(false);
+		User user = (User) httpSession.getAttribute("uname");
+		String finalestring ;
+		String fname = user.getFirstname();
+		String mname = user.getMiddlename();
+		
+		System.out.println("Firstname"+fname );
+		System.out.println("SurName"+ mname);
+		
+		finalestring = fname.concat(" "+ mname);
 		
 		String answerdescription = request.getParameter("answerdescription");
+		String id  = request.getParameter("id");
 		
 		System.out.println("Answer Description ->"+answerdescription);
+		System.out.println(" id ->"+id);
 		
 		Answer ans = new Answer();
 		
 		ans.setAnswerdescription(answerdescription);
-		
+		ans.setUsername(finalestring);
+		ans.setUserid(user.getId());
+		ans.setQueryId(Integer.parseInt(id));
+	
 		quorasessionservice.saveanswerdetails(ans);	
 		
-		response.sendRedirect("AnswerofQuestion.jsp");
-		
-		response.getWriter().append("Answer Registered Successfully");
-		response.getWriter().append("Served at: ").append("InsertAnswerDescription");
-		
+		RequestDispatcher dispacher=request.getRequestDispatcher("AnswerofQuestion.jsp");
+		dispacher.forward(request, response);
 		
 		
 	}

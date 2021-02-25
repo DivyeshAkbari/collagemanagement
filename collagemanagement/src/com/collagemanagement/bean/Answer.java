@@ -7,6 +7,15 @@ public class Answer {
 	private int queryId;
 	private String answerdescription;
 	private String Questiondescription;
+	private String username;
+	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getAnswerid() {
 		return answerid;
 	}

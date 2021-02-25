@@ -44,9 +44,13 @@ public class GetAnswerDetails extends HttpServlet {
 		
 		List<QuoraSession> questionlist = quorasessionservice.GetQuestiondetails(id);
 		
+		List<Answer> answerlist = quorasessionservice.fetchanswer(id);
+		
 		request.setAttribute("answerlist12", questionlist);
+		
+		request.setAttribute("answerlist", answerlist);
 	
-		RequestDispatcher d1=request.getRequestDispatcher("AnswerofQuestion.jsp");
+		RequestDispatcher d1 = request.getRequestDispatcher("AnswerofQuestion.jsp");
 		d1.forward(request, response);
 		
 		response.getWriter().append("Served at: ").append("GetAnswerDetails");

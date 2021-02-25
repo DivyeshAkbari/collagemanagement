@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.collagemanagement.bean.Log;
+import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 
@@ -22,4 +23,5 @@ public interface CollageDao
 	public int removestudentdetails(Connection connection, String id) ;
 	public List<User> fetchfacultydetails(Connection connection);
 	public int removefacultydetails(Connection connection, String id);
+	public List<Semester> getSemDetais(Connection connection);
 }

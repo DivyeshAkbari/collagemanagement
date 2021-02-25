@@ -1,5 +1,8 @@
 package com.collagemanagement.servlet;
 
+import com.collagemanagement.bean.Semester;
+import com.collagemanagement.service.impl.Collageserviceimpl;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -8,17 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.collagemanagement.bean.Semester;
-import com.collagemanagement.bean.Stream;
-import com.collagemanagement.service.impl.Collageserviceimpl;
-
 /**
  * Servlet implementation class Fetchsemdetails
  */
 public class Fetchsemdetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	Collageserviceimpl collage =new Collageserviceimpl(); 
+	
+	Collageserviceimpl college =new Collageserviceimpl(); 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,8 +32,11 @@ public class Fetchsemdetails extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Semester> semlist=collage.fetchSemDetails();
-		request.setAttribute("SemList",semlist);	
+		
+		List<Semester> semlist=college.fetchSemDetails();
+		request.setAttribute("SemList",semlist);
+
+		
 	}
 
 	/**

@@ -87,7 +87,7 @@ public class SendEmail implements Runnable
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
 				message.setSubject("Registration  message ");
 				message.setContent(msg,"text/html");
-				//message.setText(msg);
+				message.setText(msg);
 
 				Transport.send(message);
 

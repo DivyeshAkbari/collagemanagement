@@ -129,28 +129,24 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 		return messgae;
 	}
 
-
 	@Override
-	public List<Answer> Getanswerdetails(String id) {
+	public List<Answer> fetchanswer(String id) {
 		// TODO Auto-generated method stub
-	
-		try(Connection connection=getconnection();
-				  )
+		
+		try(Connection connection =getconnection();
+				 )
 			{
-				return  quorasessiondao.fetchansdetails( connection,id);
-				
+				return quorasessiondao.selectanswer(connection,id);
 			}
-			catch (SQLException e)
+			catch (SQLException e) 
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
-		
+		return null;
 	}
 
 
-	@Override
 	public List<QuoraSession> GetQuestiondetails(String id) 
 	{
 		try(Connection c1=getconnection();
@@ -163,4 +159,5 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 		}
 		return null;
 	}
+
 }

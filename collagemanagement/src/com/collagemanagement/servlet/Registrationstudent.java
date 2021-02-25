@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.collagemanagement.bean.User;
+import com.collagemanagement.bean.Semester;
 import com.collagemanagement.emailverification.SendEmail;
 import com.collagemanagement.encryptpassword.TrippleDes;
 import com.collagemanagement.service.impl.Collageserviceimpl;
@@ -48,7 +49,7 @@ public class Registrationstudent extends HttpServlet {
 		String  got= college.getemail(str);
 		
 		
-		System.out.println("Valu "+got);
+		System.out.println("Value "+got);
 		if(got.equalsIgnoreCase("found"))
 		{ 
 			response.getWriter().append("true");

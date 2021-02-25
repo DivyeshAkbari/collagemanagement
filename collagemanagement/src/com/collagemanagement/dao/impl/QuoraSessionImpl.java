@@ -84,11 +84,15 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 		// TODO Auto-generated method stub
 		
 		int insertedRaws=0;
-		try(PreparedStatement p1=connection.prepareStatement("insert into answer_table(c_answer_description) values (?) where i_answer_id=1 ");
+		try(PreparedStatement p1=connection.prepareStatement("insert into answer_table(c_answer_description,i_user_id,c_Name,i_question_id) values (?,?,?,?)  ");
 				)
 		{
 			
 			p1.setString(1, ans.getAnswerdescription());
+			p1.setInt(2,ans.getUserid());
+			p1.setString(3, ans.getUsername());
+			p1.setInt(4, ans.getQueryId());
+	
 
 			insertedRaws=p1.executeUpdate();	
 			if(insertedRaws==1)
@@ -104,34 +108,6 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 			
 		return insertedRaws;
 	
-	}
-
-	@Override
-	public List<Answer> fetchansdetails(Connection connection, String id) {
-		// TODO Auto-generated method stub
-		
-		List<Answer> answerlist = new ArrayList<>();
-		try(PreparedStatement p1=connection.prepareStatement("Select c_question_topic,c_question_description from question_table where i_question_id=?");
-				
-				)
-		{
-			p1.setString(1, id);
-			try(ResultSet r1=p1.executeQuery();
-					  )
-				{
-					while(r1.next())
-					{
-						Answer ans = new Answer();
-						
-						ans.setAnswerdescription(r1.getString("c_answer_description"));
-						
-						answerlist.add(ans);
-					}
-				}
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		return answerlist;
 	}
 
 	@Override
@@ -163,5 +139,38 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 			}
 
 			return querylist;
+	}
+
+	@Override
+	public List<Answer> selectanswer(Connection connection,String id) {
+		// TODO Auto-generated method stub
+		
+		List<Answer> anslist = new ArrayList<>();
+		try(PreparedStatement p1=connection.prepareStatement("Select c_answer_description,c_Name  from answer_table where i_question_id =?");
+				  )
+			{
+					p1.setInt(1, Integer.parseInt(id));
+					try(ResultSet r1=p1.executeQuery();
+					  )
+				{
+					while(r1.next())
+					{
+						
+						Answer ans = new Answer();
+					
+						ans.setAnswerdescription(r1.getString("c_answer_description"));
+						ans.setUsername(r1.getString("c_Name"));
+				
+						anslist.add(ans);
+					}
+				}
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return anslist;
 	}
 }

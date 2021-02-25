@@ -14,8 +14,8 @@ public interface QuoraSessionService {
 		
 		public String saveanswerdetails(Answer ans);
 
-		public List<Answer> Getanswerdetails(String id);
-
 		public List<QuoraSession> GetQuestiondetails(String id);
+
+		public List<Answer> fetchanswer(String id);
 
 }

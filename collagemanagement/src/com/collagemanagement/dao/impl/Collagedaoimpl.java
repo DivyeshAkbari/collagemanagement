@@ -77,17 +77,25 @@ public class Collagedaoimpl implements CollageDao
 			try(ResultSet r1=p1.executeQuery();
 				 )
 			{
-				while(r1.next())
+				System.out.println("Result set is "+r1);
+				if(r1==null)
 				{
-					u1 =new User();
-					u1.setEmail(r1.getString("c_email"));
-					u1.setPassword(r1.getString("c_password"));	
-					u1.setMiddlename(r1.getString("c_middle_name"));
-					u1.setRole(r1.getString("c_roll"));
-					u1.setSemester(r1.getInt("i_semester_id"));
-					u1.setId(r1.getInt("i_user_id"));
-					u1.setFirstname(r1.getString("c_First_Name"));
-				
+					System.out.println("heybku");
+				}
+				else
+				{
+					while(r1.next())
+					{
+						u1 =new User();
+						u1.setEmail(r1.getString("c_email"));
+						u1.setPassword(r1.getString("c_password"));	
+						u1.setMiddlename(r1.getString("c_middle_name"));
+						u1.setRole(r1.getString("c_roll"));
+						u1.setSemester(r1.getInt("i_semester_id"));
+						u1.setId(r1.getInt("i_user_id"));
+						u1.setFirstname(r1.getString("c_First_Name"));
+						u1.setStream(r1.getString("c_stream"));
+					}
 				}
 			}
 		}
@@ -103,7 +111,7 @@ public class Collagedaoimpl implements CollageDao
 	{
 		String ans=null;
 		int i1=0;
-		try(PreparedStatement p1=connection.prepareStatement("select *  from user_table where c_email=? ");
+		try(PreparedStatement p1=connection.prepareStatement("select c_email from user_table where c_email=? ");
 			  )
 		{
 			p1.setString(1, str);
@@ -118,7 +126,11 @@ public class Collagedaoimpl implements CollageDao
 					{
 						System.out.println("return 1");
 						i1=1;
-					}		
+					}	
+					else
+					{
+						System.out.println("Not ");
+					}
 				}			
 			}
 		}
@@ -400,7 +412,7 @@ public class Collagedaoimpl implements CollageDao
 	{
 		List<Semester> semlist=new ArrayList<>();
 		
-		try(PreparedStatement p1=connection.prepareStatement("Select i_Semester_id from semester_table");
+		try(PreparedStatement p1=connection.prepareStatement("Select i_Semester_id,i_semester_value from semester_table");
 				ResultSet r1=p1.executeQuery();
 			  )
 		{
@@ -408,6 +420,7 @@ public class Collagedaoimpl implements CollageDao
 			{
 				Semester sem=new Semester();
 				sem.setSemid(r1.getInt(1));
+				sem.setSemvalue(r1.getInt(2));
 				semlist.add(sem);
 			}
 		}
@@ -417,6 +430,5 @@ public class Collagedaoimpl implements CollageDao
 			e.printStackTrace();
 		}
 		return semlist;
-	}
-	
+	}	
 }

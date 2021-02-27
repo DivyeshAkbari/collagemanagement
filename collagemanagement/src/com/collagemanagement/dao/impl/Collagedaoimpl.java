@@ -407,7 +407,6 @@ public class Collagedaoimpl implements CollageDao
 			return 0;	
 		}
 
-	@Override
 	public List<Semester> getSemDetais(Connection connection)
 	{
 		List<Semester> semlist=new ArrayList<>();

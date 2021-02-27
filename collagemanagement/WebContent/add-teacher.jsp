@@ -1,3 +1,4 @@
+<%@page import="com.collagemanagement.bean.Semester"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -86,6 +87,9 @@
  
 <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
 
+<jsp:include page ="/Fetchsemdetails"/>
+
+<%List<Semester> Semlist= (List)request.getAttribute("SemList");%>
 
 <body>
     <!-- Preloader Start Here -->
@@ -332,11 +336,12 @@
 					
                         <div class="content-holder">
                          <div class="content" id="content-1" data-id='1' style="display: block;">
-                        <form class="new-added-form">
+                        <form action="Addteacher" method="post" id="form1" class="new-added-form">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                	<input type="hidden" name="role" value="FACULTY"></input>
                                     <label>First Name *</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="firstname" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Middle Name *</label>
@@ -380,15 +385,19 @@
                                    <button type="button" id="next" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Next</button>
                                 </div>
                             </div>
-                        </form>
+<!--                         </form> -->
                         </div>
                         </div>
 <!--                         content holder end -->
 <!-- 					below is division-2  -->
 					 <div class="end" data-id='2'>
    						 
-							<form class="new-added-form">
+<!-- 							<form action="Addteacher" method="post" id="form2" class="new-added-form"> -->
                             <div class="row">
+                            <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Middle Name *</label>
+                                    <input autocomplete="off" name="middlename" type="text" placeholder="" class="form-control">
+                                </div>
 
 									<div class="col-lg-12 form-group">
                                     <label>Which stream</label>
@@ -396,23 +405,35 @@
                                     for(int i=0;i<Streamlist.size();i++){
                                     
                                     	Stream s = Streamlist.get(i);
+                                    	 
+         								
+                                         		
+                                    	
                                     %>
                                     <div class="stream" >
-                                    <input name="stream_checkbox" class="stream_check" type="checkbox" placeholder="" class="" value="<%=s.getStreamid()%>">
+                                    <input name="stream_checkbox" class="stream_check" type="checkbox"  class="" value="<%=s.getStreamid()%>">
                                      <%=s.getStreamname()%>
-                                     <div id="id_sem<%=s.getStreamid() %>" class="col-lg-12 form-group">
+<!--                                      div for semester list -->
+                                     <div id="id_stream<%=s.getStreamid() %>" class="col-lg-12 form-group">
+                                     
     								</div>
+    								
+<!--     								div for subject list -->
+    								
+    								
                                      </div>
                                     <% 
+										
                                     }
                                     %>
                                     
                                  
                                 </div>
                                 
-                                
-                        
-    						
+                                <div id="id_sub" class="col-lg-12 form-group">
+    								</div>
+<!--                         		<div id="id_sub" class="col-lg-12 form-group">  </div> -->
+    							
 <!--     						<div id="id_sem" class="col-lg-12 form-group"> -->
 <!--     						</div> -->
 
@@ -475,19 +496,22 @@
 <!--                                 </div> -->
                                 
                                 <div class="col-12 form-group mg-t-8">
-                                   <button type="button" id="edit-previous">Edit Previous Options</button>
-     								<button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                   <button type="button" class="btn-fill-lg bg-blue-dark btn-hover-yellow" id="edit-previous">Edit Previous Options</button>
+     								<button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
                          			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                 </div>
                                 
                                 
                             </div>
+                            
                         </form>
-
+						
 
     					 
 					</div>
+					
                     </div>
+                    
                 </div>
                 <!-- Add New Teacher Area End Here -->
                 <footer class="footer-wrap-layout1">
@@ -515,6 +539,7 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    
     <script>
 	$(document).on('click', '.toggle-password', function() {
 	
@@ -551,11 +576,13 @@
 	
 	$(document).ready(function(){
 		//var values = [];
-		var value;
+		var value,id;
+		var streamValue;
 		
 		$('.stream_check').change(function() {
-			value = ($(this).val());
-			var id = "id_sem"+value;
+			value = ($(this).val()); //1 
+			id = "id_stream"+value; //id_sem1
+			streamValue = value;
 	        if(this.checked) {
 	            
 	        	$.ajax({
@@ -573,9 +600,13 @@
 					var obj = jQuery.parseJSON(msg);
 					
 					$.each(obj,function(key,value){
-						
-						$("#"+id).append('<input type="checkbox" value='+value.i_semester_value+'>'+value.semValue+'');
+						var divId = streamValue+'-'+value.semId;
+						$('#'+id).append('<div id='+divId+'></div>'); 
+						$("#"+divId).append('<input name="semesterids" class="semester_check" type="checkbox" value='+value.semId+'>semester '+value.semValue+'<br>');
+						//var aa = $("#"+id);
+						//alert("aa: "+aa);
 					});
+					
 				});//ajax
 	        	
 	        }//if
@@ -585,7 +616,57 @@
 	        }
 	        
 	       // $('#textbox1').val(this.checked);        
-	    });
+	    });//change event
+	    
+		var value1;
+		
+ 		$(document).on("click",".semester_check",function() {
+// 		$(".semester_check").on("click",function() {
+// 		$(".semester_check").click(function() {
+// 		 var stream_value = $(this).closest('div').attr('data-value');
+// 		 alert(stream_value);
+			
+			//alert("id in change : "+id);
+			//alert("in semester_check");
+			
+			var divTagId = $(this).parent().attr('id');
+			value1 = ($(this).val());
+			var id2 = "id_sub"+value1;
+			var id3 = "semester_check"+value1;
+			//alert("value in sub: "+value1);
+			//alert("id2: "+id2);
+	        if(this.checked) {
+	            
+	        	$.ajax({
+					method:"post",
+					url: "fetchsubjects",
+					data: { name1 : value1}
+				})
+				.done(function(msg){
+					//$("#"+id3).empty();//"#id_sub"
+					$('#' + divTagId).find('.subject').remove();
+					var obj = jQuery.parseJSON(msg);
+					
+					$.each(obj,function(key,value){
+						//"#"+id2
+						var subjectName = divTagId;//+"-"+value.subjectId
+						var $subjectDivElement = $("<div>", {"class": "subject"});
+						//var subjectDivElement = ;
+						//$('#'+divTagId).append('<div class="Subject"></div>'); 
+						$("#"+divTagId).append($subjectDivElement);
+						$($subjectDivElement).append('<input name = '+subjectName+' type="checkbox" value='+value.subjectId+'>'+value.subjectName+'<br>');
+						
+						
+					});
+				});//ajax
+	        	
+	        }//if
+	        else{
+				//$("#id_sub").empty();
+				$('#' + divTagId).find('.subject').remove();
+	        }        
+	    });//change event
+	    
 // 		$(".stream_check").change(function(){
 // 			value = ($(this).val());
 // 			var id = "id_sem"+value;
@@ -604,7 +685,11 @@
 			//alert(values);
 			
 // 		});
-	});
+	});//document.ready
+	
+	$(document).ready(function(){
+		
+	});//document.ready
 			
 			
 // 			$('input[name="stream_checkbox"]:checked').each(function() {

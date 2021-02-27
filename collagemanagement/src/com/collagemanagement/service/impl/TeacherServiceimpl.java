@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Semester1;
+import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.Subject;
 import com.collagemanagement.dao.impl.TeacherDaoImpl;
 import com.collagemanagement.dao1.TeacherDao;
@@ -47,7 +48,7 @@ public class TeacherServiceimpl implements TeacherService {
 		return DriverManager.getConnection(url,username, password);
 	}
 
-	public List<Subject> fetchSubject(String streamId, String semValue) {
+	public List<Subject> fetchSubject(int streamId, String semValue) {
 		// TODO Auto-generated method stub
 		List<Subject> subjectList = null;
 		try(Connection connection = getConnection();){
@@ -62,5 +63,53 @@ public class TeacherServiceimpl implements TeacherService {
 				e.printStackTrace();
 			}
 		return subjectList;
+	}
+
+	public int fetchStreamId(String semValue) {
+		// TODO Auto-generated method stub
+		try(Connection connection = getConnection();){
+			
+			return teacherdao.getStreamId(semValue,connection);
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public List<Stream> fetchstreamdetails(int userId) {
+		// TODO Auto-generated method stub
+		List<Stream> streamlist = null;
+		try(Connection connection = getConnection();){
+			
+		//	semesterlist = 
+			
+			return teacherdao.getStreamforfaculty(userId,connection);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return streamlist;
+	}
+
+	@Override
+	public List<Subject> fetchsubjectdetails(int userId) {
+		// TODO Auto-generated method stub
+		List<Subject> subjectlist = null;
+		try(Connection connection = getConnection();){
+			
+		//	semesterlist = 
+			
+			return teacherdao.getSubjectforfaculty(userId,connection);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return subjectlist;
+		
 	}
 }

@@ -1,3 +1,5 @@
+<%@page import="com.collagemanagement.bean.Stream"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -34,7 +36,12 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    
 </head>
+
+<jsp:include page ="/fetchsemesterforfaculty"/>
+ 
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
 
 <body>
     <!-- Preloader Start Here -->
@@ -259,8 +266,67 @@
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
+         
                 <div class="row">
                     <!-- Add Notice Area Start Here -->
+          		 
+                <div  class="col-lg-12 form-group">
+                                <label>Select Stream *</label>
+                                      <select id="stream" class="select2">
+                                      <option value="0">Please Select</option>
+                                       <% 
+                                    for(int i=0;i<Streamlist.size();i++){
+                                    
+                                    	Stream s = Streamlist.get(i);
+                                    	
+                                    	 %>
+                                        <option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> 
+                                        </option>
+                                        <%} %>   
+                                            </select>	
+                </div>
+
+<!--              <div class="card-body"> -->
+<!--                     <p>Card <code>.card-primary</code></p> -->
+<!--                   </div>         class="col-12 col-md-6 col-lg-3"    -->
+			<div class="col-12 col-md-6 col-lg-3">
+		           <div id="subjects" >
+                
+              </div>
+              </div>
+<!--               <div> -->
+<!--               <div> -->
+<!-- 		<div class="card card-primary"> -->
+<!--     		                  <div class="card-header">  -->
+<!--     		                    <h4> +value.subjectName+ </h4>  -->
+<!--     		                  </div> -->
+<!--     		                  <div class="card-body"> -->
+<!--     		                    <p>Card <code>.card-primary</code></p>  -->
+<!--     		                   </div>    -->
+<!--     		                </div> -->
+<!--              </div> -->
+<!--             </div> -->
+
+                   
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="card dashboard-card-seven">
+                            <div class="social-media bg-twitter hover-twitter">
+                                <div class="media media-none--lg">
+                                        <div class="social-icon">
+                                        <i class="fab fa-twitter"></i>
+                                        </div>
+                                        <div class="media-body space-sm">
+                                            <h6 class="item-title">Follow us on twitter</h6>
+                                        </div>
+                                </div>
+                                <div class="social-like">1,11,000</div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   
+                
+
                     <div class="col-4-xxxl col-12">
                         <div class="card height-auto">
                             <div class="card-body">
@@ -346,6 +412,57 @@
     <script src="js/datepicker.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script>
+	
+    $(document).ready(function()
+    		{
+    			$("#stream").change(function(){
+    				
+    				var stream=$("#stream").val();
+    				//alert(stream);
+    				$.ajax({
+    					
+    							method:"POST",
+    							url:"fetchsubjectforfaculty",
+    							data:
+    							{
+    								id:stream	
+    							}
+    					})
+    					.done(function(data)
+    					{
+    						$("#subjects").empty();
+    						//$("#semester1").children().remove();
+    						var object=jQuery.parseJSON(data);
+    						
+    						$.each(object,function(key,value){
+    							
+    						var code = '<div class="card card-primary">'
+    		                  +'<div class="card-header">'
+    		                    +'<h4>'+value.subjectName+'</h4>'
+    		                  +'</div>'
+    		                  +'<div class="card-body">'
+    		                    +'<p>Card <code>.card-primary</code></p>'
+    		                   +'</div>'  
+    		                +'</div>'
+    		                +'</a>';	
+    							
+//     						var code =  '<div class="col-12 col-md-6 col-lg-3">'
+//     						+'<div class="card card-primary"><div class="card-header">'
+//     						+'<h4>'+value.subjectName+'</h4></div></div></div>';   
+    								
+    								
+    						$("#subjects").append(code);	
+    								
+//     							$("#subjects").append('<h4 value='+value.subjectId+'>'+value.subjectName+'</h4>');
+    						});
+    					});
+    			});
+    		});
+	
+
+    </script>
+   
 
 </body>
 

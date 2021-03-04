@@ -336,7 +336,8 @@
 					
                         <div class="content-holder">
                          <div class="content" id="content-1" data-id='1' style="display: block;">
-                        <form action="Addteacher" method="post" id="form1" class="new-added-form">
+                        <form action="Addteacher" enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
+                        
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                 	<input type="hidden" name="role" value="FACULTY"></input>
@@ -345,44 +346,52 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Middle Name *</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="middlename"  type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Last Name *</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="lastname" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
-                                    <select class="select2">
+                                    <select name="gender" class="select2">
                                         <option value="">Please Select Gender *</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
 <!--                                         <option value="3">Others</option> -->
                                     </select>
                                 </div>
-
+								<div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Email</label>
+                                    <input autocomplete="off" name="email" type="text" placeholder="" class="form-control">
+                                  </div>
+                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Password</label>
+                                    <input id="password" autocomplete="off" class="form-control" type="password" name="password">
+                                    <i toggle="password-field" class="fa fa-fw fa-eye field_icon toggle-password"></i>
+                                  </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Qualification</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="qualification" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Mobile Number</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="number" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group">
                                     <label>Address</label>
-                                    <textarea class="textarea form-control" name="message" id="form-message" cols="10" rows="9"></textarea>
+                                    <textarea name="address" class="textarea form-control"  id="form-message" cols="10" rows="9"></textarea>
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Faculty Photo (150px X 150px)</label>
-                                    <input type="file" class="form-control-file">
+                                    <input name="profile_photo" type="file" class="form-control-file">
                                 </div>
 								 
 <!-- 								<button type="button" class="back">Back</button> -->
 				
 							   
                                 <div class="col-12 form-group mg-t-8">
-                                   <button type="button" id="next" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Next</button>
+                                   <button  type="button" id="next" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Next</button>
                                 </div>
                             </div>
 <!--                         </form> -->
@@ -391,13 +400,18 @@
 <!--                         content holder end -->
 <!-- 					below is division-2  -->
 					 <div class="end" data-id='2'>
-   						 
+   						 <div id="alert" class="ui-alart-box">
+                            <div class="dismiss-alart">
+     								 <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    This is a warning alert—check it out!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                </div></div>
 <!-- 							<form action="Addteacher" method="post" id="form2" class="new-added-form"> -->
                             <div class="row">
-                            <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Middle Name *</label>
-                                    <input autocomplete="off" name="middlename" type="text" placeholder="" class="form-control">
-                                </div>
+                           
 
 									<div class="col-lg-12 form-group">
                                     <label>Which stream</label>
@@ -417,8 +431,6 @@
                                      <div id="id_stream<%=s.getStreamid() %>" class="col-lg-12 form-group">
                                      
     								</div>
-    								
-<!--     								div for subject list -->
     								
     								
                                      </div>
@@ -494,17 +506,28 @@
 <!--                                         <option value="3">Red</option> -->
 <!--                                     </select> -->
 <!--                                 </div> -->
-                                
+
+									
+<!-- 								hidden input to pass array of id's of stream,semester,subject to servlet -->
+								<input type="hidden" id="streamHidden" name="streamInputArray">
+								<input type="hidden" id="semesterHidden" name="semesterInputArray">
+								<input type="hidden" id="subjectHidden" name="subjectInputArray"> 
+<!--                                 <input name="streamInputArray" type="checkbox" style="opacity:0; position:absolute; left:9999px;"> -->
                                 <div class="col-12 form-group mg-t-8">
                                    <button type="button" class="btn-fill-lg bg-blue-dark btn-hover-yellow" id="edit-previous">Edit Previous Options</button>
-     								<button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
+     								<button id=submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
+     								
                          			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                 </div>
+                               
+                                
+                               
                                 
                                 
                             </div>
                             
                         </form>
+                        
 						
 
     					 
@@ -515,7 +538,7 @@
                 </div>
                 <!-- Add New Teacher Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">� Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
                 </footer>
             </div>
         </div>
@@ -572,10 +595,12 @@
 	    $('#content-1').show();
 	});
 	</script>
-	<script>
 	
+	<script>
+	//$(':input[type="submit"]').prop('disabled', true);
 	$(document).ready(function(){
 		//var values = [];
+		//$("#alert").hide();
 		var value,id;
 		var streamValue;
 		
@@ -602,7 +627,7 @@
 					$.each(obj,function(key,value){
 						var divId = streamValue+'-'+value.semId;
 						$('#'+id).append('<div id='+divId+'></div>'); 
-						$("#"+divId).append('<input name="semesterids" class="semester_check" type="checkbox" value='+value.semId+'>semester '+value.semValue+'<br>');
+						$("#"+divId).append('<input name="semesterCheck" class="semester_check" type="checkbox" value='+value.semId+'>semester '+value.semValue+'<br>');
 						//var aa = $("#"+id);
 						//alert("aa: "+aa);
 					});
@@ -630,9 +655,10 @@
 			//alert("in semester_check");
 			
 			var divTagId = $(this).parent().attr('id');
+			//alert(divTagId);
 			value1 = ($(this).val());
 			var id2 = "id_sub"+value1;
-			var id3 = "semester_check"+value1;
+			
 			//alert("value in sub: "+value1);
 			//alert("id2: "+id2);
 	        if(this.checked) {
@@ -715,6 +741,32 @@
 		
 // 	});	
     </script>
+    <script>
+	function myFunction() {
+		  //document.getElementById("demo").innerHTML = "Hello World";
+		  alert("please unselect unusual checkbox");
+		  var streamArray=[];
+		  var semesterArray = [];
+		  var subjectArray = [];
+		$("input:checkbox[name=stream_checkbox]:checked").each(function(){
+		    streamArray.push($(this).val());
+		});
+		$("input:checkbox[name=semesterCheck]:checked").each(function(){
+			semesterArray.push($(this).val());
+		});
+		$('.subject input:checked').each(function() {
+			subjectArray.push($(this).attr('value'));
+		});
+		
+		document.getElementById("streamHidden").value = streamArray;
+		document.getElementById("semesterHidden").value = semesterArray;
+		document.getElementById("subjectHidden").value = subjectArray;
+		
+		//alert("streamArray: "+streamArray);
+		//alert("semesterArray: "+semesterArray);
+		//alert("subjectArray: "+subjectArray);
+		}
+	</script>
 
 </body>
 

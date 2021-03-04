@@ -265,70 +265,72 @@
                         <li>Assignment</li>
                     </ul>
                 </div>
+                
+                
                 <!-- Breadcubs Area End Here -->
          
-                <div class="row">
+               
                     <!-- Add Notice Area Start Here -->
-          		 
-                <div  class="col-lg-12 form-group">
-                                <label>Select Stream *</label>
-                                      <select id="stream" class="select2">
+<!--           		 <div> -->
+<!--                 <div  class="col-lg-12 form-group"> -->
+<!--                                 <label>Select Stream *</label> -->
+<!--                                       <select id="stream" class="select2"> -->
+<!--                                       <option value="0">Please Select</option> -->
+<%--                                        <%  --%>                                    
+<%--                                     	 %> --%>
+<%--                                         <option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%>  --%>
+<!--                                         </option> -->
+<%--                                         <%} %>    --%>
+<!--                                             </select>	 -->
+<!--                 </div> -->
+<!--                 </div> -->
+<!-- class="col-lg-3 col-sm-6 col-12" -->
+<!-- 			<div class="column"> -->
+<!--                     <div id="subjects" > -->
+                        
+<!--                     </div>       -->
+<!--                     </div>       -->
+                           
+					 <div class="row">
+					 <div class="col-4-xxxl col-12">
+                        <div class="card height-auto">
+                            <div class="card-body">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3>Add New Subject</h3>
+                                    </div>
+                                   
+                                </div>
+                                <form method="post" action="uploadAssignment" enctype="multipart/form-data" class="new-added-form">
+                                    <div class="row">
+<!--                                     Col-lg-12 -->
+<!-- 										col-12-xxxl col-lg-6 col-12 form-group -->
+                                         <div class="col-lg-12">
+                                         <label>Select Stream *</label>
+                                         <select name="streamId" id="stream" class="select2">
                                       <option value="0">Please Select</option>
                                        <% 
-                                    for(int i=0;i<Streamlist.size();i++){
-                                    
+                                    	for(int i=0;i<Streamlist.size();i++){
                                     	Stream s = Streamlist.get(i);
-                                    	
                                     	 %>
-                                        <option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> 
+                                        <option  value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> 
                                         </option>
-                                        <%} %>   
-                                            </select>	
-                </div>
-
-<!--              <div class="card-body"> -->
-<!--                     <p>Card <code>.card-primary</code></p> -->
-<!--                   </div>         class="col-12 col-md-6 col-lg-3"    -->
-			<div class="col-12 col-md-6 col-lg-3">
-		           <div id="subjects" >
-                
-              </div>
-              </div>
-<!--               <div> -->
-<!--               <div> -->
-<!-- 		<div class="card card-primary"> -->
-<!--     		                  <div class="card-header">  -->
-<!--     		                    <h4> +value.subjectName+ </h4>  -->
-<!--     		                  </div> -->
-<!--     		                  <div class="card-body"> -->
-<!--     		                    <p>Card <code>.card-primary</code></p>  -->
-<!--     		                   </div>    -->
-<!--     		                </div> -->
-<!--              </div> -->
-<!--             </div> -->
-
-                   
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card dashboard-card-seven">
-                            <div class="social-media bg-twitter hover-twitter">
-                                <div class="media media-none--lg">
-                                        <div class="social-icon">
-                                        <i class="fab fa-twitter"></i>
+                                        <%}%>   
+                                            </select>
+                                         </div>
+                                       
+<!--                                        col-lg-6 col-12  -->
+                                        <div id="subjects" class="col-12-xxxl form-group">
+                                             
                                         </div>
-                                        <div class="media-body space-sm">
-                                            <h6 class="item-title">Follow us on twitter</h6>
-                                        </div>
-                                </div>
-                                <div class="social-like">1,11,000</div>
+                                       
+                                    </div>
+<!--                                 </form> -->
                             </div>
                         </div>
                     </div>
-                   
-                   
-                
-
                     <div class="col-4-xxxl col-12">
-                        <div class="card height-auto">
+                        <div id="uploadAssDiv" class="card height-auto">
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
@@ -345,11 +347,11 @@
                                         </div>
                                     </div> -->
                                 </div>
-                                <form class="new-added-form">
+<!--                                 <form class="new-added-form"> -->
                                     <div class="row">
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                             <label>Title</label>
-                                            <input type="text" placeholder="" class="form-control">
+                                            <input name="titleOfAss" type="text" placeholder="" class="form-control">
                                         </div>
                                         <!-- <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                             <label>Details</label>
@@ -362,21 +364,27 @@
                                         </div> -->
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                             <label>Due Date</label>
-                                            <input type="text" placeholder="" class="form-control air-datepicker">
+                                            <input name="date" type="text" placeholder="" class="form-control air-datepicker">
                                             <i class="far fa-calendar-alt"></i>
                                         </div>
                                         <div class="col-lg-6 col-12 form-group">
                                             <label>Description(Optional)</label>
-                                            <textarea class="textarea form-control" name="message" id="form-message" cols="10" rows="9"></textarea>
+                                            <textarea name="description" class="textarea form-control" name="message" id="form-message" cols="10" rows="9"></textarea>
                                         </div>
                                         <div class="col-lg-4">
-                                            <button type="button" class="btn-fill-lmd radius-30 text-light bg-true-v">
-                                            Upload Assignment Here<i class="fas fa-cloud-upload-alt mg-l-10"></i>
+<!--                                             <button type="button" class="btn-fill-lmd radius-30 text-light bg-true-v"> -->
+<!--                                             Upload Assignment Here<i class="fas fa-cloud-upload-alt mg-l-10"></i> -->
+												<label>Upload Assignment</label>
+												<input name="assignment" type="file" class="btn-fill-lmd radius-30 text-light bg-true-v">
+												
                                         </button></div>
-                                        <input type="file" class="form-control-file">
-                                    
+<!--                                         <div id="hiddenId"> -->
+                                        	
+<!--                                         </div> -->
+										<input  name="subjectId" id="subjectValue" type="hidden" >
+                                      
                                         <div class="col-12 form-group mg-t-8">
-                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                            <button type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
                                             <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                         </div>
                                         
@@ -416,9 +424,12 @@
 	
     $(document).ready(function()
     		{
+    	$("#uploadAssDiv").hide();
+    	var streamValue;
     			$("#stream").change(function(){
-    				
+    				//$("#uploadAssDiv").show();
     				var stream=$("#stream").val();
+    				streamValue = stream;
     				//alert(stream);
     				$.ajax({
     					
@@ -431,33 +442,46 @@
     					})
     					.done(function(data)
     					{
+    						
     						$("#subjects").empty();
     						//$("#semester1").children().remove();
     						var object=jQuery.parseJSON(data);
     						
     						$.each(object,function(key,value){
-    							
-    						var code = '<div class="card card-primary">'
-    		                  +'<div class="card-header">'
-    		                    +'<h4>'+value.subjectName+'</h4>'
-    		                  +'</div>'
-    		                  +'<div class="card-body">'
-    		                    +'<p>Card <code>.card-primary</code></p>'
-    		                   +'</div>'  
-    		                +'</div>'
-    		                +'</a>';	
-    							
-//     						var code =  '<div class="col-12 col-md-6 col-lg-3">'
-//     						+'<div class="card card-primary"><div class="card-header">'
-//     						+'<h4>'+value.subjectName+'</h4></div></div></div>';   
+    						
+    						var divId = streamValue+'-'+value.subjectId;
+        					$('#subjects').append('<div id='+divId+'></div>');
+        					
+    						var code = '<div value='+value.subjectId+' class="card dashboard-card-seven">'
+                            +'<div id="subjectDiv" class="social-media bg-twitter hover-twitter">'
+                            +'<div class="media media-none--lg">'
+                            +'<div class="media-body space-sm">'
+                            +'<h6 value = '+value.subjectName+' class="item-title">'+value.subjectName+'</h6>'
+                            +'</div>'
+                            +'</div>'
+                            +'<div class="social-like">1,11,000</div>'
+                            +'</div>'
+                            +'</div>';	
+                            
     								
     								
-    						$("#subjects").append(code);	
+    						$("#"+divId).append(code);	
     								
 //     							$("#subjects").append('<h4 value='+value.subjectId+'>'+value.subjectName+'</h4>');
     						});
     					});
-    			});
+    			});//change 
+    			$(document).on("click","#subjectDiv",function() {
+    				
+    				//var a = $(this).parent().find('.officeName').html();
+    				//alert("hello");
+    				//$('#hiddenId').find('#subjectValue').remove();
+    				var idOfSubject = $(this).parent().attr('value');
+    				//$("#hiddenId").append('<input  name="subjectId" id="subjectValue" value='+idOfSubject+' type="hidden" >');
+    				document.getElementById("subjectValue").value = idOfSubject;
+    				$("#uploadAssDiv").show();
+    				
+    		    });//change event
     		});
 	
 

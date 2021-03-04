@@ -2,6 +2,7 @@ package com.collagemanagement.bean;
 
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.List;
 
 public class User 
 {
@@ -21,7 +22,28 @@ public class User
 	private String myHash;
 	private int id;
 	private String URL;
+	private List<Stream> streamList;
+	private List<Semester> semesterList;
+	private List<Subject> subjectList;
 		
+	public List<Stream> getStreamList() {
+		return streamList;
+	}
+	public void setStreamList(List<Stream> streamList) {
+		this.streamList = streamList;
+	}
+	public List<Semester> getSemesterList() {
+		return semesterList;
+	}
+	public void setSemesterList(List<Semester> semesterList) {
+		this.semesterList = semesterList;
+	}
+	public List<Subject> getSubjectList() {
+		return subjectList;
+	}
+	public void setSubjectList(List<Subject> subjectList) {
+		this.subjectList = subjectList;
+	}
 	public String getUserProfilepicString() {
 		return userProfilepicString;
 	}
@@ -36,8 +58,9 @@ public class User
 				+ stream + ", semester=" + semester + ", division=" + division + ", xender=" + xender + ", email="
 				+ email + ", password=" + password + ", userProfilepicStream=" + userProfilepicStream
 				+ ", userProfilepicString=" + userProfilepicString + ", confirm_password=" + confirm_password
-				+ ", qualification=" + qualification + ", contactno=" + contactno + ", address=" + address + ", image="
-				+ image + ", role=" + role + "]";
+				+ ", qualification=" + qualification + ", myHash=" + myHash + ", id=" + id + ", URL=" + URL
+				+ ", streamList=" + streamList + ", semesterList=" + semesterList + ", subjectList=" + subjectList
+				+ ", contactno=" + contactno + ", address=" + address + ", image=" + image + ", role=" + role + "]";
 	}
 
 

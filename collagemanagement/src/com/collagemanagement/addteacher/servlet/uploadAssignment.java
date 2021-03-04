@@ -1,33 +1,32 @@
 package com.collagemanagement.addteacher.servlet;
 
 import java.io.IOException;
-import java.util.List;
+
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
-import com.collagemanagement.bean.Stream;
-import com.collagemanagement.bean.Subject;
+import com.collagemanagement.bean.Assignment;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
-import com.google.gson.Gson;
 
 /**
- * Servlet implementation class fetchsubjectforfaculty
+ * Servlet implementation class uploadAssignment
  */
-public class fetchsubjectforfaculty extends HttpServlet {
+public class uploadAssignment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
+       
 	TeacherService ts = new TeacherServiceimpl();
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public fetchsubjectforfaculty() {
+    public uploadAssignment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,23 +44,50 @@ public class fetchsubjectforfaculty extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		HttpSession httpsession = request.getSession(false);
+		///doGet(request, response);
+			HttpSession httpsession = request.getSession(false);
 		
 		User u1 = (User) httpsession.getAttribute("uname");
 		
 		int userId=u1.getId();
 		
-		String streamId = request.getParameter("id");
+		String streamId = request.getParameter("streamId");
+		String subjectId = request.getParameter("subjectId");
+		String title = request.getParameter("titleOfAss");
+		String date = request.getParameter("date");
+		String discription = request.getParameter("description");
 		
-		List<Subject> subjectlist=ts.fetchsubjectdetails(userId,streamId);
+		Assignment ass = new Assignment();
+		ass.setStreamId(Integer.parseInt(streamId));
+		ass.setSubjectId(Integer.parseInt(subjectId));
+		ass.setTitle(title);
+		ass.setDate(date);
+		ass.setDiscription(discription);
+		ass.setUsesrId(userId);
+	
 		
-		System.out.println(subjectlist);
+		Part part = (Part) request.getPart("assignment");
 		
-		String json = new Gson().toJson(subjectlist);
-		System.out.println("json of semester: "+json);
+		if(null!=part)
+		{
+			
+				System.out.println("File Name" + part.getSubmittedFileName()); 
+				System.out.println(part.getName());
+			
+			
+			
+				System.out.println("File Size :: " + part.getSize());
+			
 		
-		response.getWriter().append(json);
+			
+				ass.setAssPDF(part.getInputStream());
+			
+		}
+		
+		System.out.println(streamId+" "+subjectId+" "+title+" "+date+" "+discription+" "+userId);
+		
+		String message = ts.insertAssDetail(ass);
+		//System.out.println(message);
 	}
 
 }

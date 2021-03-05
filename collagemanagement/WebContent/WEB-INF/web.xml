@@ -411,6 +411,36 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>fetchsubjects</display-name>
+    <servlet-name>fetchsubjects</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.fetchsubjects</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fetchsubjects</servlet-name>
+    <url-pattern>/fetchsubjects</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>fetchsemesterforfaculty</display-name>
+    <servlet-name>fetchsemesterforfaculty</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.fetchsemesterforfaculty</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fetchsemesterforfaculty</servlet-name>
+    <url-pattern>/fetchsemesterforfaculty</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>fetchsubjectforfaculty</display-name>
+    <servlet-name>fetchsubjectforfaculty</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.fetchsubjectforfaculty</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fetchsubjectforfaculty</servlet-name>
+    <url-pattern>/fetchsubjectforfaculty</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>fetchsemester</display-name>
     <servlet-name>fetchsemester</servlet-name>
     <servlet-class>com.collagemanagement.addteacher.servlet.fetchsemester</servlet-class>
@@ -418,5 +448,25 @@
   <servlet-mapping>
     <servlet-name>fetchsemester</servlet-name>
     <url-pattern>/fetchsemester</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>uploadAssignment</display-name>
+    <servlet-name>uploadAssignment</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.uploadAssignment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>uploadAssignment</servlet-name>
+    <url-pattern>/uploadAssignment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditFacultyDetail</display-name>
+    <servlet-name>EditFacultyDetail</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.EditFacultyDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditFacultyDetail</servlet-name>
+    <url-pattern>/EditFacultyDetail</url-pattern>
   </servlet-mapping>
 </web-app>

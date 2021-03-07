@@ -7,14 +7,13 @@ import java.util.List;
 
 import com.collagemanagement.bean.Answer;
 import com.collagemanagement.bean.QuoraSession;
+import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.QuoraSessionImpl;
 import com.collagemanagement.dao1.QuoraSessionDao;
 import com.collagemanagement.service1.QuoraSessionService;
 
-
 public class QuoraSessionServiceImpl implements QuoraSessionService {
 
-	
 		QuoraSessionDao quorasessiondao = new QuoraSessionImpl();
 		
 		public static Connection getconnection()
@@ -31,8 +30,7 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 			}
 			return c1;
 		}
-		
-		
+
 		public static Connection getConnection() 
 		{
 			Connection conn=null;
@@ -42,7 +40,6 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 				
 				Class.forName("com.mysql.jdbc.Driver");
 				
-				// Database link, username and password
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/educhamp_schema", "root", "root");
 				System.out.println("Connection Succeeded");
 				
@@ -82,7 +79,6 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 		
 	}
 
-
 	@Override
 	public List<QuoraSession> fetchquestiondetails() {
 		// TODO Auto-generated method stub
@@ -99,7 +95,6 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 			}
 			return null;
 	}
-
 
 	@Override
 	public String saveanswerdetails(Answer ans) {
@@ -146,18 +141,91 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 		return null;
 	}
 
-
 	public List<QuoraSession> GetQuestiondetails(String id) 
 	{
+		List<QuoraSession> query=null;
 		try(Connection c1=getconnection();
 			  )
 		{
-			return quorasessiondao.getquestiondetails(c1,id);
+		query =  quorasessiondao.getquestiondetails(c1,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return query;
+	}
+
+
+	public List<User> fetchimage() {
+		// TODO Auto-generated method stub
+		
+		try(Connection c1=getconnection();
+				  )
+			{
+				return quorasessiondao.getimage(c1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	@Override
+	public List<QuoraSession> fetchunanswerquestion() {
+		// TODO Auto-generated method stub
+		
+		try(Connection connection =getconnection();
+				 )
+			{
+				return quorasessiondao.selectunanswerquestion(connection);
+			}
+			catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+
+	}
+
+	@Override
+	public String searchquestion(String question) {
+		// TODO Auto-generated method stub
+		
+		try(Connection  connection = getconnection();
+			)
+		{
+			return quorasessiondao.getsearchtopic(connection,question);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-
+	
+	@Override
+	public Answer modifyAnswer(String id, Answer ans) {
+		// TODO Auto-generated method stub
+		String Message = null;
+		
+		try(Connection  connection = getconnection();
+				)
+			{
+				int updateRecordCount = quorasessiondao.updateAnswer(connection,id,ans);
+				 
+				 if(updateRecordCount>0)
+					{
+						 Message = "Updated Record Successfilly";
+					}
+					else
+					{
+						Message = "Record Not Updated";
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return null;
+	}
 }

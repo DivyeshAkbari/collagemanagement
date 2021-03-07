@@ -22,7 +22,6 @@ public class GetAnswerDetails extends HttpServlet {
 	
 	QuoraSessionService quorasessionservice = new QuoraSessionServiceImpl();
 	
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,15 +45,17 @@ public class GetAnswerDetails extends HttpServlet {
 		
 		List<Answer> answerlist = quorasessionservice.fetchanswer(id);
 		
-		request.setAttribute("answerlist12", questionlist);
+		request.setAttribute("questionlist", questionlist);
 		
 		request.setAttribute("answerlist", answerlist);
-	
-		RequestDispatcher d1 = request.getRequestDispatcher("AnswerofQuestion.jsp");
-		d1.forward(request, response);
 		
-		response.getWriter().append("Served at: ").append("GetAnswerDetails");
-			
+		System.out.println(" QUESTION Size"+questionlist.size());
+		
+		System.out.println("Answer List"+answerlist.size());
+		
+		RequestDispatcher dispature = request.getRequestDispatcher("AnswerofQuestion.jsp");
+		dispature.forward(request, response);
+		
 	}
 
 	/**
@@ -62,8 +63,5 @@ public class GetAnswerDetails extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-
 	}
-
 }

@@ -553,6 +553,11 @@ nav > div > ul > li:before,
   border-radius: 50%;
 }
 
+.ansprofile
+{
+	height : 50px !important;
+	width : 50px !important;	
+}
 .brd-rd40
 {
   -webkit-border-radius: 40px;

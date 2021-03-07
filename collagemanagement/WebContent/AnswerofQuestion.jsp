@@ -1,778 +1,550 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@page import="com.collagemanagement.bean.Answer"%>
+     <%@page import="com.collagemanagement.bean.User"%>
     <%@page import="java.util.List"%>
     <%@page import="com.collagemanagement.bean.QuoraSession"%>
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html class="no-js" lang="">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Educhamp</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <title>Food Ordering HTML Template</title>
-    <link rel="shortcut icon" href="assetsQ/images/favicon.png" type="image/x-icon">
-    
-
-    <link rel="stylesheet" href="assetsQ/css/icons.min.css">
-    <link rel="stylesheet" href="assetsQ/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assetsQ/css/main.css">
-    <link rel="stylesheet" href="assetsQ/css/red-color.css">
-    <link rel="stylesheet" href="assetsQ/css/yellow-color.css">
-    <link rel="stylesheet" href="assetsQ/css/responsive.css">
-    
-    
-   
-	
-	<!-- FAVICONS ICON ============================================= -->
-	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
-	
-	<!-- PAGE TITLE HERE ============================================= -->
-	<title>EduChamp : Education HTML Template </title>
-	
-	<!-- MOBILE SPECIFIC ============================================= -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!--[if lt IE 9]>
-	<script src="assets/js/html5shiv.min.js"></script>
-	<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
-	
-	<!-- All PLUGINS CSS ============================================= -->
-	<link rel="stylesheet" type="text/css" href="assets/css/assets.css">
-	
-	<!-- TYPOGRAPHY ============================================= -->
-	<link rel="stylesheet" type="text/css" href="assets/css/typography.css">
-	
-	<!-- SHORTCODES ============================================= -->
-	<link rel="stylesheet" type="text/css" href="assets/css/shortcodes/shortcodes.css">
-	
-	<!-- STYLESHEETS ============================================= -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <!-- Normalize Css -->
+    <link rel="stylesheet" href="assets4/css/normalize.css">
+    <!-- Main Css -->
+    <link rel="stylesheet" href="assets4/css/main.css">
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="assets4/css/bootstrap.min.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="assets4/css/animate.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="assets4/css/fontawesome-all.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="assets4/fonts/flaticon.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="assets4/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets4/css/owl.theme.default.min.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="style4.css">
+    <!-- Modernizr Js -->
+    <script src="js/modernizr-3.6.0.min.js"></script>
 </head>
-<% List<QuoraSession>  answerList1 =(List)request.getAttribute("answerlist12"); %>
-<% String id =(String)request.getAttribute("id"); %>
-<% List<Answer>  answerList2 =(List)request.getAttribute("answerlist"); %>
-<body itemscope>
-     <%@include file="header.jsp" %>
-     
-    <main>
-    
-        <!-- <div class="preloader">
-            <div id="cooking">
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div id="area">
-                    <div id="sides">
-                        <div id="pan"></div>
-                        <div id="handle"></div>
-                    </div>
-                    <div id="pancake">
-                        <div id="pastry"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         -->
-         
-         
-        <!-- <header class="stick">
-            <div class="topbar">
-                <div class="container">
-                    <div class="select-wrp">
-                        <select data-placeholder="Feel Like Eating">
-                            <option>FEEL LIKE EATING</option>
-                            <option>Burger</option>
-                            <option>Pizza</option>
-                            <option>Fried Rice</option>
-                            <option>Chicken Shots</option>
-                        </select>
-                    </div>
-                    <div class="select-wrp">
-                        <select data-placeholder="Choose Location">
-                            <option>CHOOSE LOCATION</option>
-                            <option>New york</option>
-                            <option>Washington</option>
-                            <option>Chicago</option>
-                            <option>Los Angeles</option>
-                        </select>
-                    </div>
-                    <div class="topbar-register">
-                        <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
-                    </div>
-                    <div class="social1">
-                        <a href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook-square"></i></a>
-                        <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
-                        <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
-                    </div>
-                </div>                
-            </div>
-            <div class="logo-menu-sec">
-                <div class="container">
-                    <div class="logo"><h1 itemprop="headline"><a href="index-2.html" title="Home" itemprop="url"><img src="assets/images/logo2.png" alt="logo.png" itemprop="image"></a></h1></div>
-                    <nav>
-                        <div class="menu-sec">
-                            <ul>
-                                <li class="menu-item-has-children"><a href="#" title="HOMEPAGES" itemprop="url"><span class="red-clr">FOOD ORDERING</span>HOMEPAGES</a>
-                                    <ul class="sub-dropdown">
-                                        <li><a href="index-2.html" title="HOMEPAGE 1" itemprop="url">HOMEPAGE 1</a></li>
-                                        <li><a href="index2.html" title="HOMEPAGE 2" itemprop="url">HOMEPAGE 2</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#" title="RESTAURANTS" itemprop="url"><span class="red-clr">REAL FOOD</span>RESTAURANTS</a>
-                                    <ul class="sub-dropdown">
-                                        <li><a href="restaurant-found.html" title="RESTAURANT 1" itemprop="url">RESTAURANT 1</a></li>
-                                        <li><a href="restaurant-found2.html" title="RESTAURANT 2" itemprop="url">RESTAURANT 2</a></li>
-                                        <li><a href="restaurant-detail.html" title="RESTAURANT DETAILS" itemprop="url">RESTAURANT DETAILS</a></li>
-                                        <li><a href="food-recipes.html" title="RESTAURANT DETAILS" itemprop="url">FOOD RECIPES</a></li>
-                                        <li><a href="our-articles.html" title="RESTAURANT DETAILS" itemprop="url">OUR ARTICLES</a></li>
-                                        <li><a href="our-menu.html" title="RESTAURANT DETAILS" itemprop="url">OUR MENU</a></li>
-                                        <li><a href="our-services.html" title="RESTAURANT DETAILS" itemprop="url">OUR SERVICES</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#" title="PAGES" itemprop="url"><span class="red-clr">REAL FOOD</span>PAGES</a>
-                                    <ul class="sub-dropdown">
-                                        <li class="menu-item-has-children"><a href="#" title="BLOG" itemprop="url">BLOG</a>
-                                            <ul class="sub-dropdown">
-                                                <li class="menu-item-has-children"><a href="#" title="BLOG LAYOUTS" itemprop="url">BLOG LAYOUTS</a>
-                                                    <ul class="sub-dropdown">
-                                                        <li><a href="blog-right-sidebar.html" title="BLOG WITH RIGHT SIDEBAR" itemprop="url">BLOG (W.R.S)</a></li>
-                                                        <li><a href="blog-left-sidebar.html" title="BLOG WITH LEFT SIDEBAR" itemprop="url">BLOG (W.L.S)</a></li>
-                                                        <li><a href="blog.html" title="BLOG WITH NO SIDEBAR" itemprop="url">BLOG</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu-item-has-children"><a href="#" title="BLOG DETAIL" itemprop="url">BLOG DETAIL</a>
-                                                    <ul class="sub-dropdown">
-                                                        <li><a href="blog-detail-right-sidebar.html" title="BLOG DETAIL WITH RIGHT SIDEBAR" itemprop="url">BLOG DETAIL (W.R.S)</a></li>
-                                                        <li><a href="blog-detail-left-sidebar.html" title="BLOG DETAIL WITH LEFT SIDEBAR" itemprop="url">BLOG DETAIL (W.L.S)</a></li>
-                                                        <li><a href="blog-detail.html" title="BLOG DETAIL WITH NO SIDEBAR" itemprop="url">BLOG DETAIL</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu-item-has-children"><a href="#" title="BLOG FORMATES" itemprop="url">BLOG FORMATES</a>
-                                                    <ul class="sub-dropdown">
-                                                        <li><a href="blog-detail-video.html" title="BLOG DETAIL WITH VIDEO" itemprop="url">BLOG DETAIL (VIDEO)</a></li>
-                                                        <li><a href="blog-detail-audio.html" title="BLOG DETAIL WITH AUDIO" itemprop="url">BLOG DETAIL (AUDIO)</a></li>
-                                                        <li><a href="blog-detail-carousel.html" title="BLOG DETAIL WITH CAROUSEL" itemprop="url">BLOG DETAIL (CAROUSEL)</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="#" title="SPECIAL PAGES" itemprop="url">SPECIAL PAGES</a>
-                                            <ul class="sub-dropdown">
-                                                <li><a href="404.html" title="404 ERROR" itemprop="url">404 ERROR</a></li>
-                                                <li><a href="search-found.html" title="SEARCH FOUND" itemprop="url">SEARCH FOUND</a></li>
-                                                <li><a href="search-not-found.html" title="SEARCH NOT FOUND" itemprop="url">SEARCH NOT FOUND</a></li>
-                                                <li><a href="coming-soon.html" title="COMING SOON" itemprop="url">COMING SOON</a></li>
-                                                <li><a href="login-register.html" title="LOGIN & REGISTER" itemprop="url">LOGIN & REGISTER</a></li>
-                                                <li><a href="price-table.html" title="PRICE TABLE" itemprop="url">PRICE TABLE</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="#" title="GALLERY" itemprop="url">GALLERY</a>
-                                            <ul class="sub-dropdown">
-                                                <li><a href="gallery.html" title="FOOD GALLERY" itemprop="url">FOOD GALLERY</a></li>
-                                                <li><a href="gallery-detail.html" title="GALLERY DETAIL" itemprop="url">GALLERY DETAIL</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="register-reservation.html" title="REGISTER RESERVATION" itemprop="url">REGISTER RESERVATION</a></li>
-                                        <li><a href="how-it-works.html" title="HOW IT WORKS" itemprop="url">HOW IT WORKS</a></li>
-                                        <li><a href="dashboard.html" title="USER PROFILE" itemprop="url">USER PROFILE</a></li>
-                                        <li><a href="about-us.html" title="ABOUT US" itemprop="url">ABOUT US</a></li>
-                                        <li><a href="food-detail.html" title="FOOD DETAIL" itemprop="url">FOOD DETAIL</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="red-clr">REAL FOOD</span>CONTACT US</a></li>
-                            </ul>
-                            <a class="red-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </header> -->
 
-        <!-- <div class="responsive-header">
-            <div class="responsive-topbar">
-                <div class="select-wrp">
-                    <select data-placeholder="Feel Like Eating">
-                        <option>FEEL LIKE EATING</option>
-                        <option>Burger</option>
-                        <option>Pizza</option>
-                        <option>Fried Rice</option>
-                        <option>Chicken Shots</option>
-                    </select>
-                </div>
-                <div class="select-wrp">
-                    <select data-placeholder="Choose Location">
-                        <option>CHOOSE LOCATION</option>
-                        <option>New york</option>
-                        <option>Washington</option>
-                        <option>Chicago</option>
-                        <option>Los Angeles</option>
-                    </select>
-                </div>
-            </div>
-            <div class="responsive-logomenu">
-                <div class="logo"><h1 itemprop="headline"><a href="index-2.html" title="Home" itemprop="url"><img src="assets/images/logo.png" alt="logo.png" itemprop="image"></a></h1></div>
-                <span class="menu-btn yellow-bg brd-rd4"><i class="fa fa-align-justify"></i></span>
-            </div>
-            <div class="responsive-menu">
-                <span class="menu-close red-bg brd-rd3"><i class="fa fa-close"></i></span>
-                <div class="menu-lst">
-                    <ul>
-                        <li class="menu-item-has-children"><a href="#" title="HOMEPAGES" itemprop="url"><span class="yellow-clr">FOOD ORDERING</span>HOMEPAGES</a>
-                            <ul class="sub-dropdown">
-                                <li><a href="index-2.html" title="HOMEPAGE 1" itemprop="url">HOMEPAGE 1</a></li>
-                                <li><a href="index2.html" title="HOMEPAGE 2" itemprop="url">HOMEPAGE 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children"><a href="#" title="RESTAURANTS" itemprop="url"><span class="yellow-clr">REAL FOOD</span>RESTAURANTS</a>
-                            <ul class="sub-dropdown">
-                                <li><a href="restaurant-found.html" title="RESTAURANT 1" itemprop="url">RESTAURANT 1</a></li>
-                                <li><a href="restaurant-found2.html" title="RESTAURANT 2" itemprop="url">RESTAURANT 2</a></li>
-                                <li><a href="restaurant-detail.html" title="RESTAURANT DETAILS" itemprop="url">RESTAURANT DETAILS</a></li>
-                                <li><a href="restaurant-detail.html" title="RESTAURANT DETAILS" itemprop="url">RESTAURANT DETAILS</a></li>
-                                <li><a href="food-recipes.html" title="RESTAURANT DETAILS" itemprop="url">FOOD RECIPES</a></li>
-                                <li><a href="our-articles.html" title="RESTAURANT DETAILS" itemprop="url">OUR ARTICLES</a></li>
-                                <li><a href="our-menu.html" title="RESTAURANT DETAILS" itemprop="url">OUR MENU</a></li>
-                                <li><a href="our-services.html" title="RESTAURANT DETAILS" itemprop="url">OUR SERVICES</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children"><a href="#" title="PAGES" itemprop="url"><span class="yellow-clr">REAL FOOD</span>PAGES</a>
-                            <ul class="sub-dropdown">
-                                <li class="menu-item-has-children"><a href="#" title="BLOG" itemprop="url">BLOG</a>
-                                    <ul class="sub-dropdown">
-                                        <li class="menu-item-has-children"><a href="#" title="BLOG LAYOUTS" itemprop="url">BLOG LAYOUTS</a>
-                                            <ul class="sub-dropdown">
-                                                <li><a href="blog-right-sidebar.html" title="BLOG WITH RIGHT SIDEBAR" itemprop="url">BLOG (W.R.S)</a></li>
-                                                <li><a href="blog-left-sidebar.html" title="BLOG WITH LEFT SIDEBAR" itemprop="url">BLOG (W.L.S)</a></li>
-                                                <li><a href="blog.html" title="BLOG WITH NO SIDEBAR" itemprop="url">BLOG</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="#" title="BLOG DETAIL" itemprop="url">BLOG DETAIL</a>
-                                            <ul class="sub-dropdown">
-                                                <li><a href="blog-detail-right-sidebar.html" title="BLOG DETAIL WITH RIGHT SIDEBAR" itemprop="url">BLOG DETAIL (W.R.S)</a></li>
-                                                <li><a href="blog-detail-left-sidebar.html" title="BLOG DETAIL WITH LEFT SIDEBAR" itemprop="url">BLOG DETAIL (W.L.S)</a></li>
-                                                <li><a href="blog-detail.html" title="BLOG DETAIL WITH NO SIDEBAR" itemprop="url">BLOG DETAIL</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="#" title="BLOG FORMATES" itemprop="url">BLOG FORMATES</a>
-                                            <ul class="sub-dropdown">
-                                                <li><a href="blog-detail-video.html" title="BLOG DETAIL WITH VIDEO" itemprop="url">BLOG DETAIL (VIDEO)</a></li>
-                                                <li><a href="blog-detail-audio.html" title="BLOG DETAIL WITH AUDIO" itemprop="url">BLOG DETAIL (AUDIO)</a></li>
-                                                <li><a href="blog-detail-carousel.html" title="BLOG DETAIL WITH CAROUSEL" itemprop="url">BLOG DETAIL (CAROUSEL)</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#" title="SPECIAL PAGES" itemprop="url">SPECIAL PAGES</a>
-                                    <ul class="sub-dropdown">
-                                        <li><a href="404.html" title="404 ERROR" itemprop="url">404 ERROR</a></li>
-                                        <li><a href="search-found.html" title="SEARCH FOUND" itemprop="url">SEARCH FOUND</a></li>
-                                        <li><a href="search-not-found.html" title="SEARCH NOT FOUND" itemprop="url">SEARCH NOT FOUND</a></li>
-                                        <li><a href="coming-soon.html" title="COMING SOON" itemprop="url">COMING SOON</a></li>
-                                        <li><a href="login-register.html" title="LOGIN & REGISTER" itemprop="url">LOGIN & REGISTER</a></li>
-                                        <li><a href="price-table.html" title="PRICE TABLE" itemprop="url">PRICE TABLE</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#" title="GALLERY" itemprop="url">GALLERY</a>
-                                    <ul class="sub-dropdown">
-                                        <li><a href="gallery.html" title="FOOD GALLERY" itemprop="url">FOOD GALLERY</a></li>
-                                        <li><a href="gallery-detail.html" title="GALLERY DETAIL" itemprop="url">GALLERY DETAIL</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="register-reservation.html" title="REGISTER RESERVATION" itemprop="url">REGISTER RESERVATION</a></li>
-                                <li><a href="how-it-works.html" title="HOW IT WORKS" itemprop="url">HOW IT WORKS</a></li>
-                                <li><a href="dashboard.html" title="USER PROFILE" itemprop="url">USER PROFILE</a></li>
-                                <li><a href="about-us.html" title="ABOUT US" itemprop="url">ABOUT US</a></li>
-                                <li><a href="food-detail.html" title="FOOD DETAIL" itemprop="url">FOOD DETAIL</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="yellow-clr">REAL FOOD</span>CONTACT US</a></li>
-                    </ul>
-                </div>
-                <div class="topbar-register">
-                    <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
-                </div>
-                <div class="social1">
-                    <a href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook-square"></i></a>
-                    <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
-                </div>
-                <div class="register-btn">
-                    <a class="yellow-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
-                </div>
-            </div>
-        </div> -->
+<% List<QuoraSession>  questionlist =(List)request.getAttribute("questionlist");
 
-        <!-- <section>
-            <div class="block">
-                <div class="fixed-bg" style="background-image: url(assets/images/topbg.jpg);"></div>
-                <div class="page-title-wrapper text-center">
-                    <div class="col-md-12 col-sm-12 col-lg-12">
-                        <div class="page-title-inner">
-                            <h1 itemprop="headline">Blog Detail With Left Sidebar</h1>
-                                <span>A Greate Restaurant Website</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+   String id =(String)request.getAttribute("id"); 
+   
+   List<Answer>  answerList2 =(List)request.getAttribute("answerlist");
+   
+   HttpSession httpSession = request.getSession(false);
+   User user = (User) httpSession.getAttribute("uname");
+   
+   QuoraSession query = questionlist.get(0); %>
 
-        <!-- <div class="bread-crumbs-wrapper">
+<body>
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <!-- Preloader Start Here -->
+    <div id="preloader"></div>
+    <!-- Preloader End Here -->
+    <!-- ScrollUp Start Here -->
+    <a href="#wrapper" data-type="section-switch" class="scrollup">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+    <!-- ScrollUp End Here -->
+    <div id="wrapper" class="wrapper">
+        <!-- Header Area Start Here -->
+       
+        <!-- Header Area End Here -->
+        <!-- Inne Page Banner Area Start Here -->
+       
+        <!-- Inne Page Banner Area End Here -->
+        <!-- Submit Recipe Area Start Here -->
+        <section class="single-blog-page-wrap padding-top-80 padding-bottom-50">
             <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" title="" itemprop="url">Home</a></li>
-                    <li class="breadcrumb-item active">Blog Detail With Left Sidebar</li>
-                </ol>
-            </div>
-        </div> -->
-
-        <section>
-            <div class="block less-spacing gray-bg top-padd30">
-                
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                            <div class="sec-box">                                    
-    							<div class="col-md-9 col-sm-12 col-lg-9">
-    								<div class="blog-detail-wrapper">
-    									<div class="blog-detail-thumb wow fadeIn" data-wow-delay="0.2s">
-    										<!-- <img src="assets/images/resource/blog-detial-img.jpg" alt="blog-detial-img.jpg" itemprop="image"> -->
-    									</div>
-    									
-    									
-    									
-    									<blockquote><p itemprop="headline">Michel ivauedaus rutrum mi utercture aliquam In habitasse platore dictumst. Integer sagittis  vulputate  similique sunt in culpa qui officia deserunt.</p></blockquote>
-    									<p itemprop="description">Rennie White, an advertising manager in New York City, leaves for work 10 minutes later these days because she no longer has to wait in line for coffee at a Dunkin' Donuts outlet. Instead, she preorders coffee by sending a text message from her cellphone on the way to work. "I can get off the train and get the coffee and not break my flow," Ms. White says</p>
-    									<p itemprop="description"><a class="alignnone wow fadeIn" data-wow-delay="0.2s" href="assetsQ/images/resource/blog-detial-img2.jpg" data-fancybox="gallery" title="" itemprop="url"><img src="assetsQ/images/resource/blog-detial-img2.jpg" alt="blog-detial-img2.jpg" itemprop="image"></a></p>
-    									
-    									
-    									<p itemprop="description"></p>
-    									<div class="blog-detail-info">
-    										<span class="post-detail-date red-clr"><i class="fa fa-clock-o"></i> August 10, 2017</span>
-    										<div class="post-meta">
-    											<span><i class="fa fa-eye red-clr"></i> 95 Views</span>
-    											<span><i class="fa fa-comment-o red-clr"></i> 5 Comments</span>
-    										</div>
-    									</div>
-    									<div class="post-share">
-    										<span>Share:</span>
-    										<a class="brd-rd2" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i></a>
-    										<a class="brd-rd2" href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
-    										<a class="brd-rd2" href="#" title="Pinterest" itemprop="url" target="_blank"><i class="fa fa-pinterest"></i></a>
-    										<a class="brd-rd2" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
-    										<a class="brd-rd2" href="#" title="Linkedin" itemprop="url" target="_blank"><i class="fa fa-linkedin"></i></a>
-    										<a class="brd-rd2" href="#" title="Vimeo" itemprop="url" target="_blank"><i class="fa fa-vimeo"></i></a>
-    									</div>
-    									<div class="post-next-prev">
-    										<a class="prev-post" href="#" title="Previous Post" itemprop="url"><i class="fa fa-angle-left"></i> PREV</a> -
-    										<a class="next-post" href="#" title="Next Post" itemprop="url">NEXT <i class="fa fa-angle-right"></i></a>
-    									</div>
-    									
-    									
-    									
-    									<p itemprop="description"><span class="big-letter"></span> <a class="alignnone wow fadeIn" data-wow-delay="0.2s" href="assetsQ/images/resource/blog-detial-img3.jpg" data-fancybox="gallery" title="" itemprop="url"></a> </p>
-    									<h1 itemprop="headline"><% for(int i=0;i<answerList1.size();i++)
-												{ %>
-												<tr>	
-														<% QuoraSession q1=answerList1.get(i); %>
-														<td><%=q1.getTopicname()%></td>
-														
-														
-													</tr>
-											<% } %></h1>
-    									<div class="post-tags red-clr">
-    										<span>Tags:</span>
-    										<a href="#" title="" itemprop="url">#fish</a>,<a href="#" title="" itemprop="url">#pasta</a>,<a href="#" title="" itemprop="url">#soups</a>
-    									</div>
-    									<div class="post-cate red-clr">
-    										<span>Category:</span>
-    										<a href="#" title="Italian cuisine" itemprop="url">Italian cuisine</a>
-    									</div>
-    									    								</div>
-    								
-    								
-    								
-    								<div class="author-info-wrapper">
-    								
-    									<h3 class="title4" itemprop="headline"><span class="sudo-bottom sudo-bg-red">About</span> The Author</h3>
-    									<div class="author-box">
-    										<img class="brd-rd50" src="assetsQ/images/resource/author-img.jpg" alt="author-img.jpg" itemprop="image">
-    										<div class="author-info">
-    											<h4 itemprop="headline"><a href="#" title="" itemprop="url"><% for(int i=0;i<answerList1.size();i++)
-                                                    { %>
-                                                    <tr>	
-                                                            <% QuoraSession q1=answerList1.get(i); %>
-                                                            <td><%=q1.getUsername()%></td>
-                                                            
-                                                            
-                                                        </tr>
-                                                <% } %>
-                                        </a></h4>
-                                        <%if(answerList1!=null) {%>
-    											<p itemprop="description"><% for(int i=0;i<answerList1.size();i++)
-                                                    { %>
-                                                    	
-                                                            <% QuoraSession q1=answerList1.get(i); %>
-                                                            
-                                                           	<%=q1.getTdescription()%>
-                                                          <%=q1.getTopicname()%>
-                                                            
-                                                       
-                                                	<% } %>
-                                                <% } %></p>
-    											<a class="red-clr" href="#" title="Webinane" itemprop="url" target="_blank">webinane.com</a>
-    										</div>
-    									</div>
-    								</div>
-    								<%if(answerList2!=null) {%>
-    								<div class="comments-wrapper">
-    									<h3 class="title4" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Comm</span>ents (2)</h3>
-    									<ul class="comments-thread">
-    										<li>
-    											<div class="comment">
-    												<img class="brd-rd50" src="assetsQ/images/resource/comment1.jpg" alt="comment1.jpg">
-    												<%int l=0; %>
-    												<div class="comment-info">
-    													<h4 itemprop="headline"><a href="#" title="" itemprop="url">
-    													
-    													<%if(l==0) 
-    												    {%>
-    															<% for(int i=0;i<answerList2.size();i++)
-                                                   		 		{ %>
-                                                  
-                                                           			 <% Answer ans=answerList2.get(i); %>
-                                                            
-                                                            		<%=ans.getUsername()%>
-                                                           			                
-                                                				<% } %>
-                                                		<% } %>
-                                                		
-                                                </a></h4>
-    													<i>17 August 2018 at 12.00pm / <a class="comment-reply-link red-clr" href="#" title="" itemprop="url">Reply</a></i>
-    													<p itemprop="description"> 
-    													<% for(int i=0;i<answerList2.size();i++)
-                                                    { %>
-                                                  
-                                                            <% Answer ans=answerList2.get(i); %>
-                                                            
-                                                            <%=ans.getAnswerdescription()%>
-                                                                            
-                                                <% } %>
-    													</p>
-    												</div>
-    											</div>
-    											
-    										</li>
-    									</ul>
-    								</div>
-    								<% }%>
-    								
-    								<div class="leav-comment-wrapper">
-    									<h3 class="title4" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Leave</span> a Reply</h3>
-    									<form class="reply-form" action="InsertAnswerDescription" method="post">
-    										<div class="row">
-    											<!-- <div class="col-md-4 col-sm-6 col-lg-4">
-    												<input class="brd-rd2" type="text" placeholder="Name">
-    											</div>
-    											<div class="col-md-4 col-sm-6 col-lg-4">
-    												<input class="brd-rd2" type="email" placeholder="Email">
-    											</div>
-    											<div class="col-md-4 col-sm-12 col-lg-4">
-    												<input class="brd-rd2" type="text" placeholder="Subject">
-    											</div> -->
-    											<div class="col-md-4 col-sm-12 col-lg-4">
-    												<input class="brd-rd2" type="hidden" name="id" value=<%=id %> placeholder="id">
-    											</div>
-    											
-    											<div class="col-md-12 col-sm-12 col-lg-12">
-    												<textarea class="brd-rd2" name="answerdescription" placeholder="Message" ></textarea>
-    											</div>
-    											<div class="col-md-12 col-sm-12 col-lg-12">
-    												<button class="brd-rd3 red-bg" type="submit">SUBMIT NOW</button>
-    											</div>
-    										</div>
-    									</form>
-    								</div>
-    							</div>
-    							<div class="col-md-3 col-sm-12 col-lg-3">
-    								<div class="sidebar right">
-    									<div class="widget style2 Search_filters wow fadeIn" data-wow-delay="0.2s">
-    										<h4 class="widget-title2 sudo-bg-red" itemprop="headline">Search Filters</h4>
-    										<div class="widget-data">
-    											<ul>
-    												<li><a href="#" title="" itemprop="url">Fast Food</a> </li>
-    												<li><a href="#" title="" itemprop="url">North Indian</a> </li>
-    												<li><a href="#" title="" itemprop="url">Chinese</a> </li>
-    												<li><a href="#" title="" itemprop="url">Bakery</a> </li>
-    												<li><a href="#" title="" itemprop="url">Mughlai</a> </li>
-    												<li><a href="#" title="" itemprop="url">Pizza</a> </li>
-    												<li><a href="#" title="" itemprop="url">Ice Cream</a></li>
-    												<li><a href="#" title="" itemprop="url">Rolls</a> </li>
-    												<li><a href="#" title="" itemprop="url">Cafe</a> </li>
-    												<li><a href="#" title="" itemprop="url">Italian</a> </li>
-    											</ul>
-    										</div>
-    									</div>
-    								
-    									<!-- <div class="widget style2 quick_filters wow fadeIn" data-wow-delay="0.2s">
-    										<h4 class="widget-title2 sudo-bg-red" itemprop="headline">Quick Filters</h4>
-    										<div class="widget-data">
-    											<ul>
-    												<li><span class="radio-box"><input type="radio" name="filter" id="filt1-1"><label for="filt1-1">Promotions</label></span></li>
-    												<li><span class="radio-box"><input type="radio" name="filter" id="filt1-2"><label for="filt1-2">Bookmarked</label></span></li>
-    												<li><span class="radio-box"><input type="radio" name="filter" id="filt1-3"><label for="filt1-3">Pure veg</label></span></li>
-    												<li><span class="radio-box"><input type="radio" name="filter" id="filt1-4"><label for="filt1-4">Free Delivery</label></span></li>
-    												<li><span class="radio-box"><input type="radio" name="filter" id="filt1-5"><label for="filt1-5">Online Payments</label></span></li>
-    											</ul>
-    										</div>
-    									</div> -->
-    									
-    									<div class="widget style2 popular_posts wow fadeIn" data-wow-delay="0.2s">
-    										<h4 class="widget-title2 sudo-bg-red" itemprop="headline">Popular Posts</h4>
-    										<div class="widget-data">
-    											<div class="mini-posts-list">
-    												<div class="mini-post-item">
-    													<a href="blog-detail-right-sidebar.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img1.jpg" alt="popular-post-img1.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail-right-sidebar.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> August 10, 2017</span>
-    													</div>
-    												</div>
-    												<div class="mini-post-item">
-    													<a href="blog-detail-left-sidebar.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img2.jpg" alt="popular-post-img2.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail-left-sidebar.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> November 12, 2017</span>
-    													</div>
-    												</div>
-    												<div class="mini-post-item">
-    													<a href="blog-detail.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img3.jpg" alt="popular-post-img3.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> May 15, 2017</span>
-    													</div>
-    												</div>
-    												<div class="mini-post-item">
-    													<a href="blog-detail-right-sidebar.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img4.jpg" alt="popular-post-img4.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail-right-sidebar.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> March 20, 2017</span>
-    													</div>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="widget style2 category_posts wow fadeIn" data-wow-delay="0.2s">
-    										<h4 class="widget-title2 sudo-bg-red" itemprop="headline">Categories</h4>
-    										<div class="widget-data">
-    											<div class="mini-posts-list">
-    												<div class="mini-post-item">
-    													<a href="blog-detail-right-sidebar.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img2-1.jpg" alt="popular-post-img2-1.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail-right-sidebar.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> August 10, 2017</span>
-    													</div>
-    												</div>
-    												<div class="mini-post-item">
-    													<a href="blog-detail-left-sidebar.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img2-2.jpg" alt="popular-post-img2-2.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail-left-sidebar.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> November 12, 2017</span>
-    													</div>
-    												</div>
-    												<div class="mini-post-item">
-    													<a href="blog-detail.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img2-3.jpg" alt="popular-post-img2-3.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> May 15, 2017</span>
-    													</div>
-    												</div>
-    												<div class="mini-post-item">
-    													<a href="blog-detail-right-sidebar.html" title="" itemprop="url"><img class="brd-rd2" src="assetsQ/images/resource/popular-post-img2-4.jpg" alt="popular-post-img2-4.jpg" itemprop="image"></a>
-    													<div class="mini-post-info">
-    														<h5 itemprop="headline"><a href="blog-detail-right-sidebar.html" title="" itemprop="url">Food Tech</a></h5>
-    														<span class="mini-post-data"><i class="fa fa-clock-o"></i> March 20, 2017</span>
-    													</div>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div><!--Sidebar -->
-    							</div>
+                <div class="row gutters-60">
+                    <div class="col-lg-8">
+                        <div class="single-blog-box">
+                            <div class="main-figure">
+                                <a href="single-blog.html"><img src="assets4/img/blog/blog9.jpg" alt="Blog"></a>
                             </div>
-                        </div>
-                        </div>
-                    </div>
-            </div>
-        </section>
-        <%@include file="footer.jsp" %>
-<!-- 
-        <footer>
-            <div class="block top-padd80 bottom-padd80 dark-bg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-lg-12">
-                            <div class="footer-data">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6 col-lg-3">
-                                        <div class="widget about_widget wow fadeIn" data-wow-delay="0.1s">
-                                            <div class="logo"><h1 itemprop="headline"><a href="#" title="Home" itemprop="url"><img src="assets/images/logo.png" alt="logo.png" itemprop="image"></a></h1></div>
-                                            <p itemprop="description">Food Ordering is a Premium HTML Template. Best choice for your online store. Let purchase it to enjoy now</p>
-                                            <div class="social2">
-                                                <a class="brd-rd50" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i></a>
-                                                <a class="brd-rd50" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
-                                                <a class="brd-rd50" href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
-                                                <a class="brd-rd50" href="#" title="Pinterest" itemprop="url" target="_blank"><i class="fa fa-pinterest"></i></a>
+                            <div class="blog-content">
+                                <ul class="entry-meta">
+                                    <li><a href="#"><i class="fas fa-clock"></i>15 December, 2018</a></li>
+                                    <li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
+                                    <li><a href="#"><i class="fas fa-comments"></i>Comments <span>(03)</span></a></li>
+                                    <li><a href="#"><i class="fas fa-heart"></i><span>59</span></a></li>
+                                </ul>
+                                <h3 class="item-title"><a href="single-blog.html">
+                                    <% for(int i=0;i<questionlist.size();i++)
+                                    { %>
+                                         <% QuoraSession q1=questionlist.get(i); %>
+                                         <%=q1.getTopicname()%>  
+                                    <% } %>    
+                                </a></h3>
+                                <blockquote>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                    been the industry's standard dummy text ever since the 1500s.<span></span></blockquote>
+                            </div>
+                            <div class="tag-share">
+                                <ul>
+                                    <li>
+                                        <ul class="inner-tag">
+                                            <li>
+                                                <a href="#">Burger</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Dinner</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Pizza</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Salad</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="recipe-author">
+                                <div class="media media-none--xs">
+                                    <img src="assets4/img/blog/author9.jpg" alt="Blog Author" class="rounded-circle media-img-auto">
+                                    <div class="media-body">
+                                        <h4 class="author-title">
+                                            <% for(int i=0;i<questionlist.size();i++)
+                                            { %>
+                                                    <% QuoraSession q1=questionlist.get(i); %>
+                                                    <%=q1.getUsername()%> 
+                                            <% } %>    
+                                        </h4>
+                                        <%if(questionlist!=null) {%>
+                                            <h5 class="author-sub-title">Written by</h5>
+                                            <p><% for(int i=0;i<questionlist.size();i++)
+                                                { %>
+                                                        <% QuoraSession q1=questionlist.get(i); %>
+                                                        <%=q1.getTdescription()%>
+                                                <% } %>
+                                            </p>
+                                        <% } %>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="next-prev-post">
+                                <div class="prev-post">
+                                    <a href="#" class="item-figure"><img src="assets4/img/blog/prev-post.jpg" alt="Post"></a>
+                                    <div class="item-content">
+                                        <p>PREVIOUS POST</p>
+                                        <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
+                                    </div>
+                                </div>
+                                <div class="next-post">
+                                    <div class="item-content">
+                                        <p>NEXT POST</p>
+                                        <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
+                                    </div>
+                                    <a href="#" class="item-figure"><img src="assets4/img/blog/next-post.jpg" alt="Post"></a>
+                                </div>
+                            </div>
+                    <%if(answerList2!=null) {%>
+                            <div class="recipe-reviews">
+                                <div class="section-heading3 heading-dark">
+                                    <h2 class="item-heading">RECIPE REVIEWS</h2>
+                                </div>
+                                <ul>
+                                    <li class="reviews-single-item">
+                                        <div class="media media-none--xs">
+                                            <img style="width :100px;height : 100px"  src="data:image/png;base64,<%=user.getUserProfilepicString() %>" alt="Comment" class="media-img-auto">
+                                            <div class="media-body">
+                                                <h4 class="comment-title">
+                                                    <% for(int i=0;i<answerList2.size();i++)
+                                                    { %>
+                                                        <% Answer ans=answerList2.get(i); %>
+                                                        <%=ans.getUsername()%>                 
+                                                    <% } %>
+                                               </h4>
+                                                <span class="post-date">September 27, 2018</span>
+                                                <p>
+                                                    <% for(int i=0;i<answerList2.size();i++)
+	                                                { %>
+	                                                            <% Answer ans=answerList2.get(i); %>
+	                                                            <%=ans.getAnswerdescription()%>                  
+	                                                <% } %>
+                                                </p>
+                                                
+                                                <a href="EditAnswerDescription" class="item-btn">REPLY<i class="fas fa-long-arrow-alt-right"></i></a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6 col-lg-3">
-                                        <div class="widget information_links wow fadeIn" data-wow-delay="0.2s">
-                                            <h4 class="widget-title" itemprop="headline">INFORMATION</h4>
-                                            <ul>
-                                                <li><a href="#" title="" itemprop="url">Careers</a></li>
-                                                <li><a href="#" title="" itemprop="url">Investor Relations</a></li>
-                                                <li><a href="#" title="" itemprop="url">Press Releases</a></li>
-                                                <li><a href="#" title="" itemprop="url">Shop with Points</a></li>
-                                                <li><a href="#" title="" itemprop="url">More Branches</a></li>
-                                            </ul>
+                                    </li>
+                                    <li class="reviews-single-item">
+                                        <div class="media media-none--xs">
+                                            <img src="assets4/img/blog/comment2.jpg" alt="Comment" class="media-img-auto">
+                                            <div class="media-body">
+                                                <h4 class="comment-title">John Martin</h4>
+                                                <span class="post-date">September 12, 2018</span>
+                                                <p>Absolutely great recipe. I cooked it for my kids and they loved it,
+                                                    even
+                                                    asked for more, can you believe it?</p>
+                                                
+                                                <a href="#" class="item-btn">REPLY<i class="fas fa-long-arrow-alt-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        <% }%>
+                            <div class="leave-review">
+                                <div class="section-heading3 heading-dark">
+                                    <h2 class="item-heading">LEAVE A REVIEW</h2>
+                                </div>
+                                <form class="leave-form-box" action="InsertAnswerDescription" method="post">
+                                    <div class="row">
+                                        <div class="col-12 form-group">
+                                            <label>Comment :</label>
+                                            <textarea placeholder="" class="textarea form-control"  value="<%=query.getTdescription() %>" name="answerdescription" rows="7"
+                                                cols="20" data-error="Message field is required" required></textarea>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <input type="hidden"  placeholder="" class="form-control"  name="id" 
+                                                  data-error="id field is required" required value=<%=id %> >
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="col-12 form-group mb-0">
+                                            <button type="submit" class="item-btn">POST Answer</button>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-6 col-lg-3">
-                                        <div class="widget customer_care wow fadeIn" data-wow-delay="0.3s">
-                                            <h4 class="widget-title" itemprop="headline">CUSTOMER CARE</h4>
-                                            <ul>
-                                                <li><a href="#" title="" itemprop="url">Returns</a></li>
-                                                <li><a href="#" title="" itemprop="url">Shipping Info</a></li>
-                                                <li><a href="#" title="" itemprop="url">Gift Cards</a></li>
-                                                <li><a href="#" title="" itemprop="url">Size Guide</a></li>
-                                                <li><a href="#" title="" itemprop="url">Money Back</a></li>
-                                            </ul>
+                                    <div class="form-response"></div>
+                                </form>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
+                        <div class="widget">
+                            <div class="section-heading heading-dark">
+                                <h3 class="item-heading">LATEST BLOG</h3>
+                            </div>
+                            <div class="widget-blog-post">
+                                <ul class="block-list">
+                                    <li class="single-item">
+                                        <div class="item-img">
+                                            <a href="#"><img src="assets4/img/product/latest1.jpg" alt="Post"></a>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
+                                                    2018</a></div>
+                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
+                                                    Mozzarella Oelette</a></h4>
+                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
+                                                    John Martin</a></div>
+                                        </div>
+                                    </li>
+                                    <li class="single-item">
+                                        <div class="item-img">
+                                            <a href="#"><img src="assets4/img/product/latest2.jpg" alt="Post"></a>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
+                                                    2018</a></div>
+                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
+                                                    Mozzarella Oelette</a></h4>
+                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
+                                                    John Martin</a></div>
+                                        </div>
+                                    </li>
+                                    <li class="single-item">
+                                        <div class="item-img">
+                                            <a href="#"><img src="assets4/img/product/latest3.jpg" alt="Post"></a>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
+                                                    2018</a></div>
+                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
+                                                    Mozzarella Oelette</a></h4>
+                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
+                                                    John Martin</a></div>
+                                        </div>
+                                    </li>
+                                    <li class="single-item">
+                                        <div class="item-img">
+                                            <a href="#"><img src="assets4/img/product/latest4.jpg" alt="Post"></a>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
+                                                    2018</a></div>
+                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
+                                                    Mozzarella Oelette</a></h4>
+                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
+                                                    John Martin</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="widget-ad">
+                                <a href="#"><img src="assets4/img/figure/figure6.jpg" alt="Ad" class="img-fluid"></a>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="section-heading heading-dark">
+                                <h3 class="item-heading">CATEGORIES</h3>
+                            </div>
+                            <div class="widget-categories">
+                                <ul>
+                                    <li>
+                                        <a href="#">BreakFast
+                                            <span>25</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Lunch
+                                            <span>15</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Pasta
+                                            <span>22</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Dinner
+                                            <span>18</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Dessert
+                                            <span>36</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Drinks
+                                            <span>12</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Fruits
+                                            <span>05</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="section-heading heading-dark">
+                                <h3 class="item-heading">FEATURED ARTICLE</h3>
+                            </div>
+                            <div class="widget-featured-feed">
+                                <div class="rc-carousel nav-control-layout1" data-loop="true" data-items="3"
+                                    data-margin="5" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="700"
+                                    data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1"
+                                    data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1"
+                                    data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1"
+                                    data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1"
+                                    data-r-medium-nav="true" data-r-medium-dots="false" data-r-large="1"
+                                    data-r-large-nav="true" data-r-large-dots="false" data-r-extra-large="1"
+                                    data-r-extra-large-nav="true" data-r-extra-large-dots="false">
+                                    <div class="featured-box-layout1">
+                                        <div class="item-img">
+                                            <img src="assets4/img/product/product17.jpg" alt="Brand" class="img-fluid">
+                                        </div>
+                                        <div class="item-content">
+                                            <span class="ctg-name">BREAKFAST</span>
+                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
+                                            <p>Definitiones noel ei verear intelle
+                                                gatpri civibus consequat area
+                                                refund efficiantue.</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-6 col-lg-3">
-                                        <div class="widget get_in_touch wow fadeIn" data-wow-delay="0.4s">
-                                            <h4 class="widget-title" itemprop="headline">GET IN TOUCH</h4>
-                                            <ul>
-                                               <li><i class="fa fa-map-marker"></i> 123 New Design Str, ABC Building, melbourne, Australia.</li>
-                                               <li><i class="fa fa-phone"></i> (0044) 8647 1234 587</li>
-                                               <li><i class="fa fa-envelope"></i> <a href="#" title="" itemprop="url">hello@yourdomain.com</a></li>
-                                            </ul>
+                                    <div class="featured-box-layout1">
+                                        <div class="item-img">
+                                            <img src="assets4/img/product/product18.jpg" alt="Brand" class="img-fluid">
+                                        </div>
+                                        <div class="item-content">
+                                            <span class="ctg-name">DINNER</span>
+                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
+                                            <p>Definitiones noel ei verear intelle
+                                                gatpri civibus consequat area
+                                                refund efficiantue.</p>
+                                        </div>
+                                    </div>
+                                    <div class="featured-box-layout1">
+                                        <div class="item-img">
+                                            <img src="assets4/img/product/product19.jpg" alt="Brand" class="img-fluid">
+                                        </div>
+                                        <div class="item-content">
+                                            <span class="ctg-name">SALAD</span>
+                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
+                                            <p>Definitiones noel ei verear intelle
+                                                gatpri civibus consequat area
+                                                refund efficiantue.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="widget">
+                            <div class="section-heading heading-dark">
+                                <h3 class="item-heading">INSTAGRAM</h3>
+                            </div>
+                            <div class="widget-instagram">
+                                <ul>
+                                    <li>
+                                        <div class="item-box">
+                                            <img src="assets4/img/social-figure/social-figure9.jpg" alt="Social Figure" class="img-fluid">
+                                            <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-box">
+                                            <img src="assets4/img/social-figure/social-figure10.jpg" alt="Social Figure" class="img-fluid">
+                                            <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-box">
+                                            <img src="assets4/img/social-figure/social-figure11.jpg" alt="Social Figure" class="img-fluid">
+                                            <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-box">
+                                            <img src="assets4/img/social-figure/social-figure12.jpg" alt="Social Figure" class="img-fluid">
+                                            <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-box">
+                                            <img src="assets4/img/social-figure/social-figure13.jpg" alt="Social Figure" class="img-fluid">
+                                            <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-box">
+                                            <img src="assets4/img/social-figure/social-figure14.jpg" alt="Social Figure" class="img-fluid">
+                                            <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="section-heading heading-dark">
+                                <h3 class="item-heading">POPULAR TAGS</h3>
+                            </div>
+                            <div class="widget-tag">
+                                <ul>
+                                    <li>
+                                        <a href="#">DESERT</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">CAKE</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">BREAKFAST</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">BURGER</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">DINNER</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">PIZZA</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">SEA FOOD</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">SALAD</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">JUICE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer> -->
-        <!-- <div class="bottom-bar dark-bg text-center">
-            <div class="container">
-                <p itemprop="description"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
-            </div>
-        </div> -->
-
-        <div class="log-popup text-center">
-            <div class="sign-popup-wrapper brd-rd5">
-                <div class="sign-popup-inner brd-rd5">
-                    <a class="log-close-btn" href="#" title="" itemprop="url"><i class="fa fa-close"></i></a>
-                    <div class="sign-popup-title text-center">
-                        <h4 itemprop="headline">SIGN IN</h4>
-                        <span>with your social network</span>
-                    </div>
-                    <div class="popup-social text-center">
-                        <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
-                        <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i> Google</a>
-                        <a class="twitter brd-rd3" href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
-                    </div>
-                    <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
-                    <form class="sign-form">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" placeholder="Username or Email">
+        </section>
+        <!-- Submit Recipe Area End Here -->
+        <!-- Footer Area Start Here -->
+        
+        <!-- Footer Area End Here -->
+    </div>
+    <!-- Search Box Start Here -->
+    <div id="search" class="search-wrap">
+        <button type="button" class="close">×</button>
+        <form class="search-form">
+            <input type="search" value="" placeholder="Type here........" />
+            <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
+        </form>
+    </div>
+    <!-- Search Box End Here -->
+    <!-- Modal Start-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="title-default-bold mb-none">Login</div>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="login-form">
+                        <input class="main-input-box" type="text" placeholder="User Name" />
+                        <input class="main-input-box" type="password" placeholder="Password" />
+                        <div class="inline-box mb-5 mt-4">
+                            <div class="checkbox checkbox-primary">
+                                <input id="modal-checkbox" type="checkbox">
+                                <label for="modal-checkbox">Remember Me</label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" placeholder="Password">
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <button class="red-bg brd-rd3" type="submit">SIGN IN</button>
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="#" title="" itemprop="url">Not a member? Sign up</a>
-                                <a class="recover-btn" href="#" title="" itemprop="url">Recover my password</a>
-                            </div>
+                            <label class="lost-password"><a href="#">Lost your password?</a></label>
+                        </div>
+                        <div class="inline-box mb-5 mt-4">
+                            <button class="btn-fill" type="submit" value="Login">Login</button>
+                            <a href="#" class="btn-register"><i class="fas fa-user"></i>Register Here!</a>
                         </div>
                     </form>
+                    <label>Login connect with your Social Network</label>
+                    <div class="login-box-social">
+                        <ul>
+                            <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="#" class="google"><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Modal End-->
+    <!-- Jquery Js -->
+    <script src="assets4/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets4/js/popper.min.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets4/js/bootstrap.min.js"></script>
+    <!-- Plugins Js -->
+    <script src="assets4/js/plugins.js"></script>
+    <!-- Owl Carousel Js -->
+    <script src="assets4/js/owl.carousel.min.js"></script>
+    <!-- Smoothscroll Js -->
+    <script src="assets4/js/smoothscroll.min.js"></script>
+    <!-- Custom Js -->
+    <script src="assets4/js/main.js"></script>
+</body>
 
-        <div class="sign-popup text-center">
-            <div class="sign-popup-wrapper brd-rd5">
-                <div class="sign-popup-inner brd-rd5">
-                    <a class="sign-close-btn" href="#" title="" itemprop="url"><i class="fa fa-close"></i></a>
-                    <div class="sign-popup-title text-center">
-                        <h4 itemprop="headline">SIGN UP</h4>
-                        <span>with your social network</span>
-                    </div>
-                    <div class="popup-social text-center">
-                        <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
-                        <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i> Google</a>
-                        <a class="twitter brd-rd3" href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
-                    </div>
-                    <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
-                    <form class="sign-form">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="text" placeholder="Username">
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="email" placeholder="Email">
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <input class="brd-rd3" type="password" placeholder="Password">
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <button class="red-bg brd-rd3" type="submit">REGISTER NOW</button>
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <a class="sign-btn" href="#" title="" itemprop="url">Already Registered? Sign in</a>
-                                <a class="recover-btn" href="#" title="" itemprop="url">Recover my password</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </main><!-- Main Wrapper -->
-
-    <script src="assetsQ/js/jquery.min.js"></script>
-    <script src="assetsQ/js/bootstrap.min.js"></script>
-    <script src="assetsQ/js/plugins.js"></script>
-    <script src="assetsQ/js/main.js"></script>
-    
-   <script src="assets/js/jquery.min.js"></script>
-<script src="assets/vendors/bootstrap/js/popper.min.js"></script>
-<script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
-<script src="assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
-<script src="assets/vendors/magnific-popup/magnific-popup.js"></script>
-<script src="assets/vendors/counter/waypoints-min.js"></script>
-<script src="assets/vendors/counter/counterup.min.js"></script>
-<script src="assets/vendors/imagesloaded/imagesloaded.js"></script>
-<script src="assets/vendors/masonry/masonry.js"></script>
-<script src="assets/vendors/masonry/filter.js"></script>
-<script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
-
-
-
-</body>	
 
 </html>

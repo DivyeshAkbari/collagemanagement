@@ -1,8 +1,10 @@
 package com.collagemanagement.servlet.QuoraSession;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,8 +53,15 @@ public class InsertAnswerDescription extends HttpServlet {
 		String fname = user.getFirstname();
 		String mname = user.getMiddlename();
 		
-		System.out.println("Firstname"+fname );
-		System.out.println("SurName"+ mname);
+		
+		InputStream is = new ByteArrayInputStream(user.getImagedata());
+		
+		String image = user.getUserProfilepicString();
+
+		
+		System.out.println("Firstname->"+fname );
+		System.out.println("SurName->"+ mname);
+	//	System.out.println("Image Name"+image);
 		
 		finalestring = fname.concat(" "+ mname);
 		
@@ -68,13 +77,11 @@ public class InsertAnswerDescription extends HttpServlet {
 		ans.setUsername(finalestring);
 		ans.setUserid(user.getId());
 		ans.setQueryId(Integer.parseInt(id));
-	
+		ans.setUserProfilepicStream(is);
+
 		quorasessionservice.saveanswerdetails(ans);	
 		
-		RequestDispatcher dispacher=request.getRequestDispatcher("AnswerofQuestion.jsp");
-		dispacher.forward(request, response);
-		
+		response.sendRedirect("AnswerofQuestion.jsp");
 		
 	}
-
 }

@@ -37,13 +37,11 @@ public class SelectQueryDetails extends HttpServlet {
 		
 		List<QuoraSession> querylist = quorasessionservice.fetchquestiondetails();
 		
+		List<QuoraSession> unanswerlist = quorasessionservice.fetchunanswerquestion();
 		
 		request.setAttribute("querylist", querylist);
 		
-		
-		
-		
-	
+		request.setAttribute("unanswerlist", unanswerlist);
 	}
 
 	/**
@@ -53,5 +51,4 @@ public class SelectQueryDetails extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

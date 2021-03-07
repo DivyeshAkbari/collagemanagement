@@ -197,6 +197,8 @@
 									<!-- <li><a href="profile.jsp">Profile</a></li> -->
 									<li><a href="membership.jsp">Membership</a></li>
 									<li><a href="error-404.jsp">404 Page</a></li>
+									<li><a href="Unanswered.jsp">Unanswered</a></li>
+									
 									<li><a href="Result.jsp">Result</a></li>
 									<li><a target="_blank" href="QuestionDetails.jsp" >Question Display</a></li>					
 										<% if(null!=u1 && "STUDENT".equalsIgnoreCase(u1.getRole()))

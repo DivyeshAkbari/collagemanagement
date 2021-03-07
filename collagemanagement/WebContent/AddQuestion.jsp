@@ -103,6 +103,8 @@ $(document).ready(function() {
 									<input autocomplete="off" name="topicname" type="text" required="" class="form-control">
 								</div>
 							</div>
+							
+							
 						<!-- </div> -->
 						<!-- <div class="col-lg-12"> -->
 							<!-- <div class="form-group">
@@ -194,6 +196,13 @@ $(document).ready(function() {
 								<div class="input-group">
 									<label>Topic description</label>
 									<textarea name="tdescription" type="text" required="" class="form-control" cols="30" rows="4"  maxlength="100"  "> </textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+								<input type="hidden" name="role" value="FACULTY"></input>
+									<label>Tag  Name</label>
+									<input autocomplete="off" name="tagname" type="text" required="" class="form-control">
 								</div>
 							</div>
 						<!-- </div> -->

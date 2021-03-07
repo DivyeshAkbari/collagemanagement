@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.collagemanagement.bean.Answer;
 import com.collagemanagement.bean.QuoraSession;
+import com.collagemanagement.bean.User;
 
 
 public interface QuoraSessionDao {
@@ -15,10 +16,16 @@ public interface QuoraSessionDao {
 	
 	public int insertanswerdetails(Connection connection,Answer ans);
 
-	public List<QuoraSession> getquestiondetails(Connection c1, String id);
+	public List<QuoraSession> getquestiondetails(Connection  connection, String id);
 
 	public List<Answer> selectanswer(Connection connection, String id);
 
+	public List<User> getimage(Connection c1);
 
+	public List<QuoraSession> selectunanswerquestion(Connection connection);
+
+	public String getsearchtopic(Connection connection, String question);
+
+	public int updateAnswer(Connection connection, String id, Answer ans);
 
 }

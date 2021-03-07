@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.collagemanagement.bean.Semester;
@@ -95,6 +96,15 @@ public class Collagedaoimpl implements CollageDao
 						u1.setId(r1.getInt("i_user_id"));
 						u1.setFirstname(r1.getString("c_First_Name"));
 						u1.setStream(r1.getString("c_stream"));
+						
+						byte[] imagedata = r1.getBytes("image");
+						if(imagedata!=null && imagedata.length>0)
+						{
+								String imagestring = Base64.getEncoder().encodeToString(imagedata);
+								u1.setUserProfilepicString(imagestring);
+								
+								u1.setImagedata(imagedata);
+						}
 					}
 				}
 			}

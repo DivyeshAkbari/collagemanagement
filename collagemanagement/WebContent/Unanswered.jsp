@@ -14,19 +14,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets4/favicon.png">
+    <link rel="shortcut icon" href="assets/assets4/img/favicon.png">
     <!-- Normalize Css -->
-    <link rel="stylesheet" href="assets4/css/normalize.css">
+    <link rel="stylesheet" href="assets/assets4/css/normalize.css">
     <!-- Main Css -->
-    <link rel="stylesheet" href="assets4/css/main.css">
+    <link rel="stylesheet" href="assets/assets4/css/main.css">
     <!-- Bootstrap Css -->
-    <link rel="stylesheet" href="assets4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/bootstrap.min.css">
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="assets4/css/animate.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/animate.min.css">
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="assets4/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/fontawesome-all.min.css">
     <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="assets4/fonts/flaticon.css">
+    <link rel="stylesheet" href="assets/assets4/fonts/flaticon.css">
     <!-- Custom Css -->
     <link rel="stylesheet" href="style4.css">
     <!-- Modernizr Js -->
@@ -85,7 +85,7 @@
                                         <tr>
                                             <th>
                                                 <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="assets4/img/blog/author2.jpg" alt="Author"></a>
+                                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/author2.jpg" alt="Author"></a>
                                                     <div class="item-content">
                                                         <div class="item-title"><a href="#"><%=q1.getUsername()%></a></div>		
                                                         <div class="item-designation"><a href="GetAnswerDetails?id=<%=q1.getQueryId() %>" ><%=q1.getTopicname() %></a></div>		
@@ -138,8 +138,8 @@
                                 <h3 class="item-heading">ABOUT ME</h3>
                             </div>
                             <div class="widget-about">
-                                <figure class="author-figure"><img src="assets4/img/figure/about.jpg" alt="about"></figure>
-                                <figure class="author-signature"><img src="assets4/img/figure/signature.png" alt="about"></figure>
+                                <figure class="author-figure"><img src="assets/assets4/img/figure/about.jpg" alt="about"></figure>
+                                <figure class="author-signature"><img src="assets/assets4/img/figure/signature.png" alt="about"></figure>
                                 <p>Fusce mauris auctor ollicituder teary iner hendrerit risusey aeenean rauctor pibus
                                     doloer.</p>
                             </div>
@@ -170,7 +170,7 @@
                                 <ul class="block-list">
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest1.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest1.jpg" alt="Post"></a>
                                             <div class="count-number">1</div>
                                         </div>
                                         <div class="item-content">
@@ -183,7 +183,7 @@
                                     </li>
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest2.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest2.jpg" alt="Post"></a>
                                             <div class="count-number">2</div>
                                         </div>
                                         <div class="item-content">
@@ -196,7 +196,7 @@
                                     </li>
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest3.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest3.jpg" alt="Post"></a>
                                             <div class="count-number">3</div>
                                         </div>
                                         <div class="item-content">
@@ -267,17 +267,17 @@
     </div>
     <!-- Modal End-->
     <!-- Jquery Js -->
-    <script src="assets4/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/assets4/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap Js -->
-    <script src="assets4/js/popper.min.js"></script>
+    <script src="assets/assets4/js/popper.min.js"></script>
     <!-- Bootstrap Js -->
-    <script src="assets4/js/bootstrap.min.js"></script>
+    <script src="assets/assets4/js/bootstrap.min.js"></script>
     <!-- Plugins Js -->
-    <script src="assets4/js/plugins.js"></script>
+    <script src="assets/assets4/js/plugins.js"></script>
     <!-- Smoothscroll Js -->
-    <script src="assets4/js/smoothscroll.min.js"></script>
+    <script src="assets/assets4/js/smoothscroll.min.js"></script>
     <!-- Custom Js -->
-    <script src="assets4/js/main.js"></script>
+    <script src="assets/assets4/js/main.js"></script>
 </body>
 
 </html>

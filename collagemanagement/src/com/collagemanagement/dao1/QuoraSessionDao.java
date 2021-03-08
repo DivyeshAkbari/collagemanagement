@@ -29,3 +29,4 @@ public interface QuoraSessionDao {
 	public int updateAnswer(Connection connection, String id, Answer ans);
 
 }
+//Pull 

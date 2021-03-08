@@ -25,7 +25,18 @@ public class User
 	private List<Stream> streamList;
 	private List<Semester> semesterList;
 	private List<Subject> subjectList;
+	private byte[] imagedata;
+	private String contactno;
+	private String address;
+	private Blob image;
+	private String role;
 		
+	public byte[] getImagedata() {
+		return imagedata;
+	}
+	public void setImagedata(byte[] imagedata) {
+		this.imagedata = imagedata;
+	}
 	public List<Stream> getStreamList() {
 		return streamList;
 	}
@@ -63,12 +74,6 @@ public class User
 				+ ", contactno=" + contactno + ", address=" + address + ", image=" + image + ", role=" + role + "]";
 	}
 
-
-	private String contactno;
-	private String address;
-	private Blob image;
-	private String role;
-	
 	public String getRole() {
 		return role;
 	}
@@ -183,8 +188,4 @@ public class User
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
-	
 }
-
-
-

@@ -82,7 +82,7 @@ public class Registrationstudent extends HttpServlet {
 		String address=request.getParameter("address");
 		Part part=request.getPart("profile_photo");
 		
-		if(null!=part)
+		if(part.getSize()>0)
 		{
 			System.out.println("File Name" + part.getName());
 			System.out.println("File Name 2" + part.getSubmittedFileName());

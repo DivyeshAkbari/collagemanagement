@@ -27,7 +27,8 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 		try(PreparedStatement p1=connection.prepareStatement("insert into question_table(c_question_topic,c_question_description,c_question_category_type,i_user_id,c_Name,is_active,date,tag) values (?,?,?,?,?,?,?,?)");
 				)
 		{
-			/* System  Date */
+			/* System  Date **/
+			
 			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 			LocalDateTime now = LocalDateTime.now();  

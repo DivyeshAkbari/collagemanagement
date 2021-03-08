@@ -1,7 +1,6 @@
 package com.collagemanagement.addteacher.servlet;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.collagemanagement.bean.Semester1;
-import com.collagemanagement.bean.Subject;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
 import com.google.gson.Gson;

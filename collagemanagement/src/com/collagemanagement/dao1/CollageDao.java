@@ -25,3 +25,4 @@ public interface CollageDao
 	public int removefacultydetails(Connection connection, String id);
 	public List<Semester> getSemDetais(Connection connection);
 }
+//Pull 

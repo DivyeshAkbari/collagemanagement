@@ -16,6 +16,8 @@ import com.collagemanagement.dao1.CollageDao;
 import com.collagemanagement.encryptpassword.TrippleDes;
 import com.collagemanagement.other.SendingEmail;
 
+//Pull 
+
 public class Collagedaoimpl implements CollageDao
 {
 	public int insertuserdetails(Connection connection, User u1)

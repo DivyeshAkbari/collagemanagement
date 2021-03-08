@@ -34,3 +34,4 @@ public interface Collageservice
 	
 	public String deletfacultydetails(String id);
 }
+//Pull 

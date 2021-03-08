@@ -1,6 +1,7 @@
 package com.collagemanagement.service.impl;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,6 +12,8 @@ import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.QuoraSessionImpl;
 import com.collagemanagement.dao1.QuoraSessionDao;
 import com.collagemanagement.service1.QuoraSessionService;
+
+//Pull 
 
 public class QuoraSessionServiceImpl implements QuoraSessionService {
 

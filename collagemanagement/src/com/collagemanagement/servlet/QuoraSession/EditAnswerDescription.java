@@ -45,12 +45,10 @@ public class EditAnswerDescription extends HttpServlet {
 		List<Answer> answerlist = quorasessionservice.fetchanswer(id);
 		ans.setAnswerdescription(answerdescription);
 		
-	  quorasessionservice.modifyAnswer(id,ans);
+	   quorasessionservice.modifyAnswer(id,ans);
 		
 		request.setAttribute("answerdescription",ans );
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("AnswerofQuestion.jsp");
-		requestDispatcher.forward(request, response);
-	
+		response.sendRedirect("AnswerofQuestion.jsp");
 	}
 
 	/**
@@ -60,5 +58,4 @@ public class EditAnswerDescription extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

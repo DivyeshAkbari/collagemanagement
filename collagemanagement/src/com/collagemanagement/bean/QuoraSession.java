@@ -14,6 +14,7 @@ public class QuoraSession {
 	private InputStream userProfilepicStream;
 	private int is_active;
 	private String tag;
+	//Pull 
 	
 	
 	@Override

@@ -16,20 +16,20 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.png">
     <!-- Normalize Css -->
-    <link rel="stylesheet" href="assets4/css/normalize.css">
+    <link rel="stylesheet" href="assets/assets4/css/normalize.css">
     <!-- Main Css -->
-    <link rel="stylesheet" href="assets4/css/main.css">
+    <link rel="stylesheet" href="assets/assets4/css/main.css">
     <!-- Bootstrap Css -->
-    <link rel="stylesheet" href="assets4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/bootstrap.min.css">
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="assets4/css/animate.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/animate.min.css">
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="assets4/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/fontawesome-all.min.css">
     <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="assets4/fonts/flaticon.css">
+    <link rel="stylesheet" href="assets/assets4/fonts/flaticon.css">
     <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="assets4/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets4/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/assets4/css/owl.theme.default.min.css">
     <!-- Custom Css -->
     <link rel="stylesheet" href="style4.css">
     <!-- Modernizr Js -->
@@ -75,7 +75,7 @@
                     <div class="col-lg-8">
                         <div class="single-blog-box">
                             <div class="main-figure">
-                                <a href="single-blog.html"><img src="assets4/img/blog/blog9.jpg" alt="Blog"></a>
+                                <a href="single-blog.html"><img src="assets/assets4/img/blog/blog9.jpg" alt="Blog"></a>
                             </div>
                             <div class="blog-content">
                                 <ul class="entry-meta">
@@ -117,7 +117,7 @@
                             </div>
                             <div class="recipe-author">
                                 <div class="media media-none--xs">
-                                    <img src="assets4/img/blog/author9.jpg" alt="Blog Author" class="rounded-circle media-img-auto">
+                                    <img src="assets/assets4/img/blog/author9.jpg" alt="Blog Author" class="rounded-circle media-img-auto">
                                     <div class="media-body">
                                         <h4 class="author-title">
                                             <% for(int i=0;i<questionlist.size();i++)
@@ -141,7 +141,7 @@
                             </div>
                             <div class="next-prev-post">
                                 <div class="prev-post">
-                                    <a href="#" class="item-figure"><img src="assets4/img/blog/prev-post.jpg" alt="Post"></a>
+                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/prev-post.jpg" alt="Post"></a>
                                     <div class="item-content">
                                         <p>PREVIOUS POST</p>
                                         <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
@@ -152,7 +152,7 @@
                                         <p>NEXT POST</p>
                                         <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
                                     </div>
-                                    <a href="#" class="item-figure"><img src="assets4/img/blog/next-post.jpg" alt="Post"></a>
+                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/next-post.jpg" alt="Post"></a>
                                 </div>
                             </div>
                     <%if(answerList2!=null) {%>
@@ -238,7 +238,7 @@
                                 <ul class="block-list">
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest1.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest1.jpg" alt="Post"></a>
                                         </div>
                                         <div class="item-content">
                                             <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
@@ -251,7 +251,7 @@
                                     </li>
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest2.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest2.jpg" alt="Post"></a>
                                         </div>
                                         <div class="item-content">
                                             <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
@@ -264,7 +264,7 @@
                                     </li>
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest3.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest3.jpg" alt="Post"></a>
                                         </div>
                                         <div class="item-content">
                                             <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
@@ -277,7 +277,7 @@
                                     </li>
                                     <li class="single-item">
                                         <div class="item-img">
-                                            <a href="#"><img src="assets4/img/product/latest4.jpg" alt="Post"></a>
+                                            <a href="#"><img src="assets/assets4/img/product/latest4.jpg" alt="Post"></a>
                                         </div>
                                         <div class="item-content">
                                             <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
@@ -293,7 +293,7 @@
                         </div>
                         <div class="widget">
                             <div class="widget-ad">
-                                <a href="#"><img src="assets4/img/figure/figure6.jpg" alt="Ad" class="img-fluid"></a>
+                                <a href="#"><img src="assets/assets4/img/figure/figure6.jpg" alt="Ad" class="img-fluid"></a>
                             </div>
                         </div>
                         <div class="widget">
@@ -356,7 +356,7 @@
                                     data-r-extra-large-nav="true" data-r-extra-large-dots="false">
                                     <div class="featured-box-layout1">
                                         <div class="item-img">
-                                            <img src="assets4/img/product/product17.jpg" alt="Brand" class="img-fluid">
+                                            <img src="assets/assets4/img/product/product17.jpg" alt="Brand" class="img-fluid">
                                         </div>
                                         <div class="item-content">
                                             <span class="ctg-name">BREAKFAST</span>
@@ -368,7 +368,7 @@
                                     </div>
                                     <div class="featured-box-layout1">
                                         <div class="item-img">
-                                            <img src="assets4/img/product/product18.jpg" alt="Brand" class="img-fluid">
+                                            <img src="assets/assets4/img/product/product18.jpg" alt="Brand" class="img-fluid">
                                         </div>
                                         <div class="item-content">
                                             <span class="ctg-name">DINNER</span>
@@ -380,7 +380,7 @@
                                     </div>
                                     <div class="featured-box-layout1">
                                         <div class="item-img">
-                                            <img src="assets4/img/product/product19.jpg" alt="Brand" class="img-fluid">
+                                            <img src="assets/assets4/img/product/product19.jpg" alt="Brand" class="img-fluid">
                                         </div>
                                         <div class="item-content">
                                             <span class="ctg-name">SALAD</span>
@@ -401,37 +401,37 @@
                                 <ul>
                                     <li>
                                         <div class="item-box">
-                                            <img src="assets4/img/social-figure/social-figure9.jpg" alt="Social Figure" class="img-fluid">
+                                            <img src="assets/assets4/img/social-figure/social-figure9.jpg" alt="Social Figure" class="img-fluid">
                                             <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="item-box">
-                                            <img src="assets4/img/social-figure/social-figure10.jpg" alt="Social Figure" class="img-fluid">
+                                            <img src="assets/assets4/img/social-figure/social-figure10.jpg" alt="Social Figure" class="img-fluid">
                                             <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="item-box">
-                                            <img src="assets4/img/social-figure/social-figure11.jpg" alt="Social Figure" class="img-fluid">
+                                            <img src="assets/assets4/img/social-figure/social-figure11.jpg" alt="Social Figure" class="img-fluid">
                                             <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="item-box">
-                                            <img src="assets4/img/social-figure/social-figure12.jpg" alt="Social Figure" class="img-fluid">
+                                            <img src="assets/assets4/img/social-figure/social-figure12.jpg" alt="Social Figure" class="img-fluid">
                                             <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="item-box">
-                                            <img src="assets4/img/social-figure/social-figure13.jpg" alt="Social Figure" class="img-fluid">
+                                            <img src="assets/assets4/img/social-figure/social-figure13.jpg" alt="Social Figure" class="img-fluid">
                                             <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="item-box">
-                                            <img src="assets4/img/social-figure/social-figure14.jpg" alt="Social Figure" class="img-fluid">
+                                            <img src="assets/assets4/img/social-figure/social-figure14.jpg" alt="Social Figure" class="img-fluid">
                                             <a href="#" class="item-icon"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
@@ -531,19 +531,19 @@
     </div>
     <!-- Modal End-->
     <!-- Jquery Js -->
-    <script src="assets4/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/assets4/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap Js -->
-    <script src="assets4/js/popper.min.js"></script>
+    <script src="assets/assets4/js/popper.min.js"></script>
     <!-- Bootstrap Js -->
-    <script src="assets4/js/bootstrap.min.js"></script>
+    <script src="assets/assets4/js/bootstrap.min.js"></script>
     <!-- Plugins Js -->
-    <script src="assets4/js/plugins.js"></script>
+    <script src="assets/assets4/js/plugins.js"></script>
     <!-- Owl Carousel Js -->
-    <script src="assets4/js/owl.carousel.min.js"></script>
+    <script src="assets/assets4/js/owl.carousel.min.js"></script>
     <!-- Smoothscroll Js -->
-    <script src="assets4/js/smoothscroll.min.js"></script>
+    <script src="assets/assets4/js/smoothscroll.min.js"></script>
     <!-- Custom Js -->
-    <script src="assets4/js/main.js"></script>
+    <script src="assets/assets4/js/main.js"></script>
 </body>
 
 

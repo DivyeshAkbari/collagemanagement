@@ -61,7 +61,7 @@
 
 
 <% HttpSession httpSession = request.getSession(false);%>
-<% User u1=(User) httpSession.getAttribute("uname");%>
+<% User u1 = (User) httpSession.getAttribute("uname");%>
 
 <div class="page-wraper">
 <div id="loading-icon-bx"></div>

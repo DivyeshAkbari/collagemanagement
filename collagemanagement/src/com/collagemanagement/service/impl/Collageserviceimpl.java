@@ -11,7 +11,7 @@ import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.Collagedaoimpl;
 import com.collagemanagement.service1.Collageservice;
 
-
+//Pull 
 public class Collageserviceimpl  implements Collageservice
 {
 	

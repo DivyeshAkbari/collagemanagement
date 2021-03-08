@@ -419,4 +419,34 @@
     <servlet-name>fetchsemester</servlet-name>
     <url-pattern>/fetchsemester</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayUserProfile</display-name>
+    <servlet-name>DisplayUserProfile</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.DisplayUserProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayUserProfile</servlet-name>
+    <url-pattern>/DisplayUserProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>searchquestion</display-name>
+    <servlet-name>searchquestion</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.searchquestion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchquestion</servlet-name>
+    <url-pattern>/searchquestion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditAnswerDescription</display-name>
+    <servlet-name>EditAnswerDescription</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.EditAnswerDescription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAnswerDescription</servlet-name>
+    <url-pattern>/EditAnswerDescription</url-pattern>
+  </servlet-mapping>
 </web-app>

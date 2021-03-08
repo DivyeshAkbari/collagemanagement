@@ -48,8 +48,8 @@ public class EditAnswerDescription extends HttpServlet {
 	  quorasessionservice.modifyAnswer(id,ans);
 		
 		request.setAttribute("answerdescription",ans );
-	//	RequestDispatcher requestDispatcher = request.getRequestDispatcher("AnswerofQuestion.jsp");
-//		requestDispatcher.forward(request, response);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("AnswerofQuestion.jsp");
+		requestDispatcher.forward(request, response);
 	
 	}
 

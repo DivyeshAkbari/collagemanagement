@@ -14,18 +14,14 @@ public class QuoraSession {
 	private InputStream userProfilepicStream;
 	private int is_active;
 	private String tag;
-	//Pull 
-	
 	
 	@Override
 	public String toString() {
-		return "QuoraSession [queryId=" + queryId + ", topicname=" + topicname + ", ctype=" + ctype + ", tdescription="
-				+ tdescription + ", userid=" + userid + ", username=" + username + ", userProfilepic=" + userProfilepic
-				+ ", userProfilepicStream=" + userProfilepicStream + "]";
+		return String.format(
+				"QuoraSession [queryId=%s, topicname=%s, ctype=%s, tdescription=%s, userid=%s, username=%s, userProfilepic=%s, userProfilepicStream=%s, is_active=%s, tag=%s]",
+				queryId, topicname, ctype, tdescription, userid, username, userProfilepic, userProfilepicStream,
+				is_active, tag);
 	}
-	
-	
-	
 	public String getTag() {
 		return tag;
 	}

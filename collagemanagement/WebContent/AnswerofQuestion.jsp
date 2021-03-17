@@ -34,13 +34,35 @@
     <link rel="stylesheet" href="style4.css">
     <!-- Modernizr Js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    
+    <script src="assets/js/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function()
+{
+	$("#postansid").click(function(){
+		
+		var serachid = $("#postansid").val();
+		alert(postansid);
+		$.ajax({
+			
+					method:"POST",
+					url:"InsertAnswerDescription",
+					data:
+					{
+						postansid:postansid
+					}
+			})
+		});
+});
+</script>
 </head>
 
-<% List<QuoraSession>  questionlist =(List)request.getAttribute("questionlist");
+<% List<QuoraSession>  questionlist =(List)request.getSession(false).getAttribute("questionlist");
 
    String id =(String)request.getAttribute("id"); 
    
-   List<Answer>  answerList2 =(List)request.getAttribute("answerlist");
+   List<Answer>  answerList =(List)request.getSession(false).getAttribute("answerlist");
    
    HttpSession httpSession = request.getSession(false);
    User user = (User) httpSession.getAttribute("uname");
@@ -155,53 +177,45 @@
                                     <a href="#" class="item-figure"><img src="assets/assets4/img/blog/next-post.jpg" alt="Post"></a>
                                 </div>
                             </div>
-                    <%if(answerList2!=null) {%>
+                    <%if(answerList!=null) {%>
                             <div class="recipe-reviews">
                                 <div class="section-heading3 heading-dark">
                                     <h2 class="item-heading">RECIPE REVIEWS</h2>
                                 </div>
-                                <ul>
+                                  <% for(int i=0;i<answerList.size();i++)
+                                  { %>
+                                  		<% Answer ans=answerList.get(i); %>
+                                  <ul>
                                     <li class="reviews-single-item">
                                         <div class="media media-none--xs">
                                             <img style="width :100px;height : 100px"  src="data:image/png;base64,<%=user.getUserProfilepicString() %>" alt="Comment" class="media-img-auto">
                                             <div class="media-body">
                                                 <h4 class="comment-title">
-                                                    <% for(int i=0;i<answerList2.size();i++)
-                                                    { %>
-                                                        <% Answer ans=answerList2.get(i); %>
-                                                        <%=ans.getUsername()%>                 
-                                                    <% } %>
-                                               </h4>
+                                                        <%=ans.getUsername()%>                                                    
+                                                </h4>
                                                 <span class="post-date">September 27, 2018</span>
-                                                <p>
-                                                    <% for(int i=0;i<answerList2.size();i++)
-	                                                { %>
-	                                                            <% Answer ans=answerList2.get(i); %>
-	                                                            <%=ans.getAnswerdescription()%>                  
-	                                                <% } %>
+                                                <%-- <p>
+                                                		<%String s="EditAnswerDescription?id="; %>                                               
+	                                                    <%=ans.getAnswerdescription()%>    
+	                                                    <a href=<%=s+ans.getAnswerid() %> class="item-btn">Edit<i class="fas fa-long-arrow-alt-right"></i></a>
+                                                </p>  --%>
+                                                 <p>
+                                                <%=ans.getAnswerdescription()%> 
+                                                <a href="EditAnswerDescription?id=<%=ans.getAnswerid() %>" class="item-btn">Edit<i class="fas fa-long-arrow-alt-right"></i></a>  
+                                          
+			 				 				<%-- <%if(null!=httpSession && null==user){%>
+			 				 				<%} %> --%>
+                                 
+			 				 			<%-- 	<a href="RemoveAnswerDescription?id=,?userid=<%=ans.getAnswerid() %><%=user.getId() %>" class="item-btn">Delete<i class="fas fa-long-arrow-alt-right"></i></a> --%>
+                                           
                                                 </p>
-                                                
-                                                <a href="EditAnswerDescription" class="item-btn">REPLY<i class="fas fa-long-arrow-alt-right"></i></a>
-                                            </div>
+                                           </div>
                                         </div>
                                     </li>
-                                    <li class="reviews-single-item">
-                                        <div class="media media-none--xs">
-                                            <img src="assets4/img/blog/comment2.jpg" alt="Comment" class="media-img-auto">
-                                            <div class="media-body">
-                                                <h4 class="comment-title">John Martin</h4>
-                                                <span class="post-date">September 12, 2018</span>
-                                                <p>Absolutely great recipe. I cooked it for my kids and they loved it,
-                                                    even
-                                                    asked for more, can you believe it?</p>
-                                                
-                                                <a href="#" class="item-btn">REPLY<i class="fas fa-long-arrow-alt-right"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                  <% }%>
+                                  </ul>
+                                 <% } %>
                             </div>
-                        <% }%>
                             <div class="leave-review">
                                 <div class="section-heading3 heading-dark">
                                     <h2 class="item-heading">LEAVE A REVIEW</h2>
@@ -220,14 +234,13 @@
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="col-12 form-group mb-0">
-                                            <button type="submit" class="item-btn">POST Answer</button>
+                                            <button type="submit" id="postansid"class="item-btn">POST Your Answer</button>
                                         </div>
                                     </div>
                                     <div class="form-response"></div>
                                 </form>
                             </div>
                         </div>
-                    
                     </div>
                     <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
                         <div class="widget">

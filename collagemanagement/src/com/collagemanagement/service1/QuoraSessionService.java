@@ -25,7 +25,13 @@ public interface QuoraSessionService {
 
 		public String searchquestion(String question);
 
-		public Answer modifyAnswer(String id, Answer ans);
+		public String modifyAnswer(Answer answer);
+
+		public Answer getAnswer(String id);
+
+		public String removeStudentDetails(String id);
+
+		public List<QuoraSession> fetchTaglist();
 
 }
 //Pull 

@@ -57,7 +57,7 @@
         <!-- Header Area End Here -->
         <!-- Inne Page Banner Area Start Here -->
         
-        </section> -->
+        </section>
         <!-- Inne Page Banner Area End Here -->
         <!-- Author Area Start Here -->
         <section class="author-page-wrap padding-top-80 padding-bottom-50">

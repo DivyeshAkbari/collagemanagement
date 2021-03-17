@@ -32,7 +32,7 @@
     <!-- Modernizr Js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
     
-<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
 
 <script>
 	$(document).ready(function()
@@ -84,7 +84,7 @@
         <!-- Header Area End Here -->
         <!-- Inne Page Banner Area Start Here -->
         
-        </section> -->
+        </section> 
         <!-- Inne Page Banner Area End Here -->
         <!-- Author Area Start Here -->
         <section class="author-page-wrap padding-top-80 padding-bottom-50">
@@ -108,7 +108,7 @@
                                         <tr>
                                             <th>
                                                 <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="assets4/img/blog/author2.jpg" alt="Author"></a>
+                                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/author2.jpg" alt="Author"></a>
                                                     <div class="item-content">
                                                         <div class="item-designation"><a href="GetAnswerDetails?id=" id="searchvalueid" ></a></div>		
                                                     </div>
@@ -147,7 +147,7 @@
                                         <tr>
                                             <th>
                                                 <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="assets4/img/blog/author2.jpg" alt="Author"></a>
+                                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/author2.jpg" alt="Author"></a>
                                                     <div class="item-content">
                                                         <div class="item-title"><a href="#"><%=q1.getUsername()%></a></div>		
                                                         <div class="item-designation"><a href="GetAnswerDetails?id=<%=q1.getQueryId() %>" ><%=q1.getTopicname() %></a></div>		

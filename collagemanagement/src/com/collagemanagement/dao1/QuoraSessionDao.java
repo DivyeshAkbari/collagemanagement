@@ -26,7 +26,13 @@ public interface QuoraSessionDao {
 
 	public String getsearchtopic(Connection connection, String question);
 
-	public int updateAnswer(Connection connection, String id, Answer ans);
+	public int updateAnswer(Connection connection, Answer answer);
+
+	public Answer fetchAnswer(Connection connection, String id);
+
+	public int deleteAnswerDescription(Connection connection, Integer ansId);
+
+	public List<QuoraSession> getTaglist(Connection connection);
 
 }
 //Pull 

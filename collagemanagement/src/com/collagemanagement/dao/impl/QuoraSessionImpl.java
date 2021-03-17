@@ -24,11 +24,10 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 		// TODO Auto-generated method stub
 		
 		int insertedRaws=0;
-		try(PreparedStatement p1=connection.prepareStatement("insert into question_table(c_question_topic,c_question_description,c_question_category_type,i_user_id,c_Name,is_active,date,tag) values (?,?,?,?,?,?,?,?)");
+		try(PreparedStatement p1=connection.prepareStatement("insert into question_table(c_question_topic,c_question_description,c_question_category_type,i_user_id,c_Name,is_active,date) values (?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 				)
 		{
 			/* System  Date **/
-			
 			
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 			LocalDateTime now = LocalDateTime.now();  
@@ -41,9 +40,30 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 			p1.setString(5, query.getUsername());
 			p1.setInt(6,query.getIs_active());
 			p1.setString(7, dtf.format(now));
-			p1.setString(8, query.getTag());
 		
-			insertedRaws=p1.executeUpdate();	
+			insertedRaws=p1.executeUpdate();				
+			try(ResultSet r1= p1.getGeneratedKeys();)
+			{
+				if(r1.next())
+				{
+					int id = r1.getInt(1);
+					try(PreparedStatement preparedStatement = connection.prepareStatement("insert into tag_table(i_question_id,c_tag_name) values(?,?)");)
+					{
+						preparedStatement.setInt(1,id);
+						preparedStatement.setString(2, query.getTag());
+						int i1 = preparedStatement.executeUpdate();
+						
+						if(i1>0)
+						{
+							System.out.println("Tag Inserted Successfully");
+						}
+						else
+						{
+							System.out.println("Tag Not Inserted");
+						}
+					}
+				}
+			}
 			
 			if(insertedRaws==1)
 			{
@@ -56,7 +76,7 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 			
 		return insertedRaws;
 	}
-
+//
 	@Override
 	public List<QuoraSession> selectquestiondetails(Connection connection) {
 		// TODO Auto-generated method stub
@@ -215,10 +235,12 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 		// TODO Auto-generated method stub
 		
 		List<Answer> anslist = new ArrayList<>();
-		try(PreparedStatement p1=connection.prepareStatement("Select c_answer_description,c_Name  from answer_table where i_question_id =?");
+		//,c_Name kadhelu 6 pa6i add kari devu
+		try(PreparedStatement p1=connection.prepareStatement("Select c_answer_description,i_answer_id,c_Name  from answer_table where i_question_id =?");
 				  )
 			{
 					p1.setInt(1, Integer.parseInt(id));
+				
 					try(ResultSet r1=p1.executeQuery();
 					  )
 				{
@@ -228,7 +250,8 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 						Answer ans = new Answer();
 					
 						ans.setAnswerdescription(r1.getString("c_answer_description"));
-						ans.setUsername(r1.getString("c_Name"));
+					    ans.setUsername(r1.getString("c_Name"));
+					    ans.setAnswerid(r1.getInt("i_answer_id"));
 				
 						anslist.add(ans);
 					}
@@ -337,24 +360,112 @@ public class QuoraSessionImpl implements QuoraSessionDao {
 		return null;
 	}
 	
-	@Override
-	public int updateAnswer(Connection connection, String id, Answer ans) {
+	public int updateAnswer(Connection connection, Answer answer) {
 		// TODO Auto-generated method stub
 		
-		String updateQuery ="update answer_table set c_answer_description = ? where i_answer_id = ? and i_question_id = ? and i_user_id = ?";
+		String updateQuery ="update answer_table set c_answer_description = ? where i_answer_id = ?";
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(updateQuery))
 		{
-			preparedStatement.setString(1,ans.getAnswerdescription());
-			preparedStatement.setInt(2, ans.getAnswerid());
-			preparedStatement.setInt(3, ans.getQueryId());
-			preparedStatement.setInt(4, ans.getUserid());
+			preparedStatement.setString(1,answer.getAnswerdescription());
+			preparedStatement.setInt(2, answer.getAnswerid());
 			
 			return preparedStatement.executeUpdate();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public Answer fetchAnswer(Connection connection, String id) {
+		// TODO Auto-generated method stub
+		
+		Answer answer = new Answer();
+		
+		try(PreparedStatement p1 = connection.prepareStatement("select c_answer_description from answer_table where i_answer_id=?");)
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			
+			
+			try(ResultSet r1 =  p1.executeQuery())
+			{
+					while(r1.next())
+				{
+					answer.setAnswerdescription(r1.getString("c_answer_description"));
+					
+//					String value = r1.getString("c_answer_description");
+//					return value;
+				}	
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
+	@Override
+	public int deleteAnswerDescription(Connection connection, Integer ansId) {
+		// TODO Auto-generated method stub
+		String deleteStudentQuery= "delete from answer_table where  i_answer_id= ?";
+		try(PreparedStatement preparedStatement = connection.prepareStatement(deleteStudentQuery))
+		{
+			preparedStatement.setInt(1, ansId);
+			return preparedStatement.executeUpdate();
+		}catch(Exception exception) {
+			exception.printStackTrace();
+		}	
+		return 0;
+	}
+	@Override
+	public List<QuoraSession> getTaglist(Connection connection) {
+		// TODO Auto-generated method stub
+		
+		List<QuoraSession> taglist = new ArrayList<>();
+				
+		try(PreparedStatement p1 = connection.prepareStatement("select c_tag_name from tag_table");)
+		{
+			try(ResultSet resultSet = p1.executeQuery())
+			{
+				while(resultSet.next())
+				{
+					QuoraSession query = new QuoraSession();
+					
+					query.setTag(resultSet.getString("c_tag_name"));
+					taglist.add(query);
+					
+				}
+				
+//				for(int i=0;i<taglist.size();i++)
+//				{
+//					QuoraSession query = taglist.get(i);					
+//					String tagname = query.getTag();
+//					
+//					for(int j=i+1;j<taglist.size();j++)
+//					{
+//						QuoraSession query1 = taglist.get(j);	
+//						
+//						String tagname1 = query1.getTag();
+//						
+//						if(!tagname.equalsIgnoreCase(tagname1))
+//						{
+//							QuoraSession query2 = new QuoraSession();
+//							query2.setTag(tagname);
+//							taglist.add(query2);
+//						} 
+//					}	
+//				}
+//				System.out.println("Tag List"+taglist);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return taglist;
 	}
 }

@@ -207,15 +207,14 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 		return null;
 	}
 	
-	@Override
-	public Answer modifyAnswer(String id, Answer ans) {
+	public String modifyAnswer(Answer answer) {
 		// TODO Auto-generated method stub
 		String Message = null;
 		
 		try(Connection  connection = getconnection();
 				)
 			{
-				int updateRecordCount = quorasessiondao.updateAnswer(connection,id,ans);
+				int updateRecordCount = quorasessiondao.updateAnswer(connection,answer);
 				 
 				 if(updateRecordCount>0)
 					{
@@ -229,6 +228,56 @@ public class QuoraSessionServiceImpl implements QuoraSessionService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		return Message;
+	}
+
+	@Override
+	public Answer getAnswer(String id) {
+		// TODO Auto-generated method stub
+		
+		try(Connection connection = getconnection())
+		{
+			return quorasessiondao.fetchAnswer(connection,id);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String removeStudentDetails(String id) {
+		// TODO Auto-generated method stub
+		String message = null;
+		try(Connection connection = getconnection())
+		{
+			Integer ansId = Integer.parseInt(id);
+			int deleteRecordId = quorasessiondao.deleteAnswerDescription(connection,ansId);
+			
+			if (deleteRecordId > 0) {
+				message = "Student deleted Successfully";
+			} else {
+				message = "Student delete failed";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
+	}
+
+	@Override
+	public List<QuoraSession> fetchTaglist() {
+		// TODO Auto-generated method stub
+		
+		try(Connection connection = getconnection();)
+		{
+			return quorasessiondao.getTaglist(connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

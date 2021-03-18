@@ -464,7 +464,7 @@
   <servlet-mapping>
     <servlet-name>Getpaperdetails</servlet-name>
     <url-pattern>/Getpaperdetails</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>GetSemesterDetails</display-name>
@@ -574,5 +574,75 @@
   <servlet-mapping>
     <servlet-name>EditAnswerDescription</servlet-name>
     <url-pattern>/EditAnswerDescription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PaytmConstants</display-name>
+    <servlet-name>PaytmConstants</servlet-name>
+    <servlet-class>utils.PaytmConstants</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaytmConstants</servlet-name>
+    <url-pattern>/PaytmConstants</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateAnswerDescription</display-name>
+    <servlet-name>UpdateAnswerDescription</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.UpdateAnswerDescription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAnswerDescription</servlet-name>
+    <url-pattern>/UpdateAnswerDescription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveAnswerDescription</display-name>
+    <servlet-name>RemoveAnswerDescription</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.RemoveAnswerDescription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveAnswerDescription</servlet-name>
+    <url-pattern>/RemoveAnswerDescription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchTag</display-name>
+    <servlet-name>FetchTag</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.FetchTag</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchTag</servlet-name>
+    <url-pattern>/FetchTag</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PostQuery</display-name>
+    <servlet-name>PostQuery</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.QuoraSession.PostQuery</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostQuery</servlet-name>
+    <url-pattern>/PostQuery</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InsertPaymentDetails</display-name>
+    <servlet-name>InsertPaymentDetails</servlet-name>
+    <servlet-class>utils.InsertPaymentDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertPaymentDetails</servlet-name>
+    <url-pattern>/InsertPaymentDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InsertFeesDetails</display-name>
+    <servlet-name>InsertFeesDetails</servlet-name>
+    <servlet-class>utils.InsertFeesDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertFeesDetails</servlet-name>
+    <url-pattern>/InsertFeesDetails</url-pattern>
   </servlet-mapping>
 </web-app>

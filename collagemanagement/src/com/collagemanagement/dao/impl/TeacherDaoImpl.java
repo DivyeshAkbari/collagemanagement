@@ -1,11 +1,14 @@
 package com.collagemanagement.dao.impl;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.collagemanagement.bean.Assignment;
@@ -15,7 +18,9 @@ import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.Subject;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.dao1.TeacherDao;
+import com.collagemanagement.encryptpassword.TrippleDes;
 
+import com.mysql.cj.protocol.Resultset;
 
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;
@@ -262,5 +267,262 @@ public class TeacherDaoImpl implements TeacherDao {
 		
 	}
 
+	@Override
+	public User getFacultyDetails(int userId,Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		TrippleDes t1;
+		User u1=new User();
+		String query = "select * from user_table where i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				
+				u1.setFirstname(rs.getString("c_First_Name"));
+				u1.setMiddlename(rs.getString("c_middle_name"));
+				u1.setLastname(rs.getString("c_last_name"));
+				u1.setEmail(rs.getString("c_email"));
+				u1.setXender(rs.getString("c_gender"));
+				u1.setContactno(rs.getString("c_contact"));
+				u1.setAddress(rs.getString("c_address"));
+				//u1.setStream(rs.getString("c_stream"));
+				u1.setSemester(rs.getInt("i_semester_id"));
+				//u1.setDivision(rs.getString("c_division"));
+				String password=rs.getString("c_password");
+				
+				t1=new TrippleDes();
+				String decryptpassword=t1.decrypt(password);
+				
+				u1.setPassword(decryptpassword);
+				u1.setQualification(rs.getString("c_qulification"));
+			}
+		}
+		return u1;
+	}
+
+	@Override
+	public List<Subject> getSubjectforfaculty(int userId, Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "select subject_table.i_Subject_id,subject_table.c_subject_name\r\n" + 
+				"from subject_table\r\n" + 
+				"inner join faculty_subject_table\r\n" + 
+				"on faculty_subject_table.i_Subject_id = subject_table.i_Subject_id\r\n" + 
+				"where i_user_id=?";
+		
+		List<Subject> subjectIdList = new ArrayList<>();
+		
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+				ps.setInt(1, (userId));
+				ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Subject s = new Subject();
+				s.setSubjectId(rs.getInt("i_Subject_id"));
+				s.setSubjectName(rs.getString("c_subject_name"));
+				subjectIdList.add(s);
+			}
+		}
+		
+		return subjectIdList;
+	}
+
+	@Override
+	public List<Semester> getSemesterforfaculty(int userId, Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		List<Semester> semesterlist = new ArrayList<>();
+		String query = "select semester_table.i_Semester_id,semester_table.i_semester_value\r\n" + 
+				"from semester_table\r\n" + 
+				"inner join faculty_semester_table\r\n" + 
+				"on faculty_semester_table.i_Semester_id =semester_table. i_Semester_id\r\n" + 
+				"where i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setInt(1, (userId));
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Semester s = new Semester();
+				s.setSemid(rs.getInt("i_Semester_id"));
+				s.setSemvalue(rs.getInt("i_semester_value"));
+				semesterlist.add(s);
+			}
+		}
+		return semesterlist;
+	}
+
+	@Override
+	public List<Semester> getAllSemester(Connection connection) throws SQLException {
+		// TODO Auto-generated method stub
+		List<Semester> semList = new ArrayList<>();
+		String query = "select * from semester_table";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Semester s = new Semester();
+				s.setSemid(rs.getInt("i_Semester_id"));
+				s.setSemvalue(rs.getInt("i_semester_value"));
+				semList.add(s);
+			}
+		}
+		return semList;
+	}
+
+	@Override
+	public List<Stream> getAllStream(Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		List<Stream> streamlist = new ArrayList<>();
+		String query = "select * from stream_table";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Stream s = new Stream();
+				s.setStreamid(rs.getInt("i_stream_id"));
+				s.setStreamname("c_stream");
+				streamlist.add(s);
+			}
+		}
+		
+		return streamlist;
+	}
+
+	@Override
+	public List<Subject> getAllSubject(Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		List<Subject> subjectlist = new ArrayList<>();
+		String query = "select * from stream_table";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Subject s = new Subject();
+				s.setSubjectId(rs.getInt("i_Subject_id"));
+				s.setSubjectName(rs.getString("c_subject_name"));
+				subjectlist.add(s);
+			}
+		}
+		
+		return subjectlist;
+	}
+
+	@Override
+	public List<Subject> getSubjectForStudent(Connection connection, User u1) throws Exception {
+		// TODO Auto-generated method stub
+		List<Subject> subjectlist = new ArrayList<>();
+		String query = "select i_Subject_id,c_subject_name from subject_table where i_stream_id=? and i_Semester_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setInt(1, Integer.parseInt(u1.getStream()));
+			ps.setInt(2, u1.getSemester());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Subject s = new Subject();
+				s.setSubjectId(rs.getInt("i_Subject_id"));
+				s.setSubjectName(rs.getString("c_subject_name"));
+				subjectlist.add(s);
+			}
+		}
+		return subjectlist;
+	}
+
+	@Override
+	public List<Assignment> fetchAssignments(Connection connection, String ss) throws Exception {
+		// TODO Auto-generated method stub
+		List<Assignment> asslist = new ArrayList<>();
+		String query = "select * from ass_faculty_table where i_Subject_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setInt(1, Integer.parseInt(ss));
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Assignment a = new Assignment();
+				a.setAssId(rs.getInt("i_ass_faculty_id"));
+				a.setTitle(rs.getString("c_title"));
+				a.setDiscription(rs.getString("c_description"));
+				a.setUploadDate(rs.getString("d_upload_date"));
+				a.setDate(rs.getString("d_due_date"));
+				byte[] fileData = rs.getBytes("PDF");
+				if (null != fileData && fileData.length > 0) {
+					String fileString = Base64.getEncoder().encodeToString(fileData);
+					a.setAssPDFstring(fileString);
+				}
+				a.setUsesrId(rs.getInt("i_user_id"));
+				a.setSubjectId(rs.getInt("i_Subject_id"));
+				
+				asslist.add(a);
+			}
+		}
+		return asslist;
+	}
+
+	@Override
+	public List<User> fetchFacultyForAss(Connection connection, List<Integer> userIdList) throws Exception {
+		// TODO Auto-generated method stub
+		List<User> faculty = new ArrayList<>();
+		String query = "select c_First_Name,c_middle_name from user_table where i_user_id=?";
+		ResultSet rs=null;
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			for(Integer s : userIdList) {
+				ps.setInt(1, s);
+				System.out.println("user id: "+s);
+				 rs = ps.executeQuery();
+				while(rs.next()) {
+					User u1 = new User();
+					u1.setFirstname(rs.getString("c_First_Name"));
+					u1.setMiddlename(rs.getString("c_middle_name"));
+					faculty.add(u1);
+				}
+			}
+			
+			//ps.setInt(1, (Integer.parseInt(streamId)));
+			
+		rs.close();
+		ps.close();
+	}
+		return faculty;
+	}
+
+	@Override
+	public InputStream fetchAssPdf(Connection connection, int id) throws Exception {
+		// TODO Auto-generated method stub
+		InputStream inputStream=null;
+		String query = "select PDF from ass_faculty_table where i_ass_faculty_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Blob blob = rs.getBlob("PDF");
+				inputStream = blob.getBinaryStream();
+			}
+			
+		}
+		return inputStream;
+	}
+
+	@Override
+	public List<Integer> getSelectedSem(Connection connection, int streamId, int userId) throws Exception {
+		// TODO Auto-generated method stub
+		List<Integer> semList = new ArrayList<>();
+		String query = "select semester_table.i_Semester_id  \r\n" + 
+				"from semester_table\r\n" + 
+				"inner join faculty_semester_table\r\n" + 
+				"on faculty_semester_table.i_Semester_id=semester_table.i_Semester_id\r\n" + 
+				"where i_stream_id=? and i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setInt(1, streamId);
+			ps.setInt(2, userId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				semList.add(rs.getInt("i_Semester_id"));
+				
+		//		s.setSemvalue(rs.getInt("i_semester_value"));
+				
+			}
+			
+		}
+		return semList;
+	}
+
+	@Override
+	public List<Integer> getSelectedSub(Connection connection, int semesterId, List<Subject> subjectId) {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
+
+	
 	
 }

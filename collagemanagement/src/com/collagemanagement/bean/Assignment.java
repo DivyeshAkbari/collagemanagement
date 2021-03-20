@@ -4,6 +4,13 @@ import java.io.InputStream;
 
 public class Assignment {
 
+	private int assId;
+	public int getAssId() {
+		return assId;
+	}
+	public void setAssId(int assId) {
+		this.assId = assId;
+	}
 	private int streamId;
 	private int subjectId;
 	private String date;
@@ -12,6 +19,13 @@ public class Assignment {
 	private InputStream assPDF;
 	private String assPDFstring;
 	private int usesrId;
+	private String uploadDate;
+	public String getUploadDate() {
+		return uploadDate;
+	}
+	public void setUploadDate(String uploadDate) {
+		this.uploadDate = uploadDate;
+	}
 	public int getUsesrId() {
 		return usesrId;
 	}
@@ -21,9 +35,9 @@ public class Assignment {
 	
 	@Override
 	public String toString() {
-		return "Assignment [streamId=" + streamId + ", subjectId=" + subjectId + ", date=" + date + ", discription="
-				+ discription + ", title=" + title + ", assPDF=" + assPDF + ", assPDFstring=" + assPDFstring
-				+ ", usesrId=" + usesrId + "]";
+		return "Assignment [assId=" + assId + ", streamId=" + streamId + ", subjectId=" + subjectId + ", date=" + date
+				+ ", discription=" + discription + ", title=" + title + ", assPDF=" + assPDF + ", assPDFstring="
+				+ assPDFstring + ", usesrId=" + usesrId + ", uploadDate=" + uploadDate + "]";
 	}
 	public int getStreamId() {
 		return streamId;

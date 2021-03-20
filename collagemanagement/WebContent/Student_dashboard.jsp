@@ -1,3 +1,4 @@
+<%@page import="com.collagemanagement.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -35,6 +36,9 @@
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
 </head>
+
+<% HttpSession httpSession = request.getSession(false);%>
+<% User u1=(User) httpSession.getAttribute("uname");%>
 
 <body>
     <!-- Preloader Start Here -->
@@ -289,7 +293,7 @@
                                             <img src="img/figure/student.png" class="media-img-auto" alt="student">
                                         </div>
                                         <div class="media-body">
-                                            <h3 class="item-title">Jessia Rose</h3>
+                                            <h3  class="item-title"><%= u1.getFirstname()+" "+u1.getMiddlename() %></h3>
                                             <p>Aliquam erat volutpat. Curabiene natis massa
                                                 sedde lacustiquen sodale word moun taiery.</p>
                                         </div>
@@ -299,60 +303,57 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Name:</td>
-                                                    <td class="font-medium text-dark-medium">Jessia Rose</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getFirstname()+" "+u1.getMiddlename() %></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gender:</td>
-                                                    <td class="font-medium text-dark-medium">Female</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getXender() %></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Father Name:</td>
-                                                    <td class="font-medium text-dark-medium">Fahim Rahman</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getLastname() %></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Mother Name:</td>
-                                                    <td class="font-medium text-dark-medium">Jannatul Kazi</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Date Of Birth:</td>
-                                                    <td class="font-medium text-dark-medium">07.08.2006</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Religion:</td>
-                                                    <td class="font-medium text-dark-medium">Islam</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Father Occupation:</td>
-                                                    <td class="font-medium text-dark-medium">Graphic Designer</td>
-                                                </tr>
+                                                
+<!--                                                 <tr> -->
+<!--                                                     <td>Date Of Birth:</td> -->
+<!--                                                     <td class="font-medium text-dark-medium">07.08.2006</td> -->
+<!--                                                 </tr> -->
+<!--                                                 <tr> -->
+<!--                                                     <td>Religion:</td> -->
+<!--                                                     <td class="font-medium text-dark-medium">Islam</td> -->
+<!--                                                 </tr> -->
+<!--                                                 <tr> -->
+<!--                                                     <td>Father Occupation:</td> -->
+<!--                                                     <td class="font-medium text-dark-medium">Graphic Designer</td> -->
+<!--                                                 </tr> -->
                                                 <tr>
                                                     <td>E-Mail:</td>
-                                                    <td class="font-medium text-dark-medium">jessiarose@gmail.com</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getEmail() %></td>
+                                                </tr>
+<!--                                                 <tr> -->
+<!--                                                     <td>Admission Date:</td> -->
+<!--                                                     <td class="font-medium text-dark-medium">05.01.2019</td> -->
+<!--                                                 </tr> -->
+                                                
+                                                <tr>
+                                                    <td>Stream:</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getStream() %></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Admission Date:</td>
-                                                    <td class="font-medium text-dark-medium">05.01.2019</td>
+                                                    <td>Semester:</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getSemester() %></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Class:</td>
-                                                    <td class="font-medium text-dark-medium">2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Section:</td>
-                                                    <td class="font-medium text-dark-medium">Pink</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Roll:</td>
-                                                    <td class="font-medium text-dark-medium">10005</td>
+                                                    <td>Division:</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getDivision() %></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Adress:</td>
-                                                    <td class="font-medium text-dark-medium">House #10, Road #6,
-                                                        Australia</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getAddress() %></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Phone:</td>
-                                                    <td class="font-medium text-dark-medium">+ 88 9856418</td>
+                                                    <td>Contact:</td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getContactno() %></td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -1,3 +1,5 @@
+<%@page import="com.collagemanagement.bean.Subject"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -32,7 +34,42 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-</head>
+    <style>
+    	#hoverDiv {background: #fff;}
+	#hoverDiv:hover {background: aqua;}
+	
+/* 	@media only screen and (max-width: 320px) { */
+
+/*    h2 {  */
+/*       font-size: 2em;  */
+/*    } */
+/*    } */
+   .chevron {
+  display: inline-flex;
+  align-items:center;
+  justify-content:center;
+  
+  position: relative;
+  clear: both;
+  padding: 10px 0  10px 2.5em;
+  margin:2px 0;
+  height: 250px;
+  width: 100%;
+  vertical-align:middle;
+  text-align:center;
+  color: white;
+  font-size: 12px;
+	}
+	
+
+	
+    </style>
+    </head>
+    
+   <jsp:include page ="/FetchSubjectsForStudent"/>
+   <% List<Subject> subjectlist= (List)request.getAttribute("subjectlist"); 
+  System.out.println(subjectlist);
+   %>
 
 <body>
     <!-- Preloader Start Here -->
@@ -245,19 +282,47 @@
            <%@include file="sidebar-student.jsp" %>
            
             <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
+            <div  class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Student Notes & Chapters</h3>
+                    <h3>Student Assignment</h3>
                     <ul>
                         <li>
                             <a href="Student_dashboard.jsp">Home</a>
                         </li>
-                        <li>Notes & Chapters</li>
+                        <li>Assignment</li>
                     </ul>
                 </div>
+                <div>
+                <div class="row gutters-20">
+                <% for(Subject s : subjectlist){ %>
+<%--                 <a href = <%= "\"student-assignment-subject.jsp?Id=" + s.getSubjectId() +"&Name=" +s.getSubjectName()+ "\"" %>> --%>
+              
+                    <div id="sub" value="<%=s.getSubjectId()%>" class="col-xl-3 col-sm-6 col-12">
+                        <div id="hoverDiv" class="dashboard-summery-one mg-b-20 ">
+                            <div class="row align-items-center ">
+                                
+                                <div class="col-6">
+                                    <div  class="item-content">
+                                        <div style="font-size:2vw;" class="item-title chevron"> <h2  id="dsubvalue" value="<%= s.getSubjectId() %>"> <a href = <%= "\"UploadAssStudent?Id=" + s.getSubjectId() +"&Name=" +s.getSubjectName()+ "\"" %>><%= s.getSubjectName() %></a> </h2>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+<!--                     </a> -->
+                    <% } %>
+                  
+                    
+                    
+                </div>
+               
+                </div>
                 <!-- Breadcubs Area End Here -->
-                <div class="row">
+                <div  id="uploadAssDiv" class="row">
                     <!-- Student Attendence Search Area Start Here -->
                 
                     <!-- Student Attendence Search Area End Here -->
@@ -265,9 +330,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                            
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Subject Name</h3>
+                                        <h3 id="subname">Subject Name</h3>
                                     </div>
                                    <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" 
@@ -334,6 +400,22 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script >
+    $(document).ready(function(){
+    	var nameOfSub;
+    	$("#uploadAssDiv").hide();
+    	$(document).on("click","#sub",function() {
+    		$("#uploadAssDiv").show();
+    		var idOfSubject = $(this).attr('value');
+    		nameOfSub = $('h2').first().value();       
+    		alert(nameOfSub);
+    		 //document.getElementById("subname").innerHTML = ;
+			//alert(idOfSubject);
+			
+			
+	    });//change event
+    });
+    </script>
 
 </body>
 

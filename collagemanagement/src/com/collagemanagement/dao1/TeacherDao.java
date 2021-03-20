@@ -1,5 +1,6 @@
 package com.collagemanagement.dao1;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,6 +38,32 @@ public interface TeacherDao {
 //	List<Subject> getSubjectsForFaculty(Connection connection, String streamId) throws Exception;
 
 	List<Subject> getSubjectsForFaculty(Connection connection, String streamId, List<Subject> subjectId) throws Exception;
+
+	User getFacultyDetails(int userId,Connection connection) throws Exception;
+
+	List<Subject> getSubjectforfaculty(int userId, Connection connection) throws Exception;
+
+	List<Semester> getSemesterforfaculty(int userId, Connection connection) throws Exception;
+
+	List<Semester> getAllSemester(Connection connection) throws SQLException;
+
+	List<Stream> getAllStream(Connection connection) throws Exception;
+
+	List<Subject> getAllSubject(Connection connection) throws Exception;
+
+	List<Subject> getSubjectForStudent(Connection connection, User u1) throws Exception;
+
+	List<Assignment> fetchAssignments(Connection connection, String ss) throws Exception;
+
+	List<User> fetchFacultyForAss(Connection connection, List<Integer> userIdList) throws Exception;
+
+	InputStream fetchAssPdf(Connection connection, int id) throws Exception;
+
+	List<Integer> getSelectedSem(Connection connection, int streamId, int userId) throws Exception;
+
+	List<Integer> getSelectedSub(Connection connection, int semesterId, List<Subject> subjectId);
+	
+//	List<Stream> getFacultyStream(Connection connection, int userId);
 
 	
 

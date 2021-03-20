@@ -477,6 +477,7 @@
     				//alert("hello");
     				//$('#hiddenId').find('#subjectValue').remove();
     				var idOfSubject = $(this).parent().attr('value');
+    				alert(idOfSubject);
     				//$("#hiddenId").append('<input  name="subjectId" id="subjectValue" value='+idOfSubject+' type="hidden" >');
     				document.getElementById("subjectValue").value = idOfSubject;
     				$("#uploadAssDiv").show();

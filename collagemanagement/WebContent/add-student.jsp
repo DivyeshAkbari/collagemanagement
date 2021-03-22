@@ -1,3 +1,5 @@
+<%@page import="com.collagemanagement.bean.Stream"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -34,8 +36,58 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-</head>
+<script src="assets/js/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("input[type=email]").blur(function() {
+		var str = $("#mail").val();
+		$.get("Registrationstudent", {
+			email : str
+		}).done(function(data)  {
 
+			if (data == "true") {
+				alert("This email id is already exist");	
+			}
+		});	
+	});
+});
+	
+</script>
+<script>
+$(document).ready(function()
+{
+	$("#stream").change(function(){
+		
+		var stream=$("#stream").val();
+		if(stream=="Please select Stream")
+		{
+			
+			alert("please select stream")	
+		}
+	//	alert(stream);
+		$.ajax({
+			
+					method:"POST",
+					url:"Fetchsemesterid",
+					data:
+					{
+						id:stream,	
+					}
+			}).done(function(data)
+			{
+				$("#semester1").children().remove();
+				var object=jQuery.parseJSON(data);
+				$('#semester1').append($("<option></option>").attr("value",'-1').text('Please Select Semester'));
+				$.each(object,function(key,value){
+					$("#semester1").append('<option value='+value.semid+'>'+value.semvalue+'</option>');
+				});
+			});
+	});
+});
+</script>
+</head>
+<jsp:include page ="/FetchHobby"/>
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
@@ -280,34 +332,67 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="new-added-form">
+                        <form class="new-added-form" action="Registrationstudent" method="post" enctype="multipart/form-data" >
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>First Name *</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input type="text" placeholder="" name="firstname" class="form-control">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                	<label>Your role *</label>
+                                	<input type="text" readonly="readonly" placeholder="" name="userrole" class="form-control" value="STUDENT" >
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Middle Name *</label>
+                                    <input type="text" placeholder="" name="middlename" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Last Name *</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input type="text" placeholder="" name="lastname" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
-                                    <select class="select2">
+                                    <select class="select2" name="gender">
                                         <option value="">Please Select Gender *</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Others</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </div>
+                                
+                                <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                       
+                                            <label>Select Stream *</label>
+                                            <select   class="select2" id="stream" name="stream">
+                                            <option  selected>Please select Stream</option>
+                                        <%
+											for(int i=0;i<Streamlist.size();i++)
+											{
+										%>
+										<%
+											Stream s=Streamlist.get(i);
+										%>
+											<option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> </option>
+										<%
+											}
+										%>
+                                            </select>
+                                            <!-- <input type="text" placeholder="" class="form-control"> -->
+                                        </div>
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Date Of Birth *</label>
                                     <input type="text" placeholder="dd/mm/yyyy" class="form-control air-datepicker">
                                     <i class="far fa-calendar-alt"></i>
                                 </div>
+                                -->
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>ID No</label>
                                     <input type="text" placeholder="" class="form-control">
                                 </div>
+                                -->
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Blood Group *</label>
                                     <select class="select2">
@@ -320,6 +405,8 @@
                                         <option value="3">O-</option>
                                     </select>
                                 </div>
+                                -->
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Religion *</label>
                                     <select class="select2">
@@ -331,10 +418,32 @@
                                         <option value="3">Others</option>
                                     </select>
                                 </div>
+                                -->
+                                       <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                           <!--    <label>Select Year *</label>
+                                            <input type="text" class="form-control" id="datepicker" />
+                                            <i class="flaticon-calendar"></i> -->
+                                            <label>Select Semester *</label>
+                                            <select class="select2" name="semester" id="semester1">
+                                             <option>please select</option>
+                                            </select>
+                                        </div>
+                                  <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Select Division</label>
+                                    <select class="select2" name="division">
+                                        <option value="">Please Select Division</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>E-Mail</label>
-                                    <input type="email" placeholder="" class="form-control">
+                                    <input type="email" id="mail" name="email" placeholder="" class="form-control">
                                 </div>
+                                
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Class *</label>
                                     <select class="select2">
@@ -348,6 +457,8 @@
                                         <option value="3">Five</option>
                                     </select>
                                 </div>
+                                -->
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Section *</label>
                                     <select class="select2">
@@ -359,21 +470,41 @@
                                         <option value="3">Red</option>
                                     </select>
                                 </div>
+                                -->
+                                <!--  
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Address</label>
                                     <input type="text" placeholder="" class="form-control">
                                 </div>
+                                -->
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Enter Password</label>
+                                    <input autocomplete="off"
+											class="form-control" id="password" type="password"
+											name="password" 
+											pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+											required><i toggle="#password-field"
+											class="fa fa-fw fa-eye field_icon toggle-password"></i>
+                                </div>
+                                
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Confirm Password</label>
+                                    <input autocomplete="off"
+											name="confirm_password" id="confirm_password" type="password"
+											class="form-control">
+											<span id='message'></span>
+                                </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Phone</label>
-                                    <input type="text" placeholder="" class="form-control">
+                                    <input type="text" name="number" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-lg-6 col-12 form-group">
-                                    <label>Short BIO</label>
-                                    <textarea class="textarea form-control" name="message" id="form-message" cols="10" rows="9"></textarea>
+                                    <label>Address</label>
+                                    <textarea class="textarea form-control" name="address" name="message" id="form-message" cols="10" rows="9"></textarea>
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                                    <input type="file" class="form-control-file">
+                                    <input type="file" name="profile_photo" class="form-control-file">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
@@ -409,9 +540,51 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    
+    <!--  
+	<script src="assets/js/jquery.min.js"></script>
+	
+	<script src="assets/vendors/bootstrap/js/popper.min.js"></script>
+	
+	<script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script src="assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+	-->
+	<script
+		src="assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+	<script src="assets/vendors/magnific-popup/magnific-popup.js"></script>
+	<script src="assets/vendors/counter/waypoints-min.js"></script>
+	<script src="assets/vendors/counter/counterup.min.js"></script>
+	<script src="assets/vendors/imagesloaded/imagesloaded.js"></script>
+	<script src="assets/vendors/masonry/masonry.js"></script>
+	<script src="assets/vendors/masonry/filter.js"></script>
+	<script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
+	<!--  <script src="assets/js/functions.js"></script>-->
+	<script src="assets/js/contact.js"></script>
+	
+	
+<script>
+$('#password, #confirm_password').on('keyup', function () {
+  if ($('#password').val() == $('#confirm_password').val()) 
+  {
+    $('#message').html('Matching').css('color', 'green');
+    
+  } else 
+	  {
+	  $('#message').html('Not Matching').css('color', 'red');
+	  
+	  }
+});
+</script>
+<script>
+$(document).on('click', '.toggle-password', function() {
 
+$(this).toggleClass("fa-eye fa-eye-slash");
+
+var input = $("#password");
+input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+});
+</script>
 </body>
-
-
 <!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/add-teacher.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:26 GMT -->
 </html>

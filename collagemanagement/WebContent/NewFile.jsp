@@ -1,18 +1,19 @@
-<%@page import="com.collagemanagement.bean.Papertype"%>
-<%@page import="com.collagemanagement.bean.Stream"%>
+<%@page import="com.collagemanagement.bean.Subject"%>
+<%@page import="com.collagemanagement.bean.Marks"%>
 <%@page import="java.util.List"%>
+<%@page import="com.collagemanagement.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html class="no-js" lang="">
 
-<!-- hello -->
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-subject.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:14 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ADMIN | Previous year paper</title>
+    <title>Educhamp | Student</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -27,105 +28,24 @@
     <link rel="stylesheet" href="css/all.min.css">
     <!-- Flaticon CSS -->
     <link rel="stylesheet" href="fonts/flaticon.css">
+    <!-- Full Calender CSS -->
+    <link rel="stylesheet" href="css/fullcalendar.min.css">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Select 2 CSS -->
-    <link rel="stylesheet" href="css/select2.min.css">
     <!-- Data Table CSS -->
     <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-<script src="assets/js/jquery.min.js"></script>
-<script>
-$(document).ready(function()
-{
-	var stream="";
-	var sem="";
-	var typepaper="";
-	var year="";
-	$("#stream").change(function(){
-		
-		stream=$("#stream").val();
-		alert(stream);
-		$.ajax({
-			
-					method:"POST",
-					url:"Fetchsemesterid",
-					data:
-					{
-						id:stream	
-					}
-			}).done(function(data)
-			{
-				$("#semester1").children().remove();
-				var object=jQuery.parseJSON(data);
-				
-				$('#semester1').append($("<option></option>").attr("value",'-1').text('Please Select Semester'));
-				$.each(object,function(key,value){
-					$("#semester1").append('<option value='+value.semid+'>'+value.semvalue+'</option>');
-				});
-			});
-	});
-
-
-	$("#semester1").change(function()
-	{
-		 sem=$("#semester1").val();
-		alert(sem);
-		$.ajax({
-			
-					method:"POST",
-					url:"Fetchsubjectdetais",
-					data:
-					{
-						Sem:sem
-					}
-			}).done(function(data)
-			{
-				$("#subject").children().remove();
-				var object=jQuery.parseJSON(data);
-				
-				$.each(object,function(key,value){
-					$("#subject").append('<option value='+value.subjectId+'>'+value.subjectName+'</option>');
-				});
-				
-			});
-	});
-	
-	$("#year").change(function()
-	{
-		typepaper=$("#typeofpaper").val();
-		year=$("#year").val();
-		/*
-		alert("Stream id is "+stream);
-		alert("Sem id is "+sem);
-		alert("typepaper id is "+typepaper);
-		alert("Year is "+year);
-		*/
-		$.ajax({
-			
-			method:"POST",
-			url:"ValidatePaperyear",
-			data:{typepaper1:typepaper,year1:year,stream1:stream,sem1:sem}
-				
-		}).done(function(data)
-			{
-				if(data=="found")
-				{
-					alert("Please Select Another Year");
-				}
-			});
-	});
-});
-</script>
+    
 </head>
-<jsp:include page ="/FetchHobby"/>
-<jsp:include page="/fetchPaperType"/>
-<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
-<% List<Papertype> paper= (List)request.getAttribute("paperlist"); %>
-<% String id= (String)request.getAttribute("streamid"); %>
+<% List<Subject> subjectlist= (List)request.getAttribute("Subjectlist"); %>
+<% List<Marks> Markslist= (List)request.getAttribute("Markslist"); %>
+<% String Status= (String)request.getAttribute("Status"); %>
+<%-- <% HttpSession httpSession = request.getSession(false);%>
+<% User u1=(User) httpSession.getAttribute("uname");%> --%>
+
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
@@ -135,11 +55,11 @@ $(document).ready(function()
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
-                    <a href="Admin.jsp">
+                    <a href="Student_dashboard.jsp">
                         <img src="img/logo.png" alt="logo">
                     </a>
                 </div>
-                  <div class="toggle-button sidebar-toggle">
+                <div class="toggle-button sidebar-toggle">
                     <button type="button" class="item-link">
                         <span class="btn-icon-wrap">
                             <span></span>
@@ -150,7 +70,7 @@ $(document).ready(function()
                 </div>
             </div>
             <div class="d-md-none mobile-nav-bar">
-               <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
+                <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
                     <i class="far fa-arrow-alt-circle-down"></i>
                 </button>
                 <button type="button" class="navbar-toggler sidebar-toggle-mobile">
@@ -171,32 +91,16 @@ $(document).ready(function()
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="navbar-item dropdown header-admin">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
-                                <span>Admin</span>
-                            </div>
-                            <div class="admin-img">
-                                <img src="img/figure/admin.jpg" alt="Admin">
-                            </div>
-                        </a>
+                     <!-- <li class="navbar-item dropdown header-language">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
+                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
-                            </div>
-                            <div class="item-content">
-                                <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
-                                    <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
-                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="Admin.jsp"><i class="flaticon-turn-off"></i>Log Out</a></li>
-                                </ul>
-                            </div>
+                            <a class="dropdown-item" href="#">English</a>
+                            <a class="dropdown-item" href="#">Spanish</a>
+                            <a class="dropdown-item" href="#">Franchis</a>
+                            <a class="dropdown-item" href="#">Chiness</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="navbar-item dropdown header-message">
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
@@ -316,16 +220,31 @@ $(document).ready(function()
                             </div>
                         </div>
                     </li>
-                     <li class="navbar-item dropdown header-language">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
-                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
+                    <li class="navbar-item dropdown header-admin">
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                            <div class="admin-title">
+                                <h5 class="item-title">Stevne Zone</h5>
+                                <span>Student</span>
+                            </div>
+                            <div class="admin-img">
+                                <img src="img/figure/admin.jpg" alt="Admin">
+                            </div>
+                        </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Franchis</a>
-                            <a class="dropdown-item" href="#">Chiness</a>
+                            <div class="item-header">
+                                <h6 class="item-title">Steven Zone</h6>
+                            </div>
+                            <div class="item-content">
+                                <ul class="settings-list">
+                                    <li><a href="student_profile.jsp"><i class="flaticon-user"></i>My Profile</a></li>
+                                   
+                                    <li><a href="Logout"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -334,140 +253,107 @@ $(document).ready(function()
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
             
-            <%@include file="sidebar-admin.jsp" %>
+            <%@include file="sidebar-student.jsp" %>
             
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Previous year papers</h3>
+                    <h3>Student Result</h3>
                     <ul>
                         <li>
-                            <a href="Admin.jsp">Home</a>
+                            <a href="Student_dashboard.jsp">Home</a>
                         </li>
-                        <li>Papers</li>
+                        <li>Student</li>
+                        <li>Student Result</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
-                <!-- All Subjects Area Start Here -->
                 <div class="row">
+                    <!-- Student Info Area Start Here -->
                     <div class="col-4-xxxl col-12">
-                        <div class="card height-auto">
+                        <div class="card dashboard-card-ten">
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Upload Paper here</h3>
+                                     
                                     </div>
-                                    <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                            aria-expanded="false">...</a>
-
+                                   <div class="col-12">
+                        <div class="card">
+                            <div class="card-body" style="margin-top: 43px;">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        
+                                    </div>
+                                   <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" 
+                                        data-toggle="dropdown" aria-expanded="false">...</a>
+                
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
-                                <form class="new-added-form" action="Getpaperdetails" method="post" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                        <input type="hidden" name="id" value="<%=id %>">
-                                            <label>Select Stream *</label>
-                                            <select class="select2" id="stream" name="stream">
-                                            <option>please select stream*</option>
-                                             <%
-											for(int i=0;i<Streamlist.size();i++)
-											{
-										%>
-										<%
-											Stream s=Streamlist.get(i);
-										%>
-											<option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> </option>
-										<%
-											}
-										%>
-                                            </select>
-                                            <!-- <input type="text" placeholder="" class="form-control"> -->
-                                        </div>
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <!-- <label>Select Year *</label>
-                                            <input type="text" class="form-control" id="datepicker" />
-                                            <i class="flaticon-calendar"></i> -->
-                                            <label>Select Semester *</label>
-                                            <select class="select2" name="semester" id="semester1">
-                                                
-                                            </select>
-                                        </div>
-                                        <!-- <input type="text" id="datepicker" /> -->
-                                        <!--  
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Select Subject *</label>
-                                            <select class="select2" id="subject" name="subject">
-                                               
-                                                
-                                            </select>
-                                        </div>
-                                        -->
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Select Type of Paper *</label>
-                                            <select class="select2" id="typeofpaper" name="type">
-                                            <Option>Please select</Option>
-                                        		<%
-											for(int i=0;i<paper.size();i++)
-											{
-										%>
-										<%
-											Papertype s=paper.get(i);
-										%>
-											<option value="<%=s.getPapertypeid()%>"> <%=s.getPaperType()%> </option>
-										<%
-											}
-										%>
-                                        		 
-                                            </select>
-                                        </div>
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Select Year *</label>
-                                            <input type="text" class="form-control" name="year123" id="year"/>
-                                            <i class="flaticon-calendar"></i>
-                                            <!-- <label>Select Code</label>
-                                            <select class="select2">
-                                                <option value="0">Please Select</option>
-                                                <option value="1">00524</option>
-                                                <option value="2">00525</option>
-                                                <option value="3">00526</option>
-                                                <option value="3">00527</option>
-                                                <option value="3">00528</option>
-                                            </select> -->
-                                        </div>
-                                        <!-- <div class="col-12-xxxl col-lg-6 col-12 form-group"> -->
-                                        <input type="file" name="paper" class="btn-fill-lmd radius-30 text-light bg-true-v">Upload Paper here
-                                            <i class="fas fa-cloud-upload-alt mg-l-10"></i>
-                                        
-                                        <!-- </div> -->
-                                        <div class="col-12 form-group mg-t-8">
-                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
-                                            <!--  <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button> -->
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- All Subjects Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                            href="#">PsdBosS</a></div>
-                </footer>
+						<div class="table-responsive">
+              <table class="table bs-table table-striped table-bordered text-nowrap">
+                 <thead>
+                 <tr>
+                 
+               
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                
+                 <% if(subjectlist!=null)
+				{%>
+						<%int l=0; %>
+                            <% for(int i=0;i<subjectlist.size();i++)
+							{ %>
+	
+								<% Subject s1=subjectlist.get(i); %>
+		 						<td> <%=s1.getSubjectName()%></td>
+		 						<%l=1; %>
+							<% } %>
+							<% if(l==1)
+							{%>
+								<td>Status</td>
+								<td>GP</td>
+							<%} %>
+                <%} %>
+                 </tr>
+                 <tr>
+                 		<%int p=0; %>
+              			   	<% for(int j=0;j<Markslist.size();j++)
+						{ %>
+		
+							<% Marks m1=Markslist.get(j); %>
+							<td> <%=m1.getMarksvalue() %></td>
+							<%p=1; %>
+						<% } %> 
+						
+						<% if(p==1)
+							{%>
+								<td><%=Status %></td>
+								<td>1.35</td>
+						<%} %>
+                 </tr>  
+          </tbody>
+                                    <!--Write  -->
+                                </div>
+                               
+                <!-- Footer Area Start Here -->
+               
+                <!-- Footer Area End Here -->
             </div>
+             
         </div>
+      
         <!-- Page Area End Here -->
     </div>
+   
     <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <!-- Plugins js -->
@@ -476,27 +362,25 @@ $(document).ready(function()
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- Select 2 Js -->
-    <script src="js/select2.min.js"></script>
+    <!-- Counterup Js -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Moment Js -->
+    <script src="js/moment.min.js"></script>
+    <!-- Waypoints Js -->
+    <script src="js/jquery.waypoints.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- Full Calender Js -->
+    <script src="js/fullcalendar.min.js"></script>
+    <!-- Chart Js -->
+    <script src="js/Chart.min.js"></script>
     <!-- Data Table Js -->
     <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-    <!-- bootstrap datepicker js -->
-    <script src="js/bootstrap-datepicker.js"></script>
-    <!-- bootstrap datepicker css -->
-    <link href="css/bootstrap-datepicker.css" rel="stylesheet">
-    
-    <script>
-      $("#datepicker").datepicker({
-    format: "yyyy",
-    viewMode: "years", 
-    minViewMode: "years"
-    });
-    </script>
 
 </body>
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-subject.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+
+
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:15 GMT -->
 </html>

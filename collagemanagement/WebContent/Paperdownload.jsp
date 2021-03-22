@@ -1,4 +1,3 @@
-<%@page import="com.collagemanagement.bean.Papertype"%>
 <%@page import="com.collagemanagement.bean.Stream"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -41,90 +40,128 @@
 <script>
 $(document).ready(function()
 {
-	var stream="";
-	var sem="";
-	var typepaper="";
-	var year="";
 	$("#stream").change(function(){
 		
-		stream=$("#stream").val();
-		alert(stream);
+		var stream=$("#stream").val();
+	//	alert(stream);
 		$.ajax({
 			
 					method:"POST",
 					url:"Fetchsemesterid",
 					data:
 					{
-						id:stream	
+						id:stream,	
 					}
 			}).done(function(data)
 			{
 				$("#semester1").children().remove();
 				var object=jQuery.parseJSON(data);
-				
-				$('#semester1').append($("<option></option>").attr("value",'-1').text('Please Select Semester'));
+				$('#semester1').append($("<option></option>").attr("value",'-1').text('Please Select type'));
 				$.each(object,function(key,value){
 					$("#semester1").append('<option value='+value.semid+'>'+value.semvalue+'</option>');
 				});
 			});
 	});
-
-
+	var typeofpaper;
+	var stream;
+	var sem;
+	
 	$("#semester1").change(function()
 	{
-		 sem=$("#semester1").val();
-		alert(sem);
+		sem1=$("#semester1").val();
+		//alert(sem1);
 		$.ajax({
 			
+			method:"POST",
+			url:"getPaperTypeDetails",
+			data:
+			{
+				sem1:sem1,
+			}
+		}).done(function(data)
+		{
+			$("#typeofpaper").children().remove();
+			var object=jQuery.parseJSON(data);
+			$('#typeofpaper').append($("<option></option>").attr("value",'-1').text('Please Select Type of paper'));
+
+			
+			$.each(object,function(key,value){
+				$("#typeofpaper").append('<option value='+value.papertypeid+'>'+value.paperType+'</option>');
+			});
+		});	
+	});  
+	
+	$("#typeofpaper").change(function()
+	{
+		typeofpaper=$("#typeofpaper").val();
+		stream=$("#stream").val();
+		sem=$("#semester1").val();
+		//alert(typeofpaper);
+	//	alert(stream);
+		//alert(sem);
+		
+		$.ajax({
 					method:"POST",
-					url:"Fetchsubjectdetais",
+					url:"getpaperinformation",
 					data:
 					{
-						Sem:sem
+						typeofpaper:typeofpaper,stream:stream,sem:sem,
 					}
 			}).done(function(data)
 			{
-				$("#subject").children().remove();
+				$("#year").children().remove();
 				var object=jQuery.parseJSON(data);
 				
+				$('#year').append($("<option></option>").attr("value",'-1').text('Please Select Year'));
 				$.each(object,function(key,value){
-					$("#subject").append('<option value='+value.subjectId+'>'+value.subjectName+'</option>');
+					$("#year").append('<option value='+value.Year+'>'+value.Year+'</option>');
 				});
-				
 			});
 	});
 	
 	$("#year").change(function()
 	{
-		typepaper=$("#typeofpaper").val();
-		year=$("#year").val();
-		/*
-		alert("Stream id is "+stream);
-		alert("Sem id is "+sem);
-		alert("typepaper id is "+typepaper);
-		alert("Year is "+year);
-		*/
+		var year=$("#year").val();
+		
+		//alert(typeofpaper);
+		//alert(stream);
+		//alert(sem);
+		//alert(year);
+		
 		$.ajax({
-			
-			method:"POST",
-			url:"ValidatePaperyear",
-			data:{typepaper1:typepaper,year1:year,stream1:stream,sem1:sem}
-				
-		}).done(function(data)
+					method:"POST",
+					url:"getPaperId",
+					data:
+					{
+						typeofpaper1:typeofpaper,stream1:stream,sem1:sem,year:year,
+					}
+			}).done(function(data)
 			{
-				if(data=="found")
-				{
-					alert("Please Select Another Year");
-				}
+				//alert("Paper id "+data);
+				 $("#paperid").val(data);
 			});
 	});
 });
 </script>
+<script src="assets/js/jquery.min.js"></script>
+<script>
+/*
+	document.getElementById("myform").addEventListener("click",function(e)
+	{
+		alert("form submiit");
+		
+	});
+	*/
+	
+	var el = document.getElementById('myform');
+	if(el)
+	{
+	  el.addEventListener('submit', swapper, false);
+	}
+</script>
 </head>
 <jsp:include page ="/FetchHobby"/>
-<jsp:include page="/fetchPaperType"/>
 <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
-<% List<Papertype> paper= (List)request.getAttribute("paperlist"); %>
 <% String id= (String)request.getAttribute("streamid"); %>
 <body>
     <!-- Preloader Start Here -->
@@ -135,7 +172,7 @@ $(document).ready(function()
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
-                    <a href="Admin.jsp">
+                    <a href="Amyformdmin.jsp">
                         <img src="img/logo.png" alt="logo">
                     </a>
                 </div>
@@ -372,14 +409,14 @@ $(document).ready(function()
                                         </div>
                                     </div>
                                 </div>
-                                <form class="new-added-form" action="Getpaperdetails" method="post" enctype="multipart/form-data">
+                                <form class="new-added-form"  id ="myform" action="DownloadPaper" method="post">
                                     <div class="row">
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                        <input type="hidden" name="id" value="<%=id %>">
+                                        <input type="hidden" name="id" id="paperid">
                                             <label>Select Stream *</label>
-                                            <select class="select2" id="stream" name="stream">
-                                            <option>please select stream*</option>
-                                             <%
+                                            <select   class="select2" id="stream" name="stream">
+                                            <option selected >Please select Stream</option>
+                                        <%
 											for(int i=0;i<Streamlist.size();i++)
 											{
 										%>
@@ -394,14 +431,15 @@ $(document).ready(function()
                                             <!-- <input type="text" placeholder="" class="form-control"> -->
                                         </div>
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <!-- <label>Select Year *</label>
+                                           <!--    <label>Select Year *</label>
                                             <input type="text" class="form-control" id="datepicker" />
                                             <i class="flaticon-calendar"></i> -->
                                             <label>Select Semester *</label>
                                             <select class="select2" name="semester" id="semester1">
-                                                
+                                             <option>please select</option>
                                             </select>
                                         </div>
+                                      <!--    <input type="hidden" id="paper" name="paper1">-->
                                         <!-- <input type="text" id="datepicker" /> -->
                                         <!--  
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
@@ -414,25 +452,23 @@ $(document).ready(function()
                                         -->
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                             <label>Select Type of Paper *</label>
-                                            <select class="select2" id="typeofpaper" name="type">
-                                            <Option>Please select</Option>
-                                        		<%
-											for(int i=0;i<paper.size();i++)
-											{
-										%>
-										<%
-											Papertype s=paper.get(i);
-										%>
-											<option value="<%=s.getPapertypeid()%>"> <%=s.getPaperType()%> </option>
-										<%
-											}
-										%>
-                                        		 
+                                            <select class="select2"  id="typeofpaper" name="type">
+                                          
+                                                
                                             </select>
                                         </div>
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                       <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                            <label>Select Year</label>
+                                              <!--  <input type="text" class="form-control" name="year123"-->  
+                                           <!--   <i class="flaticon-calendar"></i>-->
+                             				 <!--  <label>Select Code</label>-->
+                                            <select class="select2"  id="year" name="Year">
+                                            </select> 
+                                        </div>
+                                        <!--  
                                             <label>Select Year *</label>
-                                            <input type="text" class="form-control" name="year123" id="year"/>
+                                            <input type="text" class="form-control" name="year123" id="datepicker" />
                                             <i class="flaticon-calendar"></i>
                                             <!-- <label>Select Code</label>
                                             <select class="select2">
@@ -444,13 +480,15 @@ $(document).ready(function()
                                                 <option value="3">00528</option>
                                             </select> -->
                                         </div>
+                                       
                                         <!-- <div class="col-12-xxxl col-lg-6 col-12 form-group"> -->
+                                        <!--  
                                         <input type="file" name="paper" class="btn-fill-lmd radius-30 text-light bg-true-v">Upload Paper here
-                                            <i class="fas fa-cloud-upload-alt mg-l-10"></i>
+                                            <i class="fas fa-cloud-upload-alt mg-l-10"></i>-->
                                         
                                         <!-- </div> -->
                                         <div class="col-12 form-group mg-t-8">
-                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                          	<button type="submit"  class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Download</button>
                                             <!--  <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button> -->
                                         </div>
                                     </div>

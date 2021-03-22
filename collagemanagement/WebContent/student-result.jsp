@@ -1,3 +1,7 @@
+<%@page import="com.collagemanagement.bean.Marks"%>
+<%@page import="com.collagemanagement.bean.Subject"%>
+<%@page import="com.collagemanagement.bean.Semester"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -33,7 +37,10 @@
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
 </head>
+<jsp:include page ="/GetSemesterDetails"/>
+<% List<Semester> Semlist= (List)request.getAttribute("semlist"); %>
 
+<% String message= (String)request.getAttribute("message"); %>
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
@@ -268,17 +275,22 @@
                                     </div>
                                  
                                 </div>
-                                <form class="new-added-form">
+                                <form class="new-added-form" action="GetResultinformation" method="post">
                                     <div class="row">
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                             <label>Select Semester</label>
-                                            <select class="select2">
-                                                <option value="">Select Semester</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                            <select class="select2" name="semester">
+                                        <%
+											for(int i=0;i<Semlist.size();i++)
+											{
+										%>
+										<%
+											Semester s=Semlist.get(i);
+										%>
+											<option value="<%=s.getSemid()%>"> <%=s.getSemvalue()%> </option>
+										<%
+											}
+										%>
                                             </select>
                                         </div>
                                        
@@ -287,6 +299,11 @@
                                             <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Get result</button>
                                             <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                         </div>
+                                        <%if(message!=null)
+                                        {%>
+                                        	<span><%=message %></span>
+                                        <%} %>
+                                        
                                     </div>
                                 </form>
                             </div>
@@ -318,22 +335,18 @@
                                             <tr>
                                                 <th class="text-left">Sr. no.</th>
                                                 <th>Name of subject</th>
-                                                <th>GP</th>
+                                                <th>marks</th>
                                                
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td class="text-left">1</td>
-                                                <td><i class="fas fa-check text-success"></i></td>
-                                                <td><i class="fas fa-check text-success"></i></td>
-                                                
-                                            </tr>
+                                                                                        </tr>
                                             <tr>
                                                 <td class="text-left">2</td>
-                                                <td><i class="fas fa-check text-success"></i></td>
-                                                <td><i class="fas fa-check text-success"></i></td>
                                                 
+                                                <th>50</th>
                                             </tr>
                                           
                                         </tbody>

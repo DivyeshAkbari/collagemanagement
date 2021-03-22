@@ -20,6 +20,7 @@
 	int id = (Integer.parseInt(user.getStream()));
 
 	FeesPaymentService feespayment = new FeesPaymentServiceImpl();
+	int semvalue=feespayment.fetchSemValue(semesterid,id);
 	
 	String streamname = feespayment.fetchstreamname(id);
 	
@@ -68,32 +69,24 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     
 <script>
-	$(document).ready(function()
+ $(document).ready(function()
 {
 	$("#checkoutid").click(function(){
-		
-		var ORDER_ID = $("#ORDER_ID").val();
-		var amountid = $("#amountid").val();
 		var remarkid = $("#remarkid").val();
-		alert(ORDER_ID);
-		alert(amountid);
-		alert(amountid);
+		var orderid = $("#ORDER_ID").val();
+		var amout=$("#amountid").val();
+		
 		$.ajax({
 			
 					method:"POST",
 					url:"InsertFeesDetails",
 					data:
 					{
-						ORDER_ID:ORDER_ID,amountid:amountid,remarkid:remarkid
+						remarkid:remarkid,orderid:orderid,amout:amout
 					}
-			}).done(function(data)
-			{
-				alert(data);
-				$("#searchvalueid").html(data);
-				$
 			});
 		});
-});
+}); 
 </script>
 </head>
 
@@ -362,7 +355,7 @@
                                 </div>
                                   <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Semester</label>
-                                    <input type="text" placeholder="" class="form-control" value="<%=user.getSemester() %>" required="" disabled="disabled">
+                                    <input type="text" placeholder="" class="form-control" value="<%=semvalue %>" required="" disabled="disabled">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Phone Number</label>
@@ -396,13 +389,13 @@
 				
 			<input hidden="hidden"  id="CHANNEL_ID" tabindex="4" maxlength="12" size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
 						
-			<input hidden="hidden"  title="TXN_AMOUNT" tabindex="10" type="text" name="TXN_AMOUNT" value="1">
-							
+			<input hidden="hidden"  title="TXN_AMOUNT" tabindex="10" type="text" name="TXN_AMOUNT" value="<%=amount  %>">
+			
+					
 			<input class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" id="checkoutid" value="CheckOut" type="submit" onclick=""></td> 
 				
  </form>
- 
-                    </div>
+                </div>
                 </div>
                 <!-- Add Expense Area End Here -->
                 <footer class="footer-wrap-layout1">

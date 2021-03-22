@@ -1,10 +1,11 @@
+<%@page import="com.collagemanagement.bean.User"%>
 <%@page import="com.collagemanagement.bean.FeesDetails"%>
 <%@page import="com.collagemanagement.service.impl.FeesPaymentServiceImpl"%>
 <%@page import="com.collagemanagement.service1.FeesPaymentService"%>
  
 <%@page import="utils.PaytmConstants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"  %>
 <%@ page import="java.util.*,com.paytm.pg.merchant.CheckSumServiceHelper"%>
 
  
@@ -45,15 +46,24 @@ try{
 
 	FeesPaymentService feespayment = new FeesPaymentServiceImpl();
 	
-	/* String s[] = str.split(",");
+	String s[] = str.split(",");
 	String s1[] = s[5].split("=");
+	String s2[]=s[10].split("=");
+	String s4[] = s[11].split("=");
+	String s8[]=s[10].split("=");
+	
+	
 	
 	fees.setOrderid(s1[1]);
+	fees.setPaymentdate(s4[1]);
+	String responseofpayment=feespayment.UpdatePaymentDetails(fees);
 	
-	String s3[] = s[10].split("=");
-	fees.setPaymentstatus(1);
-	String s4[] = s[11].split("=");
-	 */
+	
+	
+	
+	 
+	
+	
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

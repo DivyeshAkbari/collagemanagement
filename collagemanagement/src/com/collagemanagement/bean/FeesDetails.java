@@ -9,7 +9,7 @@ public class FeesDetails {
 	String Orderid;
 	String remark;
 	
-	private int amount;
+	private String  amount;
 	private int student_feesdetail_id;
 	
 	public int getPaymentstatus() {
@@ -42,10 +42,10 @@ public class FeesDetails {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getAmount() {
+	public String getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 	public int getStudent_feesdetail_id() {

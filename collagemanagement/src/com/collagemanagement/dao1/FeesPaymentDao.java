@@ -18,7 +18,7 @@ public interface FeesPaymentDao
 	int UpdateFeesPaymentDetails(Connection c1, FeesDetails fees);
 
 	int insertFee(Connection c1, FeesDetails fees);
-
+  
 	
 
 }

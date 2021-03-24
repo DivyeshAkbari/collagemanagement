@@ -70,7 +70,7 @@ public class FeesPaymentDaoImpl implements FeesPaymentDao {
 	{
 		try(PreparedStatement p1=c1.prepareStatement("Select i_semester_value from semester_table where i_Semester_id=? AND i_stream_id=?");
 			 )
-		{
+		{  
 			p1.setInt(1, semesterid);
 			p1.setInt(2, id);
 			

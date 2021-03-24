@@ -8,7 +8,7 @@ public interface FeesPaymentService {
 	
 	public int fetchamount(int id,int semesterid);
 	public int fetchSemValue(int semesterid,int id);
-
+   
 
 	public String UpdatePaymentDetails(FeesDetails fees);
 

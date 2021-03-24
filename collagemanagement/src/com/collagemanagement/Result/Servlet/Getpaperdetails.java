@@ -71,7 +71,7 @@ public class Getpaperdetails extends HttpServlet {
 		
 		String Message=Service.InsertPaperDetails(p1);
 		System.out.println(Message);
-		
+		  
 		response.sendRedirect("manage-papers.jsp?");
 	}
 }

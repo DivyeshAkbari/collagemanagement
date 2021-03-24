@@ -37,6 +37,8 @@ public class fetchPaperType extends HttpServlet {
 		System.out.println(papertypelist);
 		
 		request.setAttribute("paperlist", papertypelist);
+		
+		
 	}
 
 	/**

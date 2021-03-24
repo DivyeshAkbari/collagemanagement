@@ -71,7 +71,7 @@ public class DownloadPaper extends HttpServlet {
          
         byte[] buffer = new byte[BUFFER_SIZE];
         int bytesRead = -1;
-         
+           
         while ((bytesRead = inputStream.read(buffer)) != -1)
         {
             outStream.write(buffer, 0, bytesRead);

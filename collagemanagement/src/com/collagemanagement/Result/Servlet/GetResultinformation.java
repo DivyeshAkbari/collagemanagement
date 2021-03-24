@@ -59,6 +59,7 @@ public class GetResultinformation extends HttpServlet {
 		System.out.println("Sem id is "+Semid);
 	    System.out.println("Id is "+id);
 	    
+	    
 //		//User user=new User();
 //		user= Service.fetchEmailid(u1);
 		

@@ -41,7 +41,7 @@ public class FAtchsubjectdetails3 extends HttpServlet {
 //		List<Marks> markslist=Service.fatchMarksDetails();
 //		request.setAttribute("Markslist", markslist);
 		
-		
+		   
 	}
 
 	/**

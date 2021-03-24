@@ -56,5 +56,7 @@ public class Fetchsubjectdetais extends HttpServlet {
 		String Json=new Gson().toJson(Subjectlist);
 		System.out.println("JSon is "+Json);
 		response.getWriter().append(Json);	
+		
+		
 	}
 }

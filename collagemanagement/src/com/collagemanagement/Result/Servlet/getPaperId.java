@@ -40,7 +40,7 @@ public class getPaperId extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	
-		
+		   
 		String typeofpaper1=request.getParameter("typeofpaper1");
 		System.out.println("typeofpaper is "+typeofpaper1);
 		

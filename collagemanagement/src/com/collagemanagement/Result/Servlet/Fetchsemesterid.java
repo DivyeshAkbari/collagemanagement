@@ -56,5 +56,8 @@ public class Fetchsemesterid extends HttpServlet {
 		System.out.println("JSon is "+Json);
 		response.getWriter().append(Json);
 		
+		
+		
+		
 	}
 }

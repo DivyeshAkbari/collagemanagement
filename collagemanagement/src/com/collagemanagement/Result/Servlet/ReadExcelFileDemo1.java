@@ -72,9 +72,6 @@ public class ReadExcelFileDemo1 implements Runnable
 			
 			while (itr.hasNext()) 
 			{	
-				
-				
-				
 				//System.out.println("ITR "+itr);
 				Row row = itr.next();
 				
@@ -321,6 +318,5 @@ public class ReadExcelFileDemo1 implements Runnable
 		{
 			e.printStackTrace();
 		}
-		//return result1;
 	}
 }

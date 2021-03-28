@@ -3,8 +3,10 @@ package com.collagemanagement.service.impl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.collagemanagement.bean.FeesDetails;
+import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.FeesPaymentDaoImpl;
 import com.collagemanagement.dao1.FeesPaymentDao;
 import com.collagemanagement.service1.FeesPaymentService;
@@ -126,4 +128,37 @@ public class FeesPaymentServiceImpl implements FeesPaymentService {
 		return null;
 	}
 
+	@Override
+	public FeesDetails fetchinvoiceDetails(int id) {
+		
+		try(Connection connection = getConnection())
+		{
+			return feespaymentDao.selectinvoiceDetails(connection,id);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<User> getFeesPaymentstudentdetails() {
+		// TODO Auto-generated method stub
+		
+		List<User> user = null;
+		
+		try(Connection connection = getConnection()
+		   )
+		{
+			user = feespaymentDao.fetchFeesPaystudentdetails(connection);
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+		
+	}
 }

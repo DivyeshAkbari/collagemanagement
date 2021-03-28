@@ -8,10 +8,47 @@ public class FeesDetails {
 	String paymentdate;
 	String Orderid;
 	String remark;
+	String contactno;
+	String email;
 	
 	private String  amount;
-	private int student_feesdetail_id;
+	private String username;
+	private String stream;
 	
+	private int student_feesdetail_id;
+	private int semester;
+	
+	
+	public int getSemester() {
+		return semester;
+	}
+	public void setSemester(int semester) {
+		this.semester = semester;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getStream() {
+		return stream;
+	}
+	public void setStream(String stream) {
+		this.stream = stream;
+	}
+	public String getContactno() {
+		return contactno;
+	}
+	public void setContactno(String contactno) {
+		this.contactno = contactno;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getPaymentstatus() {
 		return paymentstatus;
 	}
@@ -54,5 +91,11 @@ public class FeesDetails {
 	public void setStudent_feesdetail_id(int student_feesdetail_id) {
 		this.student_feesdetail_id = student_feesdetail_id;
 	}
-	
+	@Override
+	public String toString() {
+		return String.format(
+				"FeesDetails [paymentstatus=%s, user_id=%s, paymentdate=%s, Orderid=%s, remark=%s, contactno=%s, email=%s, amount=%s, username=%s, stream=%s, student_feesdetail_id=%s, semester=%s]",
+				paymentstatus, user_id, paymentdate, Orderid, remark, contactno, email, amount, username, stream,
+				student_feesdetail_id, semester);
+	}	
 }

@@ -685,6 +685,36 @@
     <servlet-name>InsertFeesDetails</servlet-name>
     <url-pattern>/InsertFeesDetails</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>selectsuccesspaymentDetails</display-name>
+    <servlet-name>selectsuccesspaymentDetails</servlet-name>
+    <servlet-class>utils.selectsuccesspaymentDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>selectsuccesspaymentDetails</servlet-name>
+    <url-pattern>/selectsuccesspaymentDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectPaymentInvoiceDetails</display-name>
+    <servlet-name>SelectPaymentInvoiceDetails</servlet-name>
+    <servlet-class>utils.SelectPaymentInvoiceDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectPaymentInvoiceDetails</servlet-name>
+    <url-pattern>/SelectPaymentInvoiceDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FeesPayStudentDataDisplay</display-name>
+    <servlet-name>FeesPayStudentDataDisplay</servlet-name>
+    <servlet-class>utils.FeesPayStudentDataDisplay</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FeesPayStudentDataDisplay</servlet-name>
+    <url-pattern>/FeesPayStudentDataDisplay</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>fetchselectedsubjects</display-name>

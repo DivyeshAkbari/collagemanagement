@@ -41,7 +41,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | Add Expense</title>
+    <title>Educhamp | Fees Payment</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -75,6 +75,9 @@
 		var remarkid = $("#remarkid").val();
 		var orderid = $("#ORDER_ID").val();
 		var amout=$("#amountid").val();
+		var contactnoid=$("#contactnoid").val();
+		var emailid=$("#emailid").val();
+		var streamid=$("#streamid").val();
 		
 		$.ajax({
 			
@@ -82,7 +85,7 @@
 					url:"InsertFeesDetails",
 					data:
 					{
-						remarkid:remarkid,orderid:orderid,amout:amout
+						remarkid:remarkid,orderid:orderid,amout:amout,contactnoid:contactnoid,emailid:emailid,streamid:streamid
 					}
 			});
 		});
@@ -318,7 +321,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add New Expense</h3>
+                                <h3>Add User Details</h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 
@@ -347,19 +350,19 @@
                                 </div> 
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Email *</label>
-                                    <input type="text" placeholder="" class="form-control" value="<%=user.getEmail() %>" required="" disabled="disabled">
+                                    <input type="text" placeholder="" class="form-control" value="<%=user.getEmail() %>" name="email" id="emailid" required="" disabled="disabled">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Stream</label>
-                                    <input type="text" placeholder="" class="form-control" value="<%=streamname %>" required="" disabled="disabled">
+                                    <input type="text" placeholder="" class="form-control" value="<%=streamname %>" name="stream" id="streamid" required="" disabled="disabled">
                                 </div>
                                   <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Semester</label>
-                                    <input type="text" placeholder="" class="form-control" value="<%=semvalue %>" required="" disabled="disabled">
+                                    <input type="text" placeholder="" class="form-control" value="<%=semvalue %>" name="semester" id="semesterid" required="" disabled="disabled">
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Phone Number</label>
-                                    <input type="text" placeholder="" class="form-control" value="<%=user.getContactno() %>" required="" disabled="disabled">
+                                    <input type="text" placeholder="" class="form-control" value="<%=user.getContactno() %>" name="contactno" id="contactnoid" required="" disabled="disabled">
                                 </div>                                                      
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Amount *</label>
@@ -390,8 +393,7 @@
 			<input hidden="hidden"  id="CHANNEL_ID" tabindex="4" maxlength="12" size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
 						
 			<input hidden="hidden"  title="TXN_AMOUNT" tabindex="10" type="text" name="TXN_AMOUNT" value="<%=amount  %>">
-			
-					
+							
 			<input class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" id="checkoutid" value="CheckOut" type="submit" onclick=""></td> 
 				
  </form>

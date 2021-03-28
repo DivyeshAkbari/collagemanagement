@@ -2,6 +2,7 @@ package com.collagemanagement.bean;
 
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.Arrays;
 import java.util.List;
 
 public class User 
@@ -30,7 +31,8 @@ public class User
 	private String address;
 	private Blob image;
 	private String role;
-		
+	private String paymentstatus;
+	
 	public byte[] getImagedata() {
 		return imagedata;
 	}
@@ -63,6 +65,8 @@ public class User
 	}
 	
 	
+	
+
 	@Override
 	public String toString() {
 		return "User [firstname=" + firstname + ", middlename=" + middlename + ", lastname=" + lastname + ", stream="
@@ -71,9 +75,9 @@ public class User
 				+ ", userProfilepicString=" + userProfilepicString + ", confirm_password=" + confirm_password
 				+ ", qualification=" + qualification + ", myHash=" + myHash + ", id=" + id + ", URL=" + URL
 				+ ", streamList=" + streamList + ", semesterList=" + semesterList + ", subjectList=" + subjectList
-				+ ", contactno=" + contactno + ", address=" + address + ", image=" + image + ", role=" + role + "]";
+				+ ", imagedata=" + Arrays.toString(imagedata) + ", contactno=" + contactno + ", address=" + address
+				+ ", image=" + image + ", role=" + role + "]";
 	}
-
 	public String getRole() {
 		return role;
 	}
@@ -187,5 +191,11 @@ public class User
 	}
 	public void setURL(String uRL) {
 		URL = uRL;
+	}
+	public String getPaymentstatus() {
+		return paymentstatus;
+	}
+	public void setPaymentstatus(String paymentstatus) {
+		this.paymentstatus = paymentstatus;
 	}
 }

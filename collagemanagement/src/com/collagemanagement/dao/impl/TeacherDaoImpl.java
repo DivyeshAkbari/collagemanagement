@@ -20,8 +20,6 @@ import com.collagemanagement.bean.User;
 import com.collagemanagement.dao1.TeacherDao;
 import com.collagemanagement.encryptpassword.TrippleDes;
 
-import com.mysql.cj.protocol.Resultset;
-
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;
 
@@ -374,7 +372,7 @@ public class TeacherDaoImpl implements TeacherDao {
 			while(rs.next()) {
 				Stream s = new Stream();
 				s.setStreamid(rs.getInt("i_stream_id"));
-				s.setStreamname("c_stream");
+				s.setStreamname(rs.getString("c_stream"));
 				streamlist.add(s);
 			}
 		}
@@ -386,7 +384,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	public List<Subject> getAllSubject(Connection connection) throws Exception {
 		// TODO Auto-generated method stub
 		List<Subject> subjectlist = new ArrayList<>();
-		String query = "select * from stream_table";
+		String query = "select * from subject_table";
 		try(PreparedStatement ps = connection.prepareStatement(query);){
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
@@ -452,7 +450,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	public List<User> fetchFacultyForAss(Connection connection, List<Integer> userIdList) throws Exception {
 		// TODO Auto-generated method stub
 		List<User> faculty = new ArrayList<>();
-		String query = "select c_First_Name,c_middle_name from user_table where i_user_id=?";
+		String query = "select c_First_Name,c_middle_name from user_table where i_user_id=? and i_status=1";
 		ResultSet rs=null;
 		try(PreparedStatement ps = connection.prepareStatement(query);){
 			for(Integer s : userIdList) {
@@ -521,6 +519,106 @@ public class TeacherDaoImpl implements TeacherDao {
 		// TODO Auto-generated method stub
 		
 		return null;
+	}
+
+	@Override
+	public int updateTeacherDetails(Connection connection, User u1) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "update user_table set c_First_Name=?,c_middle_name=?,c_last_name=?,"
+				+ "c_contact=?,image=?,c_address=?,c_password=?,c_qulification=? where i_user_id=?";
+		
+		try(PreparedStatement ps = connection.prepareStatement(query);){
+			ps.setString(1, u1.getFirstname());
+			ps.setString(2, u1.getMiddlename());
+			ps.setString(3, u1.getLastname());
+			ps.setString(4, u1.getContactno());
+			ps.setBlob(5, u1.getUserProfilepicStream());
+			ps.setString(6, u1.getAddress());
+			ps.setString(7, u1.getPassword());
+			ps.setString(8, u1.getQualification());
+			ps.setInt(9, u1.getId());
+			return ps.executeUpdate();
+		}
+		//return 0;
+	}
+
+	@Override
+	public void deleteTeacherStream(Connection connection, int id) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "delete from faculty_stream_table where i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		}
+		
+	}
+
+	@Override
+	public void deleteTeacherSemester(Connection connection, int id) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "delete from faculty_semester_table where i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		}
+		
+	}
+
+	@Override
+	public void deleteTeacherSubject(Connection connection, int id) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "delete from faculty_subject_table where i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		}
+		
+	}
+
+	@Override
+	public List<User> getAllFaculty(Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		List<User> userlist = new ArrayList<>();
+		String query = "select * from user_table where c_roll='FACULTY' and i_status=1";
+		try(PreparedStatement ps = connection.prepareStatement(query)){
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("i_user_id"));
+				user.setFirstname(rs.getString("c_First_Name"));
+				user.setMiddlename(rs.getString("c_middle_name"));
+				user.setLastname(rs.getString("c_last_name"));
+				user.setEmail(rs.getString("c_email"));
+				user.setXender(rs.getString("c_gender"));
+				user.setContactno(rs.getString("c_contact"));
+				user.setAddress(rs.getString("c_address"));
+				user.setPassword(rs.getString("c_password"));
+				user.setQualification(rs.getString("c_qulification"));
+				byte[] imagedata = rs.getBytes("image");
+				if(null != imagedata && imagedata.length > 0) {
+					String imagestr = Base64.getEncoder().encodeToString(imagedata);
+					user.setUserProfilepicString(imagestr);
+				}
+				
+//				Blob blob=rs.getBlob("image");
+//				byte[] b=blob.getBytes(1,(int)blob.length());
+//				user.setImagedata(b);
+				userlist.add(user);
+			}
+			return userlist;
+		}
+		//return userlist;
+	}
+
+	@Override
+	public int deletefaculty(Connection connection, int userId) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "update user_table set i_status=0 where i_user_id=?";
+		try(PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setInt(1, userId);
+			return ps.executeUpdate();
+		}
+		//return 0;
 	}
 
 	

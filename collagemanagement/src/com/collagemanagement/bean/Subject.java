@@ -2,6 +2,8 @@ package com.collagemanagement.bean;
 
 public class Subject 
 {
+	private boolean isSelected;
+	
 	public int getSubjectId() 
 	{
 		return subjectId;
@@ -11,19 +13,26 @@ public class Subject
 		this.subjectId = subjectId;
 	}
 	
+	@Override
+	public String toString() {
+		return "Subject [isSelected=" + isSelected + ", subjectId=" + subjectId + ", subjectName=" + subjectName + "]";
+	}
 	public String getSubjectName() 
 	{
 		return subjectName;
-	}
-	@Override
-	public String toString() {
-		return "Subject [subjectId=" + subjectId + ", subjectName=" + subjectName + "]";
 	}
 	public void setSubjectName(String subjectName) 
 	{
 		this.subjectName = subjectName;
 	}	
+	
+	public boolean isSelected() {
+		return isSelected;
+	}
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
 	private int subjectId;
 	private String subjectName;
-	
 }

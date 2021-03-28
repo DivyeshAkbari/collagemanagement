@@ -1,3 +1,6 @@
+<%@page import="java.util.Optional"%>
+<%@page import="java.util.stream.Collectors"%>
+<%@page import="com.collagemanagement.bean.Semester1"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.collagemanagement.bean.Subject"%>
 <%@page import="com.collagemanagement.bean.User"%>
@@ -59,12 +62,17 @@
 	.end {
     display: none;
 	}
+/* 	stream_check  #streamid1*/
+	
+	
 	</style>
 </head>
 
 <jsp:include page ="/FetchHobby"/>
  
-<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist");
+	//System.out.println("Stream list in jsp: "+Streamlist);
+%>
 
 <jsp:include page ="/Fetchsemdetails"/>
 
@@ -72,8 +80,14 @@
 
 
 <%-- <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %> --%>
-<% User u1 = (User)request.getAttribute("faculty"); %>
-<% List<Subject> subjectlist =(List)request.getAttribute("subjectList"); %>
+
+<% User u1 = (User)request.getAttribute("faculty");
+//System.out.println("User stream liist: "+u1.getStreamList());
+	Streamlist = u1.getStreamList();
+%>
+<% List<Subject> subjectlist =(List)request.getAttribute("subjectList");
+	subjectlist = u1.getSubjectList();
+%>
 <%-- <% User u1=faculty.get(0); %> --%>
 
 <% List<Integer> streamIdList = new ArrayList<>();
@@ -312,7 +326,7 @@ List<Integer> subjectIdList = new ArrayList<>();
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
            
-           <%@include file="sidebar-admin.jsp" %>
+         <%@include file="sidebar-admin.jsp" %>
            
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
@@ -323,7 +337,7 @@ List<Integer> subjectIdList = new ArrayList<>();
                         <li>
                             <a href="Admin.jsp">Home</a>
                         </li>
-                        <li>Add New Teacher</li>
+                        <li>Update Teacher</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -332,7 +346,7 @@ List<Integer> subjectIdList = new ArrayList<>();
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add New Teacher</h3>
+                                <h3>Update Teacher</h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 
@@ -349,7 +363,7 @@ List<Integer> subjectIdList = new ArrayList<>();
 					
                         <div class="content-holder">
                          <div class="content" id="content-1" data-id='1' style="display: block;">
-                        <form  enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
+                         <form action="UpdateTeacher" enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
                         
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -377,7 +391,7 @@ List<Integer> subjectIdList = new ArrayList<>();
 <!--                                 </div> -->
 								<div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Email</label>
-                                    <input value="<%=u1.getEmail() %>" autocomplete="off" name="email" type="text" placeholder="" class="form-control">
+                                    <input readonly="readonly" value="<%=u1.getEmail() %>" autocomplete="off" name="email" type="text" placeholder="" class="form-control">
                                   </div>
                                  <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Password</label>
@@ -396,13 +410,13 @@ List<Integer> subjectIdList = new ArrayList<>();
                                     <label>Address</label>
                                     <textarea name="address" class="textarea form-control"  id="form-message" cols="10" rows="9"><%=u1.getAddress() %></textarea>
                                 </div>
-<!--                                 <div class="col-lg-6 col-12 form-group mg-t-30"> -->
-<!--                                     <label class="text-dark-medium">Upload Faculty Photo (150px X 150px)</label> -->
-<!--                                     <input name="profile_photo" type="file" class="form-control-file"> -->
-<!--                                 </div> -->
+                                <div class="col-lg-6 col-12 form-group mg-t-30">
+                                    <label class="text-dark-medium">Update Photo (150px X 150px)</label>
+                                    <input name="profile_photo" type="file" value="<%=u1.getUserProfilepicString() %>" class="form-control-file">
+                                </div>
 								 
 <!-- 								<button type="button" class="back">Back</button> -->
-				
+								<input type="hidden" name="userID" value="<%=u1.getId() %>">
 							   
                                 <div class="col-12 form-group mg-t-8">
                                    <button  type="button" id="next" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Next</button>
@@ -416,37 +430,89 @@ List<Integer> subjectIdList = new ArrayList<>();
 					 <div class="end" data-id='2'>
    						
 <!-- 							<form method="post" id="form2" class="new-added-form"> -->
+					
                             <div class="row">
                            
-
+									<% int subcnt=1; %>
 									<div class="col-lg-12 form-group">
                                     <label>Which stream</label>
-                                    <% 
+                                    <%  System.out.println("Streamlist.size(): "+Streamlist.size());
+                                    if(null != Streamlist){
                                      for(int i=0;i<Streamlist.size();i++){
                                     
                                     	Stream s = Streamlist.get(i);
                                     	
                                     %>
                                     <div class="stream" >
-                                    <input name="stream_checkbox" class="stream_check" type="checkbox"  class=""
-                                    <% if(streamIdList.contains(s.getStreamid())){ %>
+                                    <input  name="stream_checkbox" class="stream_check" type="checkbox"  class=""
+                                    <% System.out.println(s.getStreamid()+" "+s.getSemesters() );
+                                  //  List<Semester1> semlist = s.getSemesters();
+                                   
+                                    //List<Boolean> blist = semlist.stream().map(Semester1::isSelected).collect(Collectors.toList());
+                                    //System.out.println(blist);
+                                   // boolean check = isSelected.contains(true);
+                                    if(streamIdList.contains(s.getStreamid()) && !s.getSemesters().isEmpty() && s.isStreamCheck()){
+                                    	
+                                    	%>
                                     checked="checked"
                                     <% } %>
                                      value="<%=s.getStreamid()%>">
-                                     <%=s.getStreamname()%>
+                                     <%=s.getStreamname()%> 
 <!--                                      div for semester list  -->
-                                     <div id="id_stream<%=s.getStreamid() %>" class="col-lg-12 form-group">                                     
-    								</div>
-    								
-    								
-                                     </div>
+									<div id="id_stream<%=s.getStreamid() %>" class="col-lg-12 form-group">
+										<%
+										 System.out.println("sem list in jsp: "+s.getSemesters());
+                                     	if(null != s.getSemesters() && s.isStreamCheck()){
+                                    
+                                     	for(Semester1 s1 : s.getSemesters()){
+                                     %>  
+                                     <div style="margin-left: 30px;" id="<%=s.getStreamid()%>-<%= s1.getSemId() %>">
+                                          <input name="semesterCheck" class="semester_check" type="checkbox"
+                                          <% if(s1.isSelected()){ %>
+                                          checked="checked"
+                                          <% } %>
+                                           value = "<%= s1.getSemId() %>"
+                                              > <b>  Semester <%=s1.getSemValue() %> </b> <br>   
+<!--                                               division for subject  -->
+                                                 <div style="margin-left: 40px;" class="subject">
+                                              
+                                              	<% //System.out.println("subject list in jsp: "+s1.getSubjects());
+                                              	if(null != s1.getSubjects()){ 
+                                              
+                                              	 for(Subject s2 : s1.getSubjects()){ %>
+                                              	
+                                              	<input type="checkbox"
+                                              	<% if(s2.isSelected()){ %>
+                                              		checked="checked"
+                                              	<% } %>
+                                              	
+                                              	value = "<%= s2.getSubjectId() %>"> Subject <%=subcnt++ %> : <%= s2.getSubjectName() %> <br>
+                                              	
+                                              	 
+                                              	<% }//subject for
+                                              	 subcnt=1;
+                                              	}//if not equal to null%>
+                                                              
+                                                 </div>
+                                                 
+                                                 
+                                         </div>        
+                                     <% }//semester for loop
+                                     	}//if%>
+                                     	
+                                     
+                                     
+                                     	</div>
+                                     	  </div>
                                     <% 
 										
-                                   }
-                                    %>
+                                   }//for
+                                    }//if stream not equal to null %>
 <!--                                    default value code here                                  -->
-                                </div>
-                                
+                              
+                               
+                               </div>
+								                               
                               
 
 									
@@ -454,10 +520,9 @@ List<Integer> subjectIdList = new ArrayList<>();
 								<input type="hidden" id="streamHidden" name="streamInputArray">
 								<input type="hidden" id="semesterHidden" name="semesterInputArray">
 								<input type="hidden" id="subjectHidden" name="subjectInputArray"> 
-<!--                                 <input name="streamInputArray" type="checkbox" style="opacity:0; position:absolute; left:9999px;"> -->
-                                <div class="col-12 form-group mg-t-8">
+								 <div class="col-12 form-group mg-t-8">
                                    <button type="button" class="btn-fill-lg bg-blue-dark btn-hover-yellow" id="edit-previous">Edit Previous Options</button>
-     								<button id=submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
+     								<button id="submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
      								
                          			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                 </div>
@@ -467,6 +532,7 @@ List<Integer> subjectIdList = new ArrayList<>();
                                 
                                 
                             </div>
+                            
                             
                         </form>
                         
@@ -538,11 +604,10 @@ List<Integer> subjectIdList = new ArrayList<>();
 	});
 	</script>
 	
-	<script>
-	//$(':input[type="submit"]').prop('disabled', true);
+		<script>
+
 	$(document).ready(function(){
-		//var values = [];
-		//$("#alert").hide();
+		
 		var value,id;
 		var streamValue;
 		
@@ -554,43 +619,24 @@ List<Integer> subjectIdList = new ArrayList<>();
 	            
 	        	$.ajax({
 					method:"post",
-					url: "fetchselectedsemester",
+					url: "fetchsemester",
 					data: { name : value}
 				})
 				.done(function(msg){
 					//var id = "id_sem"+value;
 					
+					
 					$("#"+id).empty();
-					
-					
+					//alert(value);
 					var obj = jQuery.parseJSON(msg);
-					var firstobj = obj[0];
-					//alert(firstobj);
-// 					for (i = 0; i < firstobj.length; ++i) {
-// 					    alert(firstobj[i]);
-// 					}
-// 					
 					
-					
-					$.each(obj[1],function(key,value){
+					$.each(obj,function(key,value){
 						var divId = streamValue+'-'+value.semId;
-						$('#'+id).append('<div id='+divId+'></div>');
-						if(firstobj.includes(value.semId)){
-							//alert(value.semId);
-							code = '<input name="semesterCheck" class="semester_check" type="checkbox" value='+value.semId+' checked>semester '+value.semValue+'<br>';
-						}
-						else{
-							//alert(value.semId);
-							code = '<input name="semesterCheck" class="semester_check" type="checkbox" value='+value.semId+' >semester '+value.semValue+'<br>';
-						}
-						
-						$("#"+divId).append(code);
+						$('#'+id).append('<div style="margin-left: 30px;" id='+divId+'></div>'); 
+						$("#"+divId).append('<input name="semesterCheck" class="semester_check" type="checkbox" value='+value.semId+'> <b> semester '+value.semValue+'</b> <br>');
 						//var aa = $("#"+id);
 						//alert("aa: "+aa);
 					});
-
-					
-
 					
 				});//ajax
 	        	
@@ -606,10 +652,7 @@ List<Integer> subjectIdList = new ArrayList<>();
 		var value1;
 		
  		$(document).on("click",".semester_check",function() {
-// 		$(".semester_check").on("click",function() {
-// 		$(".semester_check").click(function() {
-// 		 var stream_value = $(this).closest('div').attr('data-value');
-// 		 alert(stream_value);
+
 			
 			//alert("id in change : "+id);
 			//alert("in semester_check");
@@ -632,7 +675,7 @@ List<Integer> subjectIdList = new ArrayList<>();
 					//$("#"+id3).empty();//"#id_sub"
 					$('#' + divTagId).find('.subject').remove();
 					var obj = jQuery.parseJSON(msg);
-					
+					var subcnt=1;
 					$.each(obj,function(key,value){
 						//"#"+id2
 						var subjectName = divTagId;//+"-"+value.subjectId
@@ -640,67 +683,27 @@ List<Integer> subjectIdList = new ArrayList<>();
 						//var subjectDivElement = ;
 						//$('#'+divTagId).append('<div class="Subject"></div>'); 
 						$("#"+divTagId).append($subjectDivElement);
-						$($subjectDivElement).append('<input name = '+subjectName+' type="checkbox" value='+value.subjectId+'>'+value.subjectName+'<br>');
+						$($subjectDivElement).append('<input  style="margin-left: 40px;" name = '+subjectName+' type="checkbox" value='+value.subjectId+'>Subject '+(subcnt++)+' : '+value.subjectName+'<br>');
 						
 						
 					});
+					subcnt=1;
 				});//ajax
 	        	
 	        }//if
 	        else{
 				//$("#id_sub").empty();
+				
 				$('#' + divTagId).find('.subject').remove();
 	        }        
 	    });//change event
 	    
-// 		$(".stream_check").change(function(){
-// 			value = ($(this).val());
-// 			var id = "id_sem"+value;
-// 			if($(".stream_check").is(":checked")){
-// 				//values.push($(this).val());
-				
-				
-				
-				
-				
-// 			}//if
-// 			else{
-				
-// 			}
-			
-			//alert(values);
-			
-// 		});
+
 	});//document.ready
 	
-	$(document).ready(function(){
-		
-	});//document.ready
-			
-			
-// 			$('input[name="stream_checkbox"]:checked').each(function() {
-// 				values.push($(this).val()); 
-// 				});
-// 			alert(values);
-			//console.log(values);
-			///var a = $('#stream_check').val(this.checked);
-			
-			
-// 			$.ajax({
-// 				method:"post",
-// 				url: "fetchsemester",
-// 				data: { name : a}
-// 			})
-// 			.done(function(msg){
-// 				$("#id_sem").children().remove();
-// 				var obj = JQuery.parseJSON(msg);
-// 				$.each(obj,function(key,value){
-// 					$("#id_sem").append('<input type="checkbox" value="">');
-// 				});
-// 			});
-		
-// 	});	
+	
     </script>
+
     <script>
 	function myFunction() {
 		  //document.getElementById("demo").innerHTML = "Hello World";
@@ -722,9 +725,9 @@ List<Integer> subjectIdList = new ArrayList<>();
 		document.getElementById("semesterHidden").value = semesterArray;
 		document.getElementById("subjectHidden").value = subjectArray;
 		
-		//alert("streamArray: "+streamArray);
-		//alert("semesterArray: "+semesterArray);
-		//alert("subjectArray: "+subjectArray);
+ 		alert("streamArray: "+streamArray);
+ 		alert("semesterArray: "+semesterArray);
+ 		alert("subjectArray: "+subjectArray);
 		}
 	</script>
 

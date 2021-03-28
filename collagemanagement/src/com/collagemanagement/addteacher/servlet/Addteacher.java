@@ -69,6 +69,7 @@ public class Addteacher extends HttpServlet {
 		// Storing streamList of faculty
 		System.out.println("Stream.....");
 		String streamArray = request.getParameter("streamInputArray");
+		System.out.println(streamArray);
 		String[] streamArray1 = streamArray.split(",");
 		List<Stream> streamList = new ArrayList<>();
 		for(String a : streamArray1) {
@@ -80,6 +81,7 @@ public class Addteacher extends HttpServlet {
 		// Storing Semester
 		System.out.println("Semester.....");
 		String semesterArray = request.getParameter("semesterInputArray");
+		System.out.println(semesterArray);
 		String[] semesterArray1 = semesterArray.split(",");
 		List<Semester> semesterList = new ArrayList<>();
 		for(String a : semesterArray1) {
@@ -90,6 +92,7 @@ public class Addteacher extends HttpServlet {
 		//subject
 		System.out.println("Subject.....");
 		String subjectArray = request.getParameter("subjectInputArray");
+		System.out.println(subjectArray);
 		String[] subjectArray1 = subjectArray.split(",");
 		List<Subject> subjectList = new ArrayList<>();
 		for(String a : subjectArray1) {
@@ -147,8 +150,8 @@ public class Addteacher extends HttpServlet {
 		u1.setQualification(qualification);
 		//u1.setMyHash(myHash);
 //		
-//		String message=ts.saveuserdetails(u1);		
-//		System.out.println(message);
+		//String message=ts.saveuserdetails(u1);		
+		//System.out.println(message);
 		
 		
 //		String fname = request.getParameter("firstname");

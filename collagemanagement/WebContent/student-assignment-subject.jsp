@@ -1,4 +1,6 @@
+<%@page import="com.collagemanagement.bean.Assignment"%>
 <%@page import="com.collagemanagement.bean.User"%>
+<%@page import="com.collagemanagement.bean.Subject"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -6,12 +8,12 @@
 <html class="no-js" lang="">
 
 
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-teacher.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:25 GMT -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AKKHOR | All Teachers</title>
+    <title>EduChamp | Notes & Chapters</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -28,17 +30,21 @@
     <link rel="stylesheet" href="fonts/flaticon.css">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Data Table CSS -->
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <!-- Select 2 CSS -->
+    <link rel="stylesheet" href="css/select2.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-</head>
-
-<jsp:include page ="/SelectFacultyDetails"/>
- 
-<% List<User> facultylist = (List)request.getAttribute("facultylist");
+    
+    </head>
+    
+ <% 
+String ss = (String)request.getAttribute("ss");
+ String name = (String)request.getAttribute("name");
+List<User> facultylist =  (List)request.getAttribute("faculty");
+List<Assignment> asslist =  (List)request.getAttribute("assignmentlist");
+//System.out.println("my value and name" + ss+" "+name);
 %>
 
 <body>
@@ -46,11 +52,11 @@
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
-        <!-- Header Menu Area Start Here -->
+         <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
-                    <a href="Admin.jsp">
+                    <a href="Student_dashboard.jsp">
                         <img src="img/logo.png" alt="logo">
                     </a>
                 </div>
@@ -107,7 +113,7 @@
                                     <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
                                     <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
                                     <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="Admin.jsp"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    <li><a href="Student_dashboard.jsp"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -249,115 +255,118 @@
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
            
-           <%@include file="sidebar-admin.jsp" %>
+           <%@include file="sidebar-student.jsp" %>
            
             <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
+            <div  class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Teacher</h3>
+                    <h3>Student Assignment</h3>
                     <ul>
                         <li>
-                            <a href="Admin.jsp">Home</a>
+                            <a href="Student_dashboard.jsp">Home</a>
                         </li>
-                        <li>All Teachers</li>
+                        <li>Assignment</li>
+                        <li> <%= name %> </li>
                     </ul>
                 </div>
+
                 <!-- Breadcubs Area End Here -->
-                <!-- Teacher Table Area Start Here -->
-                <div class="card height-auto">
-                    <div class="card-body">
-                        <div class="heading-layout1">
-                            <div class="item-title">
-                                <h3>All Teachers Data</h3>
-                            </div>
-                           <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" 
-                                data-toggle="dropdown" aria-expanded="false">...</a>
-        
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                <div  id="uploadAssDiv" class="row">
+                    <!-- Student Attendence Search Area Start Here -->
+                
+                    <!-- Student Attendence Search Area End Here -->
+                    <!-- Student Attendence Area Start Here -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3 id="subname">Subject : <%= name %></h3>
+                                    </div>
+                                   <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" 
+                                        data-toggle="dropdown" aria-expanded="false">...</a>
+                
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="table-responsive">
+                                    <table class="table bs-table table-striped table-bordered text-nowrap">
+                                        
+                                        
+                                        
+                                        <% if(asslist.isEmpty()==false){
+                                        %>
+                        				<thead>
+                                            <tr>
+                                                <th class="text-left">Serial number</th>
+                                                <th>Name</th>
+                                                <th>Description </th>
+                                                <th> Faculty name </th>
+                                                <th>Assignment Uploaded by faculty(Date)</th>
+                                                <th> Due Date </th>
+                                                <th>PDF</th>
+                                                <th>Upload</th>
+                                                <th>Status</th>
+                                                
+                                            </tr>
+                                        </thead>	
+                                        <tbody>
+                                        
+                                        
+                                        
+                                        
+                                        <%
+                                        int cnt = 1;
+                                        for(Assignment a : asslist){
+                                        	int i=0;
+                                        	User f = facultylist.get(i);
+                                        	i++;
+                                        	%>
+                                            <tr>
+                                            	<td> <%= cnt %> </td>
+                                                <td class="text-left"><%= a.getTitle() %></td>
+                                                <td> <%= a.getDiscription() %> </td>
+                                                <td> <%= f.getFirstname() + " " + f.getMiddlename() %>  </td>
+                                                <td> <%= a.getUploadDate() %> </td>
+                                                <td> <%= a.getDate() %> </td>
+                                                <td> <a href="DownloadAss?assid=<%= a.getAssId() %>"> Download Assignment</a> </td>
+                                                <td> <input type="file"> </td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                
+                                            </tr>
+                       
+                                       <% cnt++;
+                                        }
+                                        }else{
+                                        	System.out.println("else"); %> 
+                                        	 <div class="ui-alart-box">
+                            <div class="icon-color-alart">
+                             
+                                <div class="alert icon-alart bg-fb2" role="alert">
+                                    <i class="fas fa-exclamation bg-fb3"></i>
+                                    !! Yet there is no assignment for this subject !!!!
+                                </div>
+                               
                             </div>
                         </div>
-                        <form class="mg-b-20">
-                            <div class="row gutters-8">
-                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input id="searchId" type="text" onkeyup="myFunction1()" placeholder="Search by ID ..." class="form-control">
-                                </div>
-                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input id="searchName" type="text" onkeyup="myFunction()" placeholder="Search by Name ..." class="form-control">
-                                </div>
-                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input id="searchMail" type="text" onkeyup="myFunction2()" placeholder="Search by Mail id ..." class="form-control">
-                                </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button disabled="disabled" type="submit" class="fw-btn-fill btn-gradient-yellow">Type to search..</button>
+                                        <% } %>
+                                            
+                                           
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </form>
-                        <div class="table-responsive">
-                            <table id="myTable" class="table display data-table text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th> 
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">ID</label>
-                                            </div>
-                                        </th>
-                                        <th>Photo</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Qualification</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>E-mail</th>
-                                        <th>Update/Delete</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <% for(int i=0; i<facultylist.size(); i++){
-                                	User user = facultylist.get(i);
-                                	%>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label"><%= user.getId() %></label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"><img style="border-radius: 50%;" src="data:image/png;base64,<%= user.getUserProfilepicString()  %>" alt="student"></td>
-                                        <td><%= user.getFirstname() %> <%= user.getMiddlename() %></td>
-                                        <td><%= user.getXender() %></td>
-                                        <td><%= user.getQualification() %></td>
-                                        <td><%= user.getAddress() %></td>
-                                        <td><%= user.getContactno() %></td>
-                                        <td><%= user.getEmail() %></td>
-                                        <td></td>
-                                         <td>
-                                            <div class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                    <span class="flaticon-more-button-of-three-dots"></span>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="RemoveFacultyDetails?id=<%= user.getId()%>"><i class="fas fa-times text-orange-red"></i>Delete</a>
-                                                    <a class="dropdown-item" href="EditFacultyDetail?id=<%= user.getId() %>"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                    <a class="dropdown-item" href="#" onclick="reloadPage();"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <% } %>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
-                <!-- Teacher Table Area End Here -->
+                <!-- Student Attendence Area End Here -->
                 <footer class="footer-wrap-layout1">
                     <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
                 </footer>
@@ -373,76 +382,16 @@
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- Select 2 Js -->
+    <script src="js/select2.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Data Table Js -->
-    <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-    <script>
-    function reloadPage(){
-        location.reload(true);
-    }
-    </script>
-    <script>
-    function myFunction() {
-    	  var input, filter, table, tr, td, i, txtValue;
-    	  input = document.getElementById("searchName");
-    	  filter = input.value.toUpperCase();
-    	  table = document.getElementById("myTable");
-    	  tr = table.getElementsByTagName("tr");
-    	  for (i = 0; i < tr.length; i++) {
-    	    td = tr[i].getElementsByTagName("td")[2];
-    	    if (td) {
-    	      txtValue = td.textContent || td.innerText;
-    	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-    	        tr[i].style.display = "";
-    	      } else {
-    	        tr[i].style.display = "none";
-    	      }
-    	    }       
-    	  }
-    	}//first fun
-    	function myFunction1() {
-      	  var input, filter, table, tr, td, i, txtValue;
-      	  input = document.getElementById("searchId");
-      	  filter = input.value.toUpperCase();
-      	  table = document.getElementById("myTable");
-      	  tr = table.getElementsByTagName("tr");
-      	  for (i = 0; i < tr.length; i++) {
-      	    td = tr[i].getElementsByTagName("td")[0];
-      	    if (td) {
-      	      txtValue = td.textContent || td.innerText;
-      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      	        tr[i].style.display = "";
-      	      } else {
-      	        tr[i].style.display = "none";
-      	      }
-      	    }       
-      	  }
-      	}//second 
-      	function myFunction2() {
-      	  var input, filter, table, tr, td, i, txtValue;
-      	  input = document.getElementById("searchMail");
-      	  filter = input.value.toUpperCase();
-      	  table = document.getElementById("myTable");
-      	  tr = table.getElementsByTagName("tr");
-      	  for (i = 0; i < tr.length; i++) {
-      	    td = tr[i].getElementsByTagName("td")[7];
-      	    if (td) {
-      	      txtValue = td.textContent || td.innerText;
-      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      	        tr[i].style.display = "";
-      	      } else {
-      	        tr[i].style.display = "none";
-      	      }
-      	    }       
-      	  }
-      	}
-    </script>
+    
 
 </body>
 
 
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-teacher.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:25 GMT -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 </html>

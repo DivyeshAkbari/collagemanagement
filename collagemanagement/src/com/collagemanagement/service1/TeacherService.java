@@ -48,5 +48,11 @@ public interface TeacherService {
 
 	List<Integer> fetchSelectedSubject(int userId, int semesterId);
 
+	String modifyTeacherDetails(User u1);
+
+	List<User> fetchFacultyDetail();
+
+	String removeFaculty(int userId);
+
 
 }

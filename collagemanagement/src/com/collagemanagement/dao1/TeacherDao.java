@@ -62,6 +62,18 @@ public interface TeacherDao {
 	List<Integer> getSelectedSem(Connection connection, int streamId, int userId) throws Exception;
 
 	List<Integer> getSelectedSub(Connection connection, int semesterId, List<Subject> subjectId);
+
+	int updateTeacherDetails(Connection connection, User u1) throws Exception;
+
+	void deleteTeacherStream(Connection connection, int id) throws Exception;
+
+	void deleteTeacherSemester(Connection connection, int id) throws Exception;
+
+	void deleteTeacherSubject(Connection connection, int id) throws Exception;
+
+	List<User> getAllFaculty(Connection connection) throws Exception;
+
+	int deletefaculty(Connection connection, int userId) throws Exception;
 	
 //	List<Stream> getFacultyStream(Connection connection, int userId);
 

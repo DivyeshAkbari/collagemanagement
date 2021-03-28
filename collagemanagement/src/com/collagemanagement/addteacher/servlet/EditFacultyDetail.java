@@ -39,11 +39,16 @@ public class EditFacultyDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		HttpSession httpsession = request.getSession(false);
 		
-		User u1 = (User) httpsession.getAttribute("uname");
 		
-		int userId=u1.getId();
+		int userId = Integer.parseInt(request.getParameter("id"));
+		
+			HttpSession httpsession = request.getSession(false);
+			
+			User u1 = (User) httpsession.getAttribute("uname");
+			
+			String userRole = u1.getRole();		
+		
 		
 //		List<Semester> semesterlist = ts.fetchAllSemester();
 //		List<Stream> streamlist = ts.fetchAllStream();
@@ -53,11 +58,18 @@ public class EditFacultyDetail extends HttpServlet {
 		
 		
 		User user = ts.fetchUserDetail(userId);
+		user.setId(userId);
 		request.setAttribute("faculty", user);
 		request.setAttribute("subjectList", subjectlist);
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("editfaculty.jsp");
-		requestDispatcher.forward(request, response);
+		if(userRole.equalsIgnoreCase("ADMIN")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("editfaculty.jsp");
+			requestDispatcher.forward(request, response);
+		}
+		else if(userRole.equalsIgnoreCase("FACULTY")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("editfacultyside.jsp");
+			requestDispatcher.forward(request, response);
+		}
 	}
 
 	/**

@@ -577,6 +577,46 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>FetchSubjectsForStudent</display-name>
+    <servlet-name>FetchSubjectsForStudent</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.FetchSubjectsForStudent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchSubjectsForStudent</servlet-name>
+    <url-pattern>/FetchSubjectsForStudent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadAssStudent</display-name>
+    <servlet-name>UploadAssStudent</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.UploadAssStudent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadAssStudent</servlet-name>
+    <url-pattern>/UploadAssStudent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownloadAss</display-name>
+    <servlet-name>DownloadAss</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.DownloadAss</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadAss</servlet-name>
+    <url-pattern>/DownloadAss</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>fetchselectedsemester</display-name>
+    <servlet-name>fetchselectedsemester</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.fetchselectedsemester</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fetchselectedsemester</servlet-name>
+    <url-pattern>/fetchselectedsemester</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>PaytmConstants</display-name>
     <servlet-name>PaytmConstants</servlet-name>
     <servlet-class>utils.PaytmConstants</servlet-class>
@@ -644,5 +684,45 @@
   <servlet-mapping>
     <servlet-name>InsertFeesDetails</servlet-name>
     <url-pattern>/InsertFeesDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>fetchselectedsubjects</display-name>
+    <servlet-name>fetchselectedsubjects</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.fetchselectedsubjects</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fetchselectedsubjects</servlet-name>
+    <url-pattern>/fetchselectedsubjects</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateTeacher</display-name>
+    <servlet-name>UpdateTeacher</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.UpdateTeacher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateTeacher</servlet-name>
+    <url-pattern>/UpdateTeacher</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectFacultyDetails</display-name>
+    <servlet-name>SelectFacultyDetails</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.SelectFacultyDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectFacultyDetails</servlet-name>
+    <url-pattern>/SelectFacultyDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveFacultyDetails</display-name>
+    <servlet-name>RemoveFacultyDetails</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.RemoveFacultyDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveFacultyDetails</servlet-name>
+    <url-pattern>/RemoveFacultyDetails</url-pattern>
   </servlet-mapping>
 </web-app>

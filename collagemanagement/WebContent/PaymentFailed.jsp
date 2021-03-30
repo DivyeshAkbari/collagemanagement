@@ -138,7 +138,7 @@
             <div class="content">
                <h1>Opps ! Something Went Wrong</h1>
                <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
-               <a href="#">Go to Home</a>
+               <a href="index.jsp">Go to Home</a>
             </div>
             
          </div>

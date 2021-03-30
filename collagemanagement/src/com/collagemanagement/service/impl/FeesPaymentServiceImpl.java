@@ -161,4 +161,27 @@ public class FeesPaymentServiceImpl implements FeesPaymentService {
 		return user;
 		
 	}
+
+	@Override
+	public String DeletOrder(FeesDetails fees) 
+	{
+		try(Connection c1=getConnection();
+			 )
+		{
+			int i1=feespaymentDao.removeOrder(c1,fees);
+			if(i1>0)
+			{
+				return "success";
+			}
+			else
+			{
+				return "Not";
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

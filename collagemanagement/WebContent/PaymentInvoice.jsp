@@ -56,7 +56,7 @@
             <td class="total" <%=fees.getAmount() %> ></td>
           </tr>
         </tbody>
-        <tfoot>         
+        <tfoot>           
           <!-- <tr>
             <td colspan="2"></td>
             <td colspan="2">TAX 25%</td>

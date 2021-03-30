@@ -52,12 +52,22 @@ try{
 	String s2[]=s[10].split("=");
 	String s4[] = s[11].split("=");
 	String s8[]=s[10].split("=");
+	String s9[]=s[9].split("=");
 	
 	fees.setOrderid(s1[1]);
 	fees.setPaymentdate(s4[1]);
+	fees.setAmount(s2[1]);
 	
-	String responseofpayment=feespayment.UpdatePaymentDetails(fees);
-		
+	if("TXN_SUCCESS".equals(s9[1]))
+	{
+		String responseofpayment=feespayment.UpdatePaymentDetails(fees);
+	}
+	else
+	{
+		String message=feespayment.DeletOrder(fees);
+		System.out.println(message);
+		response.sendRedirect("PaymentFailed.jsp");
+	}
 	FeesDetails feesDetails = new FeesDetails();
 	/* String id =(String)request.getAttribute("studentfeespaymentid"); */
 	

@@ -182,7 +182,7 @@ public class FeesPaymentDaoImpl implements FeesPaymentDao {
 	@Override
 	public FeesDetails selectinvoiceDetails(Connection connection,int id) {
 		
-		try(PreparedStatement preparedStatement = connection.prepareStatement("select c_order_id,c_amount,d_payment_date,c_contact,c_email,c_Name,c_stream from student_fees_table where i_student_fees_id=?");)
+		try(PreparedStatement preparedStatement = connection.prepareStatement("select c_order_id,c_amount,d_payment_date,c_contact,c_email,c_Name,c_stream from student_fees_table where i_user_id=?");)
 		{			
 			preparedStatement.setInt(1,id);
 			
@@ -296,5 +296,21 @@ public class FeesPaymentDaoImpl implements FeesPaymentDao {
 		}
 		return userlist;
 		
+	}
+
+	@Override
+	public int removeOrder(Connection c1, FeesDetails fees)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Delete  from student_fees_table where c_order_id=?");
+			 )
+		{
+			p1.setString(1, fees.getOrderid());
+			
+			return p1.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

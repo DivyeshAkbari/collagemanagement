@@ -20,4 +20,6 @@ public interface FeesPaymentService {
 	public FeesDetails fetchinvoiceDetails(int id);
 
 	public List<User> getFeesPaymentstudentdetails();
+	
+	 String DeletOrder(FeesDetails fees);
 }

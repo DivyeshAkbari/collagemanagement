@@ -22,5 +22,7 @@ public interface FeesPaymentDao
 	FeesDetails selectinvoiceDetails(Connection connection, int id);
 
 	List<User> fetchFeesPaystudentdetails(Connection connection);
+
+	int removeOrder(Connection c1, FeesDetails fees);
   
 }

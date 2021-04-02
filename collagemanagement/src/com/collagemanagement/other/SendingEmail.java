@@ -17,16 +17,18 @@ public class SendingEmail implements Runnable
 
 	private String userEmail;
 	private String myHash;
+	private int value;
 
 
 	//private String Incryptedemail;
 
 	//	TrippleDes td;
 
-	public SendingEmail(String userEmail, String myHash)
+	public SendingEmail(String userEmail, String myHash,int value)
 	{
 		this.userEmail = userEmail;
 		this.myHash = myHash;
+		this.value=value;
 	}
 	
 	@Override
@@ -51,16 +53,29 @@ public class SendingEmail implements Runnable
 		});
 
 		try {
-//			td = new TrippleDes();
-//			Incryptedemail = td.encrypt(email);
+			 
+			String encrypymail=null;
+			if(value==0)
+			{
+				 encrypymail=Encryption.encode(userEmail);
+				System.out.println("THis is correct "+userEmail);
+			}
 			
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(email));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
 			message.setSubject("Email Verification Link");
-			message.setText("Click this link to confirm your email address and complete setup for your account."
-					+ "\n\nVerification Link: " + "http://localhost:8081/collagemanagement/ActivateAccount?key1=" + userEmail + "&key2=" + myHash);
 			
+			if(value==0)
+			{
+				message.setText("Click this link to confirm your email address and complete setup for your account."
+					+ "\n\nVerification Link: " + "http://localhost:8081/collagemanagement/ActivateAccount?key1=" + encrypymail + "&key2=" + myHash);
+			}
+			else
+			{
+				message.setText("Your Account is verified now you can log in using this link ."
+				+ "\n\n " + "http://localhost:8081/collagemanagement/Gointologinpage");
+			}
 			Transport.send(message);
 			
 			System.out.println("Successfully sent Verification Link");

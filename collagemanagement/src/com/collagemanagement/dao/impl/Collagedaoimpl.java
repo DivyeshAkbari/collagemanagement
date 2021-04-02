@@ -24,7 +24,7 @@ public class Collagedaoimpl implements CollageDao
 	{
 		int insertedRaws=0;
 		try(PreparedStatement p1=connection.prepareStatement("insert into user_table(c_First_Name,c_middle_name,c_last_name,c_email,c_gender,"
-				+"c_contact,c_address,c_password,c_roll,c_stream,i_semester_id,c_division,image,c_qulification,c_hash) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+				+"c_contact,c_address,c_password,c_roll,i_stream_id,i_semester_id,c_division,image,c_qulification,c_hash,i_status1) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			)
 		{	
 			p1.setString(1, u1.getFirstname());
@@ -42,7 +42,7 @@ public class Collagedaoimpl implements CollageDao
 			p1.setBlob(13, u1.getUserProfilepicStream());
 			p1.setString(14,u1.getQualification());
 			p1.setString(15, u1.getMyHash());
-			
+			p1.setInt(16,0);
 			insertedRaws=p1.executeUpdate();	
 			
 			if(insertedRaws==1)
@@ -50,7 +50,7 @@ public class Collagedaoimpl implements CollageDao
 				System.out.println("Succesfully created new user.");
 				System.out.println("Sending Mail... ");
 							
-				SendingEmail se = new SendingEmail(u1.getEmail(),u1.getMyHash());
+				SendingEmail se = new SendingEmail(u1.getEmail(),u1.getMyHash(),0);
 				Thread t1=new Thread(se);
 				t1.start();
 			}
@@ -71,7 +71,7 @@ public class Collagedaoimpl implements CollageDao
 	public User getlogindetails(Connection connection, User user)
 	{
 		User u1=null;
-		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_email=? AND  c_password=? AND i_status=1 ");	
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_email=? AND  c_password=? AND i_status=1 AND i_status1=1 ");	
 			  )
 		{		
 			p1.setString(1, user.getEmail());
@@ -97,7 +97,7 @@ public class Collagedaoimpl implements CollageDao
 						u1.setSemester(r1.getInt("i_semester_id"));
 						u1.setId(r1.getInt("i_user_id"));
 						u1.setFirstname(r1.getString("c_First_Name"));
-						u1.setStream(r1.getString("c_stream"));
+						u1.setStream(r1.getString("i_stream_id"));
 						u1.setAddress(r1.getString("c_address"));
 						u1.setContactno(r1.getString("c_contact"));
 						u1.setDivision(r1.getString("c_division"));
@@ -124,38 +124,30 @@ public class Collagedaoimpl implements CollageDao
 		return u1;
 	}
 
-	public int fetchemail(Connection connection, String str)
+	public String fetchemail(Connection connection, String str)
 	{
-		String ans=null;
+		
 		int i1=0;
-		try(PreparedStatement p1=connection.prepareStatement("select c_email from user_table where c_email=? ");
+		try(PreparedStatement p1=connection.prepareStatement("select c_email from user_table where i_user_id=? ");
 			  )
 		{
-			p1.setString(1, str);
+			p1.setInt(1,Integer.parseInt(str));
 			
 			try(ResultSet r1=p1.executeQuery();
 				 )
 			{
-				while(r1.next())
+				if(r1.next())
 				{
-					ans=r1.getString("c_email");
-					if(ans.equalsIgnoreCase(str))
-					{
-						System.out.println("return 1");
-						i1=1;
-					}	
-					else
-					{
-						System.out.println("Not ");
-					}
-				}			
-			}
+					return r1.getString("c_email");
+				}
+			}			
+			
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return i1;
+		return null;
 	}
 
 	public User fetchfname(Connection connection, String username)
@@ -336,9 +328,10 @@ public class Collagedaoimpl implements CollageDao
 	}
 	public List<User> fetchstudentdetails(Connection connection)
 	{
+		System.out.println("Method ma aaya ");
 		String s1="STUDENT";
 		List<User> userlist=new ArrayList<>();
-		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_roll='"+s1+"' AND i_status=1");
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_roll='"+s1+"' AND i_status=1 AND i_status1=1");
 				ResultSet r1=p1.executeQuery();
 			  )
 		{
@@ -352,7 +345,24 @@ public class Collagedaoimpl implements CollageDao
 				user.setEmail(r1.getString(5));
 				user.setXender(r1.getString(6));
 				user.setAddress(r1.getString("c_address"));
-				user.setStream(r1.getString("c_stream"));
+				int streamid=r1.getInt("i_stream_id");
+				
+				try(PreparedStatement p2=connection.prepareStatement("select c_stream from stream_table where i_stream_id=?");
+					  )
+				{
+					System.out.println("Biji var aaya ");
+					p2.setInt(1, streamid);
+					try(ResultSet r2 =p2.executeQuery();
+						  )
+					{
+						if(r2.next())
+						{
+							user.setStream(r2.getString("c_stream"));
+							System.out.println(r2.getString("c_stream"));
+							System.out.println("Yeee");
+						}
+					}
+				}
 				user.setDivision(r1.getString("c_division"));
 				userlist.add(user);		
 			}
@@ -447,5 +457,145 @@ public class Collagedaoimpl implements CollageDao
 			e.printStackTrace();
 		}
 		return semlist;
+	}
+
+	@Override
+	public List<User> selectStudentDetails(Connection c1, String streamid)
+	{
+		List<User> studentList=new ArrayList<>();
+		
+		try(PreparedStatement p1=c1.prepareStatement("Select * from user_table where i_status1=? AND i_stream_id=?  AND c_roll=?");
+			 )
+		{
+			p1.setInt(1, 0);
+			p1.setInt(2, Integer.parseInt(streamid));
+			p1.setString(3, "STUDENT");
+			
+			try(ResultSet r1=p1.executeQuery();
+				  )
+			{
+				while(r1.next())
+				{
+					User u1=new User();
+					u1.setId(r1.getInt("i_user_id"));
+					u1.setFirstname(r1.getString("c_First_Name"));
+					u1.setMiddlename(r1.getString("c_middle_name"));
+					u1.setLastname(r1.getString("c_last_name"));
+					u1.setEmail(r1.getString("c_email"));
+					u1.setXender(r1.getString("c_gender"));
+					u1.setDivision(r1.getString("c_division"));
+					int semesterid=r1.getInt("i_semester_id");
+					int semvalue=0;
+					try(PreparedStatement p2=c1.prepareStatement("Select i_semester_value from semester_table where i_Semester_id=? AND i_stream_id=?");
+						  )
+					{
+						p2.setInt(1, semesterid);
+						p2.setInt(2, Integer.parseInt(streamid));
+						
+						
+						try(ResultSet r2=p2.executeQuery();
+							  )
+						{
+							if(r2.next())
+							{
+								semvalue=r2.getInt("i_semester_value");
+								u1.setSemester(semvalue);
+							}
+						}
+					}
+					studentList.add(u1);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return studentList;
+	}
+
+	@Override
+	public int changeStudentStatus(Connection c1, String id)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("update user_table set i_status1=? where i_user_id=?");
+			  )
+		{
+			p1.setInt(1, 1);
+			p1.setInt(2,Integer.parseInt(id));
+			
+			return p1.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int deletStudent(Connection c1, String id) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Delete from user_table where i_user_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			 return p1.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int selectStreamid(Connection c1, String id)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Select i_stream_id from user_table where i_user_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			
+			try(ResultSet r1=p1.executeQuery();
+				  )
+			{
+				if(r1.next())
+				{
+					return r1.getInt("i_stream_id");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public String checkEmail(Connection c1, String str) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Select c_email from user_table where c_email=? ");
+			  )
+		{
+			p1.setString(1, str);
+			
+			try(ResultSet r1=p1.executeQuery();
+				 )
+			{
+				if(r1.next())
+				{
+					if(str.equals(r1.getString("c_email")))
+					{
+						System.out.println("yahhoo");
+						return "found";
+					}
+				}
+			}
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}	
 }

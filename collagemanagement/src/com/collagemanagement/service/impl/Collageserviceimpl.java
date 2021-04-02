@@ -9,13 +9,14 @@ import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.Collagedaoimpl;
+import com.collagemanagement.dao1.CollageDao;
 import com.collagemanagement.service1.Collageservice;
 
 //Pull 
 public class Collageserviceimpl  implements Collageservice
 {
 	
-	Collagedaoimpl dao=new Collagedaoimpl();
+	CollageDao dao=new Collagedaoimpl();
 	public static Connection getconnection()
 	{
 		Connection c1=null;
@@ -94,20 +95,12 @@ public class Collageserviceimpl  implements Collageservice
 		return null;
 	}
 
-	public String getemail(String str)
+	public String getemail(String id)
 	{
 		try(Connection connection =getconnection();
 			  )
 		{
-			int s1=dao.fetchemail(connection,str);
-			if(s1==1)
-			{
-				return "found";
-			}
-			else
-			{
-				return "not";
-			}
+			 return dao.fetchemail(connection,id);
 		}
 		catch (SQLException e)
 		{
@@ -242,6 +235,8 @@ public class Collageserviceimpl  implements Collageservice
 			  )
 		{
 				user=dao.fetchstudentdetails(connection);
+				System.out.println("Service in the action");
+				System.out.println(user);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -319,6 +314,97 @@ public class Collageserviceimpl  implements Collageservice
 			  )
 		{
 			return dao.getSemDetais(connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public List<User> fetchStudentDetails(String streamid)
+	{
+		try(Connection c1=getconnection();
+			 )
+		{
+			return dao.selectStudentDetails(c1,streamid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public String updateStudentStatus(String id)
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=dao.changeStudentStatus(c1,id);
+			if(i1>0)
+			{
+				return "success";
+			}
+			else
+			{
+				return "not";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public String deletStudentPermanently(String id) 
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=dao.deletStudent(c1,id);
+			if(i1>0)
+			{
+				return "success";
+			}
+			else
+			{
+				return "not";
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public int fetchStreamid(String id)
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			return dao.selectStreamid(c1,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
+	public String validEmail(String str) 
+	{
+		try(Connection c1=getconnection();
+			 )
+		{
+			return dao.checkEmail(c1,str);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

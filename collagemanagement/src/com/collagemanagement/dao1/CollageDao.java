@@ -12,7 +12,7 @@ public interface CollageDao
 {
 	public int insertuserdetails(Connection connection, User u1);
 	public User getlogindetails(Connection connection, User user);
-	public int fetchemail(Connection connection, String str);
+	public String fetchemail(Connection connection, String str);
 	public User fetchfname(Connection connection, String username);
 	public int Changepassword(Connection connection, User user);
 	public List<User> fetchuserdetails(Connection connection, String email);
@@ -24,5 +24,10 @@ public interface CollageDao
 	public List<User> fetchfacultydetails(Connection connection);
 	public int removefacultydetails(Connection connection, String id);
 	public List<Semester> getSemDetais(Connection connection);
+	public List<User> selectStudentDetails(Connection c1, String streamid);
+	public int changeStudentStatus(Connection c1, String id);
+	public int deletStudent(Connection c1, String id);
+	public int selectStreamid(Connection c1, String id);
+	public String checkEmail(Connection c1, String str);
 }
 //Pull 

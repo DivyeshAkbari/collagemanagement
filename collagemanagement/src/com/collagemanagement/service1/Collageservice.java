@@ -5,7 +5,7 @@ import java.util.List;
 import com.collagemanagement.bean.Log;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
-
+import com.collagemanagement.bean.Semester;
 public interface Collageservice 
 {
 	public String saveuserdetails(User u1);
@@ -33,5 +33,19 @@ public interface Collageservice
 	public List<User> getFacultydetails();
 	
 	public String deletfacultydetails(String id);
+
+	public List<User> fetchStudentDetails(String streamid);
+
+	public String updateStudentStatus(String id);
+
+	public String deletStudentPermanently(String id);
+
+	public int fetchStreamid(String id);
+
+	public String validEmail(String str);
+
+	
+
+	
 }
 //Pull 

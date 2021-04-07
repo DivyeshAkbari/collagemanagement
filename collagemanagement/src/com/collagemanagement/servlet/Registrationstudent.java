@@ -17,6 +17,7 @@ import com.collagemanagement.bean.Semester;
 import com.collagemanagement.emailverification.SendEmail;
 import com.collagemanagement.encryptpassword.TrippleDes;
 import com.collagemanagement.service.impl.Collageserviceimpl;
+import com.collagemanagement.service1.Collageservice;
 
 
 /**
@@ -26,7 +27,7 @@ public class Registrationstudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	Collageserviceimpl college =new Collageserviceimpl(); 
+	Collageservice college =new Collageserviceimpl(); 
 	
 	//SendEmail m1=new SendEmail();
 	String message=null;
@@ -46,7 +47,7 @@ public class Registrationstudent extends HttpServlet {
 		String str=request.getParameter("email");
 		
 		System.out.println("Email id :- "+str);		
-		String  got= college.getemail(str);
+		String  got= college.validEmail(str);
 		
 		
 		System.out.println("Value "+got);
@@ -68,7 +69,8 @@ public class Registrationstudent extends HttpServlet {
 		
 		User u1=new User();
 		
-		String role=request.getParameter("role");
+		
+		String role=request.getParameter("userrole");
 		String fname=request.getParameter("firstname");
 		String mname=request.getParameter("middlename");
 		String lname=request.getParameter("lastname");

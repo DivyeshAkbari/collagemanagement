@@ -36,22 +36,28 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    <style type="text/css">
+    	
+    	.formerror{
+    	color:red;
+    	}
+    </style>
 <script src="assets/js/jquery.min.js"></script>
 <script>
+
 $(document).ready(function() {
-	$("input[type=email]").blur(function() {
+	$("#save").click(function() {
 		var str = $("#mail").val();
 		$.get("Registrationstudent", {
 			email : str
-		}).done(function(data)  {
-
+		}).done(function(data)
+		{
 			if (data == "true") {
 				alert("This email id is already exist");	
 			}
 		});	
 	});
 });
-	
 </script>
 <script>
 $(document).ready(function()
@@ -84,6 +90,128 @@ $(document).ready(function()
 			});
 	});
 });
+</script>
+<script type="text/javascript">
+
+function clearErrors()
+{
+	errors=document.getElementsByClassName('formerror');
+	
+	for(let item of errors)
+	{
+		item.innerHTML="";	
+	}
+}
+function seterror(id,error)
+{
+	element=document.getElementById(id);
+	element.getElementsByClassName('formerror')[0].innerHTML=error;
+}
+function validateForm()
+{
+	var returnval=true;
+	clearErrors();
+	var name=document.forms['myForm']["firstname"].value;
+	
+	if(name.length==0)
+	{
+		seterror("fname","*Your Name can't be empty.");
+		returnval=false;
+	}
+	if(name.length<3)
+	{
+		seterror("fname","*Your Name must Be 3 Latter.");
+		
+		returnval=false;
+	}
+	var mname=document.forms['myForm']["middlename"].value;
+	
+	if(mname.length==0)
+	{
+		seterror("mname","*Your Middle Name Can't be Empty");
+		returnval=false;
+	}
+	if(mname.length<3)
+	{
+		seterror("mname","*Your Middle Name must Be 3 Latter.")
+	}
+	
+	var lname=document.forms['myForm']["lastname"].value;
+	
+	if(lname.length==0)
+	{
+		seterror("lname","* Your Last Name Can't Be Empty");
+		returnval=false;
+	}
+	if(lname.length<5)
+	{
+		seterror("lname","* Your Last Name Must be 5 Letter.");
+		returnval=false;
+	}
+	
+	var phone=document.forms['myForm']["number"].value;
+		
+	if(phone.length!=10)
+	{
+		seterror("phone","* Your Phone Number Must Be of 10 Digits.");
+		returnval=false;
+	}
+	
+	var email=document.forms['myForm']["email"].value;
+	
+	
+	if(email.length==0)
+	{
+		seterror("femail","* Please Enter Email");
+		returnval=false;
+	}
+	var address=document.forms['myForm']["address"].value;
+	
+	if(address.length==0)
+	{
+		seterror("faddress","* Please Enter Address");
+		returnval=false;
+	}
+	var password=document.forms['myForm']["password"].value;
+	if(password.length==0)
+	{
+		seterror("pass","* Your Password Can't Be Empty");
+		returnval=false;
+	}
+	var xender=document.forms['myForm']["gender"].value;
+	if(xender==null)
+	{
+		seterror("xender","*Please Select Your Xender");	
+		returnval=false;
+	}
+	if(xender=="no")
+	{
+		alert("Please Select Valid Gender");	
+		returnval=false;
+	}
+	
+	var stream=document.forms['myForm']["stream"].value;
+	if(stream=="none")
+	{
+		alert("Please Select Valid Stream");
+		returnval=false;
+	}
+	
+	var sem=document.forms['myForm']["semester"].value;
+	if(sem==-1)
+	{
+		alert("Please Select Valid Semester");
+		returnval=false;
+	}
+	
+	var div=document.forms['myForm']["division"].value;
+	if(div=="none")
+	{
+		alert("Please Select Valid Division");
+		returnval=false;
+	}
+	return returnval;
+}
 </script>
 </head>
 <jsp:include page ="/FetchHobby"/>
@@ -332,39 +460,41 @@ $(document).ready(function()
                                 </div>
                             </div>
                         </div>
-                        <form class="new-added-form" action="Registrationstudent" method="post" enctype="multipart/form-data" >
+                        <form class="new-added-form" name="myForm" onsubmit="return validateForm()" action="Registrationstudent" method="post" enctype="multipart/form-data" >
                             <div class="row">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="fname">
                                     <label>First Name *</label>
-                                    <input type="text" placeholder="" name="firstname" class="form-control">
+                                    <input type="text" placeholder="" id="fjname"  name="firstname" class="form-control"><span  class="formerror"><b></b></span>
+                    				
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                	<label>Your role *</label>
-                                	<input type="text" readonly="readonly" placeholder="" name="userrole" class="form-control" value="STUDENT" >
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <span id="fmessage"></span>
+                                <!-- <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                	<label>Your role *</label> -->
+                                	<input type="hidden" placeholder="" name="userrole" class="form-control" value="STUDENT" >
+                                <!-- </div> -->
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="mname">
                                     <label>Middle Name *</label>
-                                    <input type="text" placeholder="" name="middlename" class="form-control">
+                                    <input type="text" placeholder="" name="middlename" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="lname">
                                     <label>Last Name *</label>
-                                    <input type="text" placeholder="" name="lastname" class="form-control">
+                                    <input type="text" placeholder="" name="lastname" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="xender">
                                     <label>Gender *</label>
-                                    <select class="select2" name="gender">
-                                        <option value="">Please Select Gender *</option>
+                                    <select class="select2" name="gender" >
+                                        <option value="no">Please Select Gender *</option> <span class="formerror"><b></b></span>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Others">Others</option>
                                     </select>
                                 </div>
                                 
-                                <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                <div class="col-12-xxxl col-lg-6 col-12 form-group" id="streamselect">
                                        
                                             <label>Select Stream *</label>
-                                            <select   class="select2" id="stream" name="stream">
-                                            <option  selected>Please select Stream</option>
+                                            <select   class="select2" required="required" id="stream" name="stream">
+                                            <option  value="none">Please select Stream</option>
                                         <%
 											for(int i=0;i<Streamlist.size();i++)
 											{
@@ -419,28 +549,28 @@ $(document).ready(function()
                                     </select>
                                 </div>
                                 -->
-                                       <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                       <div class="col-12-xxxl col-lg-6 col-12 form-group" id="sem">
                                            <!--    <label>Select Year *</label>
                                             <input type="text" class="form-control" id="datepicker" />
                                             <i class="flaticon-calendar"></i> -->
                                             <label>Select Semester *</label>
-                                            <select class="select2" name="semester" id="semester1">
+                                            <select class="select2"  required="required" name="semester" id="semester1">
                                              <option>please select</option>
                                             </select>
                                         </div>
-                                  <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                  <div class="col-xl-3 col-lg-6 col-12 form-group" id="division">
                                     <label>Select Division</label>
-                                    <select class="select2" name="division">
-                                        <option value="">Please Select Division</option>
+                                    <select class="select2" required="required" name="division">
+                                        <option value="none">Please Select Division</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
                                     </select>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="femail">
                                     <label>E-Mail</label>
-                                    <input type="email" id="mail" name="email" placeholder="" class="form-control">
+                                    <input type="email" id="mail" name="email" placeholder="" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
                                 
                                 <!--  
@@ -477,37 +607,38 @@ $(document).ready(function()
                                     <input type="text" placeholder="" class="form-control">
                                 </div>
                                 -->
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="pass">
                                     <label>Enter Password</label>
                                     <input autocomplete="off"
 											class="form-control" id="password" type="password"
 											name="password" 
 											pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-											required><i toggle="#password-field"
-											class="fa fa-fw fa-eye field_icon toggle-password"></i>
+											><i toggle="#password-field"
+											class="fa fa-fw fa-eye field_icon toggle-password"></i><span class="formerror"><b></b></span>
                                 </div>
                                 
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="cpass">
                                     <label>Confirm Password</label>
                                     <input autocomplete="off"
 											name="confirm_password" id="confirm_password" type="password"
 											class="form-control">
-											<span id='message'></span>
+											<span id='message'></span><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="phone">
                                     <label>Phone</label>
-                                    <input type="text" name="number" placeholder="" class="form-control">
+                                    <input type="text" name="number" placeholder="" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-lg-6 col-12 form-group">
+                                <div class="col-lg-6 col-12 form-group" id="faddress">
                                     <label>Address</label>
-                                    <textarea class="textarea form-control" name="address" name="message" id="form-message" cols="10" rows="9"></textarea>
+                                    <input type="hidden" id="commanvalue" value="null">
+                                    <textarea class="textarea form-control" name="address" name="message" id="form-message" cols="10" rows="9"></textarea><span class="formerror"><b></b></span>
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
                                     <input type="file" name="profile_photo" class="form-control-file">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
-                                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                    <button type="submit" id="save" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
                                     <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
                                 </div>
                             </div>
@@ -567,6 +698,7 @@ $(document).ready(function()
 $('#password, #confirm_password').on('keyup', function () {
   if ($('#password').val() == $('#confirm_password').val()) 
   {
+
     $('#message').html('Matching').css('color', 'green');
     
   } else 

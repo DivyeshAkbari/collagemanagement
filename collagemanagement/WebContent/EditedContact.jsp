@@ -223,7 +223,7 @@
                 </div><!-- End .container -->
             	<div id="map"></div><!-- End #map -->
             </div><!-- End .page-content -->
-        </main><!-- End .main -->
+        </main>
     
     <!-- Footer ==== -->
     <%@include file="footer.jsp" %>

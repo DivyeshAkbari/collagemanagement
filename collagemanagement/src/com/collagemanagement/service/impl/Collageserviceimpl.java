@@ -411,4 +411,20 @@ public class Collageserviceimpl  implements Collageservice
 		}
 		return null;
 	}
+
+
+	@Override
+	public String insertdate(String username,int i) {
+		// TODO Auto-generated method stub
+		
+		try(Connection connection = getconnection())
+		{
+			return dao.updateloginuserdate(connection,username,i);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

@@ -29,5 +29,6 @@ public interface CollageDao
 	public int deletStudent(Connection c1, String id);
 	public int selectStreamid(Connection c1, String id);
 	public String checkEmail(Connection c1, String str);
+	public String updateloginuserdate(Connection connection, String username, int i);
 }
 //Pull 

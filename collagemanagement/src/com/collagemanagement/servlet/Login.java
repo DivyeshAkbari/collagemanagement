@@ -86,6 +86,8 @@ public class Login extends HttpServlet {
 		}
 		else
 		{
+			String message = collage.insertdate(username,0);
+			
 			System.out.println("Password is "+user.getPassword());
 			HttpSession httpSession=request.getSession();
 			httpSession.setAttribute("uname",user);

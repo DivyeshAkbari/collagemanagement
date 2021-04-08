@@ -44,7 +44,7 @@ public interface Collageservice
 
 	public String validEmail(String str);
 
-	
+	public String insertdate(String username, int i);
 
 	
 }

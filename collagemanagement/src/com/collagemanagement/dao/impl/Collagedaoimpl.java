@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -71,6 +73,7 @@ public class Collagedaoimpl implements CollageDao
 	public User getlogindetails(Connection connection, User user)
 	{
 		User u1=null;
+		
 		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_email=? AND  c_password=? AND i_status=1 AND i_status1=1 ");	
 			  )
 		{		
@@ -593,6 +596,53 @@ public class Collagedaoimpl implements CollageDao
 		}
 		catch (SQLException e) 
 		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String updateloginuserdate(Connection connection, String username, int i) {
+		// TODO Auto-generated method stub
+		
+		int insertedRaws = 0;
+		PreparedStatement preparedStatement = null;
+		
+		try
+		{
+			if(i==0)
+			{
+				preparedStatement = connection.prepareStatement("update user_table set login_timeanddate=? where c_email=?");
+			}
+			else if(i==1)
+			{
+				preparedStatement = connection.prepareStatement("update user_table set logout_timeanddate=? where c_email=?");
+			}
+			
+			/* System  Date */
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+			LocalDateTime now = LocalDateTime.now();  
+			System.out.println(dtf.format(now)); 
+			
+			
+			preparedStatement.setString(1,dtf.format(now));
+			preparedStatement.setString(2,username);
+			
+			insertedRaws = preparedStatement.executeUpdate();
+			
+		
+			if(insertedRaws>0)
+			{
+				return "Date inserted Successfully";
+			}
+			else
+			{
+				return "Date inserted Failed";
+			}
+			
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -1,12 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <%@page import="com.collagemanagement.bean.FeesDetails"%>
 <%@page import="com.collagemanagement.service.impl.FeesPaymentServiceImpl"%>
 <%@page import="com.collagemanagement.service1.FeesPaymentService"%>
+<%@page import="java.util.*" %>  
+<%@page import="com.collagemanagement.bean.User"%>
 
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="java.util.*" %>  
-    <%@page import="com.collagemanagement.bean.User"%>
  <%
  	Random randomGenerator = new Random();
 	int randomInt = randomGenerator.nextInt(1000000);
@@ -17,9 +17,13 @@
 
 <%
 	int semesterid = user.getSemester();
-	int id = (Integer.parseInt(user.getStream()));
-
+ 	int id = (Integer.parseInt(user.getStream())); 
+	
+ 	System.out.println("SEMID >"+semesterid);
+ 	System.out.println("Streamid >"+id);
+ 	
 	FeesPaymentService feespayment = new FeesPaymentServiceImpl();
+
 	int semvalue=feespayment.fetchSemValue(semesterid,id);
 	
 	String streamname = feespayment.fetchstreamname(id);

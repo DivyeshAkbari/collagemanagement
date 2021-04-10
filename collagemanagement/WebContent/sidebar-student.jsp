@@ -34,13 +34,16 @@
                                 class="flaticon-checklist"></i><span>Materials</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="student-notes.jsp" class="nav-link"><i
+                                    <a href="student-notes-subjects.jsp" class="nav-link"><i
                                         class="flaticon-checklist"></i>Notes & Chapters</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="student-assignment.jsp" class="nav-link"><i class="flaticon-books"></i><span>Assignments</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="student-subject.jsp" class="nav-link"><i class="flaticon-books"></i><span>Submitted Assignments</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Previous year papers</span></a>

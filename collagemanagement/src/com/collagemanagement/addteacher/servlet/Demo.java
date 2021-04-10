@@ -7,25 +7,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.collagemanagement.bean.Subject;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
 
 /**
- * Servlet implementation class FetchSubjectsForStudent
+ * Servlet implementation class Demo
  */
-public class FetchSubjectsForStudent extends HttpServlet {
+public class Demo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	TeacherService ts = new TeacherServiceimpl();
-       
+	TeacherService ts = new TeacherServiceimpl();  
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FetchSubjectsForStudent() {
+    public Demo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +31,12 @@ public class FetchSubjectsForStudent extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		HttpSession httpsession = request.getSession(false);
+		//response.getWriter().append("Served at:h ").append(request.getContextPath());
+		int semId = 16;
+		System.out.println("hy");
+		List<User> allStudentList = ts.getStudentDetails(semId);
+		System.out.println("all students(demo): "+allStudentList);
 		
-		User u1 = (User) httpsession.getAttribute("uname");
-		
-		//int userId=u1.getId();
-		System.out.println("user id: "+u1.getId());
-		System.out.println("in fetch subjectfor student servlet");
-		System.out.println("stream is: "+u1.getStream());
-		System.out.println("semester is: "+u1.getSemester());
-		
-		List<Subject> subjectlist = ts.fetchSubjectForStudent(u1);
-		request.setAttribute("subjectlist",subjectlist);
 	}
 
 	/**
@@ -56,6 +45,7 @@ public class FetchSubjectsForStudent extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		System.out.println("hii");
 	}
 
 }

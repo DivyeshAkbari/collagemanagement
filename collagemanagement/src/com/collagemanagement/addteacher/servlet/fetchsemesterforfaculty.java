@@ -46,6 +46,7 @@ HttpSession httpsession = request.getSession(false);
 		
 		List<Stream> streamlist=ts.fetchstreamdetails(userId);
 		request.setAttribute("Streamlist",streamlist);
+		httpsession.setAttribute("Streamlist", streamlist);
 		
 		System.out.println(streamlist);
 	}

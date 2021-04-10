@@ -16,16 +16,17 @@ import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
 
 /**
- * Servlet implementation class uploadAssignment
+ * Servlet implementation class UploadAssByStudent
  */
-public class uploadAssignment extends HttpServlet {
+public class UploadAssByStudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+      
 	TeacherService ts = new TeacherServiceimpl();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public uploadAssignment() {
+    public UploadAssByStudent() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +36,8 @@ public class uploadAssignment extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -43,27 +45,23 @@ public class uploadAssignment extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		///doGet(request, response);
+		//doGet(request, response);
+		//int studentId = Integer.parseInt(request.getParameter("studentId"));
+
 		HttpSession httpsession = request.getSession(false);
 		
 		User u1 = (User) httpsession.getAttribute("uname");
 		
-		int userId=u1.getId();
-		
-		String streamId = request.getParameter("streamId");
-		String subjectId = request.getParameter("subjectId");
-		String title = request.getParameter("titleOfAss");
-		String date = request.getParameter("date");
-		String discription = request.getParameter("description");
-		
+		int studentId=u1.getId();
+		String assid = request.getParameter("name");
+		//int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+		int assId = Integer.parseInt(request.getParameter("assId"));
 		Assignment ass = new Assignment();
-		ass.setStreamId(Integer.parseInt(streamId));
-		ass.setSubjectId(Integer.parseInt(subjectId));
-		ass.setTitle(title);
-		ass.setDate(date);
-		ass.setDiscription(discription);
-		ass.setUsesrId(userId);
-	
+		ass.setAssId(assId);
+		ass.setUsesrId(studentId);
+		System.out.println("ass id is: "+assId);
+		System.out.println("student id is: "+studentId);
+		
 		
 		Part part = (Part) request.getPart("assignment");
 		
@@ -82,15 +80,28 @@ public class uploadAssignment extends HttpServlet {
 				ass.setAssPDF(part.getInputStream());
 			
 		}
+		String message1 = ts.insertStuAss(ass);
+//		String message1 = "true";
+		System.out.println(message1+" hii");
 		
-		System.out.println(streamId+" "+subjectId+" "+title+" "+date+" "+discription+" "+userId);
-		
-		String message = ts.insertAssDetail(ass);
-		System.out.println(message);
-		//String message="true";
-		httpsession.setAttribute("message", message);
-		RequestDispatcher dispatcher  = request.getRequestDispatcher("teacher-upload-assignment.jsp");
+		httpsession.setAttribute("message", message1);
+		RequestDispatcher dispatcher  = request.getRequestDispatcher("student-assignment-subject.jsp");
 		dispatcher.forward(request, response);
+//		HttpSession h1 = request.getSession(false);
+//		h1.setAttribute("message", message);
+//		request.getRequestDispatcher("student-assignment-subject.jsp").forward(request, response);
+		
+//		if(message > 0)
+//		{
+//			request.setAttribute("message","Submitted ");
+//			 request.getRequestDispatcher("student-assignment-subject.jsp").forward(request, response);
+//		}
+//		else
+//		{
+//			request.setAttribute("message","not submitted");
+//			 request.getRequestDispatcher("student-assignment-subject.jsp").forward(request, response);
+//		}
+		
 	}
 
 }

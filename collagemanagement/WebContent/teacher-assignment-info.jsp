@@ -1,3 +1,5 @@
+<%@page import="com.collagemanagement.bean.User"%>
+<%@page import="com.collagemanagement.bean.Assignment"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -33,6 +35,12 @@
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
 </head>
+<%
+List<Assignment> facultyAsslist = (List) request.getAttribute("facultyAsslist1");
+List<Assignment> userSubmittedAssList = (List) request.getAttribute("userSubmittedAssList1");
+List<Integer> assSubmittedUserId = (List) request.getAttribute("assSubmittedUserId1");
+List<User> allStudentList = (List) request.getAttribute("allStudentList1");
+%>
 
 <body>
     <!-- Preloader Start Here -->
@@ -291,6 +299,7 @@
                                 </div>
                             </div>
                         </form>
+<%--                         <% if(!(allStudentList.isEmpty()) && !(userSubmittedAssList.isEmpty()) && !(facultyAsslist.isEmpty())){ %> --%>
                         <div class="table-responsive">
                             <table class="table data-table text-nowrap">
                                 <thead>
@@ -298,55 +307,89 @@
                                         <th> 
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">Roll number</label>
+                                                <label class="form-check-label">ID</label>
                                             </div>
                                         </th>
                                         <th>Photo</th>
                                         <th>Name of student</th>
                                         <th>Gender</th>
-                                        <th>Class</th>
-                                        
+                                        <th>Division</th>
+                                        <th>Semester</th>
+                                        <th>Email</th>
+                                        <th>Title</th>
+                                        <th>Due date</th>
+                                        <th>Student upload date</th>
                                         <th>Status</th>
+                                        <th>Assignment</th>
+                                        <th></th>
                                         
                                         
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label">#0021</label>
-                                            </div>
-                                        </td>
-                                        <td><img src="img/figure/student2.png" alt="student"></td>
-                                        <td>Mark Willy</td>
-                                        <td>Male</td>
-                                        <td>2</td>
-                                        
-                                        <td class="badge badge-pill badge-success d-block mg-t-8">Submitted</td>
-                                        
+<!--                                 <tbody> -->
+<%--                                 <% Assignment a,a1;  --%>
+<!-- //                                 for(int i=0; i<allStudentList.size(); i++){  -->
+<!-- //                                 	User user = allStudentList.get(i); -->
+<!-- //                                 	a = userSubmittedAssList.get(i); -->
+<!-- // 									a1 = facultyAsslist.get(i); -->
+<%--                                  %> --%>
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div class="form-check"> -->
+<!--                                                 <input type="checkbox" class="form-check-input"> -->
+<%--                                                 <label class="form-check-label"><%= user.getId() %></label> --%>
+<!--                                             </div> -->
+<!--                                         </td> -->
+<%--                                         <td><img style="border-radius: 50%;" src="data:image/png;base64,<%= user.getUserProfilepicString()  %>" alt="student"></td> --%>
+<%--                                         <td><%= user.getFirstname() %> <%= user.getMiddlename() %></td> --%>
+<%--                                         <td><%= user.getXender() %></td> --%>
+<%--                                         <td><%= user.getDivision() %></td> --%>
+<%--                                         <td><%= user.getSemester() %></td> --%>
+<%--                                         <td><%= user.getEmail() %></td> --%>
+<%--                                         <td><%= a1.getTitle() %></td> --%>
+<%--                                         <td><%= a1.getDate() %></td> --%>
+<%--                                         <td><%= a.getUploadDate() %></td> --%>
+<%--                                         <% if(assSubmittedUserId.contains(user.getId())){ %> --%>
+<!--                                         <td class="badge badge-pill badge-success d-block mg-t-8">Submitted</td> -->
+<%--                                         <td><a href="DownloadStudentAss?id=<%= a.getAssId()%>">View</a></td> --%>
+<%--                                         <% }else{ %> --%>
+<!--                                         <td class="badge badge-pill badge-danger d-block mg-t-8">Pending</td> -->
+<!--                                         <td>---</td> -->
+<%--                                         <% } %> --%>
+<!--                                         <td></td> -->
                                          
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label">#0021</label>
-                                            </div>
-                                        </td>
-                                        <td><img src="img/figure/student2.png" alt="student"></td>
-                                        <td>Mark Willy</td>
-                                        <td>Male</td>
-                                        <td>2</td>
+<!--                                     </tr> -->
+<%--                                     <% } %> --%>
+<!-- <!--                                     <tr> --> -->
+<!-- <!--                                         <td> --> -->
+<!-- <!--                                             <div class="form-check"> --> -->
+<!-- <!--                                                 <input type="checkbox" class="form-check-input"> --> -->
+<!-- <!--                                                 <label class="form-check-label">#0021</label> --> -->
+<!-- <!--                                             </div> --> -->
+<!-- <!--                                         </td> --> -->
+<!-- <!--                                         <td><img src="img/figure/student2.png" alt="student"></td> --> -->
+<!-- <!--                                         <td>Mark Willy</td> --> -->
+<!-- <!--                                         <td>Male</td> --> -->
+<!-- <!--                                         <td>2</td> --> -->
                                        
-                                        <td class="badge badge-pill badge-danger d-block mg-t-8">Unsubmitted</td>
+<!-- <!--                                         <td class="badge badge-pill badge-danger d-block mg-t-8">Unsubmitted</td> --> -->
                                        
                                          
-                                    </tr>
-                                </tbody>
+<!-- <!--                                     </tr> --> -->
+<!--                                 </tbody> -->
                             </table>
                         </div>
+<%--                         <% }else{%> --%>
+                        <div class="ui-alart-box">
+											<div class="icon-color-alart">
+
+												<div class="alert icon-alart bg-fb2" role="alert">
+													<i class="fas fa-exclamation bg-fb3"></i> Yet no one has submitted assignment !!
+												</div>
+
+											</div>
+										</div>
+<%--                         <% } %> --%>
                     </div>
                 </div>
                 <!-- Fees Table Area End Here -->

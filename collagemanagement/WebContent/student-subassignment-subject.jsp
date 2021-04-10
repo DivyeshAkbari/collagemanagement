@@ -1,23 +1,13 @@
 <%@page import="com.collagemanagement.bean.Assignment"%>
 <%@page import="com.collagemanagement.bean.User"%>
-<%@page import="com.collagemanagement.bean.Subject"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!doctype html>
-<html class="no-js" lang="">
-
-
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<!-- /Added by HTTrack -->
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>EduChamp | Notes & Chapters</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 <!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 <!-- Normalize CSS -->
@@ -38,22 +28,18 @@
 <link rel="stylesheet" href="style.css">
 <!-- Modernize js -->
 <script src="js/modernizr-3.6.0.min.js"></script>
-
 </head>
 <%
-	// String ss = (String)request.getAttribute("ss");
-//  String name = (String)request.getAttribute("name");
-// List<User> facultylist =  (List)request.getAttribute("faculty");
-// List<Assignment> asslist =  (List)request.getAttribute("assignmentlist");
-
 String ss = (String) request.getSession(false).getAttribute("ss");
 List<User> facultylist = (List) request.getSession(false).getAttribute("faculty");
 String name = (String) request.getSession(false).getAttribute("name");
 List<Assignment> asslist = (List) request.getSession(false).getAttribute("assignmentlist");
 
-String ans = (String) request.getSession(false).getAttribute("message");
+//System.out.println("sub ass list is: "+asslist);
+String ans = (String)request.getSession(false).getAttribute("ans");
+//System.out.println("ans: "+ans);
+//int result = Integer.parseInt(ans);
 %>
-
 <body>
 	<!-- Preloader Start Here -->
 	<div id="preloader"></div>
@@ -302,66 +288,70 @@ String ans = (String) request.getSession(false).getAttribute("message");
 										</div>
 									</div>
 								</div>
-								<!-- Success Modal -->
+							                                
+                                <!-- Success Modal -->
 								<div class="modal-box">
-								<% 
-								if(null != ans && ans.equalsIgnoreCase("true")){ 
-								%>
-                                <div data-backdrop="static" data-keyboard="false" class="modal hide fade" id="success-modal" tabindex="-1" role="dialog"
+								
+                                <div class="modal fade" id="success-modal" tabindex="-1" role="dialog"
                                     aria-hidden="true">
                                     <div class="modal-dialog success-modal-content" role="document">
                                         <div class="modal-content">
-                                            
+                                            <div class="modal-header">
+<!--                                                 <button type="button" class="close" data-dismiss="modal" -->
+<!--                                                     aria-label="Close"> -->
+<!--                                                     <span aria-hidden="true">&times;</span> -->
+<!--                                                 </button> -->
+                                            </div>
                                             <div class="modal-body">
                                                <div class="success-message">
                                                     <div class="item-icon">
                                                         <i class="fas fa-check"></i>
                                                     </div>
-                                                    <h3 class="item-title">Assignment uploaded successfully..!</h3>
+                                                    <h3 class="item-title">Your assignment has been deleted..!</h3>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button id="modalid" type="button" class="footer-btn bg-linkedin"
-                                                    data-dismiss="modal" onclick="window.location='student-assignment.jsp'">Okay</button>
+                                                    data-dismiss="modal" onclick="window.location='student-subject.jsp'" >Okay</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <%} %>
+                                
                                 <!-- Error Modal -->
-                                 <%if(null != ans && ans.equalsIgnoreCase("false")){ 
-                                %>
-                                <div data-backdrop="static" data-keyboard="false" class="modal hide fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                               
+                                <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog success-modal-content" role="document">
                                         <div class="modal-content">
-                                           
+                                            <div class="modal-header">
+<!--                                                 <button type="button" class="close" data-dismiss="modal" -->
+<!--                                                     aria-label="Close"> -->
+<!--                                                     <span aria-hidden="true">&times;</span> -->
+<!--                                                 </button> -->
+                                            </div>
                                             <div class="modal-body">
                                                 <div class="success-message">
                                                     <div class="item-icon">
                                                         <i class="fas fa-exclamation-triangle"></i>
                                                     </div>
-                                                    <h3 class="item-title">Assignment can't be uploaded !</h3>
+                                                    <h3 class="item-title">Assignment can't be deleted !</h3>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button id="modalid" type="button" class="footer-btn bg-linkedin"
-                                                    data-dismiss="modal" onclick="window.location='student-assignment.jsp'">Close</button>
+                                                    data-dismiss="modal" onclick="window.location='student-subject.jsp'">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <%} session.setAttribute("message", null);%>
+                                
                                 </div>
 
 							<div class="table-responsive">
 
 								<table
 									class="table bs-table table-striped table-bordered text-nowrap">
-
-
-
 									<%
-										//System.out.println("asslis: "+asslist);
 									if (asslist.isEmpty() == false) {
 									%>
 									<thead>
@@ -372,10 +362,10 @@ String ans = (String) request.getSession(false).getAttribute("message");
 											<th>Faculty name</th>
 											<th>Assignment Uploaded by faculty(Date)</th>
 											<th>Due Date</th>
-											<th>PDF</th>
-											<th>Upload</th>
-											<th>Submit</th>
-											<th>Status</th>
+											
+											
+											<th>Unsubmit</th>
+											
 
 										</tr>
 									</thead>
@@ -397,8 +387,7 @@ String ans = (String) request.getSession(false).getAttribute("message");
 											System.out.println("faculty: " + f.getFirstname());
 											//i++;
 										%>
-<!-- 										action="UploadAssByStudent"  -->
-										<form id="formid" action="UploadAssByStudent" method="post" enctype="multipart/form-data">
+<!-- 										<form enctype="multipart/form-data"> -->
 											<tr>
 												<td><%=cnt%></td>
 												<td class="text-left"><input type="hidden" name="assId"
@@ -408,17 +397,17 @@ String ans = (String) request.getSession(false).getAttribute("message");
 												<td><%=f.getFirstname() + " " + f.getMiddlename()%></td>
 												<td><%=a.getUploadDate()%></td>
 												<td><%=a.getDate()%></td>
-												<td><a href="DownloadAss?assid=<%=a.getAssId()%>">
-														Download Assignment</a></td>
-												<td><input type="file" name="assignment"></td>
-												<%--<a href="UploadAssByStudent?userId=<%= f.getId() %> & assId=<%= a.getAssId() %>"></a> --%>
-												<td><button class="button1" value="hr">Submit</button> 
-												</td>
-												<td><i class="fas fa-check text-success"></i></td>
+												
+<%-- 												<td><button> <a id="buttonid" href="RemoveSubmittedAss?id=<%=a.getAssId()%>"> --%>
+<!-- 												</a>Unsubmit</button>  -->
+<!-- 												 </td> -->
+												<td><button class="button1" value="<%=a.getAssId()%>">
+												<i class="fas fa-times text-orange-red"></i>Unsubmit</button></td>
+												
 
 											</tr>
 											
-										</form>
+<!-- 										</form> -->
 
 										<%
 											cnt++;
@@ -431,7 +420,7 @@ String ans = (String) request.getSession(false).getAttribute("message");
 
 												<div class="alert icon-alart bg-fb2" role="alert">
 													<i class="fas fa-exclamation bg-fb3"></i> !! Yet there is
-													no assignment for this subject !!!!
+													no submitted assignment for this subject !!!!
 												</div>
 
 											</div>
@@ -474,46 +463,55 @@ String ans = (String) request.getSession(false).getAttribute("message");
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<!-- Custom Js -->
 	<script src="js/main.js"></script>
-	<script type="text/javascript">
+	<script>
 	$(document).ready(function(){
-        $('#success-modal').modal('show');
-        $('#error-modal').modal('show');
-    });
-</script>
-<script>
-
-
-// $('input[type=file]').change(function(){
-//     if($('input[type=file]').val()==''){
-//         $('button').attr('disabled',true)
-//     } 
-//     else{
-//       $('button').attr('disabled',false);
-//     }
-// })
-</script>
-<script>
-
-// $('input[type=file]').change(function(){
-// 	var x = $("input[name=button1]").val();
-// 	alert("value: "+x);
-// 	var id = "buttonid"+x;
-// 	alert("id: "+id);
-// 	document.getElementById("id").disabled = false;
-
-//     if($('input[type=file]').val()==''){
-//     	$('button1').attr('disabled',true)
-//     } 
-//     else{
-//       $('button1').attr('disabled',false);
-//     }
-// })
-
-</script>
+		//$("#button_1").click(function(e) {
+		$(".button1").click(function(){
+			var value = $(".button1").val();
+			$.ajax({
+				method:"post",
+				url: "RemoveSubmittedAss",
+				data: { name : value}
+			})
+			.done(function(msg){
+				//alert("ans is is: "+msg);
+				if(msg == "true"){
+					$('#success-modal').modal({backdrop: 'static', keyboard: false});
+					$('#success-modal').modal('show');
+				}
+					
+				else{
+					$('#error-modal').modal({backdrop: 'static', keyboard: false});
+					$('#error-modal').modal('show');
+				}
+				
+			});
+			});
+		});
+	</script>
+	<script>
+// 	function myFunction(id) {
+// 		 alert("Hello World");
+// 		 $("a").attr("href","RemoveSubmittedAss?id="+id);
+<%-- 		 var ans = <%= ans %>; --%>
+// 		 alert(ans);
+// 		}
+	
+// 	$(document).ready(function() {
+// 	    $("button a").click(function() {
+// 	        alert("hello");
+// 	    });
+// 	});
+// 	$('#buttonid').click(function() {
+// 		//$("form").attr("action","500");
+// 		//location.reload();
+// 		//window.location.reload(true);
+// 		//window.location.href=window.location.href;
+// 		// and location.href=location.href;
+// 	});
+	
+	</script>
 
 
 </body>
-
-
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 </html>

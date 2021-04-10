@@ -1,3 +1,8 @@
+<%@page import="com.collagemanagement.bean.Stream"%>
+<%@page import="java.util.List"%>
+<jsp:include page ="/fetchsemesterforfaculty"/>
+ 
+<% List<Stream> streamlist1= (List)request.getAttribute("Streamlist"); %>
 <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
                <div class="mobile-sidebar-header d-md-none">
                     <div class="header-logo">
@@ -38,7 +43,7 @@
                                     <a href="teacher-upload-assignment.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Upload Assignment</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="teacher-assignment-info.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Assignment Info.</a>
+                                    <a href="teacher-subjects.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Assignment Info.</a>
                                 </li>
                             </ul>
                         </li>

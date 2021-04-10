@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,19 +16,18 @@ import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
 
 /**
- * Servlet implementation class DownloadAss
+ * Servlet implementation class DownloadStudentAss
  */
-public class DownloadAss extends HttpServlet {
+public class DownloadStudentAss extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	TeacherService ts = new TeacherServiceimpl();
 	private static final int BUFFER_SIZE = 4096;
-	
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DownloadAss() {
+    public DownloadStudentAss() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,13 +38,12 @@ public class DownloadAss extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-			int id = Integer.parseInt(request.getParameter("assid"));
-			HttpSession httpsession = request.getSession(false);
-			
-			User u1 = (User) httpsession.getAttribute("uname");
-			
-			String role = u1.getRole();
+		int id = Integer.parseInt(request.getParameter("id"));
+		HttpSession httpsession = request.getSession(false);
 		
+		User u1 = (User) httpsession.getAttribute("uname");
+		
+		String role = u1.getRole();
 		
 		InputStream inputStream=null;
 		inputStream = ts.getPDf(id,role);
@@ -87,8 +84,7 @@ public class DownloadAss extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
+		doGet(request, response);
 	}
 
 }

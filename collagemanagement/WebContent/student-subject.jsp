@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EduChamp | Notes & Chapters</title>
+    <title>EduChamp | Subjects</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -304,7 +304,7 @@
                                 
                                 <div class="col-6">
                                     <div  class="item-content">
-                                        <div style="font-size:2vw;" class="item-title chevron"> <h2  id="dsubvalue" value="<%= s.getSubjectId() %>"> <a href = <%= "\"UploadAssStudent?Id=" + s.getSubjectId() +"&Name=" +s.getSubjectName()+ "\"" %>><%= s.getSubjectName() %></a> </h2>
+                                        <div style="font-size:2vw;" class="item-title chevron"> <h2  id="dsubvalue" value="<%= s.getSubjectId() %>"> <a href = <%= "\"UploadAssStudent?Id=" + s.getSubjectId() +"&flag=1&Name=" +s.getSubjectName()+ "\"" %>><%= s.getSubjectName() %></a> </h2>
                                         </div>
 
                                     </div>

@@ -1,4 +1,4 @@
-<%@page import="com.collagemanagement.bean.Subject"%>
+<%@page import="com.collagemanagement.bean.Stream"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -6,12 +6,12 @@
 <html class="no-js" lang="">
 
 
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/notice-board.jsp by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EduChamp | Notes & Chapters</title>
+    <title>Teacher subjects</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -28,59 +28,31 @@
     <link rel="stylesheet" href="fonts/flaticon.css">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="css/animate.min.css">
+    <!-- Date Picker CSS -->
+    <link rel="stylesheet" href="css/datepicker.min.css">
     <!-- Select 2 CSS -->
     <link rel="stylesheet" href="css/select2.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-    <style>
-    	#hoverDiv {background: #fff;}
-	#hoverDiv:hover {background: aqua;}
-	
-/* 	@media only screen and (max-width: 320px) { */
-
-/*    h2 {  */
-/*       font-size: 2em;  */
-/*    } */
-/*    } */
-   .chevron {
-  display: inline-flex;
-  align-items:center;
-  justify-content:center;
-  
-  position: relative;
-  clear: both;
-  padding: 10px 0  10px 2.5em;
-  margin:2px 0;
-  height: 250px;
-  width: 100%;
-  vertical-align:middle;
-  text-align:center;
-  color: white;
-  font-size: 12px;
-	}
-	
-
-	
-    </style>
-    </head>
     
-   <jsp:include page ="/FetchSubjectsForStudent"/>
-   <% List<Subject> subjectlist= (List)request.getAttribute("subjectlist"); 
-  System.out.println(subjectlist);
-   %>
+</head>
+
+<jsp:include page ="/fetchsemesterforfaculty"/>
+ 
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
 
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
-         <!-- Header Menu Area Start Here -->
+       <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
-                    <a href="Student_dashboard.jsp">
+                    <a href="Teacher_dashboard.jsp">
                         <img src="img/logo.png" alt="logo">
                     </a>
                 </div>
@@ -137,7 +109,7 @@
                                     <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
                                     <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
                                     <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="Student_dashboard.jsp"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    <li><a href="login.jsp"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -279,54 +251,82 @@
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
            
-           <%@include file="sidebar-student.jsp" %>
+           <%@include file="sidebar-teacher.jsp" %>
            
             <!-- Sidebar Area End Here -->
-            <div  class="dashboard-content-one">
+            <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Student Assignment</h3>
+                    <h3>Subject</h3>
                     <ul>
                         <li>
-                            <a href="Student_dashboard.jsp">Home</a>
+                            <a href="Teacher_dashboard.jsp">Home</a>
                         </li>
-                        <li>Assignment</li>
+                        <li>Subject</li>
                     </ul>
                 </div>
-                <div>
-                <div class="row gutters-20">
-                <% for(Subject s : subjectlist){ %>
-<%--                 <a href = <%= "\"student-assignment-subject.jsp?Id=" + s.getSubjectId() +"&Name=" +s.getSubjectName()+ "\"" %>> --%>
-              
-                    <div id="sub" value="<%=s.getSubjectId()%>" class="col-xl-3 col-sm-6 col-12">
-                        <div id="hoverDiv" class="dashboard-summery-one mg-b-20 ">
-                            <div class="row align-items-center ">
-                                
-                                <div class="col-6">
-                                    <div  class="item-content">
-                                        <div style="font-size:2vw;" class="item-title chevron"> <h2  id="dsubvalue" value="<%= s.getSubjectId() %>"> <a href = <%= "\"UploadAssStudent?Id=" + s.getSubjectId() +"&Name=" +s.getSubjectName()+ "\"" %>><%= s.getSubjectName() %></a> </h2>
-                                        </div>
-
+                
+                
+                <!-- Breadcubs Area End Here -->
+                           
+					 <div class="row">
+					 <div class="col-4-xxxl col-12">
+                        <div class="card height-auto">
+                            <div class="card-body">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3>Select subject</h3>
                                     </div>
+                                   
                                 </div>
+                                <form method="post" action="uploadAssignment" enctype="multipart/form-data" class="new-added-form">
+                                    <div class="row">
+<!--                                     Col-lg-12 -->
+<!-- 										col-12-xxxl col-lg-6 col-12 form-group -->
+                                         <div class="col-lg-12">
+                                         <label>Select Stream *</label>
+                                         <select name="streamId" id="stream" class="select2">
+                                      <option value="0">Please Select</option>
+                                       <% 
+                                    	for(int i=0;i<Streamlist.size();i++){
+                                    	Stream s = Streamlist.get(i);
+                                    	 %>
+                                        <option  value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> 
+                                        </option>
+                                        <%}%>   
+                                            </select>
+                                         </div>                    
+                                    </div>
+                                    
+<!--                                 </form> -->
                             </div>
                         </div>
                     </div>
-                   
-<!--                     </a> -->
-                    <% } %>
-                  
-                    
+                    <div class="col-4-xxxl col-12">
+                        <div id="uploadAssDiv" class="card height-auto">
+                            <div class="card-body">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3>Select subject</h3>
+                                    </div>
+                                </div>
+<!--                                 <form class="new-added-form"> -->
+                                    <div class="row">
+                                      <div id="subjects" class="col-12-xxxl form-group">
+                                             
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Notice Area End Here -->
                     
                 </div>
-               
-                </div>
-                <!-- Breadcubs Area End Here -->
-                
-                <!-- Student Attendence Area End Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
-                </footer>
+<!--                 <footer class="footer-wrap-layout1"> -->
+<!--                     <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by -->
+<!--                         <a href="#">PsdBosS</a></div> -->
+<!--                 </footer> -->
             </div>
         </div>
         <!-- Page Area End Here -->
@@ -343,12 +343,83 @@
     <script src="js/select2.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- Date Picker Js -->
+    <script src="js/datepicker.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-    
+    <script>
+	
+    $(document).ready(function()
+    		{
+    	//$("#uploadAssDiv").hide();
+    	var streamValue;
+    			$("#stream").change(function(){
+    				//$("#uploadAssDiv").show();
+    				var stream=$("#stream").val();
+    				streamValue = stream;
+    				//alert(stream);
+    				$.ajax({
+    					
+    							method:"POST",
+    							url:"fetchsubjectforfaculty",
+    							data:
+    							{
+    								id:stream	
+    							}
+    					})
+    					.done(function(data)
+    					{
+    						
+    						$("#subjects").empty();
+    						//$("#semester1").children().remove();
+    						var object=jQuery.parseJSON(data);
+    						
+    						$.each(object,function(key,value){
+    						
+    						var divId = streamValue+'-'+value.subjectId;
+        					$('#subjects').append('<div id='+divId+'></div>');
+        					
+    						var code = '<div value='+value.subjectId+' class="card dashboard-card-seven">'
+//     						social-media bg-gplus hover-gplus
+                            +'<div id="subjectDiv" class="social-media bg-gplus hover-gplus">'
+                            +'<div class="media media-none--lg">'
+//                             +'<div class="media-body space-sm">'
+//                             +'<h2 value = '+value.subjectName+' class="item-title">'
+//                             +'<a href="FetchSubmittedAssInfo?id='+value.subjectId+'">'+value.subjectName+'</a></h2>'
+//                             +'</div>'
+                            +'</div>'
+                            +'<div class="social-like"><a href="FetchSubmittedAssInfo?id='+value.subjectId+'">'+value.subjectName+'</a></div>'
+                            +'</div>'
+                            +'</div>';	
+                            
+    								
+    								
+    						$("#"+divId).append(code);	
+    								
+//     							$("#subjects").append('<h4 value='+value.subjectId+'>'+value.subjectName+'</h4>');
+    						});
+    					});
+    			});//change 
+    			$(document).on("click","#subjectDiv",function() {
+    				
+    				//var a = $(this).parent().find('.officeName').html();
+    				//alert("hello");
+    				//$('#hiddenId').find('#subjectValue').remove();
+    				var idOfSubject = $(this).parent().attr('value');
+    				//alert(idOfSubject);
+    				//$("#hiddenId").append('<input  name="subjectId" id="subjectValue" value='+idOfSubject+' type="hidden" >');
+    				document.getElementById("subjectValue").value = idOfSubject;
+    				$("#uploadAssDiv").show();
+    				
+    		    });//change event
+    		});
+	
+
+    </script>
+   
 
 </body>
 
 
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/notice-board.jsp by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 </html>

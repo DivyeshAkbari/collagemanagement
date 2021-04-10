@@ -150,13 +150,8 @@ public class Addteacher extends HttpServlet {
 		u1.setQualification(qualification);
 		//u1.setMyHash(myHash);
 //		
-		//String message=ts.saveuserdetails(u1);		
-		//System.out.println(message);
-		
-		
-//		String fname = request.getParameter("firstname");
-//		String mname = request.getParameter("middlename");
-		
+		String message=ts.saveuserdetails(u1);		
+		System.out.println(message);
 //		
 	}
 

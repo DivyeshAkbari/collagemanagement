@@ -90,7 +90,7 @@ public class TeacherServiceimpl implements TeacherService {
 		List<Stream> streamlist = null;
 		try (Connection connection = getConnection();) {
 
-			// semesterlist =
+			
 
 			return teacherdao.getStreamforfaculty(userId, connection);
 
@@ -106,6 +106,10 @@ public class TeacherServiceimpl implements TeacherService {
 		try (Connection connection = getConnection();) {
 
 			int i1 = teacherdao.setAssDetail(ass, connection);
+			if (i1 > 0)
+				return "true";
+			else
+				return "false";
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -165,7 +169,7 @@ public class TeacherServiceimpl implements TeacherService {
 			user = teacherdao.getFacultyDetails(userId, connection);
 
 			List<Stream> streamList = fetchAllStream();
-			 //List<Stream> streamList = teacherdao.getStreamforfaculty(userId,connection);
+			// List<Stream> streamList = teacherdao.getStreamforfaculty(userId,connection);
 			List<Semester> semesterList = teacherdao.getSemesterforfaculty(userId, connection);
 			List<Subject> subjectList = teacherdao.getSubjectforfaculty(userId, connection);
 
@@ -212,7 +216,6 @@ public class TeacherServiceimpl implements TeacherService {
 				List<Boolean> blist = allsemlist.stream().map(Semester1::isSelected).collect(Collectors.toList());
 				boolean check = blist.contains(true);
 				s.setStreamCheck(check);
-				
 
 			}
 
@@ -291,13 +294,15 @@ public class TeacherServiceimpl implements TeacherService {
 		return subjectlist;
 	}
 
-	@Override
-	public List<Assignment> getAssignments(String ss) {
+	public List<Assignment> getAssignments(String ss, int userid) {
 		// TODO Auto-generated method stub
 		List<Assignment> asslist = new ArrayList<>();
+		// List<Integer> submittedassidlist = new ArrayList<>();
 		try (Connection connection = getConnection();) {
 
-			asslist = teacherdao.fetchAssignments(connection, ss);
+			// asslist = teacherdao.fetchSubmittedAss(connection, ss, userid);
+
+			asslist = teacherdao.fetchAssignments(connection, ss, userid);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -322,11 +327,11 @@ public class TeacherServiceimpl implements TeacherService {
 	}
 
 	@Override
-	public InputStream getPDf(int id) {
+	public InputStream getPDf(int id, String role) {
 		// TODO Auto-generated method stub
 		try (Connection connection = getConnection();) {
 
-			return teacherdao.fetchAssPdf(connection, id);
+			return teacherdao.fetchAssPdf(connection, id, role);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -371,31 +376,30 @@ public class TeacherServiceimpl implements TeacherService {
 	@Override
 	public String modifyTeacherDetails(User u1) {
 		// TODO Auto-generated method stub
-		int updateRecord=0;
+		int updateRecord = 0;
 		try (Connection connection = getConnection();) {
-			
-		String role = u1.getRole();
-		System.out.println("role is: "+role);
-		if(role.equalsIgnoreCase("FACULTY"))
-			updateRecord = teacherdao.updateTeacherDetails(connection,u1);
-		else if(role.equalsIgnoreCase("ADMIN")) {
-			updateRecord = teacherdao.updateTeacherDetails(connection,u1);
-			teacherdao.deleteTeacherStream(connection,u1.getId());
-			teacherdao.deleteTeacherSemester(connection,u1.getId());
-			teacherdao.deleteTeacherSubject(connection,u1.getId());
-			
-			List<Stream> streamList = u1.getStreamList();
-			List<Semester> semesterList = u1.getSemesterList();
-			List<Subject> subjectList = u1.getSubjectList();
-			//System.out.println("uid in service impl: "+u1.getId());
-			int[] insertStream = teacherdao.insertFacultyStream(connection, streamList, u1.getId());
-			int[] insertSemester = teacherdao.insertFacultySemester(connection, semesterList, u1.getId());
-			int[] insertSubject = teacherdao.insertFacultySubject(connection, subjectList, u1.getId());
-			
-		}
-			
 
-			if(updateRecord > 0) {
+			String role = u1.getRole();
+			System.out.println("role is: " + role);
+			if (role.equalsIgnoreCase("FACULTY"))
+				updateRecord = teacherdao.updateTeacherDetails(connection, u1);
+			else if (role.equalsIgnoreCase("ADMIN")) {
+				updateRecord = teacherdao.updateTeacherDetails(connection, u1);
+				teacherdao.deleteTeacherStream(connection, u1.getId());
+				teacherdao.deleteTeacherSemester(connection, u1.getId());
+				teacherdao.deleteTeacherSubject(connection, u1.getId());
+
+				List<Stream> streamList = u1.getStreamList();
+				List<Semester> semesterList = u1.getSemesterList();
+				List<Subject> subjectList = u1.getSubjectList();
+				// System.out.println("uid in service impl: "+u1.getId());
+				int[] insertStream = teacherdao.insertFacultyStream(connection, streamList, u1.getId());
+				int[] insertSemester = teacherdao.insertFacultySemester(connection, semesterList, u1.getId());
+				int[] insertSubject = teacherdao.insertFacultySubject(connection, subjectList, u1.getId());
+
+			}
+
+			if (updateRecord > 0) {
 				return "record updated successfully";
 			}
 		} catch (Exception e) {
@@ -412,7 +416,7 @@ public class TeacherServiceimpl implements TeacherService {
 		try (Connection connection = getConnection();) {
 
 			return teacherdao.getAllFaculty(connection);
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -425,12 +429,12 @@ public class TeacherServiceimpl implements TeacherService {
 		// TODO Auto-generated method stub
 		try (Connection connection = getConnection();) {
 
-			int updateRecord = teacherdao.deletefaculty(connection,userId);
+			int updateRecord = teacherdao.deletefaculty(connection, userId);
 //			teacherdao.deleteTeacherStream(connection,userId);
 //			teacherdao.deleteTeacherSemester(connection,userId);
 //			teacherdao.deleteTeacherSubject(connection,userId);
-			
-			if(updateRecord > 0) 
+
+			if (updateRecord > 0)
 				return "record deleted successfully";
 			else
 				return "record can not deleted successfully";
@@ -439,8 +443,158 @@ public class TeacherServiceimpl implements TeacherService {
 			e.printStackTrace();
 		}
 		return null;
-		
-		
+
+	}
+
+	@Override
+	public String insertStuAss(Assignment ass) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+
+			int i1 =  teacherdao.submitAssignment(connection, ass);
+			System.out.println("i1 is: " + i1);
+			if (i1 > 0)
+				return "true";
+			else
+				return "false";
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		//return 0;
+	}
+
+	@Override
+	public List<Assignment> getSubmittedAss(String ss, int userId) {
+		// TODO Auto-generated method stub
+		List<Assignment> asslist = new ArrayList<>();
+		try (Connection connection = getConnection();) {
+
+			asslist = teacherdao.fetchSubmittedAss(connection, ss, userId);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return asslist;
+	}
+
+	@Override
+	public int removeSubmittedAss(String assid,int userId) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+
+			return teacherdao.deleteSubmittedAss(connection,assid,userId);
+//			if(ans > 0)
+//				return "1";
+//			else
+//				return "0";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return null;
+		return 0;
+	}
+
+	@Override
+	public List<Assignment> fetchFacultyAss(String subId, int userId) {
+		// TODO Auto-generated method stub
+		List<Assignment> facultyAss = new ArrayList<>();
+		try (Connection connection = getConnection();) {
+			return teacherdao.getFacultyAss(connection,subId,userId);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return facultyAss;
+	}
+
+	@Override
+	public List<Assignment> fetchUserAss(String subId, int userId) {
+		List<Assignment> userass = new ArrayList<>();
+		try (Connection connection = getConnection();) {
+			userass =  teacherdao.getStudentsAssList(connection,subId,userId);
+			return userass;
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return userass;
+	}
+
+	@Override
+	public int fetchSemId(String subId) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			return teacherdao.getSemId(connection,subId);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public List<User> getStudentDetails(int semId) {
+		//List<User> studentlist = new ArrayList<>();
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			System.out.println("service start.");
+			return teacherdao.fetchStudentDetails(connection,semId);
+			
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String insertNote(Assignment ass) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+
+			int i1 = teacherdao.insertNote(ass, connection);
+			if (i1 > 0)
+				return "true";
+			else
+				return "false";
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Assignment> getNotes(String ss) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			return teacherdao.fetchNotes(ss,connection);
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public InputStream getNotesPDf(int id) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			return teacherdao.fetchNotesPdf(connection, id);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

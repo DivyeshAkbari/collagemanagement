@@ -32,6 +32,7 @@ public class User
 	private Blob image;
 	private String role;
 	private String paymentstatus;
+//	private List<Integer> assStudentId;
 	
 	public byte[] getImagedata() {
 		return imagedata;
@@ -75,8 +76,8 @@ public class User
 				+ ", userProfilepicString=" + userProfilepicString + ", confirm_password=" + confirm_password
 				+ ", qualification=" + qualification + ", myHash=" + myHash + ", id=" + id + ", URL=" + URL
 				+ ", streamList=" + streamList + ", semesterList=" + semesterList + ", subjectList=" + subjectList
-				+ ", imagedata=" + Arrays.toString(imagedata) + ", contactno=" + contactno + ", address=" + address
-				+ ", image=" + image + ", role=" + role + "]";
+				+ ", imagedata=" + imagedata + ", contactno=" + contactno + ", address=" + address + ", image=" + image
+				+ ", role=" + role + ", paymentstatus=" + paymentstatus + "]";
 	}
 	public String getRole() {
 		return role;
@@ -198,4 +199,10 @@ public class User
 	public void setPaymentstatus(String paymentstatus) {
 		this.paymentstatus = paymentstatus;
 	}
+//	public List<Integer> getAssStudentId() {
+//		return assStudentId;
+//	}
+//	public void setAssStudentId(List<Integer> assStudentId) {
+//		this.assStudentId = assStudentId;
+//	}
 }

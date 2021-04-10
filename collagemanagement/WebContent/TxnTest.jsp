@@ -311,12 +311,12 @@
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Accounts</h3>
+                    <h3>Fees Portal</h3>
                     <ul>
                         <li>
                             <a href="index.html">Home</a>
                         </li>
-                        <li>Add New Expense</li>
+                        <li>Add Payment Details </li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -325,7 +325,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add User Details</h3>
+                                <h3>Add Payments Details</h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 

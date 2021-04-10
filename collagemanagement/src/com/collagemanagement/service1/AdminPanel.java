@@ -27,5 +27,4 @@ public interface AdminPanel {
 	public String insertNotice(Notice notice);
 	
 	
-	
 }

@@ -15,7 +15,6 @@
 	int count = adminpanelService.fetchTotalEarning();
 	
 	List<FeesDetails>  chartlist =(List)request.getAttribute("chartlist");
-	
 
 %>
  

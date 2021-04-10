@@ -26,8 +26,7 @@
 
 	int semvalue=feespayment.fetchSemValue(semesterid,id);
 	
-	String streamname = feespayment.fetchstreamname(id);
-	
+	String streamname = feespayment.fetchstreamname(id);	
 	int amount = feespayment.fetchamount(id,semesterid);
 	
 	System.out.println("Amount >"+amount);

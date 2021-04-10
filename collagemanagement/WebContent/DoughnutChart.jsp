@@ -8,7 +8,6 @@
  <%@page import="com.collagemanagement.service1.AdminPanel"%>
  <%@page import="com.collagemanagement.service.impl.AdminPanelServiceImpl"%>
 
-
 <%
 	AdminPanel adminpanelService = new AdminPanelServiceImpl();
 

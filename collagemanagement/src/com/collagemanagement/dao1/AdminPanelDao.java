@@ -28,3 +28,4 @@ public interface AdminPanelDao {
 	String addNotice(Connection connection, Notice notice);
 
 }
+//hii

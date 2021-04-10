@@ -685,7 +685,7 @@
     <servlet-name>InsertFeesDetails</servlet-name>
     <url-pattern>/InsertFeesDetails</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>selectsuccesspaymentDetails</display-name>
     <servlet-name>selectsuccesspaymentDetails</servlet-name>
@@ -754,5 +754,85 @@
   <servlet-mapping>
     <servlet-name>RemoveFacultyDetails</servlet-name>
     <url-pattern>/RemoveFacultyDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadAssByStudent</display-name>
+    <servlet-name>UploadAssByStudent</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.UploadAssByStudent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadAssByStudent</servlet-name>
+    <url-pattern>/UploadAssByStudent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveSubmittedAss</display-name>
+    <servlet-name>RemoveSubmittedAss</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.RemoveSubmittedAss</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveSubmittedAss</servlet-name>
+    <url-pattern>/RemoveSubmittedAss</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchSubmittedAssInfo</display-name>
+    <servlet-name>FetchSubmittedAssInfo</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.FetchSubmittedAssInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchSubmittedAssInfo</servlet-name>
+    <url-pattern>/FetchSubmittedAssInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownloadStudentAss</display-name>
+    <servlet-name>DownloadStudentAss</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.DownloadStudentAss</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadStudentAss</servlet-name>
+    <url-pattern>/DownloadStudentAss</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadNotes</display-name>
+    <servlet-name>UploadNotes</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.UploadNotes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadNotes</servlet-name>
+    <url-pattern>/UploadNotes</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchStudentNotes</display-name>
+    <servlet-name>FetchStudentNotes</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.FetchStudentNotes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchStudentNotes</servlet-name>
+    <url-pattern>/FetchStudentNotes</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownloadNotes</display-name>
+    <servlet-name>DownloadNotes</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.DownloadNotes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadNotes</servlet-name>
+    <url-pattern>/DownloadNotes</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Demo</display-name>
+    <servlet-name>Demo</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.Demo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Demo</servlet-name>
+    <url-pattern>/Demo</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -57,7 +57,7 @@ public interface TeacherDao {
 
 	List<User> fetchFacultyForAss(Connection connection, List<Integer> userIdList) throws Exception;
 
-	InputStream fetchAssPdf(Connection connection, int id, String role) throws Exception;
+	InputStream fetchAssPdf(Connection connection, int id) throws Exception;
 
 	List<Integer> getSelectedSem(Connection connection, int streamId, int userId) throws Exception;
 
@@ -83,7 +83,7 @@ public interface TeacherDao {
 
 	List<Assignment> getFacultyAss(Connection connection, String subId, int userId) throws Exception;
 
-	List<Assignment> getStudentsAssList(Connection connection, String subId, int userId) throws Exception;
+	List<Assignment> getStudentsAssList(Connection connection, String subId, int userId, int assId) throws Exception;
 
 	int getSemId(Connection connection, String subId) throws Exception;
 
@@ -94,6 +94,8 @@ public interface TeacherDao {
 	List<Assignment> fetchNotes(String ss, Connection connection) throws Exception;
 
 	InputStream fetchNotesPdf(Connection connection, int id) throws Exception;
+
+	InputStream fetchStudentAss(Connection connection, int id) throws Exception;
 	
 //	List<Stream> getFacultyStream(Connection connection, int userId);
 

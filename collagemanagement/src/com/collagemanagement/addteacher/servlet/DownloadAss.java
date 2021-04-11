@@ -41,15 +41,9 @@ public class DownloadAss extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 			int id = Integer.parseInt(request.getParameter("assid"));
-			HttpSession httpsession = request.getSession(false);
-			
-			User u1 = (User) httpsession.getAttribute("uname");
-			
-			String role = u1.getRole();
-		
 		
 		InputStream inputStream=null;
-		inputStream = ts.getPDf(id,role);
+		inputStream = ts.getPDf(id);
 		
 		ServletContext context = getServletContext();
 		 String fileName="Assignment"+".pdf";

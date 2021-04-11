@@ -37,9 +37,12 @@
 </head>
 <%
 List<Assignment> facultyAsslist = (List) request.getAttribute("facultyAsslist1");
+List<Integer> facultyAsslistId = (List) request.getAttribute("facultyAsslistId1");
 List<Assignment> userSubmittedAssList = (List) request.getAttribute("userSubmittedAssList1");
 List<Integer> assSubmittedUserId = (List) request.getAttribute("assSubmittedUserId1");
 List<User> allStudentList = (List) request.getAttribute("allStudentList1");
+String assId = (String)request.getAttribute("assid");
+System.out.println("assId: "+assId);
 %>
 
 <body>
@@ -270,7 +273,7 @@ List<User> allStudentList = (List) request.getAttribute("allStudentList1");
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>All Fees Collection</h3>
+                                <h3>Students</h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 
@@ -286,22 +289,22 @@ List<User> allStudentList = (List) request.getAttribute("allStudentList1");
                         <form class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by ID ..." class="form-control">
+                                    <input type="text" id="searchId" type="text" onkeyup="myFunction1()" placeholder="Search by ID ..." class="form-control">
                                 </div>
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                    <input type="text" id="searchName" type="text" onkeyup="myFunction()" placeholder="Search by Name ..." class="form-control">
                                 </div>
                                 <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Phone" class="form-control">
+                                    <input type="text" id="searchMail" type="text" onkeyup="myFunction2()" placeholder="Search by Mail id ..." class="form-control">
                                 </div>
                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                    <button disabled="disabled" type="submit" class="fw-btn-fill btn-gradient-yellow">Type to search</button>
                                 </div>
                             </div>
                         </form>
-<%--                         <% if(!(allStudentList.isEmpty()) && !(userSubmittedAssList.isEmpty()) && !(facultyAsslist.isEmpty())){ %> --%>
+                        <% if(!(allStudentList.isEmpty()) && !(userSubmittedAssList.isEmpty()) && !(facultyAsslist.isEmpty())){ %>
                         <div class="table-responsive">
-                            <table class="table data-table text-nowrap">
+                            <table id="myTable" class="table data-table text-nowrap">
                                 <thead>
                                     <tr>
                                         <th> 
@@ -326,60 +329,72 @@ List<User> allStudentList = (List) request.getAttribute("allStudentList1");
                                         
                                     </tr>
                                 </thead>
-<!--                                 <tbody> -->
-<%--                                 <% Assignment a,a1;  --%>
-<!-- //                                 for(int i=0; i<allStudentList.size(); i++){  -->
-<!-- //                                 	User user = allStudentList.get(i); -->
-<!-- //                                 	a = userSubmittedAssList.get(i); -->
-<!-- // 									a1 = facultyAsslist.get(i); -->
-<%--                                  %> --%>
+                                <tbody>
+                                <% Assignment a,a1;
+                                int cnt=0;
+                                int j= Integer.parseInt(assId);
+                                int k = facultyAsslistId.indexOf(j);
+									a1 = facultyAsslist.get(k);
+									System.out.println("a1 id: "+a1.getAssId());
+                                for(int i=0; i<allStudentList.size(); i++){
+                                	User user = allStudentList.get(i); 
+                                	String title="",dueDate="";
+                                	
+                                  %> 
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input">
+                                                <label class="form-check-label"><%= user.getId() %></label>
+                                            </div>
+                                        </td>
+                                        <td><img style="border-radius: 50%;" src="data:image/png;base64,<%= user.getUserProfilepicString()  %>" alt="student"></td>
+                                        <td><%= user.getFirstname() %> <%= user.getMiddlename() %></td>
+                                        <td><%= user.getXender() %></td>
+                                        <td><%= user.getDivision() %></td>
+                                        <td><%= user.getSemester() %></td>
+                                        <td><%= user.getEmail() %></td>
+										<td><%= a1.getTitle() %></td>
+                                        <td><%= a1.getDate() %></td>
+                                       <% if(!(assSubmittedUserId.contains(user.getId()))){%>
+                                       <td>---</td>
+                                       <%} %>
+                                        <% if(assSubmittedUserId.contains(user.getId())){ 
+                                        
+                                        a = userSubmittedAssList.get(cnt);
+                                        cnt++;
+                                        %>
+                                         <td><%= a.getUploadDate() %></td>
+                                        <td class="badge badge-pill badge-success d-block mg-t-8">Submitted</td>
+                                        <td><a href="DownloadStudentAss?id=<%= a.getAssId()%>">View</a></td>
+                                        <% }else{ %>
+                                        <td class="badge badge-pill badge-danger d-block mg-t-8">Pending</td>
+                                        <td>---</td>
+                                        <% } %>
+                                        <td></td>
+                                         
+                                    </tr>
+                                    <% } %>
 <!--                                     <tr> -->
 <!--                                         <td> -->
 <!--                                             <div class="form-check"> -->
 <!--                                                 <input type="checkbox" class="form-check-input"> -->
-<%--                                                 <label class="form-check-label"><%= user.getId() %></label> --%>
+<!--                                                 <label class="form-check-label">#0021</label> -->
 <!--                                             </div> -->
 <!--                                         </td> -->
-<%--                                         <td><img style="border-radius: 50%;" src="data:image/png;base64,<%= user.getUserProfilepicString()  %>" alt="student"></td> --%>
-<%--                                         <td><%= user.getFirstname() %> <%= user.getMiddlename() %></td> --%>
-<%--                                         <td><%= user.getXender() %></td> --%>
-<%--                                         <td><%= user.getDivision() %></td> --%>
-<%--                                         <td><%= user.getSemester() %></td> --%>
-<%--                                         <td><%= user.getEmail() %></td> --%>
-<%--                                         <td><%= a1.getTitle() %></td> --%>
-<%--                                         <td><%= a1.getDate() %></td> --%>
-<%--                                         <td><%= a.getUploadDate() %></td> --%>
-<%--                                         <% if(assSubmittedUserId.contains(user.getId())){ %> --%>
-<!--                                         <td class="badge badge-pill badge-success d-block mg-t-8">Submitted</td> -->
-<%--                                         <td><a href="DownloadStudentAss?id=<%= a.getAssId()%>">View</a></td> --%>
-<%--                                         <% }else{ %> --%>
-<!--                                         <td class="badge badge-pill badge-danger d-block mg-t-8">Pending</td> -->
-<!--                                         <td>---</td> -->
-<%--                                         <% } %> --%>
-<!--                                         <td></td> -->
+<!--                                         <td><img src="img/figure/student2.png" alt="student"></td> -->
+<!--                                         <td>Mark Willy</td> -->
+<!--                                         <td>Male</td> -->
+<!--                                         <td>2</td> -->
+                                       
+<!--                                         <td class="badge badge-pill badge-danger d-block mg-t-8">Unsubmitted</td> -->
+                                       
                                          
 <!--                                     </tr> -->
-<%--                                     <% } %> --%>
-<!-- <!--                                     <tr> --> -->
-<!-- <!--                                         <td> --> -->
-<!-- <!--                                             <div class="form-check"> --> -->
-<!-- <!--                                                 <input type="checkbox" class="form-check-input"> --> -->
-<!-- <!--                                                 <label class="form-check-label">#0021</label> --> -->
-<!-- <!--                                             </div> --> -->
-<!-- <!--                                         </td> --> -->
-<!-- <!--                                         <td><img src="img/figure/student2.png" alt="student"></td> --> -->
-<!-- <!--                                         <td>Mark Willy</td> --> -->
-<!-- <!--                                         <td>Male</td> --> -->
-<!-- <!--                                         <td>2</td> --> -->
-                                       
-<!-- <!--                                         <td class="badge badge-pill badge-danger d-block mg-t-8">Unsubmitted</td> --> -->
-                                       
-                                         
-<!-- <!--                                     </tr> --> -->
-<!--                                 </tbody> -->
+                                </tbody>
                             </table>
                         </div>
-<%--                         <% }else{%> --%>
+                        <% }else{%>
                         <div class="ui-alart-box">
 											<div class="icon-color-alart">
 
@@ -389,7 +404,7 @@ List<User> allStudentList = (List) request.getAttribute("allStudentList1");
 
 											</div>
 										</div>
-<%--                         <% } %> --%>
+                        <% } %>
                     </div>
                 </div>
                 <!-- Fees Table Area End Here -->
@@ -414,6 +429,62 @@ List<User> allStudentList = (List) request.getAttribute("allStudentList1");
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script>
+    function myFunction() {
+    	  var input, filter, table, tr, td, i, txtValue;
+    	  input = document.getElementById("searchName");
+    	  filter = input.value.toUpperCase();
+    	  table = document.getElementById("myTable");
+    	  tr = table.getElementsByTagName("tr");
+    	  for (i = 0; i < tr.length; i++) {
+    	    td = tr[i].getElementsByTagName("td")[2];
+    	    if (td) {
+    	      txtValue = td.textContent || td.innerText;
+    	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    	        tr[i].style.display = "";
+    	      } else {
+    	        tr[i].style.display = "none";
+    	      }
+    	    }       
+    	  }
+    	}//first fun
+    	function myFunction1() {
+      	  var input, filter, table, tr, td, i, txtValue;
+      	  input = document.getElementById("searchId");
+      	  filter = input.value.toUpperCase();
+      	  table = document.getElementById("myTable");
+      	  tr = table.getElementsByTagName("tr");
+      	  for (i = 0; i < tr.length; i++) {
+      	    td = tr[i].getElementsByTagName("td")[0];
+      	    if (td) {
+      	      txtValue = td.textContent || td.innerText;
+      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      	        tr[i].style.display = "";
+      	      } else {
+      	        tr[i].style.display = "none";
+      	      }
+      	    }       
+      	  }
+      	}//second 
+      	function myFunction2() {
+      	  var input, filter, table, tr, td, i, txtValue;
+      	  input = document.getElementById("searchMail");
+      	  filter = input.value.toUpperCase();
+      	  table = document.getElementById("myTable");
+      	  tr = table.getElementsByTagName("tr");
+      	  for (i = 0; i < tr.length; i++) {
+      	    td = tr[i].getElementsByTagName("td")[6];
+      	    if (td) {
+      	      txtValue = td.textContent || td.innerText;
+      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      	        tr[i].style.display = "";
+      	      } else {
+      	        tr[i].style.display = "none";
+      	      }
+      	    }       
+      	  }
+      	}
+    </script>
 
 </body>
 

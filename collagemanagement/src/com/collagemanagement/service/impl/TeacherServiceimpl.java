@@ -327,11 +327,11 @@ public class TeacherServiceimpl implements TeacherService {
 	}
 
 	@Override
-	public InputStream getPDf(int id, String role) {
+	public InputStream getPDf(int id) {
 		// TODO Auto-generated method stub
 		try (Connection connection = getConnection();) {
 
-			return teacherdao.fetchAssPdf(connection, id, role);
+			return teacherdao.fetchAssPdf(connection, id);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -513,10 +513,10 @@ public class TeacherServiceimpl implements TeacherService {
 	}
 
 	@Override
-	public List<Assignment> fetchUserAss(String subId, int userId) {
+	public List<Assignment> fetchUserAss(String subId, int userId, int assId) {
 		List<Assignment> userass = new ArrayList<>();
 		try (Connection connection = getConnection();) {
-			userass =  teacherdao.getStudentsAssList(connection,subId,userId);
+			userass =  teacherdao.getStudentsAssList(connection,subId,userId,assId);
 			return userass;
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -591,6 +591,20 @@ public class TeacherServiceimpl implements TeacherService {
 		try (Connection connection = getConnection();) {
 			return teacherdao.fetchNotesPdf(connection, id);
 		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public InputStream getStudentAss(int id) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+
+			return teacherdao.fetchStudentAss(connection, id);
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

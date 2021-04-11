@@ -477,14 +477,11 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public InputStream fetchAssPdf(Connection connection, int id, String role) throws Exception {
+	public InputStream fetchAssPdf(Connection connection, int id) throws Exception {
 		// TODO Auto-generated method stub
 		InputStream inputStream = null;
 		String query="";
-		if(role.equalsIgnoreCase("FACULTY"))
 			query = "select PDF from ass_faculty_table where i_ass_faculty_id=?";
-		else
-			query = "select PDF from ass_student_table where i_ass_student_id=?";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -719,19 +716,26 @@ public class TeacherDaoImpl implements TeacherDao {
 	}
 
 	@Override
-	public List<Assignment> getStudentsAssList(Connection connection, String subId, int userId) throws Exception {
+	public List<Assignment> getStudentsAssList(Connection connection, String subId, int userId, int assId) throws Exception {
 		// TODO Auto-generated method stub
 		List<Assignment> studentSubmiitedAss = new ArrayList<>();
 //		i_ass_student_id,i_user_id,PDF,d_upload_date
 //		String query = "select * from ass_student_table"
 //				+ "where i_ass_faculty_id in"
 //				+ "(select i_ass_faculty_id from ass_faculty_table where i_user_id=? and i_Subject_id=?)";
-		String query = "select i_ass_student_id,i_user_id,d_upload_date from ass_student_table\r\n" + 
-				"where i_ass_faculty_id in\r\n" + 
-				"(select i_ass_faculty_id from ass_faculty_table where i_user_id=? and i_Subject_id=?)";
+//		String query = "select i_ass_student_id,i_user_id,d_upload_date from ass_student_table\r\n" + 
+//				"where i_ass_faculty_id in\r\n" + 
+//				"(select i_ass_faculty_id from ass_faculty_table where i_user_id=? and i_Subject_id=?)";
+		String query = "select ass_student_table.i_ass_student_id,ass_student_table.i_user_id,ass_student_table.d_upload_date,ass_faculty_table.c_title,ass_faculty_table.d_due_date\r\n" + 
+				"from ass_student_table\r\n" + 
+				"inner join ass_faculty_table\r\n" + 
+				"on ass_faculty_table.i_ass_faculty_id=ass_student_table.i_ass_faculty_id\r\n" + 
+				"where ass_faculty_table.i_ass_faculty_id in \r\n" + 
+				"(select i_ass_faculty_id from ass_faculty_table where i_user_id=? and i_Subject_id=?) and ass_faculty_table.i_ass_faculty_id=?";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
 			ps.setInt(1, userId);
 			ps.setInt(2, Integer.parseInt(subId));
+			ps.setInt(3, assId);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Assignment a = new Assignment();
@@ -742,6 +746,8 @@ public class TeacherDaoImpl implements TeacherDao {
 //					String fileString = Base64.getEncoder().encodeToString(fileData);
 //					a.setAssPDFstring(fileString);
 //				}
+				a.setTitle(rs.getString("c_title"));
+				a.setDate(rs.getString("d_due_date"));
 				a.setUploadDate(rs.getString("d_upload_date"));
 				studentSubmiitedAss.add(a);
 			}
@@ -767,62 +773,119 @@ public class TeacherDaoImpl implements TeacherDao {
 	@Override
 	public List<User> fetchStudentDetails(Connection connection, int semId) throws Exception {
 		// TODO Auto-generated method stub
-		List<User> userlist=new ArrayList<>();
-		System.out.println("In dao");
-		String query = "Select * from user_table where c_roll=? and i_status=1 and i_status1=1 and i_semester_id=?";
+		List<User> userlist1=new ArrayList<>();
+		String query = "select * from user_table where c_roll='STUDENT'  and i_status=1 and i_status1=1 and i_semester_id=16";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
-			ps.setString(1, "STUDENT");
-			ps.setInt(2, semId);
-			
-			
-			try(ResultSet rs = ps.executeQuery();){
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				User user=new User();
-				user.setId(rs.getInt(1));
-				user.setFirstname(rs.getString(2));
-				user.setMiddlename(rs.getString(3));
-				user.setLastname(rs.getString(4));
-				user.setEmail(rs.getString(5));
-				user.setXender(rs.getString(6));
-				user.setAddress(rs.getString("c_address"));
-				byte[] imagedata = rs.getBytes("image");
-				if (null != imagedata && imagedata.length > 0) {
-					String imagestr = Base64.getEncoder().encodeToString(imagedata);
-					user.setUserProfilepicString(imagestr);
-				}
+				User u1=new User();
+				u1.setId(rs.getInt(1));
+				u1.setFirstname(rs.getString(2));
+				u1.setMiddlename(rs.getString(3));
+				u1.setLastname(rs.getString(4));
+				u1.setEmail(rs.getString(5));
+				u1.setXender(rs.getString(6));
+				u1.setAddress(rs.getString("c_address"));
+//				byte[] imagedata = rs.getBytes("image");
+//				 if(null!=imagedata && imagedata.length>0)
+//				 {
+//					 String imagestr = Base64.getEncoder().encodeToString(imagedata);
+//					 u1.setUserProfilepicString(imagestr);
+//				 }
 				int streamid=rs.getInt("i_stream_id");
 				int semid = rs.getInt("i_semester_id");
 				System.out.println("sem id in impl: "+semid);
+				try (PreparedStatement p3 = connection.prepareStatement("select i_semester_value from semester_table where i_Semester_id=?");) {
+				p3.setInt(1, semid);
+				ResultSet r3 =p3.executeQuery();
+					if(r3.next()) {
+						System.out.println("sem value in impl: "+r3.getInt("i_semester_value"));
+						u1.setSemester(r3.getInt("i_semester_value"));
+					}
 				
-//				try (PreparedStatement p3 = connection.prepareStatement("select i_semester_value from semester_table where i_Semester_id=?");) {
-//					p3.setInt(1, semid);
-//					try(ResultSet r3 =p3.executeQuery();){
-//						if(r3.next()) {
-//							System.out.println("sem value in impl: "+r3.getInt("i_semester_value"));
-//							user.setSemester(r3.getInt("i_semester_value"));
-//						}
-//					}
-//					
-//				}
-//				
-//				try (PreparedStatement p2 = connection.prepareStatement("select c_stream from stream_table where i_stream_id=?");) {
-//					p2.setInt(1, streamid);
-//					try(ResultSet r2 =p2.executeQuery();)
-//					{
-//						if(r2.next())
-//						{
-//							user.setStream(r2.getString("c_stream"));
-//						}
-//					}
-//				}
-				user.setDivision(rs.getString("c_division"));
-				userlist.add(user);	
-				System.out.println("user .. "+user);
+				
 			}
-			}//rs try
+			
+			try (PreparedStatement p2 = connection.prepareStatement("select c_stream from stream_table where i_stream_id=?");) {
+				p2.setInt(1, streamid);
+				ResultSet r2 =p2.executeQuery();
+			
+					if(r2.next())
+					{
+						u1.setStream(r2.getString("c_stream"));
+					}
+				
+			}
+				u1.setDivision(rs.getString("c_division"));
+				userlist1.add(u1);
+			}
+			System.out.println("user list in dao impl: "+userlist1);
+			return userlist1;
 		}
-		System.out.println("user list in dao impl: "+userlist);
-		return userlist;
+//		for(int i=0;i<20;i++) {
+//			User user = new User();
+//			user.setId(i);
+//			user.setContactno(""+i);
+//			userlist1.add(user);
+//		}
+		//return userlist1;
+		
+//		System.out.println("In dao");
+		//String query = "Select * from user_table where c_roll='STUDENT' and i_status=1 and i_status1=1 and i_semester_id=? and i_user_id=51";
+//		try (PreparedStatement ps = connection.prepareStatement(query);) {
+//			//ps.setString(1, "STUDENT");
+////			ps.setInt(1, semId);
+//			
+//			
+//			ResultSet rs = ps.executeQuery();
+//			while(rs.next()) {
+//				User u1=new User();
+//				u1.setId(rs.getInt(1));
+//				u1.setFirstname(rs.getString(2));
+//				u1.setMiddlename(rs.getString(3));
+//				u1.setLastname(rs.getString(4));
+//				u1.setEmail(rs.getString(5));
+//				u1.setXender(rs.getString(6));
+//				u1.setAddress(rs.getString("c_address"));
+//				byte[] imagedata = rs.getBytes("image");
+//				if (null != imagedata && imagedata.length > 0) {
+//					String imagestr = Base64.getEncoder().encodeToString(imagedata);
+//					u1.setUserProfilepicString(imagestr);
+//				}
+//				int streamid=rs.getInt("i_stream_id");
+//				int semid = rs.getInt("i_semester_id");
+//				System.out.println("sem id in impl: "+semid);
+//				
+////				try (PreparedStatement p3 = connection.prepareStatement("select i_semester_value from semester_table where i_Semester_id=?");) {
+////					p3.setInt(1, semid);
+////					ResultSet r3 =p3.executeQuery();
+////						if(r3.next()) {
+////							System.out.println("sem value in impl: "+r3.getInt("i_semester_value"));
+////							u1.setSemester(r3.getInt("i_semester_value"));
+////						}
+////					
+////					
+////				}
+////				
+////				try (PreparedStatement p2 = connection.prepareStatement("select c_stream from stream_table where i_stream_id=?");) {
+////					p2.setInt(1, streamid);
+////					ResultSet r2 =p2.executeQuery();
+////				
+////						if(r2.next())
+////						{
+////							u1.setStream(r2.getString("c_stream"));
+////						}
+////					
+////				}
+//				u1.setDivision(rs.getString("c_division"));
+//				userlist1.add(u1);	
+//				System.out.println("user list in while: "+userlist1);
+//				System.out.println("user .. "+u1);
+//			}
+//			
+//		}
+//		System.out.println("user list in dao impl: "+userlist1);
+//		return userlist1;
 		
 	}
 
@@ -876,6 +939,24 @@ public class TeacherDaoImpl implements TeacherDao {
 		// TODO Auto-generated method stub
 		InputStream inputStream = null;
 		String query = "select PDF from faculty_notes_table where i_faculty_notes_id=?";
+		try (PreparedStatement ps = connection.prepareStatement(query);) {
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Blob blob = rs.getBlob("PDF");
+				inputStream = blob.getBinaryStream();
+			}
+
+		}
+		return inputStream;
+	}
+
+	@Override
+	public InputStream fetchStudentAss(Connection connection, int id) throws Exception {
+		// TODO Auto-generated method stub
+		InputStream inputStream = null;
+		String query="";
+			query = "select PDF from ass_student_table where i_ass_student_id=?";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();

@@ -42,7 +42,7 @@ public interface TeacherService {
 
 	List<User> fetchFacultyForAss(List<Integer> userIdList);
 
-	InputStream getPDf(int id, String role);
+	InputStream getPDf(int id);
 
 	List<Integer> fetchSelectedSemester(int streamId, int userId);
 
@@ -62,7 +62,7 @@ public interface TeacherService {
 
 	List<Assignment> fetchFacultyAss(String subId, int userId);
 
-	List<Assignment> fetchUserAss(String subId, int userId);
+	List<Assignment> fetchUserAss(String subId, int userId, int assId);
 
 	int fetchSemId(String subId);
 
@@ -73,6 +73,8 @@ public interface TeacherService {
 	List<Assignment> getNotes(String ss);
 
 	InputStream getNotesPDf(int id);
+
+	InputStream getStudentAss(int id);
 
 
 }

@@ -38,6 +38,7 @@ public class FetchSubmittedAssInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		int assId=1;
 		HttpSession httpsession = request.getSession(false);
 		User u1 = (User) httpsession.getAttribute("uname");
 		int userId = u1.getId();
@@ -51,20 +52,29 @@ public class FetchSubmittedAssInfo extends HttpServlet {
 		System.out.println("faculty ass list: "+facultyAsslist);
 		List<Integer> facultyAsslistId = facultyAsslist.stream().map(Assignment::getAssId).collect(Collectors.toList());
 		System.out.println("facultyAsslistId list: "+facultyAsslistId);
-		List<Assignment> userSubmittedAssList = ts.fetchUserAss(subId,userId);
-		System.out.println("user submitted ass list: "+userSubmittedAssList);
-		List<Integer> assSubmittedUserId = userSubmittedAssList.stream().map(Assignment::getUsesrId).collect(Collectors.toList());
-		System.out.println("id list: "+assSubmittedUserId);
+		//if(facultyAsslistId.size()>1) {
+			request.setAttribute("facultyAsslist1", facultyAsslist);
+			request.setAttribute("subid", subId);
+			request.setAttribute("facultyAsslistId1", facultyAsslistId);
+			request.getRequestDispatcher("select-assignment.jsp").forward(request, response);
+		//}
 		
-		List<User> allStudentList = ts.getStudentDetails(semId);
-		System.out.println("all students: "+allStudentList);
-////		
+//		List<Assignment> userSubmittedAssList = ts.fetchUserAss(subId,userId,assId);
+//		System.out.println("user submitted ass list: "+userSubmittedAssList);
+//		List<Integer> assSubmittedUserId = userSubmittedAssList.stream().map(Assignment::getUsesrId).collect(Collectors.toList());
+//		System.out.println("id list: "+assSubmittedUserId);
+//		
+//		List<User> allStudentList = ts.getStudentDetails(semId);
+//		System.out.println("all students: "+allStudentList);
+////		List<Integer> allStudentId = allStudentList.stream().map(User::getId).collect(Collectors.toList());
+//		
+//		
 //		request.setAttribute("facultyAsslist1", facultyAsslist);
 //		request.setAttribute("userSubmittedAssList1", userSubmittedAssList);
 //		request.setAttribute("assSubmittedUserId1", assSubmittedUserId);
-		//request.setAttribute("allStudentList1", allStudentList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("teacher-assignment-info.jsp");
-		dispatcher.forward(request, response);
+//		request.setAttribute("allStudentList1", allStudentList);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("teacher-assignment-info.jsp");
+//		dispatcher.forward(request, response);
 	}
 
 	/**

@@ -46,7 +46,7 @@ public class DownloadStudentAss extends HttpServlet {
 		String role = u1.getRole();
 		
 		InputStream inputStream=null;
-		inputStream = ts.getPDf(id,role);
+		inputStream = ts.getStudentAss(id);
 		
 		ServletContext context = getServletContext();
 		 String fileName="Assignment"+".pdf";

@@ -1,8 +1,7 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.collagemanagement.bean.Notice"%>    
-<%@page import="java.util.List"%>
-    
+ <%@page import="com.collagemanagement.bean.Notice"%>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -37,30 +36,9 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-    
-     <!-- <script src="js/jquery-3.3.1.min.js"></script>
-    
-<script>
- $(document).ready(function()
-{
-	$("#submitbtnid").click(function(){
-		
-		$.ajax({
-			
-					method:"GET",
-					url:"DisplayNotice",
-					data:
-					{
-						
-					}
-			});
-		});
-}); 
-</script> -->
 </head>
 
 <% List<Notice> noticelist = (List)request.getAttribute("noticelist"); %>
-
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
@@ -286,54 +264,15 @@
                 <!-- Breadcubs Area End Here -->
                 <div class="row">
                     <!-- Add Notice Area Start Here -->
-                    <div class="col-4-xxxl col-12">
-                        <div class="card height-auto">
-                            <div class="card-body">
-                                <div class="heading-layout1">
-                                    <div class="item-title">
-                                        <h3>Create A Notice</h3>
-                                    </div>
-                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" 
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
-                
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <form class="new-added-form" action="InsertNoticeDetail" method="post">
-                                    <div class="row">
-                                    <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Title</label>
-                                            <input type="text" placeholder="" name="title" class="form-control">
-                                        </div> 
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Details</label>
-                                            <input type="text" placeholder="" name="detail" class="form-control">
-                                        </div>
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">                                            
-                                            <input type="hidden" placeholder="" name="noticeId" class="form-control">
-                                        </div>                                                                    
-                                        <div class="col-12 form-group mg-t-8">
-                                            <button type="submit" id="submitbtnid" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
-                                           <!--  <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button> -->
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- Add Notice Area End Here -->
                     <!-- All Notice Area Start Here -->
-                    <div class="col-8-xxxl col-12">
+                     <div class="col-8-xxxl col-12">
                         <div class="card height-auto">
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Notice Board</h3>
+                                        <h3>Notices</h3>
                                     </div>
                                      <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" 
@@ -346,33 +285,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form class="mg-b-20">
-                                    <div class="row gutters-8">
-                                        <div class="col-lg-5 col-12 form-group">
-                                            <input type="text" placeholder="Search by Date ..." class="form-control">
-                                        </div>
-                                        <div class="col-lg-5 col-12 form-group">
-                                            <input type="text" placeholder="Search by Title ..." class="form-control">
-                                        </div>
-                                        <div class="col-lg-2 col-12 form-group">
-                                            <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                
                                 <% for(int i=0;i<noticelist.size();i++)
                                     { %>
-                                         <% Notice notice = noticelist.get(i); %>   
-                                <div class="notice-board-wrap">
-                                    <div class="notice-list">
-                                        <div class="post-date bg-skyblue">16 June, 2019</div><div class="post-date bg-yellow"><a href="RemoveNotice?noticeId=<%=notice.getNoticeId()%>">Delete</a></div>
-                                        <h6 class="notice-title"><%=notice.getNoticedetails()%></h6>                                     
-                                        <div class="entry-meta">  Jennyfar Lopez</div>                                        
-                                    </div>             
-                                </div>
+                                         <% Notice notice = noticelist.get(i); %>       
+			                                <div class="notice-board-wrap">
+			                                    <div class="notice-list">
+			                                        <div class="post-date bg-skyblue">16 June, 2019</div>
+			                                        <h6 class="notice-title"><%=notice.getNoticedetails()%></h6>
+			                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
+			                                    </div>                               
+			                                </div>
                                 <% } %>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                     <!-- All Notice Area End Here -->
                 </div>
                 <footer class="footer-wrap-layout1">

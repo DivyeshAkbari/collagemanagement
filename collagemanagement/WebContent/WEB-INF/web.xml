@@ -833,6 +833,46 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Demo</servlet-name>
-    <url-pattern>/Demo</url-pattern >
+    <url-pattern>/Demo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InsertNoticeDetail</display-name>
+    <servlet-name>InsertNoticeDetail</servlet-name>
+    <servlet-class>utils.InsertNoticeDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertNoticeDetail</servlet-name>
+    <url-pattern>/InsertNoticeDetail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayNotice</display-name>
+    <servlet-name>DisplayNotice</servlet-name>
+    <servlet-class>utils.DisplayNotice</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayNotice</servlet-name>
+    <url-pattern>/DisplayNotice</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveNotice</display-name>
+    <servlet-name>RemoveNotice</servlet-name>
+    <servlet-class>utils.RemoveNotice</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveNotice</servlet-name>
+    <url-pattern>/RemoveNotice</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchCourse</display-name>
+    <servlet-name>FetchCourse</servlet-name>
+    <servlet-class>utils.FetchCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchCourse</servlet-name>
+    <url-pattern>/FetchCourse</url-pattern>
   </servlet-mapping>
 </web-app>

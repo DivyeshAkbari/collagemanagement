@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.collagemanagement.bean.FeesDetails;
 import com.collagemanagement.bean.Notice;
+import com.collagemanagement.bean.QuoraSession;
+import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.dao.impl.AdminPanelDaoImpl;
 import com.collagemanagement.dao1.AdminPanelDao;
@@ -167,10 +169,21 @@ public class AdminPanelServiceImpl implements AdminPanel {
 	public String insertNotice(Notice notice) {
 		// TODO Auto-generated method stub
 		
-
+		String message = null;
+		
 		try(Connection connection = getConnection())
 		{
-			return adminPanelDao.addNotice(connection,notice);
+			 int count = adminPanelDao.addNotice(connection,notice);
+			 System.out.println("Count is "+count);
+			 if(count>0)
+			 {
+				 
+				 message="QueryInsertedSuccess";
+			 }
+			 else
+			 {
+				 message= "NotSuccess";
+			 }
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -179,5 +192,64 @@ public class AdminPanelServiceImpl implements AdminPanel {
 		
 		return null;
 	}
+
+	@Override
+	public List<Notice> selectNotice() {
+		// TODO Auto-generated method stub
+		
+		List<Notice> notice = null;
+		try(Connection connection = getConnection())
+		{
+			System.out.println("Service Called");
+			
+			notice = adminPanelDao.getNotice(connection);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return notice;
+	}
+
+	@Override
+	public String removenotice(String noticeid) {
+		// TODO Auto-generated method stub
+		
+		String message = null;
+		
+		try(Connection connection = getConnection())
+		{
+			
+			int deletenotice = adminPanelDao.deletenoticeDetails(connection,noticeid);
+			
+			if (deletenotice > 0) 
+			{
+				message = "notice deleted Successfully";
+			} 
+			else
+			{
+				message = "notice delete failed";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return message;
+	}
+
+	@Override
+	public List<Stream> fetchCourse() {
+		// TODO Auto-generated method stub
+		
+		List<Stream> course = null;
+		try(Connection connection = getConnection())
+		{
+			course = adminPanelDao.getStreamname(connection);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return course;	
+	}
 }
-//hi

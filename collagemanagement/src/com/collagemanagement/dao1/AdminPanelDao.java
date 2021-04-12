@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.collagemanagement.bean.FeesDetails;
 import com.collagemanagement.bean.Notice;
+import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 
 public interface AdminPanelDao {
@@ -25,7 +26,13 @@ public interface AdminPanelDao {
 
 	List<FeesDetails> fetchSplinechartDetail(Connection connection);
 
-	String addNotice(Connection connection, Notice notice);
+	int addNotice(Connection connection, Notice notice);
+
+	List<Notice> getNotice(Connection connection);
+
+	int deletenoticeDetails(Connection connection, String noticeid);
+
+	List<Stream> getStreamname(Connection connection);
+
 
 }
-//hii

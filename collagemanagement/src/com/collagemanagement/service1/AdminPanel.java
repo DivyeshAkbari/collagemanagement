@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.collagemanagement.bean.FeesDetails;
 import com.collagemanagement.bean.Notice;
+import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
 
 public interface AdminPanel {
@@ -25,6 +26,11 @@ public interface AdminPanel {
 	public List<FeesDetails> getSplineAreaChartDetail();
 
 	public String insertNotice(Notice notice);
-	
-	
+
+	public List<Notice> selectNotice();
+
+	public String removenotice(String noticeid);
+
+	public List<Stream> fetchCourse();
+
 }

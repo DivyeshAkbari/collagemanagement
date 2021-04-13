@@ -1,7 +1,7 @@
 package com.collagemanagement.service1;
 
 import java.util.List;
-
+import com.collagemanagement.bean.Event;
 import com.collagemanagement.bean.FeesDetails;
 import com.collagemanagement.bean.Notice;
 import com.collagemanagement.bean.Stream;
@@ -32,5 +32,7 @@ public interface AdminPanel {
 	public String removenotice(String noticeid);
 
 	public List<Stream> fetchCourse();
+
+	public String insertEvent(Event event);
 
 }

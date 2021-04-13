@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.collagemanagement.bean.Event;
 import com.collagemanagement.bean.FeesDetails;
 import com.collagemanagement.bean.Notice;
 import com.collagemanagement.bean.QuoraSession;
@@ -178,11 +179,11 @@ public class AdminPanelServiceImpl implements AdminPanel {
 			 if(count>0)
 			 {
 				 
-				 message="QueryInsertedSuccess";
+				 message="Notice InsertedSuccess";
 			 }
 			 else
 			 {
-				 message= "NotSuccess";
+				 message= "Not Success";
 			 }
 			
 		} catch (SQLException e) {
@@ -251,5 +252,33 @@ public class AdminPanelServiceImpl implements AdminPanel {
 			e.printStackTrace();
 		}
 		return course;	
+	}
+
+	@Override
+	public String insertEvent(Event event) {
+		// TODO Auto-generated method stub
+		
+		String message = null;
+		
+		try(Connection connection = getConnection())
+		{
+			System.out.println("In The Service");
+			 int count = adminPanelDao.addEvent(connection,event);
+			 
+			 System.out.println("Count is "+count);
+			 if(count>0)
+			 { 
+				 message="Event InsertedSuccess";
+			 }
+			 else
+			 {
+				 message= "Not Success";
+			 }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return null;
 	}
 }

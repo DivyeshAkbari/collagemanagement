@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.collagemanagement.bean.Event;
 import com.collagemanagement.bean.FeesDetails;
 import com.collagemanagement.bean.Notice;
 import com.collagemanagement.bean.Stream;
@@ -340,5 +341,31 @@ public class AdminPanelDaoImpl implements AdminPanelDao {
 			e.printStackTrace();
 		}		
 		return courseList;
+	}
+
+	@Override
+	public int addEvent(Connection connection, Event event) {
+		// TODO Auto-generated method stub
+		
+		int insertedRaws=0;														
+		try(PreparedStatement p1 = connection.prepareStatement("insert into event_table(c_event_title,c_event_description) values(?,?)");
+			)
+		{
+			System.out.println("In dao");
+			p1.setString(1, event.getEventname()); 
+			p1.setString(2,event.getEventDescription());
+			
+			insertedRaws = p1.executeUpdate();
+
+			if (insertedRaws == 1) {
+				System.out.println("Event Registered Successfully");
+			} else {
+				System.out.println("Event Registered Failed");
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return insertedRaws;
 	}
 }

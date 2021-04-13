@@ -6,7 +6,7 @@
 <html  lang="en">
 
 <head>
-<title>Result</title>
+<title>Contact Us</title>
 <!-- META ============================================= -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,6 +52,8 @@
 	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
 	
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	
+	 <link rel="stylesheet" href="assets/css/stylec.css">
 </head>
 <body id="bg">
 
@@ -70,7 +72,7 @@
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
             <div class="container">
-	        	<div class="page-header page-header-big text-center" style="background-image: url('assets/images/contact-header-bg.jpg')">
+	        	<div class="page-header page-header-big text-center" style="background-image: url('assets/images/trainer/2.jpg')">
         			<h1 class="page-title text-white">Contact us<span class="text-white">keep in touch with us</span></h1>
 	        	</div><!-- End .page-header -->
             </div><!-- End .container -->
@@ -160,68 +162,8 @@
                 			</form><!-- End .contact-form -->
                 		</div><!-- End .col-lg-6 -->
                 	</div><!-- End .row -->
-
-                	<hr class="mt-4 mb-5">
-
-                	<div class="stores mb-4 mb-lg-5">
-	                	<h2 class="title text-center mb-3">Our Stores</h2><!-- End .title text-center mb-2 -->
-
-	                	<div class="row">
-	                		<div class="col-lg-6">
-	                			<div class="store">
-	                				<div class="row">
-	                					<div class="col-sm-5 col-xl-6">
-	                						<figure class="store-media mb-2 mb-lg-0">
-	                							<img src="assets/images/stores/img-1.jpg" alt="image">
-	                						</figure><!-- End .store-media -->
-	                					</div><!-- End .col-xl-6 -->
-	                					<div class="col-sm-7 col-xl-6">
-	                						<div class="store-content">
-	                							<h3 class="store-title">Wall Street Plaza</h3><!-- End .store-title -->
-	                							<address>88 Pine St, New York, NY 10005, USA</address>
-	                							<div><a href="tel:#">+1 987-876-6543</a></div>
-
-	                							<h4 class="store-subtitle">Store Hours:</h4><!-- End .store-subtitle -->
-                								<div>Monday - Saturday 11am to 7pm</div>
-                								<div>Sunday 11am to 6pm</div>
-
-                								<a href="#" class="btn btn-link" target="_blank"><span>View Map</span><i class="icon-long-arrow-right"></i></a>
-	                						</div><!-- End .store-content -->
-	                					</div><!-- End .col-xl-6 -->
-	                				</div><!-- End .row -->
-	                			</div><!-- End .store -->
-	                		</div><!-- End .col-lg-6 -->
-
-	                		<div class="col-lg-6">
-	                			<div class="store">
-	                				<div class="row">
-	                					<div class="col-sm-5 col-xl-6">
-	                						<figure class="store-media mb-2 mb-lg-0">
-	                							<img src="assets/images/stores/img-2.jpg" alt="image">
-	                						</figure><!-- End .store-media -->
-	                					</div><!-- End .col-xl-6 -->
-
-	                					<div class="col-sm-7 col-xl-6">
-	                						<div class="store-content">
-	                							<h3 class="store-title">One New York Plaza</h3><!-- End .store-title -->
-	                							<address>88 Pine St, New York, NY 10005, USA</address>
-	                							<div><a href="tel:#">+1 987-876-6543</a></div>
-
-	                							<h4 class="store-subtitle">Store Hours:</h4><!-- End .store-subtitle -->
-												<div>Monday - Friday 9am to 8pm</div>
-												<div>Saturday - 9am to 2pm</div>
-												<div>Sunday - Closed</div>
-
-                								<a href="#" class="btn btn-link" target="_blank"><span>View Map</span><i class="icon-long-arrow-right"></i></a>
-	                						</div><!-- End .store-content -->
-	                					</div><!-- End .col-xl-6 -->
-	                				</div><!-- End .row -->
-	                			</div><!-- End .store -->
-	                		</div><!-- End .col-lg-6 -->
-	                	</div><!-- End .row -->
-                	</div><!-- End .stores -->
                 </div><!-- End .container -->
-            	<div id="map"></div><!-- End #map -->
+            	<!-- End #map -->
             </div><!-- End .page-content -->
         </main>
     

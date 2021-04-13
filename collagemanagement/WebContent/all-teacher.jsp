@@ -315,6 +315,7 @@
                                         <th>Address</th>
                                         <th>Phone</th>
                                         <th>E-mail</th>
+                                        <th>Subjects</th>
                                         <th>Update/Delete</th>
                                         <th></th>
                                     </tr>
@@ -337,6 +338,7 @@
                                         <td><%= user.getAddress() %></td>
                                         <td><%= user.getContactno() %></td>
                                         <td><%= user.getEmail() %></td>
+                                        <td><b><a href="DisplayFacultySubjects?userId=<%=user.getId()%>">View</a></b></td>
                                         <td></td>
                                          <td>
                                             <div class="dropdown">

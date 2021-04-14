@@ -248,7 +248,7 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 		<div class="dashboard-page-one">
 			<!-- Sidebar Area Start Here -->
 
-			<%@include file="sidebar-admin.jsp" %>
+			<%@include file="sidebar-teacher.jsp"%>
 
 			<!-- Sidebar Area End Here -->
 			<div class="dashboard-content-one">
@@ -305,7 +305,7 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 											<th class="text-left">Serial number</th>
 											<th>Name</th>
 											<th>Description</th>
-											<th>Faculty name</th>
+											
 											<th>Notes Uploaded by faculty(Date)</th>
 											
 											<th>PDF</th>
@@ -330,7 +330,6 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 													value="<%=a.getAssId()%>"><%=a.getTitle()%></td>
 
 												<td><%=a.getDiscription()%></td>
-												<td><%=a.getUserFirstName() + " " + a.getUserLastName()%></td>
 												<td><%=a.getUploadDate()%></td>
 												
 												<td><a href="DownloadNotes?id=<%=a.getAssId()%>">

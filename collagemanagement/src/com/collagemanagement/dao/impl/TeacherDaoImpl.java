@@ -927,6 +927,20 @@ public class TeacherDaoImpl implements TeacherDao {
 				a.setDiscription(rs.getString("c_description"));
 				a.setUploadDate(rs.getString("d_upload_date"));
 				a.setUsesrId(rs.getInt("i_user_id"));
+				int userId = rs.getInt("i_user_id");
+				System.out.println("user id is: "+userId);
+				try (PreparedStatement ps1 = connection.prepareStatement("select c_First_Name,c_middle_name from user_table where i_user_id=?");) {
+					ps1.setInt(1, userId);
+					ResultSet r2 =ps1.executeQuery();
+				
+						if(r2.next())
+						{
+							a.setUserFirstName(r2.getString("c_First_Name"));
+							a.setUserLastName(r2.getString("c_middle_name"));
+						}
+					
+				}
+				
 				notes.add(a);
 			}
 			return notes;
@@ -967,6 +981,18 @@ public class TeacherDaoImpl implements TeacherDao {
 
 		}
 		return inputStream;
+	}
+
+	@Override
+	public int removeNote(String assid, Connection connection, String userid) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "delete from faculty_notes_table where i_user_id=? and i_Subject_id=?";
+		try (PreparedStatement ps = connection.prepareStatement(query);) {
+			ps.setInt(1, Integer.parseInt(userid));
+			ps.setInt(2, Integer.parseInt(assid));
+			return ps.executeUpdate();
+		}
+		//return 0;
 	}
 
 }

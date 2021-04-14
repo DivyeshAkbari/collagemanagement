@@ -20,6 +20,20 @@ public class Assignment {
 	private String assPDFstring;
 	private int usesrId;
 	private String uploadDate;
+	private String userFirstName;
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+	public String getUserLastName() {
+		return userLastName;
+	}
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
+	private String userLastName;
 	public String getUploadDate() {
 		return uploadDate;
 	}
@@ -37,7 +51,8 @@ public class Assignment {
 	public String toString() {
 		return "Assignment [assId=" + assId + ", streamId=" + streamId + ", subjectId=" + subjectId + ", date=" + date
 				+ ", discription=" + discription + ", title=" + title + ", assPDF=" + assPDF + ", assPDFstring="
-				+ assPDFstring + ", usesrId=" + usesrId + ", uploadDate=" + uploadDate + "]";
+				+ assPDFstring + ", usesrId=" + usesrId + ", uploadDate=" + uploadDate + ", userFirstName="
+				+ userFirstName + ", userLastName=" + userLastName + "]";
 	}
 	public int getStreamId() {
 		return streamId;

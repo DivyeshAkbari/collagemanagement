@@ -96,6 +96,8 @@ public interface TeacherDao {
 	InputStream fetchNotesPdf(Connection connection, int id) throws Exception;
 
 	InputStream fetchStudentAss(Connection connection, int id) throws Exception;
+
+	int removeNote(String assid, Connection connection, String userid) throws Exception;
 	
 //	List<Stream> getFacultyStream(Connection connection, int userId);
 

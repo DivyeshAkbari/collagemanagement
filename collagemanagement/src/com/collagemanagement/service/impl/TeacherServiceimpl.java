@@ -611,4 +611,20 @@ public class TeacherServiceimpl implements TeacherService {
 		return null;
 	}
 
+	@Override
+	public String deleteNote(String assid, String userid) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			int i = teacherdao.removeNote(assid,connection,userid);
+			if(i > 0)
+				return "true";
+			else
+				return "false";
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

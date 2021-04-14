@@ -93,7 +93,7 @@
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Manage Materials</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="manage-material.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Notes</a>
+                                    <a href="view-material-admin.jsp" class="nav-link"><i class="fas fa-angle-right"></i>View</a>
                                 </li>
                                 <!-- <li class="nav-item">
                                     <a href="add-book.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Add New

@@ -76,5 +76,7 @@ public interface TeacherService {
 
 	InputStream getStudentAss(int id);
 
+	String deleteNote(String assid, String userid);
+
 
 }

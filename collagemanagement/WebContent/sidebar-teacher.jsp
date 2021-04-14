@@ -47,10 +47,18 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="teacher-upload-notes.jsp" class="nav-link">
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i>
                                 <span>Upload Notes</span></a>
+                                <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="teacher-upload-notes.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Upload Notes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="teacher-note-subject.jsp" class="nav-link"><i class="fas fa-angle-right"></i>View Uploaded Notes</a>
+                                </li>
+                                </ul>
                         </li>
                         
                         <!-- <li class="nav-item sidebar-nav-item">

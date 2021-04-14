@@ -875,4 +875,44 @@
     <servlet-name>FetchCourse</servlet-name>
     <url-pattern>/FetchCourse</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchSubmittedAssInfo1</display-name>
+    <servlet-name>FetchSubmittedAssInfo1</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.FetchSubmittedAssInfo1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchSubmittedAssInfo1</servlet-name>
+    <url-pattern>/FetchSubmittedAssInfo1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayFacultySubjects</display-name>
+    <servlet-name>DisplayFacultySubjects</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.DisplayFacultySubjects</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayFacultySubjects</servlet-name>
+    <url-pattern>/DisplayFacultySubjects</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetNotes</display-name>
+    <servlet-name>GetNotes</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.GetNotes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetNotes</servlet-name>
+    <url-pattern>/GetNotes</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteNote</display-name>
+    <servlet-name>DeleteNote</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.DeleteNote</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteNote</servlet-name>
+    <url-pattern>/DeleteNote</url-pattern>
+  </servlet-mapping>
 </web-app>

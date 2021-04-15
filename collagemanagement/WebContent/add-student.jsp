@@ -40,24 +40,11 @@
     	
     	.formerror{
     	color:red;
+    	
     	}
+    	
     </style>
 <script src="assets/js/jquery.min.js"></script>
-<script>
-
-$(document).ready(function() {
-	$("#save").click(function() {
-		var str = $("#mail").val();
-		$.get("Registrationstudent", {
-			email : str
-		}).done(function(data)
-		{
-			if (data == "true") {
-				alert("This email id is already exist");	
-			}
-		});	
-	});
-});
 </script>
 <script>
 $(document).ready(function()
@@ -91,8 +78,24 @@ $(document).ready(function()
 	});
 });
 </script>
-<script type="text/javascript">
+<script >
 
+var returnval="";
+$(document).ready(function() {
+	$("#save").click(function() {
+		var str = $("#mail").val();
+		$.post("Registrationstudent", {
+			email : str
+		}).done(function(data)
+		{
+			if (data == "true") {
+				alert("This email id is already exist");
+ 				returnval=false;
+			}
+		});	
+	});
+});
+ 
 function clearErrors()
 {
 	errors=document.getElementsByClassName('formerror');
@@ -108,9 +111,9 @@ function seterror(id,error)
 	element.getElementsByClassName('formerror')[0].innerHTML=error;
 }
 function validateForm()
-{
-	var returnval=true;
+{	
 	clearErrors();
+	
 	var name=document.forms['myForm']["firstname"].value;
 	
 	if(name.length==0)
@@ -186,28 +189,28 @@ function validateForm()
 	}
 	if(xender=="no")
 	{
-		alert("Please Select Valid Gender");	
+		seterror("xender","*Please Select Valid Gender");	
 		returnval=false;
 	}
 	
 	var stream=document.forms['myForm']["stream"].value;
 	if(stream=="none")
 	{
-		alert("Please Select Valid Stream");
+		seterror("streamselect","* Please Select Valid Stream");
 		returnval=false;
 	}
 	
 	var sem=document.forms['myForm']["semester"].value;
 	if(sem==-1)
 	{
-		alert("Please Select Valid Semester");
+		seterror("sem","* Please Select Valid Semester");
 		returnval=false;
 	}
 	
 	var div=document.forms['myForm']["division"].value;
 	if(div=="none")
 	{
-		alert("Please Select Valid Division");
+		seterror("division","* Please Select Valid Division");
 		returnval=false;
 	}
 	return returnval;
@@ -222,7 +225,7 @@ function validateForm()
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
          <!-- Header Menu Area Start Here -->
-        <div class="navbar navbar-expand-md header-menu-one bg-light">
+<!--         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="Admin.jsp">
@@ -418,36 +421,36 @@ function validateForm()
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
             
-           <%@include file="sidebar-admin.jsp" %>
-           
+           <%-- <%@include file="sidebar-admin.jsp" %>
+  --%>          
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
+                <!-- <div class="breadcrumbs-area">
                     <h3>Student</h3>
                     <ul>
                         <li>
                             <a href="Admin.jsp">Home</a>
                         </li>
                         <li>Add New Student</li>
-                        <!-- <li>
+                        <li>
                             <a href="add-teacher.html">Add New Student</a>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
-                <!-- Breadcubs Area End Here -->
+ -->                <!-- Breadcubs Area End Here -->
                 <!-- Add New Teacher Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Add New Student</h3>
+                                <h3>Sign Up </h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 
@@ -483,11 +486,11 @@ function validateForm()
                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="xender">
                                     <label>Gender *</label>
                                     <select class="select2" name="gender" >
-                                        <option value="no">Please Select Gender *</option> <span class="formerror"><b></b></span>
+                                        <option value="no">Please Select Gender *</option> 
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Others">Others</option>
-                                    </select>
+                                    </select><span class="formerror"><b></b></span>
                                 </div>
                                 
                                 <div class="col-12-xxxl col-lg-6 col-12 form-group" id="streamselect">
@@ -506,7 +509,7 @@ function validateForm()
 										<%
 											}
 										%>
-                                            </select>
+                                            </select><span class="formerror"><b></b></span>
                                             <!-- <input type="text" placeholder="" class="form-control"> -->
                                         </div>
                                 <!--  
@@ -556,7 +559,7 @@ function validateForm()
                                             <label>Select Semester *</label>
                                             <select class="select2"  required="required" name="semester" id="semester1">
                                              <option>please select</option>
-                                            </select>
+                                            </select><span class="formerror"><b></b></span>
                                         </div>
                                   <div class="col-xl-3 col-lg-6 col-12 form-group" id="division">
                                     <label>Select Division</label>
@@ -566,7 +569,7 @@ function validateForm()
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                    </select>
+                                    </select><span class="formerror"><b></b></span>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="femail">
                                     <label>E-Mail</label>
@@ -646,9 +649,9 @@ function validateForm()
                     </div>
                 </div>
                 <!-- Add New Teacher Area End Here -->
-                <footer class="footer-wrap-layout1">
+              <!--   <footer class="footer-wrap-layout1">
                     <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
-                </footer>
+                </footer> -->
             </div>
         </div>
         <!-- Page Area End Here -->

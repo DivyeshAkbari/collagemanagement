@@ -13,22 +13,17 @@ public class QuoraSession {
 	private String userProfilepic;
 	private InputStream userProfilepicStream;
 	private int is_active;
-	private String tag;
+	private int tagid;
+	private String tagname;
 	
+
 	@Override
 	public String toString() {
-		return String.format(
-				"QuoraSession [queryId=%s, topicname=%s, ctype=%s, tdescription=%s, userid=%s, username=%s, userProfilepic=%s, userProfilepicStream=%s, is_active=%s, tag=%s]",
-				queryId, topicname, ctype, tdescription, userid, username, userProfilepic, userProfilepicStream,
-				is_active, tag);
+		return "QuoraSession [queryId=" + queryId + ", topicname=" + topicname + ", ctype=" + ctype + ", tdescription="
+				+ tdescription + ", userid=" + userid + ", username=" + username + ", userProfilepic=" + userProfilepic
+				+ ", userProfilepicStream=" + userProfilepicStream + ", is_active=" + is_active + ", tagid=" + tagid
+				+ "]";
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
 	public int getIs_active() {
 		return is_active;
 	}
@@ -39,8 +34,8 @@ public class QuoraSession {
 	public InputStream getUserProfilepicStream() {
 		return userProfilepicStream;
 	}
-	public void setUserProfilepicStream(InputStream userProfilepicStream) {
-		this.userProfilepicStream = userProfilepicStream;
+	public void setUserProfilepicStream(InputStream image) {
+		this.userProfilepicStream = image;
 	}
 	public String getUserProfilepic() {
 		return userProfilepic;
@@ -84,6 +79,18 @@ public class QuoraSession {
 	}
 	public void setTdescription(String tdescription) {
 		this.tdescription = tdescription;
+	}
+	public int getTagid() {
+		return tagid;
+	}
+	public void setTagid(int tagid) {
+		this.tagid = tagid;
+	}
+	public String getTagname() {
+		return tagname;
+	}
+	public void setTagname(String tagname) {
+		this.tagname = tagname;
 	}
 
 }

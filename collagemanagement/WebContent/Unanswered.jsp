@@ -85,14 +85,14 @@
                                         <tr>
                                             <th>
                                                 <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/author2.jpg" alt="Author"></a>
+                                                    <a href="#" class="item-figure"><img style="width :100px;height : 100px"  src="data:image/png;base64,<%=q1.getUserProfilepic() %>" alt="Author"></a>
                                                     <div class="item-content">
                                                         <div class="item-title"><a href="#"><%=q1.getUsername()%></a></div>		
                                                         <div class="item-designation"><a href="GetAnswerDetails?id=<%=q1.getQueryId() %>" ><%=q1.getTopicname() %></a></div>		
                                                     </div>
                                                 </div>
                                             </th>
-                                            <td>
+                                            <!-- <td>
                                                 <div class="author-social-info">
                                                     <ul>
                                                         
@@ -110,7 +110,7 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                       <% } %>
                                     </tbody>

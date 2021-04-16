@@ -1,3 +1,6 @@
+<%@page import="com.collagemanagement.other.Encryption"%>
+<%@page import="com.collagemanagement.bean.QuoraSession"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
@@ -34,8 +37,78 @@
     <link rel="stylesheet" href="style4.css">
     <!-- Modernizr Js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    <style type="text/css">
+    	
+    	.formerror{
+    	color:red;
+    	}
+    </style>
+<script type="text/javascript">
+function clearErrors()
+{
+	errors=document.getElementsByClassName('formerror');
+	
+	for(let item of errors)
+	{
+		item.innerHTML="";	
+	}
+}
+function seterror(id,error)
+{
+	element=document.getElementById(id);
+	element.getElementsByClassName('formerror')[0].innerHTML=error;
+}
+function validateForm()
+{
+	var returnval=true;
+	clearErrors();
+	var topicname=document.forms['myForm']['topicname'].value;
+	
+	
+	if(topicname.length==0)
+	{
+		seterror("topicid","* Please Enter Topic Name");	
+		returnval=false;
+	}
+	if(topicname.length<10)
+	{
+		seterror("topicid","* Topic Name atleast 10 Letters ");	
+		returnval=false;
+	}
+	var ctype=document.forms['myForm']['ctype'].value;
+	
+	if(ctype=="none")
+	{
+		seterror("categoryid","* Please Select Category Type");
+		returnval=false;
+	}
+	
+	var tdescription=document.forms['myForm']['tdescription'].value;
+	if(tdescription.length==0)
+	{
+		seterror("descriptionid","* Please Enter Discription");
+		returnval=false;
+	}
+	
+	if(tdescription.length<20)
+	{
+		seterror("descriptionid","* Discription atleast 20 Letters");
+		returnval=false;
+	}
+	var tagname=document.forms['myForm']['tagname'].value;
+	
+	if(tagname.length==0)
+	{
+		seterror("tagid","* Please Enter TageName");
+		returnval=false;
+	}
+	return returnval;
+}
+</script>
 </head>
 
+<jsp:include page ="/FetchTag"/>
+<% List<QuoraSession>  taglist =(List)request.getAttribute("taglist"); %>
 <body>
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
@@ -271,34 +344,34 @@
                                 <div class="section-heading3 heading-dark">
                                     <h2 class="item-heading">Post Your Question</h2>
                                 </div>
-                                <form class="leave-form-box" action="PostQuery" method="post">
+                                <form class="leave-form-box" name="myForm" onsubmit="return validateForm()" action="PostQuery" method="post">
                                     <div class="row">
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-group" id="topicid">
                                             <label>Topic Name :</label>
                                             <input type="text" placeholder="topic" class="form-control" name="topicname"
-                                                data-error="Topic-Name field is required" required>
+                                                ><span  class="formerror"><b></b></span>
                                             <div class="help-block with-errors"></div>
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-group" id="categoryid">
                                             <label>Category :</label>
                                             <select class="filter-box" name="ctype" data-error="Category field is required" required>
-                                                <option class="hidden" selected="" disabled="">Catogary Type</option>
+                                                <option class="hidden" value="none" selected="" >Catogary Type</option>
                                                 <option>M.Sc (CA&IT)</option>
                                                 <option>MBA</option>
-                                            </select>
+                                            </select><span  class="formerror"><b></b></span>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         
-                                        <div class="col-12 form-group">
+                                        <div class="col-12 form-group" id="descriptionid">
                                             <label>Description :</label>
                                             <textarea placeholder="" class="textarea form-control" name="tdescription" rows="7"
-                                                cols="20" data-error="Message field is required" required></textarea>
+                                                cols="20" ></textarea><span  class="formerror"><b></b></span>
                                             <div class="help-block with-errors"></div>
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-group" id="tagid">
                                             <label>Tag :</label>
                                             <input type="text" placeholder="e.g Python" class="form-control" name="tagname"
-                                                data-error="Name field is required"  required>
+                                                ><span  class="formerror"><b></b></span>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="col-12 form-group mb-0">
@@ -363,36 +436,16 @@
                                 <h3 class="item-heading">POPULAR TAGS</h3>
                             </div>
                             <div class="widget-tag">
+                               <% for(int i=0;i<taglist.size();i++)
+                             { %>
+                                     <% QuoraSession q1 = taglist.get(i); %>
+                                       <%String incrypted=Encryption.encode(Integer.toString(q1.getTagid())); %>
                                 <ul>
-                                    <li>
-                                        <a href="#">DESERT</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">CAKE</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">BREAKFAST</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">BURGER</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">DINNER</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">PIZZA</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">SEA FOOD</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">SALAD</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">JUICE</a>
-                                    </li>
+                                    <li class="single-item"><a href="getQuestions?id=<%=incrypted %>"><%=q1.getTagname() %></a></li>
                                 </ul>
+                              <% } %>  
                             </div>
+                           
                         </div>
                     </div>
                 </div>

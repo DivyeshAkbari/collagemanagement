@@ -1,6 +1,9 @@
 package com.collagemanagement.servlet.QuoraSession;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,9 +52,12 @@ public class PostQuery extends HttpServlet {
 		String fname = user.getFirstname();
 		String mname = user.getMiddlename();
 		
+		byte [] image=user.getImagedata();
 		
+		InputStream myInputStream = new ByteArrayInputStream(image);
 		System.out.println("Firstname ->"+fname );
 		System.out.println("SurName ->"+ mname);
+		
 		
 		finalestring = fname.concat(" "+ mname);
 		
@@ -59,23 +65,38 @@ public class PostQuery extends HttpServlet {
 		String ctype = request.getParameter("ctype");
 		String tdescription = request.getParameter("tdescription");
 		String tagname = request.getParameter("tagname");
-
-	
-		System.out.println("Topic Name ->"+topicname);
-		System.out.println("Topic Category Type ->"+ctype);
-		System.out.println("Topic Description ->"+tdescription);
-		System.out.println("Tag ->"+tagname);
-	
+		
 		query.setTopicname(topicname);
 		query.setCtype(ctype);
 		query.setTdescription(tdescription);
 		query.setUsername(finalestring);
 		query.setUserid(user.getId());
-		query.setTag(tagname);
-	
-		quorasessionservice.savequestiondetails(query);
+		query.setUserProfilepicStream(myInputStream);
 		
+		
+		System.out.println("Topic Name ->"+topicname);
+		System.out.println("Topic Category Type ->"+ctype);
+		System.out.println("Topic Description ->"+tdescription);
+		System.out.println("Tag ->"+tagname);
+	
+		int tagid=quorasessionservice.fetchTagid(tagname);
+		 int tagid1;
+		System.out.println("Existing  id is "+tagid);
+		
+		if(tagid==0)
+		{
+			 tagid1=quorasessionservice.insertTagDetails(tagname);
+			System.out.println("new taginserted successfully");
+			System.out.println("New tagid is "+tagid1);
+			query.setTagid(tagid1);
+			quorasessionservice.savequestiondetails(query);
+		}
+		else
+		{
+			query.setTagid(tagid);
+			quorasessionservice.savequestiondetails(query);
+		}
+	
 		response.sendRedirect("QuestionDetails.jsp");
 	}
-
 }

@@ -29,9 +29,15 @@ public interface QuoraSessionService {
 
 		public Answer getAnswer(String id);
 
-		public String removeStudentDetails(String id);
+		public String removeStudentDetails(String id, String userid);
 
 		public List<QuoraSession> fetchTaglist();
+
+		public int fetchTagid(String tagname);
+
+		public int insertTagDetails(String tagname);
+
+		public List<QuoraSession> fetchquestion(String decryptid);
 
 }
 //Pull 

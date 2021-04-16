@@ -38,7 +38,7 @@
     <script src="assets/js/jquery.min.js"></script>
 
 <script>
-	$(document).ready(function()
+	/* $(document).ready(function()
 {
 	$("#postansid").click(function(){
 		
@@ -50,12 +50,12 @@
 					url:"InsertAnswerDescription",
 					data:
 					{
-						postansid:postansid
+						postansid:postansid,
 					}
 			})
 		});
 });
-</script>
+ */</script>
 </head>
 
 <% List<QuoraSession>  questionlist =(List)request.getSession(false).getAttribute("questionlist");
@@ -139,12 +139,14 @@
                             </div>
                             <div class="recipe-author">
                                 <div class="media media-none--xs">
-                                    <img src="assets/assets4/img/blog/author9.jpg" alt="Blog Author" class="rounded-circle media-img-auto">
+                                <% for(int i=0;i<questionlist.size();i++)
+                                 { %>
+                                 <% QuoraSession q1=questionlist.get(i); %>
+                                    <img src="data:image/png;base64,<%=q1.getUserProfilepic() %>" style="width: 100px; height: 100px" alt="Blog Author" class="rounded-circle media-img-auto">
                                     <div class="media-body">
                                         <h4 class="author-title">
-                                            <% for(int i=0;i<questionlist.size();i++)
-                                            { %>
-                                                    <% QuoraSession q1=questionlist.get(i); %>
+                                            
+                                                    
                                                     <%=q1.getUsername()%> 
                                             <% } %>    
                                         </h4>
@@ -163,7 +165,7 @@
                             </div>
                             <div class="next-prev-post">
                                 <div class="prev-post">
-                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/prev-post.jpg" alt="Post"></a>
+                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/prev-post.jpg"  alt="Post"></a>
                                     <div class="item-content">
                                         <p>PREVIOUS POST</p>
                                         <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
@@ -188,7 +190,7 @@
                                   <ul>
                                     <li class="reviews-single-item">
                                         <div class="media media-none--xs">
-                                            <img style="width :100px;height : 100px"  src="data:image/png;base64,<%=user.getUserProfilepicString() %>" alt="Comment" class="media-img-auto">
+                                            <img style="width :100px;height : 100px"  src="data:image/png;base64,<%=ans.getUserProfilepic() %>" style="width: 100px; height: 100px" alt="Comment" class="media-img-auto">
                                             <div class="media-body">
                                                 <h4 class="comment-title">
                                                         <%=ans.getUsername()%>                                                    
@@ -202,9 +204,13 @@
                                                  <p>
                                                 <%=ans.getAnswerdescription()%> 
                                                 <a href="EditAnswerDescription?id=<%=ans.getAnswerid() %>" class="item-btn">Edit<i class="fas fa-long-arrow-alt-right"></i></a>  
-                                          
-			 				 				<%-- <%if(null!=httpSession && null==user){%>
-			 				 				<%} %> --%>
+                                          <br>
+                                          <br>
+			 				 				<%if(user.getId()==ans.getUserid()){%>
+			 				 				<br>
+			 				 				
+			 				 				<a href="RemoveAnswerDescription?id=<%=ans.getAnswerid() %> &userid=<%=user.getId() %>">Delete<i class="fas fa-long-arrow-alt-right"></i></a>
+			 				 				<%} %>
                                  
 			 				 			<%-- 	<a href="RemoveAnswerDescription?id=,?userid=<%=ans.getAnswerid() %><%=user.getId() %>" class="item-btn">Delete<i class="fas fa-long-arrow-alt-right"></i></a> --%>
                                            

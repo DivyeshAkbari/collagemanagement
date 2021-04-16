@@ -3,6 +3,7 @@ package com.collagemanagement.servlet.QuoraSession;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,14 +46,19 @@ public class searchquestion extends HttpServlet {
 		String question = request.getParameter("id");
 		String searchvalue = quorasessionservice.searchquestion(question);
 		
-		if(searchvalue.equalsIgnoreCase(question))
+		if(searchvalue==null)
 		{
-			response.getWriter().append(searchvalue);
+			response.getWriter().append("Search Not found");
 		}
 		else
 		{
-			response.getWriter().append("Search not found");
+			if(searchvalue.equalsIgnoreCase(question))
+			{
+			//	int id=quorasessionservice.fetchQuestionId(searchvalue);
+			//	response.getWriter().append(searchvalue+" "+id);
+			//	System.out.println("Id is "+id);
+			}
+			System.out.println("Search Value -> "+question);
 		}
-		System.out.println("Search Value -> "+question);
 	}
 }

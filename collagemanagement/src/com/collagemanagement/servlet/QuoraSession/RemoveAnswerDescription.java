@@ -31,10 +31,13 @@ public class RemoveAnswerDescription extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
-		request.setAttribute("id", id);
+		String userid = request.getParameter("userid");
 		
-		String removeStudentMessage = quorasessionservice.removeStudentDetails(id);
+		System.out.println("Answer id is "+id);
+		System.out.println("User id is "+userid);
 		
+		String removeStudentMessage = quorasessionservice.removeStudentDetails(id,userid);
+		System.out.println(removeStudentMessage);
 		response.sendRedirect("AnswerofQuestion.jsp");
 		
 	}

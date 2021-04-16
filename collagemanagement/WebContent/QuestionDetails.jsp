@@ -1,3 +1,5 @@
+<%@page import="com.collagemanagement.other.Encryption"%>
+<%@page import="com.collagemanagement.encryptpassword.TrippleDes"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@page import="com.collagemanagement.bean.QuoraSession"%>
@@ -61,9 +63,9 @@
 </head>
 
 <jsp:include page ="/SelectQueryDetails"/>
-
+<jsp:include page ="/FetchTag"/>
 <% List<QuoraSession>  queryList =(List)request.getAttribute("querylist"); %>
-
+<% List<QuoraSession>  taglist =(List)request.getAttribute("taglist"); %>
 <body>
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
@@ -147,7 +149,7 @@
                                         <tr>
                                             <th>
                                                 <div class="author-personal-info">
-                                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/author2.jpg" alt="Author"></a>
+                                                    <a href="#" class="item-figure"><img src="data:image/png;base64,<%=q1.getUserProfilepic() %>" style="width: 100px; height: 100px" alt="Author"></a>
                                                     <div class="item-content">
                                                         <div class="item-title"><a href="#"><%=q1.getUsername()%></a></div>		
                                                         <div class="item-designation"><a href="GetAnswerDetails?id=<%=q1.getQueryId() %>" ><%=q1.getTopicname() %></a></div>		
@@ -155,7 +157,7 @@
                                                 </div>
                                             </th>
                                             <td>
-                                                <div class="author-social-info">
+                                                <!-- <div class="author-social-info">
                                                     <ul>
                                                         
                                                         <li>
@@ -171,7 +173,7 @@
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </td>
                                         </tr>
                                       <% } %>
@@ -211,17 +213,14 @@
                                 <h3 class="item-heading">TAGS &amp; FOLLOW</h3>
                             </div>
                             <div class="widget-follow-us">
+                            <% for(int i=0;i<taglist.size();i++)
+                             { %>
+                                     <% QuoraSession q1 = taglist.get(i); %>
+                                       <%String incrypted=Encryption.encode(Integer.toString(q1.getTagid())); %>
                                 <ul>
-                                    <li class="single-item"><a href="#">Python</a></li>
-                                    <li class="single-item"><a href="#">java</a></li>
-                                    <li class="single-item"><a href="#">.Net</a></li>
-                                    <li class="single-item"><a href="#">Rubby</a></li>
-                                    <li class="single-item"><a href="#">C</a></li>
-                                    <li class="single-item"><a href="#">C++</a></li>
-                                    <li class="single-item"><a href="#">DBMS</a></li>
-                                    <li class="single-item"><a href="#">MYSQL</a></li>
-                                    
+                                    <li class="single-item"><a href="getQuestions?id=<%=incrypted %>"><%=q1.getTagname() %></a></li>
                                 </ul>
+                              <% } %>  
                             </div>
                         </div>
                         <div class="widget">

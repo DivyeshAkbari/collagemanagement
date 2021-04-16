@@ -30,9 +30,15 @@ public interface QuoraSessionDao {
 
 	public Answer fetchAnswer(Connection connection, String id);
 
-	public int deleteAnswerDescription(Connection connection, Integer ansId);
+	public int deleteAnswerDescription(Connection connection, String id, String userid);
 
 	public List<QuoraSession> getTaglist(Connection connection);
+
+	public int getTagId(Connection c1, String tagname);
+
+	public int insertTagDetails(Connection c1, String tagname);
+
+	public List<QuoraSession> getquestion(Connection c1, String decryptid);
 
 }
 //Pull 

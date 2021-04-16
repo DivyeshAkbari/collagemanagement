@@ -4,7 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +58,7 @@ public class InsertAnswerDescription extends HttpServlet {
 		
 		InputStream is = new ByteArrayInputStream(user.getImagedata());
 		
-		String image = user.getUserProfilepicString();
+		//String image = user.getUserProfilepicString();
 
 		
 		System.out.println("Firstname->"+fname );
@@ -68,8 +70,10 @@ public class InsertAnswerDescription extends HttpServlet {
 		String answerdescription = request.getParameter("answerdescription");
 		String id  = request.getParameter("id");
 		
+		
 		System.out.println("Answer Description ->"+answerdescription);
-		System.out.println(" id ->"+id);
+		System.out.println(" id from insertanswerdescription "+id);
+		
 		
 		Answer ans = new Answer();
 		
@@ -81,7 +85,10 @@ public class InsertAnswerDescription extends HttpServlet {
 
 		quorasessionservice.saveanswerdetails(ans);	
 		
-		response.sendRedirect("AnswerofQuestion.jsp");
+		List<Answer> answerlist = quorasessionservice.fetchanswer(id);
 		
+        httpSession.setAttribute("answerlist", answerlist);
+		
+		request.getRequestDispatcher("AnswerofQuestion.jsp").forward(request, response);
 	}
 }

@@ -48,6 +48,12 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
 	
+	<style>
+p.ex1 {
+  margin-left: 300px;
+}
+</style>
+	
 </head>
 <body id="bg">
 
@@ -56,9 +62,13 @@
 <div class="page-wraper">
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
-		<div class="account-head" style="background-image:url(assets/images/background/bg2.jpg);">
-			<a href="index.jsp"><img src="assets/images/logo-white-2.png" alt=""></a>
+		<div class="account-head"  style="background-image:url(assets/images/background/bg2.jpg);">
+			<img class="ex1" height="100px" width="100px" src="assets/images/Educhamp_logo.png" alt=""></a>
+			<br>
+			<br>
+			<img height="200px" width="200px"  src="assets/images/logo-whiteeeee.png" alt=""></a>
 		</div>
+		
 		<div class="account-form-inner">
 			<div class="account-container">
 				<div class="heading-bx left">
@@ -69,7 +79,7 @@
 					<%} %>
 					<h2 class="title-head">Login to your <span>Account</span></h2>
 					<p>Don't have an account? Registered As Student <a href="register.jsp">Click here</a></p>
-					<p>Don't have an account? Registered As Faculty <a href="register1.jsp">Click here</a></p>
+					
 				</div>	
 				<form class="contact-bx" action="Login" method="post">
 					<div class="row placeani">
@@ -85,15 +95,15 @@
 							<div class="form-group">
 								<div class="input-group"> 
 									<label>Your Password</label>
-									<input name="password" type="password" class="form-control" required="">
+									<input name="password" type="password" class="form-control" id="myInput" required="">
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group form-forget">
 								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-									<label class="custom-control-label" for="customControlAutosizing">Remember me</label>
+									<input type="checkbox" class="custom-control-input" id="customControlAutosizing" onclick="myFunction()">
+									<label class="custom-control-label" for="customControlAutosizing">Show Password</label>
 								</div>
 								<a href="forget-password.jsp" class="ml-auto">Forgot Password?</a>
 							</div>
@@ -132,6 +142,17 @@
 <script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
 <script src="assets/js/functions.js"></script>
 <script src="assets/js/contact.js"></script>
+
+<script>
+function myFunction() {
+	  var x = document.getElementById("myInput");
+	  if (x.type === "password") {
+	    x.type = "text";
+	  } else {
+	    x.type = "password";
+	  }
+	}
+</script>
 
 </body>
 

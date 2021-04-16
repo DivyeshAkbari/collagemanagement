@@ -54,7 +54,9 @@
           <div class="hero-content mx-auto w-100 h-100 d-flex flex-column">
             <div class="row no-gutters">
               <div class="col-10 col-lg-9 mx-auto">
-                <div class="logo mt-5 mb-5 mb-md-0"> <a class="d-flex" href="http://demo.harnishdesign.net/html/oxyy/index.html" title="Educhamp"><img src="assets/images/logo-white-2.png" alt="Educhamp"></a> </div>
+                <div class="logo mt-5 mb-5 mb-md-0"> <a class="d-flex" href="http://demo.harnishdesign.net/html/oxyy/index.html" title="Educhamp"><img class="ex1" height="100px" width="100px" src="assets/images/Educhamp_logo.png" alt=""></a>
+			
+			<img height="100px" width="150px"  src="assets/images/logo-whiteeeee.png" alt=""></a> </div>
               </div>
             </div>
             <div class="row no-gutters my-auto">
@@ -98,7 +100,7 @@
               
               <form id="otp-screen" action="ResendOTP" method="post"> 
               </form>
-              <p class="text-center text-muted mb-0">Not received your code? <a class="btn-link" href="ResendOTP?email=<%=email%>">Resend code</a></p>
+              <p class="text-center text-muted mb-0"><a class="btn-link" href="ResendOTP?email=<%=email%>"></a></p>
 			  
 								<% if(message!=null)
 								{%>

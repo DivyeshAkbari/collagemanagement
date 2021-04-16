@@ -103,7 +103,7 @@
 
         .content a
         {
-            width:200px;
+            width:170px;
             height:35px;
             color:#fff;
             border-radius:30px;
@@ -137,7 +137,7 @@
             </div>
             <div class="content">
                <h1>Opps ! Something Went Wrong</h1>
-               <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+               <p>Your Payment has been Failed due to some Technicle issues. </p>
                <a href="index.jsp">Go to Home</a>
             </div>
             

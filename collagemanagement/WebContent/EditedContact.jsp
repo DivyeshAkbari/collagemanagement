@@ -90,15 +90,15 @@
 
                 						<ul class="contact-list">
                 							<li>
-                								<i class="icon-map-marker"></i>
+                								<i class="ti-location-pin"></i>
 	                							70 Washington Square South New York, NY 10012, United States
 	                						</li>
                 							<li>
-                								<i class="icon-phone"></i>
+                								<i class="ti-mobile"></i>
                 								<a href="tel:#">+92 423 567</a>
                 							</li>
                 							<li>
-                								<i class="icon-envelope"></i>
+                								<i class="ti-email"></i>
                 								<a href="mailto:#">info@Molla.com</a>
                 							</li>
                 						</ul><!-- End .contact-list -->
@@ -186,6 +186,8 @@
 <script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
 <script src="assets/js/functions.js"></script>
 <script src="assets/js/contact.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+    
 
 
 </body>

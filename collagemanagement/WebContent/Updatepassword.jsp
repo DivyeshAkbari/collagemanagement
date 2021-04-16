@@ -101,7 +101,10 @@
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
 		<div class="account-head" style="background-image:url(assets/images/background/bg2.jpg);">
-			<a href="index.html"><img src="assets/images/logo-white-2.png" alt=""></a>
+			<img class="ex1" height="100px" width="100px" src="assets/images/Educhamp_logo.png" alt=""></a>
+			<br>
+			<br>
+			<img height="200px" width="200px"  src="assets/images/logo-whiteeeee.png" alt=""></a>
 		</div>
 		<div class="account-form-inner">
 			<div class="account-container">

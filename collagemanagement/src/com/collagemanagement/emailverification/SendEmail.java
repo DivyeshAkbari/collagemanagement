@@ -55,11 +55,13 @@ public class SendEmail implements Runnable
 
 	private String mail;
 	private String msg;
+	private String subject;
 	
-	public SendEmail(String mail, String msg)
+	public SendEmail(String mail, String msg,String subject)
 	{
 		this.mail=mail;
 		this.msg=msg;
+		this.subject=subject;
 	}
 		@Override
 		public void run()
@@ -85,7 +87,7 @@ public class SendEmail implements Runnable
 				Message message = new MimeMessage(session);
 				message.setFrom(new InternetAddress("divyeshakabari01@gmail.com"));
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
-				message.setSubject("Registration  message ");
+				message.setSubject(subject);
 				message.setContent(msg,"text/html");
 				message.setText(msg);
 

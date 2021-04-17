@@ -242,7 +242,7 @@ public class FeesPaymentDaoImpl implements FeesPaymentDao {
 				user.setXender(r1.getString(6));
 				user.setDivision(r1.getString("c_division"));
 				
-				int Streamid = r1.getInt("c_stream");
+				int Streamid = r1.getInt("i_stream_id");
 				
 				try(PreparedStatement p2 = connection.prepareStatement("select c_stream from stream_table where i_stream_id=?");
 					)

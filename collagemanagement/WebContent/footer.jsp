@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+ <!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" lang="sa" xml:lang="sa">
+
+<head>
+</head>
+<body id="bg">
 <footer>
         <div class="footer-top">
 			<div class="pt-exebar">
@@ -46,15 +53,20 @@
 
 					<div class="col-lg-4 col-md-12 col-sm-12 footer-col-4">
                         <div class="widget">
-                            <h5 class="footer-title">Contact <span>Information</span></h5>
-							<!-- <p class="text-capitalize m-b20">Weekly Breaking news analysis and cutting edge advices on job searching.</p> -->
-                            <div class="widget widget_getintuch">	
+                            <h5 class="footer-title">Contact <span>Information</span></h5> 
+			
+
+<!-- <p lang="sa" class="text-capitalize m-b20">
+<strong>
+loreum
+</p>
+        -->                    <div class="widget widget_getintuch">	
 								<ul>
-									<li><i class="ti-location-pin"></i>75k Newcastle St. Ponte Vedra Beach, FL 309382 New York</li>
+									<li><i class="ti-location-pin"></i>75k Newcastle St. Ponte Vedra Hights,309382 Ahmedabad</li>
 									<li><i class="ti-mobile"></i>0800-123456 (24/7 Support Line)</li>
 									<li><i class="ti-email"></i>info@example.com</li>
 								</ul>
-							</div>
+							</div> 
                         </div>
                     </div>
 
@@ -140,3 +152,8 @@
             </div>
         </div> -->
     </footer>
+    
+    </body>
+
+
+</html>

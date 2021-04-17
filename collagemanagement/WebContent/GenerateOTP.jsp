@@ -16,7 +16,7 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'>
 
 <!-- Stylesheet
-========================= -->
+========================== -->
 <link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/oxyy/vendor/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/oxyy/vendor/font-awesome/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/oxyy/css/stylesheet.css" />

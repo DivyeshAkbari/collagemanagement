@@ -162,7 +162,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="widget">
+                      <!--   <div class="widget">
                             <div class="section-heading heading-dark">
                                 <h3 class="item-heading">LATEST RECIPES</h3>
                             </div>
@@ -209,7 +209,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

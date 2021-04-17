@@ -38,9 +38,6 @@ public class FeesPayStudentDataDisplay extends HttpServlet {
 		request.setAttribute("user",user);
 		
 		System.out.println("User List "+user);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("FeesPayStudentDataDisplay.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	/**

@@ -47,7 +47,7 @@ $(document).ready(function() {
 	<!-- PAGE TITLE HERE ============================================= -->
 	<title>EduChamp : Education HTML Template </title>
 	
-	<!-- MOBILE SPECIFIC ============================================= -->
+	<!-- MOBILE SPECIFIC ============================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<!--[if lt IE 9]>

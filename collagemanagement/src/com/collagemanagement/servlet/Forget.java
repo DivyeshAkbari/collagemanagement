@@ -40,7 +40,7 @@ public class Forget extends HttpServlet {
 		
          email=request.getParameter("email");
 		
-		 String  message=collage.getemail(email);
+		 String  message=collage.validEmail(email);
 
 		if(message.equalsIgnoreCase("found"))
 		{ 
@@ -64,7 +64,7 @@ public class Forget extends HttpServlet {
 		System.out.println("Email is "+email);
 		request.setAttribute("message","otp has been sent to your email id go and check your email");
 		String otp=GenerateOTP.generateOTP();
-		SendEmail m1=new SendEmail(email,"Your Otp is "+otp);
+		SendEmail m1=new SendEmail(email,"Your Otp is "+otp,"OPT verification");
 		Thread t1=new Thread(m1);
 		t1.start();
 		

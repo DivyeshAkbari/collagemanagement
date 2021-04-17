@@ -35,7 +35,7 @@
 	<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
 	
-	<!-- All PLUGINS CSS ============================================= -->
+	<!-- All PLUGINS CSS ============================================== -->
 	<link rel="stylesheet" type="text/css" href="assets/css/assets.css">
 	
 	<!-- TYPOGRAPHY ============================================== -->

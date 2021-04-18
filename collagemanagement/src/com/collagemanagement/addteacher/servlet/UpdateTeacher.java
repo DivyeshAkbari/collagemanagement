@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -111,7 +112,7 @@ public class UpdateTeacher extends HttpServlet {
 		
 		
 	
-		if(null!=part) {
+		if(null!=part  && part.getSize()>0) {
 			System.out.println("File Name" + part.getName());
 			System.out.println("File Name 2" + part.getSubmittedFileName());
 			System.out.println("File Size :: " + part.getSize());
@@ -159,6 +160,10 @@ public class UpdateTeacher extends HttpServlet {
 		
 		String message = ts.modifyTeacherDetails(u1);
 		System.out.println(message);
+		
+		request.setAttribute("ans", message);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editfaculty.jsp");
+		dispatcher.forward(request, response);
 			
 		}else if(userRole.equalsIgnoreCase("FACULTY")) {
 			
@@ -174,10 +179,11 @@ public class UpdateTeacher extends HttpServlet {
 			String address=request.getParameter("address");
 			Part part=request.getPart("profile_photo");
 			String qualification=request.getParameter("qualification");
+			System.out.println("part : : "+part);
 		
 		
 	
-		if(null!=part) {
+		if(null!=part && part.getSize()>0) {
 			System.out.println("File Name" + part.getName());
 			System.out.println("File Name 2" + part.getSubmittedFileName());
 			System.out.println("File Size :: " + part.getSize());
@@ -225,6 +231,11 @@ public class UpdateTeacher extends HttpServlet {
 		
 		String message = ts.modifyTeacherDetails(u1);
 		System.out.println(message);
+		
+		httpsession.setAttribute("ans", message);
+		//request.getSession().setAttribute("ans", message);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editfacultyside.jsp");
+		dispatcher.forward(request, response);
 		}
 		
 		

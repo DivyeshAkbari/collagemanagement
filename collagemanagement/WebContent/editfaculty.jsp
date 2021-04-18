@@ -81,11 +81,11 @@
 
 <%-- <% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %> --%>
 
-<% User u1 = (User)request.getAttribute("faculty");
+<% User u1 = (User)request.getSession(false).getAttribute("faculty");
 //System.out.println("User stream liist: "+u1.getStreamList());
 	Streamlist = u1.getStreamList();
 %>
-<% List<Subject> subjectlist =(List)request.getAttribute("subjectList");
+<% List<Subject> subjectlist =(List)request.getSession(false).getAttribute("subjectList");
 	subjectlist = u1.getSubjectList();
 %>
 <%-- <% User u1=faculty.get(0); %> --%>
@@ -116,7 +116,7 @@ List<Integer> subjectIdList = new ArrayList<>();
 	 System.out.println(streamIdList);
 	 System.out.println(semesterIdList);
 	 %>
-
+<% String message = (String)request.getAttribute("ans"); %>
 
 <body>
     <!-- Preloader Start Here -->
@@ -124,203 +124,7 @@ List<Integer> subjectIdList = new ArrayList<>();
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
          <!-- Header Menu Area Start Here -->
-        <div class="navbar navbar-expand-md header-menu-one bg-light">
-            <div class="nav-bar-header-one">
-                <div class="header-logo">
-                    <a href="Admin.jsp">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                  <div class="toggle-button sidebar-toggle">
-                    <button type="button" class="item-link">
-                        <span class="btn-icon-wrap">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="d-md-none mobile-nav-bar">
-               <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
-                    <i class="far fa-arrow-alt-circle-down"></i>
-                </button>
-                <button type="button" class="navbar-toggler sidebar-toggle-mobile">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-            <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
-                <ul class="navbar-nav">
-                    <li class="navbar-item header-search-bar">
-                        <div class="input-group stylish-input-group">
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="flaticon-search" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Find Something . . .">
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="navbar-item dropdown header-admin">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
-                                <span>Admin</span>
-                            </div>
-                            <div class="admin-img">
-                                <img src="img/figure/admin.jpg" alt="Admin">
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
-                            </div>
-                            <div class="item-content">
-                                <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-list"></i>Task</a></li>
-                                    <li><a href="#"><i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>Message</a></li>
-                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="Admin.jsp"><i class="flaticon-turn-off"></i>Log Out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-item dropdown header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="far fa-envelope"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Message</div>
-                            <span>5</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">05 Message</h6>
-                            </div>
-                            <div class="item-content">
-                                <div class="media">
-                                    <div class="item-img bg-skyblue author-online">
-                                        <img src="img/figure/student11.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Maria Zaman</span> 
-                                                <span class="item-time">18:30</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-yellow author-online">
-                                        <img src="img/figure/student12.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Benny Roy</span> 
-                                                <span class="item-time">10:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-pink">
-                                        <img src="img/figure/student13.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Steven</span> 
-                                                <span class="item-time">02:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-img bg-violet-blue">
-                                        <img src="img/figure/student11.png" alt="img">
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="item-title">
-                                            <a href="#">
-                                                <span class="item-name">Joshep Joe</span> 
-                                                <span class="item-time">12:35</span> 
-                                            </a>  
-                                        </div>
-                                        <p>What is the reason of buy this item. 
-                                        Is it usefull for me.....</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-item dropdown header-notification">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="far fa-bell"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
-                            <span>8</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="item-header">
-                                <h6 class="item-title">03 Notifiacations</h6>
-                            </div>
-                            <div class="item-content">
-                                <div class="media">
-                                    <div class="item-icon bg-skyblue">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Complete Today Task</div>
-                                        <span>1 Mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-icon bg-orange">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Director Metting</div>
-                                        <span>20 Mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="item-icon bg-violet-blue">
-                                        <i class="fas fa-cogs"></i>
-                                    </div>
-                                    <div class="media-body space-sm">
-                                        <div class="post-title">Update Password</div>
-                                        <span>45 Mins ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                     <li class="navbar-item dropdown header-language">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" 
-                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Franchis</a>
-                            <a class="dropdown-item" href="#">Chiness</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      	  <%@include file="dashboard-header.jsp" %>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -344,6 +148,17 @@ List<Integer> subjectIdList = new ArrayList<>();
                 <!-- Add New Teacher Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
+                    <%if(message != null){ %>
+                    	<div class="ui-alart-box">
+                			<div class="alert alert-success" role="alert">
+                        	<%=message %>
+                        	<%if(message.equals("record updated successfully")){
+                        		session.setAttribute("faculty", null); 
+                        		session.setAttribute("subjectList", null);
+                        		}%>
+                     		</div>
+                		</div>
+                		<%} %>
                         <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>Update Teacher</h3>
@@ -412,6 +227,7 @@ List<Integer> subjectIdList = new ArrayList<>();
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Update Photo (150px X 150px)</label>
+                                    <img style="height: 150px; width: 150px;" src="data:image/png;base64,<%= u1.getUserProfilepicString()  %>" alt="student">
                                     <input name="profile_photo" type="file" value="<%=u1.getUserProfilepicString() %>" class="form-control-file">
                                 </div>
 								 
@@ -725,9 +541,9 @@ List<Integer> subjectIdList = new ArrayList<>();
 		document.getElementById("semesterHidden").value = semesterArray;
 		document.getElementById("subjectHidden").value = subjectArray;
 		
- 		alert("streamArray: "+streamArray);
- 		alert("semesterArray: "+semesterArray);
- 		alert("subjectArray: "+subjectArray);
+//  		alert("streamArray: "+streamArray);
+//  		alert("semesterArray: "+semesterArray);
+//  		alert("subjectArray: "+subjectArray);
 		}
 	</script>
 

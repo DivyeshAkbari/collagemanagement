@@ -59,8 +59,10 @@ public class EditFacultyDetail extends HttpServlet {
 		
 		User user = ts.fetchUserDetail(userId);
 		user.setId(userId);
-		request.setAttribute("faculty", user);
-		request.setAttribute("subjectList", subjectlist);
+		httpsession.setAttribute("faculty", user);//faculty
+		httpsession.setAttribute("subjectList", subjectlist);
+//		request.setAttribute("faculty", user);
+//		request.setAttribute("subjectList", subjectlist);
 		
 		if(userRole.equalsIgnoreCase("ADMIN")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("editfaculty.jsp");

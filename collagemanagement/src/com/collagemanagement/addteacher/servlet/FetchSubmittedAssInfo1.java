@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.collagemanagement.bean.Assignment;
+import com.collagemanagement.bean.Image;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
@@ -68,6 +69,9 @@ public class FetchSubmittedAssInfo1 extends HttpServlet {
 		System.out.println("id list: "+assSubmittedUserId);
 		
 		List<User> allStudentList = ts.getStudentDetails(semId);
+		
+		List<Image> profilepiclist = ts.getStudentProfilePic(semId);
+		System.out.println("images: "+profilepiclist);
 		System.out.println("all students: "+allStudentList);
 //		List<Integer> allStudentId = allStudentList.stream().map(User::getId).collect(Collectors.toList());
 		
@@ -77,6 +81,7 @@ public class FetchSubmittedAssInfo1 extends HttpServlet {
 		request.setAttribute("userSubmittedAssList1", userSubmittedAssList);
 		request.setAttribute("assSubmittedUserId1", assSubmittedUserId);
 		request.setAttribute("allStudentList1", allStudentList);
+		request.setAttribute("profilepiclist1", profilepiclist);
 		request.setAttribute("assid", assId1);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("teacher-assignment-info.jsp");
 		dispatcher.forward(request, response);

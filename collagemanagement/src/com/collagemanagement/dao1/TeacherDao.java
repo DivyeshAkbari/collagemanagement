@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.collagemanagement.bean.Assignment;
+import com.collagemanagement.bean.Image;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Semester1;
 import com.collagemanagement.bean.Stream;
@@ -98,6 +99,10 @@ public interface TeacherDao {
 	InputStream fetchStudentAss(Connection connection, int id) throws Exception;
 
 	int removeNote(String assid, Connection connection, String userid) throws Exception;
+
+	int deleteAssFaculty(Connection connection, int userId, String assid) throws Exception;
+
+	List<Image> fetchStudentProfilePics(int semId, Connection connection) throws Exception;
 	
 //	List<Stream> getFacultyStream(Connection connection, int userId);
 

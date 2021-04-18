@@ -1,4 +1,5 @@
 <%@page import="com.collagemanagement.bean.Assignment"%>
+<%@page import="com.collagemanagement.bean.User"%>
 <%@page import="com.collagemanagement.bean.Subject"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -14,7 +15,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>EduChamp | Manage Notes & Chapters</title>
+<title>EduChamp | Teacher Assignment</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Favicon -->
@@ -40,8 +41,10 @@
 
 </head>
 <%
-List<Assignment> notes =  (List)request.getAttribute("notes");
+ List<Assignment> asslist =  (List)request.getAttribute("ass");
 
+
+String name = (String) request.getAttribute("subname");
 %>
 
 <body>
@@ -56,16 +59,17 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 		<div class="dashboard-page-one">
 			<!-- Sidebar Area Start Here -->
 
-			<%@include file="sidebar-teacher.jsp"%>
+			<%@include file="sidebar-teacher.jsp" %>
 
 			<!-- Sidebar Area End Here -->
 			<div class="dashboard-content-one">
 				<!-- Breadcubs Area Start Here -->
 				<div class="breadcrumbs-area">
-					<h3>Student Materials</h3>
+					<h3>Teacher Assignment</h3>
 					<ul>
 						<li><a href="Student_dashboard.jsp">Home</a></li>
-						<li>View-materials</li>
+						<li>Assignment</li>
+						<li><%=name%></li>
 					</ul>
 				</div>
 
@@ -82,7 +86,8 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 								<div class="heading-layout1">
 									<div class="item-title">
 										<h3 id="subname">
-											Notes</h3>
+											Subject :
+											<%=name%></h3>
 									</div>
 									<div class="dropdown">
 										<a class="dropdown-toggle" href="#" role="button"
@@ -102,11 +107,14 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 
 							<div class="table-responsive">
 
-								<table class="table bs-table table-striped table-bordered text-nowrap">
+								<table
+									class="table bs-table table-striped table-bordered text-nowrap">
+
+
 
 									<%
 										//System.out.println("asslis: "+asslist);
-									if (notes.isEmpty() == false) {
+									if (asslist.isEmpty() == false) {
 									%>
 									<thead>
 										<tr>
@@ -114,10 +122,11 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 											<th>Name</th>
 											<th>Description</th>
 											
-											<th>Notes Uploaded by faculty(Date)</th>
-											
+											<th>Assignment Uploaded by faculty(Date)</th>
+											<th>Due Date</th>
 											<th>PDF</th>
 											<th>Delete</th>
+											<th></th>
 
 										</tr>
 									</thead>
@@ -129,20 +138,22 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 										<%
 											int cnt = 1;
 										Assignment a;
-										for (int j = 0; j < notes.size(); j++) {
-											a = notes.get(j);
-											//User f = facultylist.get(j);
-										%><tr>
+										for (int j = 0; j < asslist.size(); j++) {
+											a = asslist.get(j);
+										%>
+<!-- 										action="UploadAssByStudent"  -->
+										<tr>
 												<td><%=cnt%></td>
 												<td class="text-left"><input type="hidden" name="assId"
 													value="<%=a.getAssId()%>"><%=a.getTitle()%></td>
 
 												<td><%=a.getDiscription()%></td>
 												<td><%=a.getUploadDate()%></td>
-												
-												<td><a href="DownloadNotes?id=<%=a.getAssId()%>">
-														Download</a></td>
-												<td><a href="DeleteNote?assid=<%=a.getAssId()%>&userid=<%=a.getUsesrId()%>">Delete this</a></td>
+												<td><%=a.getDate()%></td>
+												<td><a href="DownloadAss?assid=<%=a.getAssId()%>">
+														Download Assignment</a></td>
+												<td><a href="DeleteAssFaculty?id=<%= a.getAssId() %>">Delete</a></td>
+												<td></td>
 
 											</tr>
 											
@@ -158,8 +169,8 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 											<div class="icon-color-alart">
 
 												<div class="alert icon-alart bg-fb2" role="alert">
-													<i class="fas fa-exclamation bg-fb3"></i> !! Yet there is
-													no materials for this subject !!!!
+													<i class="fas fa-exclamation bg-fb3"></i> !! Yet you haven't upload assignment for
+													 this subject !!!!
 												</div>
 
 											</div>
@@ -177,6 +188,7 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 					</div>
 				</div>
 			</div>
+			<!-- Student Attendence Area End Here -->
 			<footer class="footer-wrap-layout1">
 				<div class="copyright">
 					© Copyrights <a href="#">akkhor</a> 2019. All rights reserved.
@@ -207,4 +219,5 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 </body>
 
 
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/student-attendence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 </html>

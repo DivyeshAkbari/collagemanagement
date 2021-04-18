@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -152,6 +153,10 @@ public class Addteacher extends HttpServlet {
 //		
 		String message=ts.saveuserdetails(u1);		
 		System.out.println(message);
+		
+		request.setAttribute("ans", message);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("add-teacher.jsp");
+		dispatcher.forward(request, response);
 //		
 	}
 

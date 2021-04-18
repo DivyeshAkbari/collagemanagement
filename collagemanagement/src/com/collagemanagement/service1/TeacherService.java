@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import com.collagemanagement.bean.Assignment;
+import com.collagemanagement.bean.Image;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Semester1;
 import com.collagemanagement.bean.Stream;
@@ -77,6 +78,10 @@ public interface TeacherService {
 	InputStream getStudentAss(int id);
 
 	String deleteNote(String assid, String userid);
+
+	String removeAssFaculty(int userId, String assid);
+
+	List<Image> getStudentProfilePic(int semId);
 
 
 }

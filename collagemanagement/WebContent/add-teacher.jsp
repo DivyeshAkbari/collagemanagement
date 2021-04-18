@@ -90,40 +90,14 @@
 <jsp:include page ="/Fetchsemdetails"/>
 
 <%List<Semester> Semlist= (List)request.getAttribute("SemList");%>
-
+<% String message = (String)request.getAttribute("ans"); %>
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
          <!-- Header Menu Area Start Here -->
-        <div class="navbar navbar-expand-md header-menu-one bg-light">
-            <div class="nav-bar-header-one">
-                <div class="header-logo">
-                    <a href="Admin.jsp">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                  <div class="toggle-button sidebar-toggle">
-                    <button type="button" class="item-link">
-                        <span class="btn-icon-wrap">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="d-md-none mobile-nav-bar">
-               <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
-                    <i class="far fa-arrow-alt-circle-down"></i>
-                </button>
-                <button type="button" class="navbar-toggler sidebar-toggle-mobile">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
             <%@include file="dashboard-header.jsp" %>
-        </div>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -143,10 +117,19 @@
                         <li>Add New Teacher</li>
                     </ul>
                 </div>
+                
+                
                 <!-- Breadcubs Area End Here -->
                 <!-- Add New Teacher Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
+                    	<%if(message != null){ %>
+                    	<div class="ui-alart-box">
+                			<div class="alert alert-success" role="alert">
+                        	<%=message %>
+                     		</div>
+                		</div>
+                		<%} %>
                         <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>Add New Teacher</h3>
@@ -193,7 +176,7 @@
                                 </div>
 								<div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Email</label>
-                                    <input autocomplete="off" name="email" type="text" placeholder="" class="form-control">
+                                    <input id="mail" autocomplete="off" name="email" type="text" placeholder="" class="form-control">
                                   </div>
                                  <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Password</label>
@@ -392,6 +375,22 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <script>
+
+$(document).ready(function() {
+	$("#submit").click(function() {
+		var str = $("#mail").val();
+		$.get("Registrationstudent", {
+			email : str
+		}).done(function(data)
+		{
+			if (data == "true") {
+				alert("This email id is already exist");	
+			}
+		});	
+	});
+});
+</script>
     
     <script>
 	$(document).on('click', '.toggle-password', function() {
@@ -461,7 +460,7 @@
 					
 					$.each(obj,function(key,value){
 						var divId = streamValue+'-'+value.semId; //
-						$('#'+id).append('<div id='+divId+'></div>'); 
+						$('#'+id).append('<div style="margin-left: 30px;" id='+divId+'></div>'); 
 						$("#"+divId).append('<input name="semesterCheck" class="semester_check" type="checkbox" value='+value.semId+'>semester '+value.semValue+'<br>');
 						//var aa = $("#"+id);
 						//alert("aa: "+aa);
@@ -515,7 +514,7 @@
 						//var subjectDivElement = ;
 						//$('#'+divTagId).append('<div class="Subject"></div>'); 
 						$("#"+divTagId).append($subjectDivElement);
-						$($subjectDivElement).append('<input name = '+subjectName+' type="checkbox" value='+value.subjectId+'>'+value.subjectName+'<br>');
+						$($subjectDivElement).append('<input style="margin-left: 40px;" name = '+subjectName+' type="checkbox" value='+value.subjectId+'>'+value.subjectName+'<br>');
 						
 						
 					});

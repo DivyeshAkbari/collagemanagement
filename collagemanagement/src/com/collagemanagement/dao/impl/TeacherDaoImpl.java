@@ -1,5 +1,6 @@
 package com.collagemanagement.dao.impl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.util.Base64;
 import java.util.List;
 
 import com.collagemanagement.bean.Assignment;
+import com.collagemanagement.bean.Image;
 import com.collagemanagement.bean.Result;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Semester1;
@@ -162,7 +164,7 @@ public class TeacherDaoImpl implements TeacherDao {
 		// TODO Auto-generated method stub
 		int userRecordId = 0;
 		String query = "insert into user_table(c_First_Name,c_middle_name,c_last_name,c_email,"
-				+ "c_gender,c_address,c_password,image,c_qulification,c_contact,c_roll) values (?,?,?,?,?,?,?,?,?,?,?)";
+				+ "c_gender,c_address,c_password,image,c_qulification,c_contact,c_roll,i_status,i_status1) values (?,?,?,?,?,?,?,?,?,?,?,1,1)";
 		try (PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, u1.getFirstname());
@@ -285,6 +287,11 @@ public class TeacherDaoImpl implements TeacherDao {
 				u1.setSemester(rs.getInt("i_semester_id"));
 				// u1.setDivision(rs.getString("c_division"));
 				String password = rs.getString("c_password");
+				byte[] imagedata = rs.getBytes("image");
+				if (null != imagedata && imagedata.length > 0) {
+					String imagestr = Base64.getEncoder().encodeToString(imagedata);
+					u1.setUserProfilepicString(imagestr);
+				}
 
 				t1 = new TrippleDes();
 				String decryptpassword = t1.decrypt(password);
@@ -528,7 +535,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	public int updateTeacherDetails(Connection connection, User u1) throws Exception {
 		// TODO Auto-generated method stub
 		String query = "update user_table set c_First_Name=?,c_middle_name=?,c_last_name=?,"
-				+ "c_contact=?,image=?,c_address=?,c_password=?,c_qulification=? where i_user_id=?";
+				+ "c_contact=?,image=COALESCE(?,image),c_address=?,c_password=?,c_qulification=? where i_user_id=?";
 
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
 			ps.setString(1, u1.getFirstname());
@@ -703,6 +710,7 @@ public class TeacherDaoImpl implements TeacherDao {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Assignment a = new Assignment();
+				a.setDiscription(rs.getString("c_description"));
 				a.setTitle(rs.getString("c_title"));
 				a.setAssId(rs.getInt("i_ass_faculty_id"));
 				a.setUploadDate(rs.getString("d_upload_date"));
@@ -774,8 +782,9 @@ public class TeacherDaoImpl implements TeacherDao {
 	public List<User> fetchStudentDetails(Connection connection, int semId) throws Exception {
 		// TODO Auto-generated method stub
 		List<User> userlist1=new ArrayList<>();
-		String query = "select * from user_table where c_roll='STUDENT'  and i_status=1 and i_status1=1 and i_semester_id=16";
+		String query = "select * from user_table where c_roll='STUDENT'  and i_status=1 and i_status1=1 and i_semester_id=?";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
+			ps.setInt(1, semId);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				User u1=new User();
@@ -993,6 +1002,55 @@ public class TeacherDaoImpl implements TeacherDao {
 			return ps.executeUpdate();
 		}
 		//return 0;
+	}
+
+	@Override
+	public int deleteAssFaculty(Connection connection, int userId, String assid) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "delete from ass_faculty_table where i_ass_faculty_id=? and i_user_id=?";
+		try (PreparedStatement ps = connection.prepareStatement(query);) {
+			ps.setInt(1, Integer.parseInt(assid));
+			ps.setInt(2, userId);
+			return ps.executeUpdate();
+		}
+		//return 0;
+	}
+
+	@Override
+	public List<Image> fetchStudentProfilePics(int semId, Connection connection) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "select image from user_table where c_roll='STUDENT' and i_status=1 and i_status1=1 and  i_semester_id=?";
+		List<Image> imagelist =  new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(query);) {
+			ps.setInt(1, semId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Image i1 = new Image();
+//				Blob imageBlob = rs.getBlob("image");
+//				InputStream binaryStream = imageBlob.getBinaryStream(0, imageBlob.length());
+//				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//				i1.setUserProfilepicStream(binaryStream);
+//				byte[] buffer = new byte[4096];
+//				int bytesRead = -1;
+//				 
+//				while ((bytesRead = binaryStream.read(buffer)) != -1) {
+//				    outputStream.write(buffer, 0, bytesRead);
+//				}
+//				 
+//				byte[] imageBytes = outputStream.toByteArray();
+//				 
+//				String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+//				i1.setUserProfilepicString(base64Image);
+				byte[] imagedata = rs.getBytes("image");
+				 if(null!=imagedata && imagedata.length>0)
+				 {
+					 String imagestr = Base64.getEncoder().encodeToString(imagedata);
+					 i1.setUserProfilepicString(imagestr);
+				 }
+				 imagelist.add(i1);
+			}
+		}
+		return imagelist;
 	}
 
 }

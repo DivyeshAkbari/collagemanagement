@@ -66,8 +66,8 @@ public class SendEmail implements Runnable
 		@Override
 		public void run()
 		{
-			final String username = "divyeshakabari01@gmail.com";
-			final String password = "Divyesh1234";
+			final String username = "educhampp@gmail.com";
+			final String password = "Lel0d0mar0";
 
 			Properties prop = new Properties();
 			prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -85,11 +85,11 @@ public class SendEmail implements Runnable
 			try
 			{
 				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress("divyeshakabari01@gmail.com"));
+				message.setFrom(new InternetAddress("educhampp@gmail.com"));
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
 				message.setSubject(subject);
 				message.setContent(msg,"text/html");
-				message.setText(msg);
+				//message.setText(msg);
 
 				Transport.send(message);
 

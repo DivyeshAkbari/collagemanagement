@@ -24,7 +24,7 @@
                                     <a href="index4.html" class="nav-link"><i class="fas fa-angle-right"></i>Parents</a>
                                 </li> -->
                                 <li class="nav-item">
-                                    <a href="Teacher_dashboard5.jsp" class="nav-link menu-active"><i class="fas fa-angle-right"></i>Teachers</a>
+                                    <a href="Teacher_dashboard.jsp" class="nav-link menu-active"><i class="fas fa-angle-right"></i>Teachers</a>
                                 </li>
                             </ul>
                         </li>
@@ -42,8 +42,11 @@
                                 <li class="nav-item">
                                     <a href="teacher-upload-assignment.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Upload Assignment</a>
                                 </li>
+                                 <li class="nav-item">
+                                    <a href="view-assignment-subject.jsp" class="nav-link"><i class="fas fa-angle-right"></i>View Assignment</a>
+                                </li>
                                 <li class="nav-item">
-                                    <a href="teacher-subjects.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Assignment Info.</a>
+                                    <a href="teacher-subjects.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Student Assignment Info.</a>
                                 </li>
                             </ul>
                         </li>

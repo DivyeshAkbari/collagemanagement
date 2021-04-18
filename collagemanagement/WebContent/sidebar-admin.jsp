@@ -129,12 +129,14 @@
                         <li class="nav-item">
                             <a href="manage-papers.jsp" class="nav-link"><i
                                     class="flaticon-list"></i><span>Previous year papers</span></a>
-                                    <li class="nav-item">
-                                    
-                                    <a href="SelectStreamforpaperdata.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Update Paper Details</a>
-                                    </li>
-                        
                         </li>
+                        <li class="nav-item">
+                            <a href="SelectStreamforpaperdata.jsp" class="nav-link"><i
+                                    class="flaticon-list"></i><span>Update Paper Details</span></a>
+                        </li>
+                       
+                        
+<!--                         </li> -->
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Acconunt</span></a>
                             <ul class="nav sub-group-menu">
@@ -215,33 +217,33 @@
                             <a href="messaging.jsp" class="nav-link"><i
                                     class="flaticon-chat"></i><span>Messeage</span></a>
                         </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-menu-1"></i><span>UI Elements</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="notification-alart.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Alart</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="button.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Button</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="grid.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Grid</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="modal.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Modal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="progress-bar.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Progress Bar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-tab.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Tab</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="ui-widget.jsp" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Widget</a>
-                                </li>
-                            </ul>
-                        </li>
+<!--                         <li class="nav-item sidebar-nav-item"> -->
+<!--                             <a href="#" class="nav-link"><i class="flaticon-menu-1"></i><span>UI Elements</span></a> -->
+<!--                             <ul class="nav sub-group-menu"> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="notification-alart.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Alart</a> -->
+<!--                                 </li> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="button.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Button</a> -->
+<!--                                 </li> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="grid.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Grid</a> -->
+<!--                                 </li> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="modal.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Modal</a> -->
+<!--                                 </li> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="progress-bar.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Progress Bar</a> -->
+<!--                                 </li> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="ui-tab.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Tab</a> -->
+<!--                                 </li> -->
+<!--                                 <li class="nav-item"> -->
+<!--                                     <a href="ui-widget.jsp" class="nav-link"><i -->
+<!--                                             class="fas fa-angle-right"></i>Widget</a> -->
+<!--                                 </li> -->
+<!--                             </ul> -->
+<!--                         </li> -->
                         <!-- <li class="nav-item">
                             <a href="map.jsp" class="nav-link"><i
                                     class="flaticon-planet-earth"></i><span>Map</span></a>

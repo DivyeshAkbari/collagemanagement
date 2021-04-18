@@ -39,6 +39,7 @@
 <jsp:include page ="/SelectFacultyDetails"/>
  
 <% List<User> facultylist = (List)request.getAttribute("facultylist");
+int userid1=0;
 %>
 
 <body>
@@ -47,33 +48,7 @@
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
         <!-- Header Menu Area Start Here -->
-        <div class="navbar navbar-expand-md header-menu-one bg-light">
-            <div class="nav-bar-header-one">
-                <div class="header-logo">
-                    <a href="Admin.jsp">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                  <div class="toggle-button sidebar-toggle">
-                    <button type="button" class="item-link">
-                        <span class="btn-icon-wrap">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="d-md-none mobile-nav-bar">
-               <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
-                    <i class="far fa-arrow-alt-circle-down"></i>
-                </button>
-                <button type="button" class="navbar-toggler sidebar-toggle-mobile">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
             <%@include file="dashboard-header.jsp" %>
-        </div>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -106,9 +81,9 @@
                                 data-toggle="dropdown" aria-expanded="false">...</a>
         
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Generate Report</a>
+<!--                                     <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a> -->
+<!--                                     <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a> -->
                                 </div>
                             </div>
                         </div>
@@ -123,13 +98,15 @@
                                 <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
                                     <input id="searchMail" type="text" onkeyup="myFunction2()" placeholder="Search by Mail id ..." class="form-control">
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button disabled="disabled" type="submit" class="fw-btn-fill btn-gradient-yellow">Type to search..</button>
-                                </div>
+<!--                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group"> -->
+<!--                                     <button id="btnExport" type="submit" class="fw-btn-fill btn-gradient-yellow">Generate Report</button> -->
+<!--                                 </div> -->
                             </div>
                         </form>
                         <div class="table-responsive">
                             <table id="myTable" class="table display data-table text-nowrap">
+<!--                              <button id="btnExport" type="submit" class="fw-btn-fill btn-gradient-yellow">Generate Report</button> -->
+                                
                                 <thead>
                                     <tr>
                                         <th> 
@@ -153,6 +130,7 @@
                                 <tbody>
                                 <% for(int i=0; i<facultylist.size(); i++){
                                 	User user = facultylist.get(i);
+                                	userid1 = user.getId();
                                 	%>
                                     <tr>
                                         <td>
@@ -176,7 +154,10 @@
                                                     <span class="flaticon-more-button-of-three-dots"></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="RemoveFacultyDetails?id=<%= user.getId()%>"><i class="fas fa-times text-orange-red"></i>Delete</a>
+<%--                                                 	href="RemoveFacultyDetails?id=<%= user.getId()%>" --%>
+                                                    <a data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item" onclick="geteventid(<%=user.getId()%>);"><i class="fas fa-times text-orange-red"></i>Delete</a>
+<!--                                                    <button type="button" class="fw-btn-fill btn-gradient-yellow"  data-toggle="modal" data-target="#exampleModalCenter" -->
+<%-- 													onclick="geteventid(<%=user.getId()%>);">Activate</button> --%>
                                                     <a class="dropdown-item" href="EditFacultyDetail?id=<%= user.getId() %>"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                                                     <a class="dropdown-item" href="#" onclick="reloadPage();"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                                 </div>
@@ -186,6 +167,32 @@
                                     <% } %>
                                 </tbody>
                             </table>
+                             
+<!--                             modal -->
+							<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalCenterTitle"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-exclamation-triangle"></i>Warning</h4>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">Are you sure want to Activate  ?</div>
+									<div class="modal-footer">
+										<button type="button" class="fw-btn-fill btn-gradient-yellow"
+											data-dismiss="modal"><i class="bi bi-x"></i>cancel</button>
+										<button type="button" class="fw-btn-fill btn-gradient-yellow">
+											</i><a style="color: white;" id="Acceptid"><i class="bi bi-person-x-fill" style="margin-right: 10px;"></i>Delete</a>
+										</button>
+									</div> 
+								</div>
+							</div>
+						</div>
+<!-- 						modal end -->
                         </div>
                     </div>
                 </div>
@@ -271,6 +278,14 @@
       	    }       
       	  }
       	}
+    </script>
+    <script>
+    function geteventid(userid)
+    {	
+    	var uid = userid;
+    	var strLink = "RemoveFacultyDetails?id=" + uid;
+    	document.getElementById("Acceptid").setAttribute("href", strLink);
+    }
     </script>
 
 </body>

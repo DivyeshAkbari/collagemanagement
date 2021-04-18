@@ -192,7 +192,7 @@
 //                             +'<a href="FetchSubmittedAssInfo?id='+value.subjectId+'">'+value.subjectName+'</a></h2>'
 //                             +'</div>'
                             +'</div>'
-                            +'<div class="social-like"><a href="FetchSubmittedAssInfo?id='+value.subjectId+'">'+value.subjectName+'</a></div>'
+                            +'<div class="social-like"><a href="FetchFacultyAssignment?id='+value.subjectId+'&name='+value.subjectName+'">'+value.subjectName+'</a></div>'
                             +'</div>'
                             +'</div>';	
                             

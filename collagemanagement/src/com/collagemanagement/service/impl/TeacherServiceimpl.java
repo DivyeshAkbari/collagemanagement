@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
 import com.collagemanagement.bean.Assignment;
+import com.collagemanagement.bean.Image;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Semester1;
 import com.collagemanagement.bean.Stream;
@@ -401,7 +402,8 @@ public class TeacherServiceimpl implements TeacherService {
 
 			if (updateRecord > 0) {
 				return "record updated successfully";
-			}
+			}else
+				return "record can't be updated.. try again";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -620,6 +622,30 @@ public class TeacherServiceimpl implements TeacherService {
 				return "true";
 			else
 				return "false";
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String removeAssFaculty(int userId, String assid) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			int i1 = teacherdao.deleteAssFaculty(connection,userId,assid);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Image> getStudentProfilePic(int semId) {
+		// TODO Auto-generated method stub
+		try (Connection connection = getConnection();) {
+			return teacherdao.fetchStudentProfilePics(semId,connection);
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

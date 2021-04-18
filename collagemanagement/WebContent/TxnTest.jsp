@@ -107,8 +107,8 @@
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="index.html">
-                        <img height="70px" width="70px" src="assets/images/Educhamp_logo12.png" alt="logo">
-                        <img height="170px" width="170px" src="assets/images/Black.png" alt="logo">
+                        <img height="63px" width="63px" src="assets/images/Educhamp_logo12.png" alt="logo">
+                        <img height="127px" width="127px" src="assets/images/Black.png" alt="logo">
                     </a>
                 </div>
                   <div class="toggle-button sidebar-toggle">

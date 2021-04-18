@@ -915,7 +915,7 @@
     <servlet-name>DeleteNote</servlet-name>
     <url-pattern>/DeleteNote</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>ValidatePaperyear</display-name>
     <servlet-name>ValidatePaperyear</servlet-name>
@@ -1074,5 +1074,85 @@
   <servlet-mapping>
     <servlet-name>EventRegister</servlet-name>
     <url-pattern>/EventRegister</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchEventDetails</display-name>
+    <servlet-name>FetchEventDetails</servlet-name>
+    <servlet-class>utils.FetchEventDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchEventDetails</servlet-name>
+    <url-pattern>/FetchEventDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Fetchupcomingevent</display-name>
+    <servlet-name>Fetchupcomingevent</servlet-name>
+    <servlet-class>utils.Fetchupcomingevent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fetchupcomingevent</servlet-name>
+    <url-pattern>/Fetchupcomingevent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Fetchexpiredevent</display-name>
+    <servlet-name>Fetchexpiredevent</servlet-name>
+    <servlet-class>utils.Fetchexpiredevent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fetchexpiredevent</servlet-name>
+    <url-pattern>/Fetchexpiredevent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchEventforadmin</display-name>
+    <servlet-name>FetchEventforadmin</servlet-name>
+    <servlet-class>utils.FetchEventforadmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchEventforadmin</servlet-name>
+    <url-pattern>/FetchEventforadmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActivateEvent</display-name>
+    <servlet-name>ActivateEvent</servlet-name>
+    <servlet-class>utils.ActivateEvent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActivateEvent</servlet-name>
+    <url-pattern>/ActivateEvent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExpireEvent</display-name>
+    <servlet-name>ExpireEvent</servlet-name>
+    <servlet-class>utils.ExpireEvent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExpireEvent</servlet-name>
+    <url-pattern>/ExpireEvent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Fetcheventforuploadimage</display-name>
+    <servlet-name>Fetcheventforuploadimage</servlet-name>
+    <servlet-class>utils.Fetcheventforuploadimage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fetcheventforuploadimage</servlet-name>
+    <url-pattern>/Fetcheventforuploadimage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentRegistration</display-name>
+    <servlet-name>StudentRegistration</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.StudentRegistration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentRegistration</servlet-name>
+    <url-pattern>/StudentRegistration</url-pattern>
   </servlet-mapping>
 </web-app>

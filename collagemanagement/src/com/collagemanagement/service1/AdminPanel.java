@@ -35,4 +35,10 @@ public interface AdminPanel {
 
 	public String insertEvent(Event event);
 
+	public List<Event> fetchEvent(int i);
+
+	public String activateEvent(String id);
+
+	public String expireEvent(String id);
+
 }

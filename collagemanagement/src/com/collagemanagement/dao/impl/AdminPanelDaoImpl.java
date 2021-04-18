@@ -348,13 +348,13 @@ public class AdminPanelDaoImpl implements AdminPanelDao {
 		// TODO Auto-generated method stub
 		
 		int insertedRaws=0;														
-		try(PreparedStatement p1 = connection.prepareStatement("insert into event_table(c_event_title,c_event_description) values(?,?)");
+		try(PreparedStatement p1 = connection.prepareStatement("insert into event_table(c_event_title,c_event_description,d_event_date) values(?,?,?)");
 			)
 		{
 			System.out.println("In dao");
 			p1.setString(1, event.getEventname()); 
 			p1.setString(2,event.getEventDescription());
-			
+			p1.setString(3, event.getDate());
 			insertedRaws = p1.executeUpdate();
 
 			if (insertedRaws == 1) {
@@ -367,5 +367,147 @@ public class AdminPanelDaoImpl implements AdminPanelDao {
 			e.printStackTrace();
 		}		
 		return insertedRaws;
+	}
+
+	@Override
+	public List<Event> getEvent(Connection c1,int i)
+	{
+		List<Event> eventlist=new ArrayList<>();
+		PreparedStatement p1=null;
+		try 
+		{
+			
+			if(i==1)
+			{
+				p1=c1.prepareStatement("Select * from event_table where i_status=1 ");
+			}
+			else if(i==0) 
+			{
+				p1=c1.prepareStatement("Select * from event_table where i_status=0 ");
+			}
+			else if(i==2)
+			{
+				p1=c1.prepareStatement("Select * from event_table ");
+			}
+				
+			try(ResultSet r1=p1.executeQuery();
+				  )
+			{
+				while(r1.next())
+				{
+					Event e1=new Event();
+					
+					e1.setEventname(r1.getString("c_event_title"));
+					e1.setEventDescription(r1.getString("c_event_description"));
+					e1.setEventid(r1.getInt("i_event_id"));
+					e1.setDate(r1.getString("d_event_date"));
+					
+					String eventdate=r1.getString("d_event_date");
+					
+					String d1[]=eventdate.split("/");
+					
+					e1.setD1(Integer.parseInt(d1[0]));
+					
+					if(Integer.parseInt(d1[1])==1)
+					{
+						e1.setMonth("January");
+					}
+					else if (Integer.parseInt(d1[1])==2)
+					{
+						e1.setMonth("February");
+					}
+					else if (Integer.parseInt(d1[1])==3)
+					{
+						e1.setMonth("March");
+					}
+					else if (Integer.parseInt(d1[1])==4)
+					{
+						e1.setMonth("April");
+					}
+					else if (Integer.parseInt(d1[1])==5)
+					{
+						e1.setMonth("May");
+					}
+					else if (Integer.parseInt(d1[1])==6)
+					{
+						e1.setMonth("June");
+					}
+					else if (Integer.parseInt(d1[1])==7)
+					{
+						e1.setMonth("July");
+					}
+					else if (Integer.parseInt(d1[1])==8)
+					{
+						e1.setMonth("August");
+					}
+					else if (Integer.parseInt(d1[1])==9)
+					{
+						e1.setMonth("September");
+					}
+					else if (Integer.parseInt(d1[1])==10)
+					{
+						e1.setMonth("October");
+					}
+					else if (Integer.parseInt(d1[1])==11)
+					{
+						e1.setMonth("November");
+					}
+					else if (Integer.parseInt(d1[1])==12)
+					{
+						e1.setMonth("December");
+					}
+					
+					e1.setYear(Integer.parseInt(d1[2]));
+					
+					eventlist.add(e1);
+				}
+			}
+			p1.close();
+		}
+		 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			return eventlist;
+	}
+
+	@Override
+	public String startEvent(Connection c1, String id) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Update event_table set i_status=1 where  i_event_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			int i1= p1.executeUpdate();
+			if(i1>0)
+			{
+				return "done";
+			}
+			else
+			{
+				return "not";
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public int concludeEvent(Connection c1, String id) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Update event_table set i_status=0 where   i_event_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			return p1.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

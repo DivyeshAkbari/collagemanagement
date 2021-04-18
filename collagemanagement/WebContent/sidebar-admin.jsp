@@ -1,7 +1,8 @@
 <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
                <div class="mobile-sidebar-header d-md-none">
                     <div class="header-logo">
-                        <a href="Admin.jsp"><img src="img/logo1.png" alt="logo"></a>
+                        <a href="Admin.jsp"><img height="70px" width="70px" src="assets/images/Educhamp_logo12.png" alt="logo">
+                        <img height="170px" width="170px" src="assets/images/Black.png" alt="logo"></a>
                     </div>
                </div>
                 <div class="sidebar-menu-content">
@@ -36,6 +37,10 @@
                                     <a href="add-student.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Add
                                         Student</a>
                                 </li>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="Selectstreamforpendinguser.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Pending Student Request</a>
+                                </li>
                                 <!-- <li class="nav-item">
                                     <a href="student-details.jsp" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Student Details</a>
@@ -50,6 +55,22 @@
                                 </li>
                             </ul>
                         </li>
+                        
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Event</span></a>
+                            <ul class="nav sub-group-menu">
+                            	<li class="nav-item">
+                                    <a href="FetchEventforadmin" class="nav-link"><i class="fas fa-angle-right"></i>All
+                                        Events</a>
+                                        <a href="EventRegister.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Add
+                                        Events</a>
+                                        <a href="manage-eventimage.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Upload
+                                        Event Image</a>
+                                        
+                                </li>
+                            </ul>
+                        </li>
+                        
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i
                                     class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
@@ -108,6 +129,11 @@
                         <li class="nav-item">
                             <a href="manage-papers.jsp" class="nav-link"><i
                                     class="flaticon-list"></i><span>Previous year papers</span></a>
+                                    <li class="nav-item">
+                                    
+                                    <a href="SelectStreamforpaperdata.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Update Paper Details</a>
+                                    </li>
+                        
                         </li>
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Acconunt</span></a>
@@ -141,8 +167,16 @@
                             </ul>
                         </li> -->
                         <li class="nav-item">
-                            <a href="all-subject.jsp" class="nav-link"><i
-                                    class="flaticon-open-book"></i><span>Subject</span></a>
+                                    <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Subject</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="all-subject.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Addsubject</a>
+                                </li>
+                                <li class="nav-item">
+                            <a href="SelectStreamtoshowsubject.jsp" class="nav-link"><i
+                                    class="flaticon-open-book"></i><span>Show Subject</span></a>
+                            </li>
                         </li>
                        
                         <!-- <li class="nav-item">

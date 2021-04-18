@@ -1,15 +1,18 @@
+<%@page import="com.collagemanagement.bean.Papertype"%>
+<%@page import="com.collagemanagement.bean.Stream"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.collagemanagement.bean.Notice"%>    
-<%@page import="java.util.List"%>
-    
 <!doctype html>
 <html class="no-js" lang="">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<!-- hello -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-subject.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EduChamp | Notice Board</title>
+    <title>ADMIN | Previous year paper</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -26,32 +29,29 @@
     <link rel="stylesheet" href="fonts/flaticon.css">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Date Picker CSS -->
-    <link rel="stylesheet" href="css/datepicker.min.css">
     <!-- Select 2 CSS -->
     <link rel="stylesheet" href="css/select2.min.css">
+    <!-- Data Table CSS -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-   
-</head>
-
-
-<%
-String message=(String)request.getAttribute("message");
-%>
+<script src="assets/js/jquery.min.js"></script></head>
+<jsp:include page ="/FetchHobby"/>
+<% List<Stream> Streamlist= (List)request.getAttribute("Streamlist"); %>
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
-       <!-- Header Menu Area Start Here -->
+        <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="Admin.jsp">
-                        <img src="img/logo.png" alt="logo">
+                        <img height="70px" width="70px" src="assets/images/Educhamp_logo12.png" alt="logo">
+                        <img height="170px" width="170px" src="assets/images/Black.png" alt="logo">
                     </a>
                 </div>
                   <div class="toggle-button sidebar-toggle">
@@ -248,84 +248,90 @@ String message=(String)request.getAttribute("message");
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-           
-           <%@include file="sidebar-admin.jsp" %>
-           
+            
+            <%@include file="sidebar-admin.jsp" %>
+            
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Notice Board</h3>
+                    <h3></h3>
                     <ul>
                         <li>
                             <a href="Admin.jsp">Home</a>
                         </li>
-                        <li>Notice</li>
+                        <li></li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
+                <!-- All Subjects Area Start Here -->
                 <div class="row">
-                    <!-- Add Notice Area Start Here -->
                     <div class="col-4-xxxl col-12">
                         <div class="card height-auto">
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Create A Notice</h3>
+                                        <!--  --><h3>select stream for pending Student </h3>
                                     </div>
-                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" 
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
-                
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                            aria-expanded="false">...</a>
+
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#"><i
+                                                    class="fas fa-times text-orange-red"></i>Close</a>
+                                            <a class="dropdown-item" href="#"><i
+                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#"><i
+                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
-                                <form class="new-added-form" action="EventRegister" method="post">
+                                <form class="new-added-form" action="fetchstudentinformation" method="post">
                                     <div class="row">
-                                    <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Title</label>
-                                            <input type="text" placeholder="" name="eventtitle" class="form-control">
-                                        </div> 
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Details</label>
-                                            <input type="text" placeholder="" name="eventDetails" class="form-control">
+                                        
+                                            <label>Select Stream *</label>
+                                            <select class="select2" id="stream" name="stream">
+                                            <option>please select stream*</option>
+                                             <%
+											for(int i=0;i<Streamlist.size();i++)
+											{
+										%>
+										<%
+											Stream s=Streamlist.get(i);
+										%>
+											<option value="<%=s.getStreamid()%>"> <%=s.getStreamname()%> </option>
+										<%
+											}
+										%>
+                                            </select>
+                                            <!-- <input type="text" placeholder="" class="form-control"> -->
                                         </div>
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group"> 
-                                    <label>Date Of Birth *</label>
-                                    <input type="text" placeholder="dd/mm/yyyy" name="date" class="form-control air-datepicker">
-                                    <i class="far fa-calendar-alt"></i>
-                                		</div>   
-                                                                                                         
+                                     <!-- <input type="text" id="datepicker" /> -->
+                                        <!--  
+                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                            <label>Select Subject *</label>
+                                            <select class="select2" id="subject" name="subject">
+                                               
+                                                
+                                            </select>
+                                        </div>
+                                        -->
                                         <div class="col-12 form-group mg-t-8">
-                                            <button type="submit" id="submitbtnid" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
-                                            <% if(message!=null)
-					{%>
-						 <span><%=message %></span>
-					<%} %>
-                                            
-                                           <!--  <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                            <!--  <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button> -->
                                         </div>
                                     </div>
                                 </form>
-                               
                             </div>
                         </div>
                     </div>
-                    <!-- Add Notice Area End Here -->
-                    <!-- All Notice Area Start Here -->
-                    
-                    <!-- All Notice Area End Here -->
-                    </div>
-                    </div>
-                    </form>
                 </div>
+                <!-- All Subjects Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by
-                        <a href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                            href="#">PsdBosS</a></div>
                 </footer>
             </div>
         </div>
@@ -343,13 +349,23 @@ String message=(String)request.getAttribute("message");
     <script src="js/select2.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Date Picker Js -->
-    <script src="js/datepicker.min.js"></script>
+    <!-- Data Table Js -->
+    <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    <!-- bootstrap datepicker js -->
+    <script src="js/bootstrap-datepicker.js"></script>
+    <!-- bootstrap datepicker css -->
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet">
+    
+    <script>
+      $("#datepicker").datepicker({
+    format: "yyyy",
+    viewMode: "years", 
+    minViewMode: "years"
+    });
+    </script>
 
 </body>
-
-
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/notice-board.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-subject.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
 </html>

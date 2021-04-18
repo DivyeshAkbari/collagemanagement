@@ -1,15 +1,17 @@
+<%@page import="com.collagemanagement.bean.User"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.collagemanagement.bean.Notice"%>    
-<%@page import="java.util.List"%>
-    
 <!doctype html>
 <html class="no-js" lang="">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-student.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EduChamp | Notice Board</title>
+    <title>AKKHOR | All Students</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -26,32 +28,48 @@
     <link rel="stylesheet" href="fonts/flaticon.css">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="css/animate.min.css">
-    <!-- Date Picker CSS -->
-    <link rel="stylesheet" href="css/datepicker.min.css">
-    <!-- Select 2 CSS -->
-    <link rel="stylesheet" href="css/select2.min.css">
+    <!-- Data Table CSS -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-   
+    <script type="text/css">
+     .imageclass  {
+		width: auto;
+	}
+</script>
+    <script type="text/javascript">
+    
+    function getuserid(userid)
+    {	
+    	var uid = userid;
+    	var strLink = "AcceptStudentdetails?id=" + uid;
+    	document.getElementById("Acceptid").setAttribute("href", strLink);
+    }
+    function getuserid1(userid)
+    {	
+    	var uid = userid;
+    	var strLink = "DeletStudentdetails?id=" + uid;
+    	document.getElementById("rejectid").setAttribute("href", strLink);
+    }
+</script>
 </head>
-
-
-<%
-String message=(String)request.getAttribute("message");
-%>
+<% 
+List<User>  userList =(List)request.getSession(false).getAttribute("Studentlist");%>
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
-       <!-- Header Menu Area Start Here -->
+        <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
                 <div class="header-logo">
                     <a href="Admin.jsp">
-                        <img src="img/logo.png" alt="logo">
+                        <img height="70px" width="70px" src="assets/images/Educhamp_logo12.png" alt="logo">
+                        <img height="170px" width="170px" src="assets/images/Black.png" alt="logo">
                     </a>
                 </div>
                   <div class="toggle-button sidebar-toggle">
@@ -248,84 +266,161 @@ String message=(String)request.getAttribute("message");
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
-           
-           <%@include file="sidebar-admin.jsp" %>
-           
+            
+            <%@include file="sidebar-admin.jsp" %>
+            
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Notice Board</h3>
+                    <h3>Students</h3>
                     <ul>
                         <li>
                             <a href="Admin.jsp">Home</a>
                         </li>
-                        <li>Notice</li>
+                        <li>All Students</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
-                <div class="row">
-                    <!-- Add Notice Area Start Here -->
-                    <div class="col-4-xxxl col-12">
-                        <div class="card height-auto">
-                            <div class="card-body">
-                                <div class="heading-layout1">
-                                    <div class="item-title">
-                                        <h3>Create A Notice</h3>
-                                    </div>
-                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" 
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
-                
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                        </div>
-                                    </div>
+                <!-- Student Table Area Start Here -->
+                <div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Students Data</h3>
+                            </div>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                    aria-expanded="false">...</a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                 </div>
-                                <form class="new-added-form" action="EventRegister" method="post">
-                                    <div class="row">
-                                    <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Title</label>
-                                            <input type="text" placeholder="" name="eventtitle" class="form-control">
-                                        </div> 
-                                        <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                            <label>Details</label>
-                                            <input type="text" placeholder="" name="eventDetails" class="form-control">
-                                        </div>
-                                        <div class="col-xl-3 col-lg-6 col-12 form-group"> 
-                                    <label>Date Of Birth *</label>
-                                    <input type="text" placeholder="dd/mm/yyyy" name="date" class="form-control air-datepicker">
-                                    <i class="far fa-calendar-alt"></i>
-                                		</div>   
-                                                                                                         
-                                        <div class="col-12 form-group mg-t-8">
-                                            <button type="submit" id="submitbtnid" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Submit</button>
-                                            <% if(message!=null)
-					{%>
-						 <span><%=message %></span>
-					<%} %>
-                                            
-                                           <!--  <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                                        </div>
-                                    </div>
-                                </form>
-                               
                             </div>
                         </div>
+                        <form class="mg-b-20">
+                            <div class="row gutters-8">
+                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Roll ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Class ..." class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div >
+                                                <label class="form-check-label">Sr No.</label>
+                                            </div>
+                                        </th>
+                                       		 
+                                                <th>First Name</th>
+                                                <th>Middle Name</th>
+                                               <th>Last Name</th>
+                                               <th>Email</th>
+                                                <th>Gender</th>
+                                                <th>Division</th>
+                                                <th>Semester</th>
+                                            	<th>Action</th>
+                                            	<th>Action2</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <tr>
+                                     
+                                         
+                                       <%int l=0; %>
+                                            <% for(int i=0;i<userList.size();i++)
+												{ %>
+												<tr>	
+														<% User u1=userList.get(i); %>
+														<td><%=++l %></td>
+														<td><%=u1.getFirstname()%></td>
+														<td><%=u1.getMiddlename() %></td>
+														<td><%=u1.getLastname() %></td>
+														<td><%=u1.getEmail()%></td>
+														<td><%=u1.getXender() %></td>
+														<td><%=u1.getDivision()%></td>
+														<td><%=u1.getSemester()%></td>
+														  <%-- <%String incrypt=Encryption.encode(Integer.toString(u1.getId())); %> --%>
+														<td><h1><button type="button" class="fw-btn-fill btn-gradient-yellow" data-toggle="modal" data-target="#exampleModalCenter"
+													onclick="getuserid(<%=u1.getId()%>);">Accept</button></h1></td>
+													<td><h1><button type="button" class="fw-btn-fill btn-gradient-yellow" data-toggle="modal" data-target="#exampleModalCenter1"
+													onclick="getuserid1(<%=u1.getId()%>);">Reject</button></h1></td>
+												</tr>
+											<% } %>               
+                                            </tbody>
+                                        </table>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalCenterTitle"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-exclamation-triangle"></i>Warning</h4>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">Are you sure want to Accept ?</div>
+									<div class="modal-footer">
+										<button type="button" class="fw-btn-fill btn-gradient-yellow"
+											data-dismiss="modal"><i class="bi bi-x"></i>cancel</button>
+										<button type="button" class="fw-btn-fill btn-gradient-yellow">
+											</i><a style="color: white;" id="Acceptid"><i class="bi bi-person-x-fill" style="margin-right: 10px;"></i>Accept</a>
+										</button>
+									</div> 
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="exampleModalCenter1" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalCenterTitle"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-exclamation-triangle"></i>Warning</h4>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">Are you sure want to Reject ?</div>
+									<div class="modal-footer">
+										<button type="button" class="fw-btn-fill btn-gradient-yellow"
+											data-dismiss="modal"><i class="bi bi-x"></i>cancel</button>
+										<button type="button" class="fw-btn-fill btn-gradient-yellow">
+											</i><a style="color: white;" id="rejectid"><i class="bi bi-person-x-fill" style="margin-right: 10px;"></i>Reject</a>
+										</button>
+									</div> 
+								</div>
+							</div>
+						</div>
+                        </div>
                     </div>
-                    <!-- Add Notice Area End Here -->
-                    <!-- All Notice Area Start Here -->
-                    
-                    <!-- All Notice Area End Here -->
-                    </div>
-                    </div>
-                    </form>
                 </div>
+                <!-- Student Table Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by
-                        <a href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                            href="#">PsdBosS</a></div>
                 </footer>
             </div>
         </div>
@@ -339,17 +434,15 @@ String message=(String)request.getAttribute("message");
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- Select 2 Js -->
-    <script src="js/select2.min.js"></script>
     <!-- Scroll Up Js -->
     <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- Date Picker Js -->
-    <script src="js/datepicker.min.js"></script>
+    <!-- Data Table Js -->
+    <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
 
 </body>
 
 
-<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/notice-board.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:27 GMT -->
+<!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/all-student.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:21 GMT -->
 </html>

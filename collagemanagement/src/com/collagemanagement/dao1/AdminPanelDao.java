@@ -37,5 +37,11 @@ public interface AdminPanelDao {
 
 	int addEvent(Connection connection, Event event);
 
+	List<Event> getEvent(Connection c1, int i);
+
+	String startEvent(Connection c1, String id);
+
+	int concludeEvent(Connection c1, String id);
+
 
 }

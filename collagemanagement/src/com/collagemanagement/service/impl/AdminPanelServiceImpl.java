@@ -279,6 +279,56 @@ public class AdminPanelServiceImpl implements AdminPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+		return message;
+	}
+
+	@Override
+	public List<Event> fetchEvent(int i) 
+	{
+		try(Connection c1=getConnection();
+			  )
+		{
+			return adminPanelDao.getEvent(c1,i);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String activateEvent(String id) {
+		
+		try(Connection c1=getConnection();
+			  )
+		{
+			return adminPanelDao.startEvent(c1,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String expireEvent(String id) 
+	{
+		try(Connection c1=getConnection();
+			  )
+		{
+			int i1= adminPanelDao.concludeEvent(c1,id);
+			if(i1>0)
+			{
+				return "success";
+			}
+			else
+			{
+				return "not";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

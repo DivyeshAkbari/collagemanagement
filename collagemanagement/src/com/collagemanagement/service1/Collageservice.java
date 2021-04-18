@@ -2,6 +2,7 @@ package com.collagemanagement.service1;
 
 import java.util.List;
 
+import com.collagemanagement.bean.Feedback;
 import com.collagemanagement.bean.Log;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
@@ -45,6 +46,8 @@ public interface Collageservice
 	public String validEmail(String str);
 
 	public String insertdate(String username, int i);
+
+	public String saveFeedbackDetails(Feedback f1);
 
 	
 }

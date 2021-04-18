@@ -1,30 +1,25 @@
 package utils;
 
 import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.collagemanagement.bean.Stream;
 import com.collagemanagement.service.impl.AdminPanelServiceImpl;
 import com.collagemanagement.service1.AdminPanel;
 
 /**
- * Servlet implementation class FetchCourse
+ * Servlet implementation class ActivateEvent
  */
-public class FetchCourse extends HttpServlet {
+public class ActivateEvent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	AdminPanel adminpanelService = new AdminPanelServiceImpl();
        
+	AdminPanel adminpanelService = new AdminPanelServiceImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FetchCourse() {
+    public ActivateEvent() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +28,16 @@ public class FetchCourse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		System.out.println("Servlet Called");
-		
-		List<Stream> courseList = adminpanelService.fetchCourse();
-		
-		System.out.println("Course is "+courseList);
-		request.setAttribute("courseList",courseList);
-		
-		
+		// TODO Auto-generated method stub
 	
+		String id=request.getParameter("id");
+		
+		String message=adminpanelService.activateEvent(id);
+		System.out.println(message);
+		
+		System.out.println("Activate Event Servlet");
+		request.setAttribute("message", "Event Activated");
+		request.getRequestDispatcher("all-event.jsp").forward(request, response);
 	}
 
 	/**

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import com.collagemanagement.bean.Feedback;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
 //import com.collagemanagement.bean.Log;
@@ -350,6 +351,14 @@ public class Collagedaoimpl implements CollageDao
 				user.setAddress(r1.getString("c_address"));
 				int streamid=r1.getInt("i_stream_id");
 				
+				 byte [] imagedata=r1.getBytes("image");
+					
+					if(null!=imagedata && imagedata.length>0)
+					{
+						String imagestr=Base64.getEncoder().encodeToString(imagedata);
+						user.setUserProfilepicString(imagestr);
+					}
+				
 				try(PreparedStatement p2=connection.prepareStatement("select c_stream from stream_table where i_stream_id=?");
 					  )
 				{
@@ -647,5 +656,35 @@ public class Collagedaoimpl implements CollageDao
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public int inserFeedBackDetails(Connection c1, Feedback f1)
+	{
+		
+		try(PreparedStatement p1=c1.prepareStatement("insert into feedback_table (c_description,c_date,i_user_id,c_roll,c_subject,c_email,c_name,c_contact) values(?,?,?,?,?,?,?,?)");
+			  )
+		{
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+			LocalDateTime now = LocalDateTime.now();  
+			System.out.println(dtf.format(now));
+			
+			p1.setString(1, f1.getDescription());
+			p1.setString(2, dtf.format(now));
+			p1.setInt(3, f1.getUserid());
+			p1.setString(4, f1.getRoll());
+			p1.setString(5, f1.getSubject());
+			p1.setString(6, f1.getEmail());
+			p1.setString(7, f1.getName());
+			p1.setString(8, f1.getContact());
+			
+			return p1.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}	
 }

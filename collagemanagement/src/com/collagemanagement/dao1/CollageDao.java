@@ -3,6 +3,7 @@ package com.collagemanagement.dao1;
 import java.sql.Connection;
 import java.util.List;
 
+import com.collagemanagement.bean.Feedback;
 import com.collagemanagement.bean.Log;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
@@ -30,5 +31,6 @@ public interface CollageDao
 	public int selectStreamid(Connection c1, String id);
 	public String checkEmail(Connection c1, String str);
 	public String updateloginuserdate(Connection connection, String username, int i);
+	public int inserFeedBackDetails(Connection c1, Feedback f1);
 }
 //Pull 

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.collagemanagement.bean.Feedback;
 import com.collagemanagement.bean.Semester;
 import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.User;
@@ -427,4 +428,31 @@ public class Collageserviceimpl  implements Collageservice
 		
 		return null;
 	}
+
+
+	@Override
+	public String saveFeedbackDetails(Feedback f1) 
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=dao.inserFeedBackDetails(c1,f1);
+			
+			if(i1>0)
+			{
+				return "Success";
+			}
+			else
+			{
+				return "Not";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	
 }

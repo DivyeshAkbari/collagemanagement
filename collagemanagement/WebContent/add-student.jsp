@@ -7,13 +7,14 @@
 
 
 <!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/add-teacher.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Dec 2020 18:32:26 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack --><!-- <meta http-equiv="content-type" content="text/html;charset=UTF-8" />/Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>AKKHOR | Add Student</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <!-- Normalize CSS -->
@@ -80,14 +81,16 @@ $(document).ready(function()
 </script>
 <script >
 
-var returnval="";
+var returnval=true;
 $(document).ready(function() {
 	$("#save").click(function() {
 		var str = $("#mail").val();
-		$.post("Registrationstudent", {
+		alert(str);
+		$.get("StudentRegistration", {
 			email : str
 		}).done(function(data)
 		{
+			alert(data);
 			if (data == "true") {
 				alert("This email id is already exist");
  				returnval=false;
@@ -120,12 +123,14 @@ function validateForm()
 	{
 		seterror("fname","*Your Name can't be empty.");
 		returnval=false;
+		alert("alert from  first name and here return value is "+returnval);
 	}
 	if(name.length<3)
 	{
 		seterror("fname","*Your Name must Be 3 Latter.");
 		
 		returnval=false;
+		alert("alert from first 1 name and here return value is "+returnval);
 	}
 	var mname=document.forms['myForm']["middlename"].value;
 	
@@ -133,10 +138,14 @@ function validateForm()
 	{
 		seterror("mname","*Your Middle Name Can't be Empty");
 		returnval=false;
+		alert("alert from middle  name and here return value is "+returnval);
+		
 	}
 	if(mname.length<3)
 	{
-		seterror("mname","*Your Middle Name must Be 3 Latter.")
+		seterror("mname","*Your Middle Name must Be 3 Latter.");
+		returnval=false;
+		alert("alert from middle 1 name and here return value is "+returnval);
 	}
 	
 	var lname=document.forms['myForm']["lastname"].value;
@@ -145,11 +154,13 @@ function validateForm()
 	{
 		seterror("lname","* Your Last Name Can't Be Empty");
 		returnval=false;
+		alert("alert from last  name and here return value is "+returnval);
 	}
 	if(lname.length<5)
 	{
 		seterror("lname","* Your Last Name Must be 5 Letter.");
 		returnval=false;
+		alert("alert from Last  1 name and here return value is "+returnval);
 	}
 	
 	var phone=document.forms['myForm']["number"].value;
@@ -167,6 +178,7 @@ function validateForm()
 	{
 		seterror("femail","* Please Enter Email");
 		returnval=false;
+		alert("alert from email  name and here return value is "+returnval);
 	}
 	var address=document.forms['myForm']["address"].value;
 	
@@ -174,23 +186,27 @@ function validateForm()
 	{
 		seterror("faddress","* Please Enter Address");
 		returnval=false;
+		alert("alert from Adddress  name and here return value is "+returnval);
 	}
 	var password=document.forms['myForm']["password"].value;
 	if(password.length==0)
 	{
 		seterror("pass","* Your Password Can't Be Empty");
 		returnval=false;
+		alert("alert from password  name and here return value is "+returnval);
 	}
 	var xender=document.forms['myForm']["gender"].value;
 	if(xender==null)
 	{
 		seterror("xender","*Please Select Your Xender");	
 		returnval=false;
+		alert("alert from Xender  name and here return value is "+returnval);
 	}
 	if(xender=="no")
 	{
 		seterror("xender","*Please Select Valid Gender");	
 		returnval=false;
+		alert("alert from xender 1  name and here return value is "+returnval);
 	}
 	
 	var stream=document.forms['myForm']["stream"].value;
@@ -198,6 +214,7 @@ function validateForm()
 	{
 		seterror("streamselect","* Please Select Valid Stream");
 		returnval=false;
+		alert("alert from Stream   name and here return value is "+returnval);
 	}
 	
 	var sem=document.forms['myForm']["semester"].value;
@@ -205,6 +222,7 @@ function validateForm()
 	{
 		seterror("sem","* Please Select Valid Semester");
 		returnval=false;
+		alert("alert from sem  name and here return value is "+returnval);
 	}
 	
 	var div=document.forms['myForm']["division"].value;
@@ -212,9 +230,84 @@ function validateForm()
 	{
 		seterror("division","* Please Select Valid Division");
 		returnval=false;
+		alert("alert from division  name and here return value is "+returnval);
 	}
+	alert("finally return value is "+returnval);
 	return returnval;
 }
+
+/* function firstname()
+{
+    var nameInput = document.forms['myForm']["firstname"].value;
+    var letters =/^[A-Za-z]+$/;
+  if (nameInput.match(letters))
+  {
+    return true ;
+  }
+   else
+  { 
+	  alert("Please Enter Valid  First Name");
+      return false;
+  }
+} */
+
+/* function middlename() {
+    var nameInput = document.forms['myForm']["middlename"].value;
+    var letters =/^[A-Za-z]+$/;
+    if (nameInput.match(letters))  {
+    return true ;
+  } else { 
+	  alert("Please Enter Valid  Middle Name");
+      return false;
+  }
+}
+function lastname() {
+    var nameInput = document.forms['myForm']["lastname"].value;
+    var letters =/^[A-Za-z]+$/;
+    if (nameInput.match(letters))  {
+    return true ;
+  } else { 
+	  alert("Please Enter Valid  Last Name");
+      return false;
+  }
+}*/
+
+
+
+function fileValidation() {
+    var fileInput = 
+        document.getElementById('file');
+      
+    var filePath = fileInput.value;
+ 
+    // Allowing file type
+    var allowedExtensions = 
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+      
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    } 
+    else 
+    { 
+        // Image preview
+        if (fileInput.files && fileInput.files[0]) {
+        	alert("fileInput.files is "+fileInput.files);
+        	alert("fileInput.files[0] is "+fileInput.files[0]);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(
+                    'imageid').innerHTML = 
+                    '<img src="' + e.target.result
+                    + '"/>';
+            };
+              
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+
 </script>
 </head>
 <jsp:include page ="/FetchHobby"/>
@@ -463,7 +556,7 @@ function validateForm()
                                 </div>
                             </div>
                         </div>
-                        <form class="new-added-form" name="myForm" onsubmit="return validateForm()" action="Registrationstudent" method="post" enctype="multipart/form-data" >
+                        <form class="new-added-form" name="myForm" onsubmit="return validateForm()" action="StudentRegistration" method="post" enctype="multipart/form-data" >
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="fname">
                                     <label>First Name *</label>
@@ -477,11 +570,11 @@ function validateForm()
                                 <!-- </div> -->
                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="mname">
                                     <label>Middle Name *</label>
-                                    <input type="text" placeholder="" name="middlename" class="form-control"><span class="formerror"><b></b></span>
+                                    <input type="text" placeholder=""  name="middlename" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="lname">
                                     <label>Last Name *</label>
-                                    <input type="text" placeholder="" name="lastname" class="form-control"><span class="formerror"><b></b></span>
+                                    <input type="text" placeholder=""   name="lastname" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="xender">
                                     <label>Gender *</label>
@@ -636,9 +729,9 @@ function validateForm()
                                     <input type="hidden" id="commanvalue" value="null">
                                     <textarea class="textarea form-control" name="address" name="message" id="form-message" cols="10" rows="9"></textarea><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-lg-6 col-12 form-group mg-t-30">
+                                <div class="col-lg-6 col-12 form-group mg-t-30" id="imageid">
                                     <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                                    <input type="file" name="profile_photo" class="form-control-file">
+                                    <input type="file" id="file" name="profile_photo" onchange="return fileValidation()" class="form-control-file">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit" id="save" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>

@@ -1,7 +1,8 @@
 <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
                <div class="mobile-sidebar-header d-md-none">
                     <div class="header-logo">
-                        <a href="Student_dashboard.jsp"><img src="img/logo1.png" alt="logo"></a>
+                        <a href="Student_dashboard.jsp"><img height="70px" width="70px" src="assets/images/Educhamp_logo12.png" alt="logo">
+                        <img height="170px" width="170px" src="assets/images/Black.png" alt="logo"></a>
                     </div>
                </div>
                 <div class="sidebar-menu-content">
@@ -46,7 +47,7 @@
                             <a href="student-subject.jsp" class="nav-link"><i class="flaticon-books"></i><span>Submitted Assignments</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Previous year papers</span></a>
+                            <a href="Paperdownload.jsp" class="nav-link"><i class="flaticon-shopping-list"></i><span>Previous year papers</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="student-result.jsp" class="nav-link"><i class="flaticon-percentage-discount"></i><span>Result</span></a>
@@ -57,7 +58,7 @@
                         
                          <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
-                            <ul class="nav sub-group-menu">
+                            <ul class="nav sub-group-menu"> 
                                 <li class="nav-item">
                                     <a href="all-student.jsp" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Students</a>

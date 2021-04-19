@@ -293,6 +293,8 @@ public class ReadExcelFileDemo1 implements Runnable
 								if(sum/count>=33)
 								{
 									p1.setString(4,"PASS");
+									
+									
 								}
 								else
 								{

@@ -41,6 +41,11 @@
                                 <li class="nav-item">
                                     <a href="Selectstreamforpendinguser.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Pending Student Request</a>
                                 </li>
+                                <li class="nav-item">
+                                <a href="uploadeexcelfile.jsp" class="nav-link"><i class="fas fa-angle-right"></i>Upload
+                                        excelfile</a>
+                                        
+                                </li>
                                 <!-- <li class="nav-item">
                                     <a href="student-details.jsp" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Student Details</a>

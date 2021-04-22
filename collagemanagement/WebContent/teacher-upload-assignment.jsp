@@ -243,7 +243,7 @@ String ans = (String)request.getSession(false).getAttribute("message");
 										<!--                                             Upload Assignment Here<i class="fas fa-cloud-upload-alt mg-l-10"></i> -->
 										<label>Upload Assignment</label> <input name="assignment"
 											type="file"
-											class="btn-fill-lmd radius-30 text-light bg-true-v">
+											class="btn-fill-lmd radius-30 text-light bg-true-v" required="required">
 
 										</button>
 									</div>

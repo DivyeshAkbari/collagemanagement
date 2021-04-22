@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
-    
+    <script src="assets/js/jquery.min.js"></script>
    <script>
 //    		$(document).ready(function(){
 //    			$("#stream_check").click(function(){
@@ -64,7 +64,150 @@
 //    		});
    		
    </script>
+   <script>
+
+var returnval=true;
+
+$(document).ready(function() {
+	
+	$("#submit").click(function() {
+		var str = $("#mail").val();
+		alert(str);
+		$.get("Addteacher", {
+			email : str
+		}).done(function(data)
+		{
+			alert(data);
+			if (data == "true") {
+				alert("This email id is already exist");
+ 				returnval=false;
+			}
+		});	
+	});
+});
+
+
+ 
+function clearErrors()
+{
+	errors=document.getElementsByClassName('formerror');
+	
+	for(let item of errors)
+	{
+		item.innerHTML="";	
+	}
+}
+function seterror(id,error)
+{
+	element=document.getElementById(id);
+	element.getElementsByClassName('formerror')[0].innerHTML=error;
+}
+function validateForm()
+{	
+	clearErrors();
+	
+	var name=document.forms['myForm']["firstname"].value;
+	
+	if(name.length==0)
+	{
+		seterror("fname","*Your Name can't be empty.");
+		returnval=false;
+		//alert("alert from  first name and here return value is "+returnval);
+	}
+	var mname=document.forms['myForm']["middlename"].value;
+	
+	if(mname.length==0)
+	{
+		seterror("mname","*Your Middle Name Can't be Empty");
+		returnval=false;
+		//alert("alert from middle  name and here return value is "+returnval);
+		
+	}
+	
+	var lname=document.forms['myForm']["lastname"].value;
+	
+	if(lname.length==0)
+	{
+		seterror("lname","* Your Last Name Can't Be Empty");
+		returnval=false;
+		//alert("alert from last  name and here return value is "+returnval);
+	}
+	var qualification=document.forms['myForm']["qualification"].value;
+	
+	if(qualification.length==0)
+	{
+		seterror("cpass","* Your Qualification Can't Be Empty");
+		returnval=false;
+		//alert("alert from last  name and here return value is "+returnval);
+	}
+	
+	var phone=document.forms['myForm']["number"].value;
+		
+	if(phone.length!=10)
+	{
+		seterror("phone","* Your Phone Number Must Be of 10 Digits.");
+		returnval=false;
+	}
+	
+	var email=document.forms['myForm']["email"].value;
+	
+	
+	if(email.length==0)
+	{
+		seterror("femail","* Please Enter Email");
+		returnval=false;
+		//alert("alert from email  name and here return value is "+returnval);
+	}
+	var address=document.forms['myForm']["address"].value;
+	
+	if(address.length==0)
+	{
+		seterror("faddress","* Please Enter Address");
+		returnval=false;
+	//	alert("alert from Adddress  name and here return value is "+returnval);
+	}
+// 	var password=document.forms['myForm']["password"].value;
+// 	if(password.length==0)
+// 	{
+// 		seterror("pass","* Your Password Can't Be Empty");
+// 		returnval=false;
+// 		alert("alert from password  name and here return value is "+returnval);
+// 	}
+	var gender=document.forms['myForm']["gender"].value;
+	if(gender==null)
+	{
+		seterror("xender","*Please Select Your Gender");	
+		returnval=false;
+		//alert("alert from Xender  name and here return value is "+returnval);
+	}
+	
+	
+	return returnval;
+}
+
+function fileValidation() {
+    var fileInput = 
+        document.getElementById('file');
+      
+    var filePath = fileInput.value;
+ 
+    // Allowing file type
+    var allowedExtensions = 
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+      
+    if (!allowedExtensions.exec(filePath)) {
+      //  alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    } 
+}
+
+</script>
 	<style>
+	.formerror{
+    	color:red;
+    	
+    	}
 	.content {
     display: none;
 	}
@@ -123,6 +266,7 @@
                 <!-- Add New Teacher Area Start Here -->
                 <div class="card height-auto">
                     <div class="card-body">
+                    
                     	<%if(message != null){ %>
                     	<div class="ui-alart-box">
                 			<div class="alert alert-success" role="alert">
@@ -149,55 +293,58 @@
 					
                         <div class="content-holder">
                          <div class="content" id="content-1" data-id='1' style="display: block;">
-                        <form action="Addteacher" enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
+                        <form action="Addteacher" name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
                         
                             <div class="row">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="fname">
                                 	<input type="hidden" name="role" value="FACULTY"></input>
                                     <label>First Name *</label>
-                                    <input autocomplete="off" name="firstname" type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="firstname" type="text" placeholder="" class="form-control"><span  class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <span id="fmessage"></span>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="mname">
                                     <label>Middle Name *</label>
-                                    <input autocomplete="off" name="middlename"  type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="middlename"  type="text" placeholder="" class="form-control"><span  class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="lname">
                                     <label>Last Name *</label>
-                                    <input autocomplete="off" name="lastname" type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="lastname" type="text" placeholder="" class="form-control"><span  class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="gender">
                                     <label>Gender *</label>
                                     <select name="gender" class="select2">
                                         <option value="">Please Select Gender *</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
 <!--                                         <option value="3">Others</option> -->
-                                    </select>
+                                    </select><span  class="formerror"><b></b></span>
                                 </div>
-								<div class="col-xl-3 col-lg-6 col-12 form-group">
+								<div class="col-xl-3 col-lg-6 col-12 form-group" id="femail">
                                     <label>Email</label>
-                                    <input id="mail" autocomplete="off" name="email" type="text" placeholder="" class="form-control">
+                                    <input id="mail" autocomplete="off" name="email" type="text" placeholder="" class="form-control"><span  class="formerror"><b></b></span>
                                   </div>
-                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                  
+                                 <div class="col-xl-3 col-lg-6 col-12 form-group" id="pass">
                                     <label>Password</label>
-                                    <input id="password" autocomplete="off" class="form-control" type="password" name="password">
+                                    <input id="password1" autocomplete="off" class="form-control" type="password" name="password" >
                                     <i toggle="password-field" class="fa fa-fw fa-eye field_icon toggle-password"></i>
                                   </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="cpass">
                                     <label>Qualification</label>
-                                    <input autocomplete="off" name="qualification" type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="qualification" type="text" placeholder="" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group" id="phone">
                                     <label>Mobile Number</label>
-                                    <input autocomplete="off" name="number" type="text" placeholder="" class="form-control">
+                                    <input autocomplete="off" name="number" type="text" placeholder="" class="form-control"><span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-lg-6 col-12 form-group">
+                                <div class="col-lg-6 col-12 form-group" id="faddress">
                                     <label>Address</label>
                                     <textarea name="address" class="textarea form-control"  id="form-message" cols="10" rows="9"></textarea>
+                                    <span class="formerror"><b></b></span>
                                 </div>
-                                <div class="col-lg-6 col-12 form-group mg-t-30">
+                                <div class="col-lg-6 col-12 form-group mg-t-30" id="imageid">
                                     <label class="text-dark-medium">Upload Faculty Photo (150px X 150px)</label>
-                                    <input name="profile_photo" type="file" class="form-control-file">
+                                    <input id="file" name="profile_photo" onchange="return fileValidation()" type="file" class="form-control-file">
                                 </div>
 								 
 <!-- 								<button type="button" class="back">Back</button> -->
@@ -213,20 +360,20 @@
 <!--                         content holder end -->
 <!-- 					below is division-2  -->
 					 <div class="end" data-id='2'>
-   						 <div id="alert" class="ui-alart-box">
-                            <div class="dismiss-alart">
-     								 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    This is a warning alert—check it out!
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                </div></div>
+<!--    						 <div id="alert" class="ui-alart-box"> -->
+<!--                             <div class="dismiss-alart"> -->
+<!--      								 <div class="alert alert-warning alert-dismissible fade show" role="alert"> -->
+<!--                                     This is a warning alert—check it out! -->
+<!--                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
+<!--                                         <span aria-hidden="true">&times;</span> -->
+<!--                                     </button> -->
+<!--                                 </div> -->
+<!--                                 </div></div> -->
 <!-- 							<form action="Addteacher" method="post" id="form2" class="new-added-form"> -->
                             <div class="row">
                            
 
-									<div class="col-lg-12 form-group">
+									<div class="col-lg-12 form-group" >
                                     <label>Which stream</label>
                                     <% 
                                     for(int i=0;i<Streamlist.size();i++){
@@ -238,7 +385,7 @@
                                     	
                                     %>
                                     <div class="stream" >
-                                    <input name="stream_checkbox" class="stream_check" type="checkbox"  class="" value="<%=s.getStreamid()%>">
+                                    <input name="stream_checkbox" class="stream_check" type="checkbox"value="<%=s.getStreamid()%>">
                                      <%=s.getStreamname()%>
 <!--                                      div for semester list -->
                                      <div id="id_stream<%=s.getStreamid() %>" class="col-lg-12 form-group">
@@ -328,9 +475,10 @@
 <!--                                 <input name="streamInputArray" type="checkbox" style="opacity:0; position:absolute; left:9999px;"> -->
                                 <div class="col-12 form-group mg-t-8">
                                    <button type="button" class="btn-fill-lg bg-blue-dark btn-hover-yellow" id="edit-previous">Edit Previous Options</button>
-     								<button id=submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
+     								<button id="submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
      								
                          			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+<!--                          			<button id="check11" disabled>Check</button> -->
                                 </div>
                                
                                 
@@ -351,7 +499,7 @@
                 </div>
                 <!-- Add New Teacher Area End Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a href="#">PsdBosS</a></div>
+                    <div class="copyright">© Copyrights <a href="#">educhap</a> 2021. All rights reserved. Designed by <a href="#">pldBrosS</a></div>
                 </footer>
             </div>
         </div>
@@ -375,29 +523,14 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
-    <script>
-
-$(document).ready(function() {
-	$("#submit").click(function() {
-		var str = $("#mail").val();
-		$.get("Registrationstudent", {
-			email : str
-		}).done(function(data)
-		{
-			if (data == "true") {
-				alert("This email id is already exist");	
-			}
-		});	
-	});
-});
-</script>
+    
     
     <script>
 	$(document).on('click', '.toggle-password', function() {
 	
 	$(this).toggleClass("fa-eye fa-eye-slash");
 	
-	var input = $("#password");
+	var input = $("#password1");
 	input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
 	});
 	
@@ -578,7 +711,7 @@ $(document).ready(function() {
     <script>
 	function myFunction() {
 		  //document.getElementById("demo").innerHTML = "Hello World";
-		  alert("please unselect unusual checkbox");
+		//  alert("please unselect unusual checkbox");
 		  var streamArray=[];
 		  var semesterArray = [];
 		  var subjectArray = [];
@@ -600,10 +733,20 @@ $(document).ready(function() {
 		document.getElementById("semesterHidden").value = semesterArray;
 		document.getElementById("subjectHidden").value = subjectArray;
 		
-		//alert("streamArray: "+streamArray);
-		//alert("semesterArray: "+semesterArray);
-		//alert("subjectArray: "+subjectArray);
+		
 		}
+	</script>
+	<script>
+	$('#checkstreamid').click(function(){
+	    //If the checkbox is checked.
+	    if($(this).is(':checked')){
+	    	
+	       		$('#check11').attr("disabled", false);
+	    } else{
+	       
+	        $('#check11').attr("disabled", true);
+	    }
+	});
 	</script>
 
 </body>

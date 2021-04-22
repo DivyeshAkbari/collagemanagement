@@ -1155,7 +1155,7 @@
     <servlet-name>StudentRegistration</servlet-name>
     <url-pattern>/StudentRegistration</url-pattern>
   </servlet-mapping>
-      <servlet>
+  <servlet>
     <description></description>
     <display-name>FetchFacultyAssignment</display-name>
     <servlet-name>FetchFacultyAssignment</servlet-name>
@@ -1174,5 +1174,25 @@
   <servlet-mapping>
     <servlet-name>DeleteAssFaculty</servlet-name>
     <url-pattern>/DeleteAssFaculty</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditAdminDetails</display-name>
+    <servlet-name>EditAdminDetails</servlet-name>
+    <servlet-class>com.collagemanagement.servlet.EditAdminDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAdminDetails</servlet-name>
+    <url-pattern>/EditAdminDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateAdmin</display-name>
+    <servlet-name>UpdateAdmin</servlet-name>
+    <servlet-class>com.collagemanagement.addteacher.servlet.UpdateAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAdmin</servlet-name>
+    <url-pattern>/UpdateAdmin</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -216,7 +216,7 @@ System.out.println(ans);
 									<div class="col-lg-4">
 										<label>Upload Notes</label> <input name="assignment"
 											type="file"
-											class="btn-fill-lmd radius-30 text-light bg-true-v">
+											class="btn-fill-lmd radius-30 text-light bg-true-v" required="required">
 
 										
 									</div>

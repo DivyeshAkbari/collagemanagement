@@ -19,9 +19,9 @@ public interface Collageservice
 	
 	public String Updatepassword(User user);
 	
-	public List<User> getuserdetails(String email);
+	public User getuserdetails(int userid);
 	
-	public String updatestudentdetails(User u1, String email);
+	public String updatestudentdetails(User u1);
 	
 	public List<Stream> fetchstreamdetails();
 	

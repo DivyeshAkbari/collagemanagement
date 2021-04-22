@@ -218,7 +218,7 @@ String ans = (String) request.getSession(false).getAttribute("message");
 												<td><%=a.getDate()%></td>
 												<td><a href="DownloadAss?assid=<%=a.getAssId()%>">
 														Download Assignment</a></td>
-												<td><input type="file" name="assignment"></td>
+												<td><input type="file" name="assignment" required="required"></td>
 												<%--<a href="UploadAssByStudent?userId=<%= f.getId() %> & assId=<%= a.getAssId() %>"></a> --%>
 												<td><button class="button1" value="hr">Submit</button> 
 												</td>

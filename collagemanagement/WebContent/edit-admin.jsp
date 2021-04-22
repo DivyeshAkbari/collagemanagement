@@ -45,7 +45,7 @@
 </head>
 
 
-<% User u1 = (User)request.getSession(false).getAttribute("faculty");
+<% User u1 = (User)request.getSession(false).getAttribute("user");
 %>
 <% String message = (String)request.getSession(false).getAttribute("ans");
 
@@ -64,7 +64,7 @@
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->
            
-           <%@include file="sidebar-teacher.jsp" %>
+           <%@include file="sidebar-admin.jsp" %>
            
             <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
@@ -73,9 +73,9 @@
                     <h3>Teacher</h3>
                     <ul>
                         <li>
-                            <a href="">Home</a>
+                            <a href="Admin.jsp">Home</a>
                         </li>
-                        <li>Update Teacher</li>
+                        <li>Update Admin</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -87,7 +87,7 @@
                 			<div class="alert alert-success" role="alert">
                         	<%=message%>
                         	<%if(message.equals("record updated successfully")){
-                        		session.setAttribute("faculty", null); 
+                        		session.setAttribute("user", null); 
                         		
                         		}%>
                      		</div>
@@ -96,7 +96,7 @@
                 		%>
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Update Teacher</h3>
+                                <h3>Update</h3>
                             </div>
                            <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" 
@@ -112,7 +112,7 @@
 <!--                         division for next previous button  -->
 					
                         <div class="content-holder">
-                        <form action="UpdateTeacher" enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
+                        <form action="UpdateAdmin" enctype="multipart/form-data" method="post" id="form1" class="new-added-form">
                         
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
@@ -128,29 +128,20 @@
                                     <label>Last Name *</label>
                                     <input value="<%=u1.getLastname() %>" autocomplete="off" name="lastname" type="text" placeholder="" class="form-control">
                                 </div>
-<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
-<!--                                     <label>Gender *</label> -->
-<!--                                     <select  name="gender" class="select2"> -->
-                                    
-<!--                                         <option value="">Please Select Gender *</option> -->
-<!--                                         <option value="Male">Male</option> -->
-<!--                                         <option value="Female">Female</option> -->
-<!--                                         <option value="3">Others</option> -->
-<!--                                     </select> -->
 <!--                                 </div> -->
-								<div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Email</label>
-                                    <input readonly="readonly" value="<%=u1.getEmail() %>" autocomplete="off" name="email" type="text" placeholder="" class="form-control">
-                                  </div>
+<!-- 								<div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Email</label> -->
+<%--                                     <input readonly="readonly" value="<%=u1.getEmail() %>" autocomplete="off" name="email" type="text" placeholder="" class="form-control"> --%>
+<!--                                   </div> -->
                                  <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Password</label>
                                     <input value="<%=u1.getPassword() %>" id="password" autocomplete="off" class="form-control" type="password" name="password">
                                     <i toggle="password-field" class="fa fa-fw fa-eye field_icon toggle-password"></i>
                                   </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Qualification</label>
-                                    <input value="<%=u1.getQualification() %>" autocomplete="off" name="qualification" type="text" placeholder="" class="form-control">
-                                </div>
+<!--                                 <div class="col-xl-3 col-lg-6 col-12 form-group"> -->
+<!--                                     <label>Qualification</label> -->
+<%--                                     <input value="<%=u1.getQualification() %>" autocomplete="off" name="qualification" type="text" placeholder="" class="form-control"> --%>
+<!--                                 </div> -->
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Mobile Number</label>
                                     <input value="<%=u1.getContactno() %>" autocomplete="off" name="number" type="text" placeholder="" class="form-control">
@@ -176,11 +167,8 @@
                               
                             </div>
                         </form>
-<%--                         <%session.setAttribute("faculty", null); %> --%>
                        
                         </div>
-<!--                         content holder end -->
-<!-- 					below is division-2  -->
 
 					
                     </div>

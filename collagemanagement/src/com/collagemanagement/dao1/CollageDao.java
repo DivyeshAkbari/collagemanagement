@@ -16,8 +16,8 @@ public interface CollageDao
 	public String fetchemail(Connection connection, String str);
 	public User fetchfname(Connection connection, String username);
 	public int Changepassword(Connection connection, User user);
-	public List<User> fetchuserdetails(Connection connection, String email);
-	public int changestudentdetails(Connection connection, User u1, String email);
+	public User fetchuserdetails(Connection connection, int userid);
+	public int changestudentdetails(Connection connection, User u1);
 	public List<Stream> getstreamdetais(Connection connection);
 	public int sendaccountactivatedmail(Connection connection, String email, String hash);
 	public List<User> fetchstudentdetails(Connection connection);
@@ -32,5 +32,7 @@ public interface CollageDao
 	public String checkEmail(Connection c1, String str);
 	public String updateloginuserdate(Connection connection, String username, int i);
 	public int inserFeedBackDetails(Connection c1, Feedback f1);
+	public User getAdminDetails(int userid, Connection c1) throws Exception;
+	public int updateAdmin(User u1, Connection c1) throws Exception;
 }
 //Pull 

@@ -97,8 +97,8 @@
                                         </div>
                                         <div class="media-body">
                                             <h3  class="item-title"><%= u1.getFirstname()+" "+u1.getMiddlename() %></h3>
-                                            <p>Aliquam erat volutpat. Curabiene natis massa
-                                                sedde lacustiquen sodale word moun taiery.</p>
+<!--                                             <p>Aliquam erat volutpat. Curabiene natis massa -->
+<!--                                                 sedde lacustiquen sodale word moun taiery.</p> -->
                                         </div>
                                     </div>
                                     <div class="table-responsive info-table">

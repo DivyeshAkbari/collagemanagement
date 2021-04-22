@@ -3,7 +3,6 @@ package com.collagemanagement.servlet;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,17 +13,15 @@ import com.collagemanagement.bean.User;
 import com.collagemanagement.service.impl.Collageserviceimpl;
 
 /**
- * Servlet implementation class EditStudentDetails
+ * Servlet implementation class EditAdminDetails
  */
-public class EditStudentDetails extends HttpServlet {
+public class EditAdminDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
 	Collageserviceimpl collage =new Collageserviceimpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditStudentDetails() {
+    public EditAdminDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,30 +31,24 @@ public class EditStudentDetails extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		ServletContext Email=getServletContext();
-//		String email=(String) Email.getAttribute("email");
-//		
-//		System.out.println("Updated Email is "+email);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession httpsession = request.getSession(false);
 		
 		User u1 = (User) httpsession.getAttribute("uname");
 		int userid = u1.getId();
-		System.out.println("user id: "+userid);
-		
-		//java.util.List<User> user=collage.getuserdetails(email);
-		User user = collage.getuserdetails(userid);
-		
-		//System.out.println("editStudent No badho data niche 6");
-		//System.out.println(user);
-		request.setAttribute("user",user);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editstudentdetails.jsp");
-		dispatcher.forward(request, response);	
+		User user = collage.fetchAdminDetails(userid);
+		httpsession.setAttribute("user", user);
+		//request.setAttribute("user", user);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("edit-admin.jsp");
+		dispatcher.forward(request, response);
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }

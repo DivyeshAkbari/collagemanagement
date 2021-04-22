@@ -54,7 +54,7 @@ String userRole = user11.getRole();
                                 <span><%=userRole %></span>
                             </div>
                             <div class="admin-img">
-                                <img style="width :50px;height : 50px"  src="data:image/png;base64,<%=user11.getUserProfilepicString() %>" alt="Admin">
+                                <img style="width :50px;height : 50px"  src="data:image/png;base64,<%=user11.getUserProfilepicString() %>">
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

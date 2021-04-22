@@ -19,7 +19,9 @@ import com.collagemanagement.bean.Stream;
 import com.collagemanagement.bean.Subject;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.encryptpassword.TrippleDes;
+import com.collagemanagement.service.impl.Collageserviceimpl;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
+import com.collagemanagement.service1.Collageservice;
 import com.collagemanagement.service1.TeacherService;
 
 /**
@@ -29,6 +31,7 @@ public class Addteacher extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	TeacherService ts = new TeacherServiceimpl();
+	Collageservice college =new Collageserviceimpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +45,22 @@ public class Addteacher extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+String str=request.getParameter("email");
+		
+		System.out.println("Email id :- "+str);		
+		String  got= college.validEmail(str);
+		
+		
+		System.out.println("Value "+got);
+		if(got==null)
+		{
+			response.getWriter().append("false");
+		}
+		else 
+		{ 
+			response.getWriter().append("true");
+		}
 	}
 
 	/**

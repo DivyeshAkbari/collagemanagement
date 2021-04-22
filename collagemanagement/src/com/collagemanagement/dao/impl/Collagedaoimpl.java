@@ -196,40 +196,42 @@ public class Collagedaoimpl implements CollageDao
 		return 0;
 	}
 
-	public List<User> fetchuserdetails(Connection connection, String email)
+	public User fetchuserdetails(Connection connection, int userid)
 	{
-		List<User> user=new ArrayList<>();
+		//List<User> user=new ArrayList<>();
+		User u1=new User();
 		TrippleDes t1;
-		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_email=?");
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where i_user_id=?");
 			 )
 		{
-			p1.setString(1,email);
+			p1.setInt(1,userid);
 			try(ResultSet r1=p1.executeQuery();
 				  )
 			{
 					while(r1.next())
 					{
-						User u1=new User();
+						
+						u1.setId(r1.getInt(1));
 						u1.setFirstname(r1.getString("c_First_Name"));
 						u1.setMiddlename(r1.getString("c_middle_name"));
 						u1.setLastname(r1.getString("c_last_name"));
-						u1.setEmail(r1.getString("c_email"));
-						u1.setXender(r1.getString("c_gender"));
+						
 						u1.setContactno(r1.getString("c_contact"));
 						u1.setAddress(r1.getString("c_address"));
-						u1.setStream(r1.getString("c_stream"));
-						u1.setSemester(r1.getInt("i_semester_id"));
-						u1.setDivision(r1.getString("c_division"));
 						String password=r1.getString("c_password");
-						
-						
 						t1=new TrippleDes();
 						String decryptpassword=t1.decrypt(password);
-						
 						u1.setPassword(decryptpassword);
-						u1.setQualification(r1.getString("c_qulification"));
-						user.add(u1);
+						byte[] imagedata = r1.getBytes("image");
+						if (null != imagedata && imagedata.length > 0) {
+							System.out.println("in image if");
+							String imagestr = Base64.getEncoder().encodeToString(imagedata);
+							u1.setUserProfilepicString(imagestr);
+						}
+						
+					//	user.add(u1);
 					}
+					return u1;
 			}
 			catch (Exception e)
 			{
@@ -241,28 +243,25 @@ public class Collagedaoimpl implements CollageDao
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		return user;
+		return u1;
 	}
 
-	public int changestudentdetails(Connection connection, User u1, String email)
+	public int changestudentdetails(Connection connection, User u1)
 	{
 		try(PreparedStatement p1=connection.prepareStatement("Update user_table set  c_First_Name=?, c_middle_name=?,c_last_name=?,"
-				+ "c_email=?,c_contact=?,c_address=?,c_password=? ,c_stream=?,"
-				+ "i_semester_id=?,c_division=?,c_qulification=?  where c_email=? ");
+				+ "c_contact=?,c_address=?,c_password=? ,image=COALESCE(?,image)"
+				+ "where i_user_id=? ");
 			  )
 		{
 			p1.setString(1,u1.getFirstname());
 			p1.setString(2, u1.getMiddlename());
 			p1.setString(3, u1.getLastname());
-			p1.setString(4, u1.getEmail());
-			p1.setString(5,u1.getContactno());
-			p1.setString(6,u1.getAddress());
-			p1.setString(7, u1.getPassword());
-			p1.setString(8,u1.getStream());
-			p1.setInt(9,u1.getSemester());
-			p1.setString(10, u1.getDivision());
-			p1.setString(11,u1.getQualification());
-			p1.setString(12,email);
+			
+			p1.setString(4,u1.getContactno());
+			p1.setString(5,u1.getAddress());
+			p1.setString(6, u1.getPassword());
+			p1.setBlob(7, u1.getUserProfilepicStream());
+			p1.setInt(8, u1.getId());
 					
 			return p1.executeUpdate();
 		} 
@@ -686,5 +685,59 @@ public class Collagedaoimpl implements CollageDao
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public User getAdminDetails(int userid, Connection c1) throws Exception {
+		// TODO Auto-generated method stub
+//		String query = "update user_table set c_First_Name=?,c_middle_name=?,c_last_name=?,c_contact=?,image=COALESCE(?,image),"
+//				+ "c_address=?,c_password=? where i_user_id=?";
+		String query = "select i_user_id,c_First_Name,c_middle_name,c_last_name,c_contact,image,c_address,"
+				+ "c_password from user_table where i_user_id=?";
+		TrippleDes t1;
+		User user = new User();
+		try(PreparedStatement p1=c1.prepareStatement(query);){
+			p1.setInt(1, userid);
+			ResultSet rs = p1.executeQuery();
+			while(rs.next()) {
+				user.setId(rs.getInt(1));
+				user.setFirstname(rs.getString(2));
+				user.setMiddlename(rs.getString(3));
+				user.setLastname(rs.getString(4));
+				user.setContactno(rs.getString("c_contact"));
+				user.setAddress(rs.getString("c_address"));
+				//user.setPassword(rs.getString(10));
+				byte[] imagedata = rs.getBytes("image");
+				if (null != imagedata && imagedata.length > 0) {
+					String imagestr = Base64.getEncoder().encodeToString(imagedata);
+					user.setUserProfilepicString(imagestr);
+				}
+				String password = rs.getString("c_password");
+				t1 = new TrippleDes();
+				String decryptpassword = t1.decrypt(password);
+				user.setPassword(decryptpassword);
+			}
+		}
+		return user;
+	}
+
+	@Override
+	public int updateAdmin(User u1, Connection c1) throws Exception {
+		// TODO Auto-generated method stub
+		String query = "update user_table set c_First_Name=?,c_middle_name=?,c_last_name=?,c_contact=?,image=COALESCE(?,image),"
+				+ "c_address=?,c_password=? where i_user_id=?";
+		try(PreparedStatement p1=c1.prepareStatement(query);){
+			p1.setInt(8, u1.getId());
+			p1.setString(1, u1.getFirstname());
+			p1.setString(2, u1.getMiddlename());
+			p1.setString(3, u1.getLastname());
+			p1.setString(4, u1.getContactno());
+			p1.setBlob(5, u1.getUserProfilepicStream());
+			p1.setString(6, u1.getAddress());
+			p1.setString(7, u1.getPassword());
+			
+			return p1.executeUpdate();
+		}
+		//return 0;
 	}	
 }

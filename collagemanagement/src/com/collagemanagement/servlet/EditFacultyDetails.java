@@ -38,14 +38,14 @@ public class EditFacultyDetails extends HttpServlet {
 		
 		System.out.println("Updated Email is "+email);
 		
-		java.util.List<User> user=collage.getuserdetails(email);
+		//java.util.List<User> user=collage.getuserdetails(email);
 		
 		
 		System.out.println("editable Student No badho data niche 6");
-		System.out.println(user);
-		request.setAttribute("user",user);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editfacultydetails.jsp");
-		dispatcher.forward(request, response);		
+		//System.out.println(user);
+		//request.setAttribute("user",user);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("editfacultydetails.jsp");
+		//dispatcher.forward(request, response);		
 	}
 
 	/**

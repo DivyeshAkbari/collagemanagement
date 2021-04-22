@@ -154,27 +154,27 @@ public class Collageserviceimpl  implements Collageservice
 		return null;
 	}
 
-	public List<User> getuserdetails(String email)
+	public User getuserdetails(int userid)
 	{
-		List<User> user=null;
+		//List<User> user=null;
 		try(Connection connection=getconnection();
 			)
 		{
-			user=dao.fetchuserdetails(connection,email);
+			return dao.fetchuserdetails(connection,userid);
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return user;
+		return null;
 	}
 
-	public String updatestudentdetails(User u1, String email)
+	public String updatestudentdetails(User u1)
 	{
 		try(Connection connection=getconnection();
 			  )
 		{
-				int i1=dao.changestudentdetails(connection,u1,email);
+				int i1=dao.changestudentdetails(connection,u1);
 				if(i1>0)
 				{
 					return"Updated";
@@ -447,6 +447,34 @@ public class Collageserviceimpl  implements Collageservice
 				return "Not";
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public User fetchAdminDetails(int userid) {
+		// TODO Auto-generated method stub
+		try(Connection c1=getconnection();){
+			return dao.getAdminDetails(userid,c1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public String editAdmin(User u1) {
+		// TODO Auto-generated method stub
+		try(Connection c1=getconnection();){
+			int i1 = dao.updateAdmin(u1,c1);
+			if(i1>0)
+				return "record updated successfully";
+			else
+				return "record can't be updated";
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

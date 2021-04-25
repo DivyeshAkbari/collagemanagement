@@ -1,6 +1,7 @@
 package com.collagemanagement.addteacher.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -82,6 +83,14 @@ public class UploadAssByStudent extends HttpServlet {
 		}
 		String message1 = ts.insertStuAss(ass);
 //		String message1 = "true";
+		if(message1=="true") {
+			int semId = u1.getSemester();
+			List<Assignment> asslist = ts.getAllAss(studentId,semId);
+			if(!(asslist.isEmpty())){
+				httpsession.setAttribute("notification", "May be you do not have submitted some assignment!Kindly check it.");
+			}else
+				httpsession.setAttribute("notification", null);
+		}
 		System.out.println(message1+" hii");
 		
 		httpsession.setAttribute("message", message1);

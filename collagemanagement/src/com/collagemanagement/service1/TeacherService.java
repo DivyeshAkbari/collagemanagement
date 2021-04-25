@@ -83,5 +83,7 @@ public interface TeacherService {
 
 	List<Image> getStudentProfilePic(int semId);
 
+	List<Assignment> getAllAss(int userId, int semId);
+
 
 }

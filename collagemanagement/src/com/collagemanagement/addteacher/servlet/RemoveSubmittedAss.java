@@ -1,12 +1,15 @@
 package com.collagemanagement.addteacher.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.collagemanagement.bean.Assignment;
 import com.collagemanagement.bean.User;
 import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.TeacherService;
@@ -64,6 +67,12 @@ public class RemoveSubmittedAss extends HttpServlet {
 
 		int ans = ts.removeSubmittedAss(assid, userId);
 		System.out.println("answer is: " + ans);
+		int semId = u1.getSemester();
+		List<Assignment> asslist = ts.getAllAss(userId,semId);
+		//httpsession.setAttribute("notification", "May be you do not have submitted some assignment!Kindly check it.");
+		if(!(asslist.isEmpty())){
+			httpsession.setAttribute("notification", "May be you do not have submitted some assignment!Kindly check it.");
+		}
 
 		// response.setContentType("text/plain");
 		// response.getWriter().write(ans);

@@ -45,7 +45,7 @@ public class UploadAssStudent extends HttpServlet {
 		User u1 = (User) httpsession.getAttribute("uname");
 
 		int userId = u1.getId();
-
+		
 		// getting value from jsp
 		System.out.println("heeyyy");
 		String ss = request.getParameter("Id");
@@ -56,6 +56,7 @@ public class UploadAssStudent extends HttpServlet {
 		System.out.println("Id of sub: " + ss);
 		List<Assignment> assignmentlist = new ArrayList<>();
 
+		int flag1 = 0;
 		if (flag != null) {
 			assignmentlist = ts.getSubmittedAss(ss, userId);
 			List<Integer> userIdList = new ArrayList<>();
@@ -74,6 +75,9 @@ public class UploadAssStudent extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			assignmentlist = ts.getAssignments(ss, userId);
+//			if(!(assignmentlist.isEmpty())){
+//				flag1=1;
+//			}
 			List<Integer> userIdList = new ArrayList<>();
 			for (Assignment a : assignmentlist) {
 				int id = a.getUsesrId();
@@ -89,6 +93,9 @@ public class UploadAssStudent extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("student-assignment-subject.jsp");
 			dispatcher.forward(request, response);
 		}
+//		if(flag1==1) {
+//			httpsession.setAttribute("notification", "May be you do not have submitted some assignment!Kindly check it.");
+//		}
 
 		// System.out.println("ass list in upload ass stu : " + assignmentlist);
 		// System.out.println("ass list: "+assignmentlist);

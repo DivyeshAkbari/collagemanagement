@@ -38,7 +38,9 @@
 </head>
 
 <% HttpSession httpSession = request.getSession(false);%>
-<% User u1=(User) httpSession.getAttribute("uname");%>
+<% User u1=(User) httpSession.getAttribute("uname");
+String message = (String)httpSession.getAttribute("notification");
+%>
 
 <body>
     <!-- Preloader Start Here -->
@@ -66,6 +68,17 @@
                         <li>Student</li>
                     </ul>
                 </div>
+                <%if(message!=null){ %>
+                 <div class="ui-alart-box">
+						<div class="default-alart">
+ 							<div class="alert alert-primary" role="alert">
+                             
+                             <%=message %>
+                             
+                             </div>
+						</div>
+				</div>
+				<%} %>
                 <!-- Breadcubs Area End Here -->
                 <div class="row">
                     <!-- Student Info Area Start Here -->
@@ -90,10 +103,11 @@
                                         </div>
                                     </div>
                                 </div>
+                               
                                 <div class="student-info">
                                     <div class="media media-none--xs">
                                         <div class="item-img">
-                                            <img src="img/figure/student.png" class="media-img-auto" alt="student">
+                                            <img src="data:image/png;base64,<%= u1.getUserProfilepicString()  %>" alt="student">
                                         </div>
                                         <div class="media-body">
                                             <h3  class="item-title"><%= u1.getFirstname()+" "+u1.getMiddlename() %></h3>
@@ -694,7 +708,7 @@
                 </div>
                 <!-- Footer Area Start Here -->
                 <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                    <div class="copyright">Â© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
                             href="#">PsdBosS</a></div>
                 </footer>
                 <!-- Footer Area End Here -->

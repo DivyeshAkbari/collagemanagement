@@ -653,4 +653,22 @@ public class TeacherServiceimpl implements TeacherService {
 		return null;
 	}
 
+	@Override
+	public List<Assignment> getAllAss(int userId, int semId) {
+		// TODO Auto-generated method stub
+		List<Assignment> asslist = new ArrayList<>();
+		// List<Integer> submittedassidlist = new ArrayList<>();
+		try (Connection connection = getConnection();) {
+
+			// asslist = teacherdao.fetchSubmittedAss(connection, ss, userid);
+
+			asslist = teacherdao.fetchAllAss(connection,userId,semId);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return asslist;
+	}
+
 }

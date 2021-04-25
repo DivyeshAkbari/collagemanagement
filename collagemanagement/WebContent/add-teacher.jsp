@@ -72,12 +72,12 @@ $(document).ready(function() {
 	
 	$("#submit").click(function() {
 		var str = $("#mail").val();
-		alert(str);
+		//alert(str);
 		$.get("Addteacher", {
 			email : str
 		}).done(function(data)
 		{
-			alert(data);
+			//alert(data);
 			if (data == "true") {
 				alert("This email id is already exist");
  				returnval=false;
@@ -181,7 +181,9 @@ function validateForm()
 		//alert("alert from Xender  name and here return value is "+returnval);
 	}
 	
-	
+	if(returnval == false){
+		alert("May be you have missed some field please press back to check..");
+	}
 	return returnval;
 }
 
@@ -475,10 +477,11 @@ function fileValidation() {
 <!--                                 <input name="streamInputArray" type="checkbox" style="opacity:0; position:absolute; left:9999px;"> -->
                                 <div class="col-12 form-group mg-t-8">
                                    <button type="button" class="btn-fill-lg bg-blue-dark btn-hover-yellow" id="edit-previous">Edit Previous Options</button>
-     								<button id="submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
+     								<button id="submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" disabled>Save</button>
      								
                          			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
 <!--                          			<button id="check11" disabled>Check</button> -->
+                         			<input type="hidden" id="demo"> 
                                 </div>
                                
                                 
@@ -568,6 +571,7 @@ function fileValidation() {
 		
 		$('.stream_check').change(function() {
 			value = ($(this).val()); //1 
+				
 			previousValue = value;
 			if(previousValue == value){
 				
@@ -584,7 +588,7 @@ function fileValidation() {
 				})
 				.done(function(msg){
 					//var id = "id_sem"+value;
-					
+					document.getElementById("demo").value = 1;
 					//$("#id_sem").children().remove();
 					//$("#id_sem").remove();
 					$("#"+id).empty();
@@ -604,6 +608,8 @@ function fileValidation() {
 	        }//if
 	        else{
 	        	//alert("else");
+	        	document.getElementById("demo").value = 0;
+	        	$('#submit').attr("disabled", true);
 				$("#"+id).empty();
 	        }
 	        
@@ -637,6 +643,13 @@ function fileValidation() {
 				})
 				.done(function(msg){
 					//$("#"+id3).empty();//"#id_sub"
+					document.getElementById("demo").value = 1;
+					//var flag=document.getElementById("demo").value;
+// 					if(flag == 1){
+// 						$('#check11').attr("disabled", false);
+// 					}else{
+// 						$('#check11').attr("disabled", true);
+// 					}
 					$('#' + divTagId).find('.subject').remove();
 					var obj = jQuery.parseJSON(msg);
 					
@@ -647,7 +660,7 @@ function fileValidation() {
 						//var subjectDivElement = ;
 						//$('#'+divTagId).append('<div class="Subject"></div>'); 
 						$("#"+divTagId).append($subjectDivElement);
-						$($subjectDivElement).append('<input style="margin-left: 40px;" name = '+subjectName+' type="checkbox" value='+value.subjectId+'>'+value.subjectName+'<br>');
+						$($subjectDivElement).append('<input class="subjectcheck" style="margin-left: 40px;" name = '+subjectName+' type="checkbox" value='+value.subjectId+'>'+value.subjectName+'<br>');
 						
 						
 					});
@@ -656,8 +669,24 @@ function fileValidation() {
 	        }//if
 	        else{
 				//$("#id_sub").empty();
+				document.getElementById("demo").value = 0;
+				$('#submit').attr("disabled", true);
 				$('#' + divTagId).find('.subject').remove();
 	        }        
+	    });//change event
+	    $(document).on("click",".subjectcheck",function() {
+	    	if(this.checked) {
+	    		document.getElementById("demo").value = 1;
+				var flag=document.getElementById("demo").value;
+					if(flag == 1){
+						$('#submit').attr("disabled", false);
+					}else{
+						$('#submit').attr("disabled", true);
+					}
+	    	}else{
+	    		document.getElementById("demo").value = 0;
+				$('#submit').attr("disabled", true);
+	    	}
 	    });//change event
 	    
 // 		$(".stream_check").change(function(){

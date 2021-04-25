@@ -1,6 +1,7 @@
 package com.collagemanagement.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.collagemanagement.encryptpassword.TrippleDes;
 import com.collagemanagement.service.impl.Collageserviceimpl;
+import com.collagemanagement.service.impl.TeacherServiceimpl;
 import com.collagemanagement.service1.Collageservice;
+import com.collagemanagement.service1.TeacherService;
+import com.collagemanagement.bean.Assignment;
 import com.collagemanagement.bean.Log;
 import com.collagemanagement.bean.User;
 
@@ -22,6 +26,7 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	Collageservice collage=new Collageserviceimpl();
+	TeacherService ts = new TeacherServiceimpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -92,6 +97,24 @@ public class Login extends HttpServlet {
 			HttpSession httpSession=request.getSession();
 			httpSession.setAttribute("uname",user);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+			
+			//getting assignment for notification
+			User u2 = (User) httpSession.getAttribute("uname");
+			if(u2.getRole().equalsIgnoreCase("STUDENT")) {
+				int userId = u2.getId();
+				int semId = u2.getSemester();
+				int flag1=0;
+				List<Assignment> asslist = ts.getAllAss(userId,semId);
+				if(!(asslist.isEmpty())){
+					flag1=1;
+				}
+				if(flag1==1) {
+					httpSession.setAttribute("notification", "May be you do not have submitted some assignment!Kindly check it.");
+				}else
+					httpSession.setAttribute("notification", null);
+			}
+			
 		}
+		
 	}
 }

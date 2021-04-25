@@ -103,6 +103,8 @@ public interface TeacherDao {
 	int deleteAssFaculty(Connection connection, int userId, String assid) throws Exception;
 
 	List<Image> fetchStudentProfilePics(int semId, Connection connection) throws Exception;
+
+	List<Assignment> fetchAllAss(Connection connection, int userId, int semId) throws Exception;
 	
 //	List<Stream> getFacultyStream(Connection connection, int userId);
 

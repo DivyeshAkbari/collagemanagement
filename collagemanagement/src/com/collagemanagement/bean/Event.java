@@ -14,12 +14,14 @@ public class Event {
 	private int d1;
 	private String month;
 	private int year;
+	
+	
 	@Override
 	public String toString() {
-		return String.format("Event [eventname=%s, eventDescription=%s, userProfilepic=%s, userProfilepicStream=%s]",
-				eventname, eventDescription, userProfilepic, userProfilepicStream);
+		return "Event [eventname=" + eventname + ", eventDescription=" + eventDescription + ", userProfilepic="
+				+ userProfilepic + ", userProfilepicStream=" + userProfilepicStream + ", eventid=" + eventid + ", date="
+				+ date + ", isactive=" + isactive + ", d1=" + d1 + ", month=" + month + ", year=" + year + "]";
 	}
-	
 	public String getEventname() {
 		return eventname;
 	}

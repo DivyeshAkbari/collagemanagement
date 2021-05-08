@@ -3,7 +3,10 @@ package com.collagemanagement.bean;
 public class Subject 
 {
 	private boolean isSelected;
-	
+	private int subjecttype;
+	private String stream;
+	private String sem;
+	private String subjectcredit;
 	public int getSubjectId() 
 	{
 		return subjectId;
@@ -31,6 +34,34 @@ public class Subject
 	}
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
+	}
+
+	public int getSubjecttype() {
+		return subjecttype;
+	}
+	public void setSubjecttype(int subjecttype) {
+		this.subjecttype = subjecttype;
+	}
+
+	public String getStream() {
+		return stream;
+	}
+	public void setStream(String stream) {
+		this.stream = stream;
+	}
+
+	public String getSem() {
+		return sem;
+	}
+	public void setSem(String sem) {
+		this.sem = sem;
+	}
+
+	public String getSubjectcredit() {
+		return subjectcredit;
+	}
+	public void setSubjectcredit(String subjectcredit) {
+		this.subjectcredit = subjectcredit;
 	}
 
 	private int subjectId;

@@ -57,9 +57,12 @@ public class ReadExcelFileDemo1 implements Runnable
 		int subjectcredit=0;
 		int sum1=0;
 		
+		int subject[] = new int[10];
+	
+		int subjectcount = 0;
 		
 		
-		Map<Integer ,Integer> subjectidcolomidmap=new HashedMap<>();
+		Map<Integer ,Integer> subjectidcolomidmap = new HashedMap<>();
 		try 
 		{
 			//FileInputStream fis = new FileInputStream(new File("S:Book1.xlsx"));
@@ -73,6 +76,17 @@ public class ReadExcelFileDemo1 implements Runnable
 			while (itr.hasNext()) 
 			{	
 				int sum=0;
+				int mul = 0;
+				
+				int gradecount = 0;
+				int gradearr[] = new int[10];
+				
+				int cigi[] = new int[10];
+				int cigicount = 0;
+				
+				int finalspi = 0;
+				
+				
 				//System.out.println("ITR "+itr);
 				Row row = itr.next();
 				
@@ -130,8 +144,7 @@ public class ReadExcelFileDemo1 implements Runnable
 						if(row.getRowNum()==1 && cell.getColumnIndex()>0)
 						{
 							String subjectname=cell.getStringCellValue();
-							count++;
-							//TODO Get subject id from databse using subject name
+							count++;			
 							
 							try(Connection connection =getconnection();
 								PreparedStatement p1=connection.prepareStatement("Select i_Subject_id,i_subject_credit from subject_table where c_subject_name=? AND i_stream_id=? AND i_Semester_id=?");
@@ -141,8 +154,7 @@ public class ReadExcelFileDemo1 implements Runnable
 								p1.setInt(2, Streamid);
 								p1.setInt(3, semid);
 								int subjectid=0;
-								
-								
+														
 								try(ResultSet resultset=p1.executeQuery();
 									  )
 								{
@@ -154,13 +166,27 @@ public class ReadExcelFileDemo1 implements Runnable
 										
 										System.out.println("Subject  id is "+subjectid);
 										System.out.println("Subject Credit is "+subjectcredit);
-										System.out.println("Sum1 is "+sum1);
+										
+										subject[subjectcount] = subjectcredit; //aaya error ave 6
+										subjectcount++;
+									
+										System.out.println("Sum1 is "+sum1); // 
+										
+										System.out.println("Subject Credit" +subjectcredit);
+										
 									}
 								}
-								subjectidcolomidmap.put(cell.getColumnIndex(), subjectid);
-								
+								subjectidcolomidmap.put(cell.getColumnIndex(),subjectid);								
 							}
 						}
+						
+						
+						/*
+						 * for(int i1=0;i<subject.length;i1++) {
+						 * System.out.println(" Subject Credit is"+ subject[i1]); }
+						 */
+						
+						
 							 //aa databse mathi aavse
 						
 							
@@ -194,7 +220,7 @@ public class ReadExcelFileDemo1 implements Runnable
 									{
 										System.out.println("Yuppoo");
 										semid=resultset.getInt("i_Semester_id");
-										System.out.println("Sem   id is "+semid);
+										System.out.println("Sem id is "+semid);
 									}
 								}
 							}	
@@ -241,24 +267,116 @@ public class ReadExcelFileDemo1 implements Runnable
 						{
 							int  marksvalue=(int) cell.getNumericCellValue();
 							
-							Marks marks=new Marks();
+							Marks marks = new Marks();
 							
-							marks.setMarksvalue(marksvalue);
-							sum=sum+marksvalue;
+							
+							/* SPI(SEMESTER PERFORMANCE INDEX) Calculation using GTU Pattern Start Here */
+										
+							
+							if(marksvalue>=85 && marksvalue<=100)
+							{
+								gradearr[gradecount] = 10;
+								gradecount++;
+								marks.setGrade("AA");
+							}
+							else if(marksvalue>=75 && marksvalue<=84)
+							{
+								gradearr[gradecount] = 9;
+								gradecount++;
+								marks.setGrade("AB");
+							}
+							else if(marksvalue>=65 && marksvalue<=74)  
+							{
+								gradearr[gradecount] = 8;
+								gradecount++;
+								marks.setGrade("BB");
+							}
+							else if(marksvalue>=55 && marksvalue<=64)
+							{
+								gradearr[gradecount] = 7;
+								gradecount++;
+								marks.setGrade("BC");
+							}
+							else if(marksvalue>=45 && marksvalue<=54)
+							{
+								gradearr[gradecount] = 6;
+								gradecount++;
+								marks.setGrade("CC");
+							}
+							else if(marksvalue>=40 && marksvalue<=44)
+							{
+								gradearr[gradecount] = 5;
+								gradecount++;
+								marks.setGrade("CD");
+							}
+							else if(marksvalue>=35 && marksvalue<=39)
+							{
+								gradearr[gradecount] = 4;
+								gradecount++;
+								marks.setGrade("DD");
+							}
+							else if(marksvalue<35)
+							{
+								gradearr[gradecount] = 0;
+								gradecount++;
+								marks.setGrade("FF");
+							}
+							
+
+							for(int spi=0;i<subject.length;spi++)
+							{
+								int creditofsub = subject[spi];  //2,3,2,3,3,3,3,3,3 error line
+								
+								for(int j=0;j<gradearr.length;j++)
+								{
+									int grade = gradearr[j];  //8,9,0,9,9,9,10,10,9
+									
+									int spicredit = creditofsub * grade; //8*2,3*9,2*0,3*9,3*9,3*9,3*10,3*10,3*9
+									
+									cigi[cigicount] = spicredit;   //16,27,0,27,27,27,30,30,27
+									cigicount++;		
+									marks.setMarksvalue(spicredit);
+									break;									
+								}
+							}
+							
+							/* Ecigi sum start */
+							
+							for(int k=0;k<cigi.length;k++)
+							{
+								sum = sum + cigi[k]; // 211
+							}
+							
+							finalspi = sum / sum1;   // 211/25 = 8.44
+							
+							/* Ecigi sum end */
+							
+							/* SPI(SEMESTER PERFORMANCE INDEX) Calculation using GTU Pattern End Here */
+							
+							
+							/* marks.setMarksvalue(marksvalue); */
+							
+							
+							//sum = sum + marksvalue;
+							
 							marks.setSemId(semid);
 							marks.setStudentId(studentID);
+							
 							System.out.println("AAya student id aa che "+marks.getStudentId());
+							
 							marks.setSubjectId(subjectidcolomidmap.get(cell.getColumnIndex()));
 							
 							
 							try(Connection c1=getconnection();
-									PreparedStatement p1=c1.prepareStatement("insert into marks_table (i_user_id,i_Semester_id,i_Subject_id,i_marks_value) values (?,?,?,?)");
+									PreparedStatement p1=c1.prepareStatement("insert into marks_table (i_user_id,i_Semester_id,i_Subject_id,i_marks_value,c_grade) values (?,?,?,?,?)");
 								  )
 							{
 								p1.setInt(1, marks.getStudentId());
 								p1.setInt(2, marks.getSemId());
 								p1.setInt(3, marks.getSubjectId());
 								p1.setInt(4,marks.getMarksvalue());
+								p1.setString(5,marks.getGrade());
+							
 								
 								int i1=p1.executeUpdate();
 								
@@ -294,50 +412,34 @@ public class ReadExcelFileDemo1 implements Runnable
 								if(sum/count>=33)
 								{
 									p1.setString(4,"PASS");
-									p1.setInt(5,sum);
+									p1.setInt(5,finalspi);
 					
 										//TODO pramote student
 										
-										if(semid%2==0)
-										{
-											try(Connection c2=getconnection();
-													PreparedStatement p2=c2.prepareStatement("update user_table set i_semester_id=? where  i_user_id=?");
-												 )
-											{
-												p2.setInt(1,semid+1);
-												p2.setInt(2,studentID);
-												
-												int i1=p2.executeUpdate();
-												
-												if(i1>0)
-												{
-													System.out.println(studentID+" has been pramoted");
-												}
-											}
-										}
+										/*
+										 * if(semid%2==0) { try(Connection c2=getconnection(); PreparedStatement p2=c2.
+										 * prepareStatement("update user_table set i_semester_id=? where  i_user_id=?");
+										 * ) { p2.setInt(1,semid+1); p2.setInt(2,studentID);
+										 * 
+										 * int i1=p2.executeUpdate();
+										 * 
+										 * if(i1>0) { System.out.println(studentID+" has been pramoted"); } } }
+										 */
 									}								
 								else
 								{
 									p1.setString(4,"FAIL");
-									p1.setInt(5,sum);
+									p1.setInt(5,finalspi);
 									
-									if(semid%2==0)
-									{
-										try(Connection c2=getconnection();
-												PreparedStatement p2=c2.prepareStatement("update user_table set i_semester_id=? where  i_user_id=?");
-											 )
-										{
-											p2.setInt(1,semid-1);
-											p2.setInt(2,studentID);
-											
-											int i1=p2.executeUpdate();
-											
-											if(i1>0)
-											{
-												System.out.println(studentID+" has been not  pramoted");
-											}
-										}
-									}
+									/*
+									 * if(semid%2==0) { try(Connection c2=getconnection(); PreparedStatement p2=c2.
+									 * prepareStatement("update user_table set i_semester_id=? where  i_user_id=?");
+									 * ) { p2.setInt(1,semid-1); p2.setInt(2,studentID);
+									 * 
+									 * int i1=p2.executeUpdate();
+									 * 
+									 * if(i1>0) { System.out.println(studentID+" has been not  pramoted"); } } }
+									 */
 								}
 								
 								int i1=p1.executeUpdate();
@@ -354,17 +456,18 @@ public class ReadExcelFileDemo1 implements Runnable
 				}
 				System.out.println("");
 				
-				String message=Service.deletnotice_table();
-				System.out.println(message);
-				
-				String message1=Service.deletass_faculty_table();
-				System.out.println(message1);
-				
-				String message2=Service.deletass_student_table();
-				System.out.println(message2);
-				
-				String message3=Service.deletfaculty_notes_table();
-				System.out.println(message3);
+				/*
+				 * String message=Service.deletnotice_table(); System.out.println(message);
+				 * 
+				 * String message1=Service.deletass_faculty_table();
+				 * System.out.println(message1);
+				 * 
+				 * String message2=Service.deletass_student_table();
+				 * System.out.println(message2);
+				 * 
+				 * String message3=Service.deletfaculty_notes_table();
+				 * System.out.println(message3);
+				 */
 			}  
 		}
 		catch (Exception e)

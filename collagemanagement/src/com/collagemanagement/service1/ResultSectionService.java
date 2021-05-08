@@ -24,7 +24,7 @@ public interface ResultSectionService
 
 	public Result fetchStatusDetails(int id, String semid);
 
-	public int fetchStreamId(String sem);
+	public int fetchStreamId(String sem, int i);
 
 	public List<Subject> fetchSubjectDetails(String sem);
 
@@ -41,6 +41,28 @@ public interface ResultSectionService
 	public InputStream getPDf(int id);
 
 	public String validatePaperYear(Paper paper);
+
+	public List<Paper> fetchPaperData(String streamid);
+
+	public Paper fetchPaperDetails(String id);
+
+	public String changePDF(Paper paper);
+
+	public String insertSubject(Subject s1);
+
+	public List<Subject> fetchSubject(String stream, String semester);
+
+	public String deletSubject(String id);
+
+	public String deletnotice_table();
+
+	public String deletass_faculty_table();
+
+	public String deletass_student_table();
+
+	
+
+	public String deletfaculty_notes_table();
 
 	
 

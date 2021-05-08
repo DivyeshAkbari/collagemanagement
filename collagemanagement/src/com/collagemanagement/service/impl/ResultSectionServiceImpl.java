@@ -107,11 +107,11 @@ public class ResultSectionServiceImpl implements ResultSectionService
 		return null;
 	}
 	@Override
-	public int fetchStreamId(String sem)
+	public int fetchStreamId(String sem,int i)
 	{
 		try(Connection c1=getconnection();)
 		{
-			return Dao.getStreamId(c1,sem);
+			return Dao.getStreamId(c1,sem,i);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,5 +244,232 @@ public class ResultSectionServiceImpl implements ResultSectionService
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public List<Paper> fetchPaperData(String streamid)
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			return Dao.getPaperData(c1,streamid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public Paper fetchPaperDetails(String id)
+	{
+		try(Connection c1=getconnection();
+			 )
+		{
+			return Dao.getpaperDetails(c1,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public String changePDF(Paper paper) 
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=Dao.updatePDF(c1,paper);
+			if(i1>0)
+			{
+				return "Yupoo";
+			}
+			else
+			{
+				return "Nope";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public String insertSubject(Subject s1)
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=Dao.setSubject(c1,s1);
+			if(i1>0)
+			{
+				return "Yupoo";
+			}
+			else
+			{
+				return "not";
+			}
+				
+		} catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public List<Subject> fetchSubject(String stream, String semester) {
+		// TODO Auto-generated method stub
+		
+		try(Connection c1=getconnection();
+			  )
+		{
+			return Dao.selectSubject(c1,stream,semester);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	@Override
+	public String deletSubject(String id) 
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=Dao.removeSubject(c1,id);
+			int i2=Dao.deletSubjectFromAssFacultyTable(c1,id);
+			int i3=Dao.deletSubjectFromfaculty_subject_table(c1,id);
+			int i4=Dao.deletdeletSubjectFromfaculty_notes_table(c1,id);
+			
+			if(i4>0)
+			{
+				System.out.println("subject deleted from faculty_notes_table");
+			}
+			else
+			{
+				System.out.println("subject  not deleted from faculty_notes_table");
+			}
+			if(i3>0)
+			{
+				System.out.println("subject deleted from faculty_subject_table" );
+			}
+			else
+			{
+				System.out.println("subject Not deleted from faculty_subject_table" );
+			}
+			if(i2>0)
+			{
+				System.out.println("subject deleted from ass_faculty_table");
+			}
+			else
+			{
+				System.out.println("subject Not  deleted from ass_faculty_table");
+			}
+			if(i1>0)
+			{
+				return "done";
+			}
+			else
+			{
+				return "no";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public String  deletnotice_table()
+	{
+		try(Connection c1=getconnection();
+			  )
+		{
+			int i1=Dao.clearnotice_table(c1);
+			if(i1>0)
+			{
+				return "Notice table has been cleared";
+			}
+			else
+			{
+				return "not";
+			}
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public String deletass_faculty_table()
+	{
+		try(Connection c1=getconnection();
+			 )
+		{
+			int i1=Dao.clearass_faculty_table(c1);
+			if(i1>0)
+			{
+				return "ass_faculty_table has been cleared";
+			}
+			else
+			{
+				return "not";
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		return null;
+		}
+	}
+	@Override
+	public String deletass_student_table()
+	{
+		
+		try(Connection c1=getconnection();
+				 )
+			{
+				int i1=Dao.clearass_student_table(c1);
+				if(i1>0)
+				{
+					return "ass_student_table has been cleared";
+				}
+				else
+				{
+					return "not";
+				}
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			
+			return null;
+			}
+	}
+	@Override
+	public String deletfaculty_notes_table()
+	{
+		try(Connection c1=getconnection();
+			 )
+		{
+			int i1=Dao.clearfaculty_notes_table(c1);
+			if(i1>0)
+			{
+				return "faculty_notes_table has been cleared";
+			}
+			else
+			{
+				return "not";
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		return null;
+		}
 	}
 }

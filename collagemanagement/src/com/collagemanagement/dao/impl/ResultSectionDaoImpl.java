@@ -37,6 +37,7 @@ public class ResultSectionDaoImpl implements ResultSectionDao
 					p1=c1.prepareStatement("Select c_subject_name from subject_table where i_stream_id=? AND i_Semester_id=?");
 				}
 				
+				System.out.println("Streamid is "+streamid);
 				p1.setInt(1, Integer.parseInt(streamid));
 				p1.setInt(2, Integer.parseInt(semid));
 					
@@ -179,13 +180,24 @@ public class ResultSectionDaoImpl implements ResultSectionDao
 	}
 
 	@Override
-	public int getStreamId(Connection c1, String sem) 
+	public int getStreamId(Connection c1, String sem,int i) 
 	{
-		try(PreparedStatement p1=c1.prepareStatement("Select i_stream_id from semester_table where i_Semester_id=?");)
+		try
 		{
-			p1.setInt(1, Integer.parseInt(sem));
+			PreparedStatement p1=null;
+			if(i==1)
+			{
+				p1=c1.prepareStatement("Select i_stream_id from semester_table where i_Semester_id=?");
+				p1.setInt(1, Integer.parseInt(sem));
+			}
+			else
+			{
+				p1=c1.prepareStatement("Select i_stream_id from paper_table where i_Paper_id=?");
+				p1.setInt(1, Integer.parseInt(sem));
+			}
 			
-			try(ResultSet r1=p1.executeQuery();)
+			try(ResultSet r1=p1.executeQuery();
+				  )
 			{
 				if(r1.next())
 				{
@@ -424,6 +436,348 @@ public class ResultSectionDaoImpl implements ResultSectionDao
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 0;
+	}
+	@Override
+	public List<Paper> getPaperData(Connection c1, String streamid)
+	{
+		List<Paper> paperlist=new ArrayList<>();
+		
+		try(PreparedStatement p1=c1.prepareStatement("Select * from paper_table where i_stream_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(streamid));
+			
+			try(ResultSet r1=p1.executeQuery();
+				 )
+			{
+				while(r1.next())
+				{
+					Paper p2=new Paper();
+					p2.setPaperid(r1.getInt("i_Paper_id"));
+					
+					int streamid1=r1.getInt("i_stream_id");
+					
+						try(PreparedStatement p3=c1.prepareStatement("Select c_stream from stream_table where i_stream_id=?");
+							 )
+						{
+							p3.setInt(1, streamid1);
+							
+							try(ResultSet r2=p3.executeQuery();
+								 )
+							{
+								if(r2.next())
+								{
+									p2.setStreamname(r2.getString("c_stream"));
+								}
+							}
+						}
+						
+						int semid=r1.getInt("i_Semester_id");
+						try(PreparedStatement p4=c1.prepareStatement("select i_semester_value from semester_table where i_Semester_id=? AND i_stream_id=?");
+							  )
+						{
+							p4.setInt(1, semid);
+							p4.setInt(2, Integer.parseInt(streamid));
+							
+							try(ResultSet r3=p4.executeQuery();
+								  )
+							{
+								if(r3.next())
+								{
+									p2.setSemesterid(r3.getInt("i_semester_value"));
+								}
+							}
+						}
+						
+						p2.setYear(r1.getInt("i_year"));
+						
+						int papertypeid=r1.getInt("i_papertype_id");
+						try(PreparedStatement p5=c1.prepareStatement("Select c_type from papertype_table where i_papertype_id=?");
+							  )
+						{
+							p5.setInt(1, papertypeid);
+							try(ResultSet r4=p5.executeQuery();
+								  )
+							{
+								if(r4.next())
+								{
+									p2.setPapertype(r4.getString("c_type"));
+								}
+							}
+						}
+						
+						paperlist.add(p2);
+					}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return paperlist;
+	}
+	@Override
+	public Paper getpaperDetails(Connection c1, String id)
+	{
+		Paper p2=new Paper();
+		try(PreparedStatement p1=c1.prepareStatement("Select * from paper_table where i_Paper_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			
+			try(ResultSet r1=p1.executeQuery();
+				  )
+			{
+				if(r1.next())
+				{
+					
+					
+					int streamid1=r1.getInt("i_stream_id");
+					
+					try(PreparedStatement p3=c1.prepareStatement("Select c_stream from stream_table where i_stream_id=?");
+						 )
+					{
+						p3.setInt(1, streamid1);
+						
+						try(ResultSet r2=p3.executeQuery();
+							 )
+						{
+							if(r2.next())
+							{
+								p2.setStreamname(r2.getString("c_stream"));
+							}
+						}
+					}
+					
+					int semid=r1.getInt("i_Semester_id");
+					try(PreparedStatement p4=c1.prepareStatement("select i_semester_value from semester_table where i_Semester_id=? AND i_stream_id=?");
+						  )
+					{
+						p4.setInt(1, semid);
+						p4.setInt(2,streamid1);
+						
+						try(ResultSet r3=p4.executeQuery();
+							  )
+						{
+							if(r3.next())
+							{
+								p2.setSemesterid(r3.getInt("i_semester_value"));
+							}
+						}
+					}
+					
+					p2.setYear(r1.getInt("i_year"));
+					
+					int papertypeid=r1.getInt("i_papertype_id");
+					try(PreparedStatement p5=c1.prepareStatement("Select c_type from papertype_table where i_papertype_id=?");
+						  )
+					{
+						p5.setInt(1, papertypeid);
+						try(ResultSet r4=p5.executeQuery();
+							  )
+						{
+							if(r4.next())
+							{
+								p2.setPapertype(r4.getString("c_type"));
+							}
+						}
+					}
+				}
+			}
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p2;
+	}
+	@Override
+	public int updatePDF(Connection c1, Paper paper)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Update paper_table set PDF=? where i_Paper_id=?");
+			  )
+		{
+			p1.setBlob(1, paper.getPDF());
+			p1.setInt(2, paper.getPaperid());
+			return p1.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public int setSubject(Connection c1, Subject s1)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Insert into subject_table (c_subject_name,"
+				+ "i_stream_id,i_Semester_id,i_subject_credit,i_differenciate) values(?,?,?,?,?)");
+			  )
+		{
+			p1.setString(1, s1.getSubjectName());
+			p1.setInt(2, Integer.parseInt(s1.getStream()));
+			p1.setInt(3,Integer.parseInt(s1.getSem()));
+			p1.setInt(4, Integer.parseInt(s1.getSubjectcredit()));
+			p1.setInt(5,s1.getSubjecttype());
+			
+			return p1.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public List<Subject> selectSubject(Connection c1, String stream, String semester)
+	{
+		List<Subject> Subjectlist=new ArrayList<>();
+		try(PreparedStatement p1=c1.prepareStatement("Select * from subject_table where i_stream_id=? AND i_Semester_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(stream));
+			p1.setInt(2, Integer.parseInt(semester));
+			
+			try(ResultSet r1=p1.executeQuery();
+				  )
+			{
+				while(r1.next())
+				{
+					Subject s1=new Subject();
+					s1.setSubjectName(r1.getString("c_subject_name"));
+					s1.setSubjectId(r1.getInt("i_Subject_id"));
+					
+					Subjectlist.add(s1);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Subjectlist;
+	}
+	@Override
+	public int removeSubject(Connection c1, String id) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Delete * from subject_table where i_Subject_id=?");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			return p1.executeUpdate();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public int deletSubjectFromAssFacultyTable(Connection c1, String id)
+	{
+		
+		try(PreparedStatement p1=c1.prepareStatement("Delete * from ass_faculty_table where i_Subject_id=? ");
+			  )
+		{
+			
+			p1.setInt(1, Integer.parseInt(id));
+			return p1.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public int deletSubjectFromfaculty_subject_table(Connection c1, String id) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Delete * from faculty_subject_table where i_Subject_id=? ");
+			  )
+		{
+			p1.setInt(1, Integer.parseInt(id));
+			return p1.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public int deletdeletSubjectFromfaculty_notes_table(Connection c1, String id)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("Delete * from faculty_notes_table where i_Subject_id=? ");
+				  )
+			{
+				p1.setInt(1, Integer.parseInt(id));
+				return p1.executeUpdate();
+			}
+		catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return 0;
+	}
+	@Override
+	public int clearnotice_table(Connection c1)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("delete * from notice_table");
+			 )
+		{
+			return p1.executeUpdate();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public int clearass_faculty_table(Connection c1) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("delete * from ass_faculty_table");
+			  )
+		{
+			return p1.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		return 0;
+	}
+	@Override
+	public int clearass_student_table(Connection c1) 
+	{
+		try(PreparedStatement p1=c1.prepareStatement("delete * from ass_student_table");
+				  )
+			{
+				return p1.executeUpdate();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		
+		return 0;
+	}
+	@Override
+	public int clearfaculty_notes_table(Connection c1)
+	{
+		try(PreparedStatement p1=c1.prepareStatement("delete * from ass_student_table");
+				  )
+			{
+				return p1.executeUpdate();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		
 		return 0;
 	}
 }

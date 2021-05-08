@@ -1,16 +1,12 @@
 package com.collagemanagement.Result.Servlet;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -21,6 +17,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.collagemanagement.bean.Marks;
+import com.collagemanagement.service.impl.ResultSectionServiceImpl;
+import com.collagemanagement.service1.ResultSectionService;
 
 public class ReadExcelFileDemo1 implements Runnable
 {
@@ -29,6 +27,8 @@ public class ReadExcelFileDemo1 implements Runnable
 	{
 		this.excelfile=excelfile;
 	}
+	
+	ResultSectionService Service=new ResultSectionServiceImpl();
 	
 	public static Connection getconnection()
 	{
@@ -52,7 +52,7 @@ public class ReadExcelFileDemo1 implements Runnable
 		int semid=0;
 		int studentID=0;
 		int year=0;
-		int sum=0;
+		
 		int count=0;
 		int subjectcredit=0;
 		int sum1=0;
@@ -72,6 +72,7 @@ public class ReadExcelFileDemo1 implements Runnable
 			
 			while (itr.hasNext()) 
 			{	
+				int sum=0;
 				//System.out.println("ITR "+itr);
 				Row row = itr.next();
 				
@@ -283,7 +284,7 @@ public class ReadExcelFileDemo1 implements Runnable
 				{
 							System.out.println("Subject credit sum is "+sum1);
 							try(Connection c1=getconnection();
-							PreparedStatement p1=c1.prepareStatement("insert into result_table (c_Result_date,i_user_id,i_Semester_id,c_Status) values (?,?,?,?)");
+							PreparedStatement p1=c1.prepareStatement("insert into result_table (c_Result_date,i_user_id,i_Semester_id,c_Status,i_total) values (?,?,?,?,?)");
 							)
 					{
 								p1.setInt(1, year);
@@ -293,12 +294,50 @@ public class ReadExcelFileDemo1 implements Runnable
 								if(sum/count>=33)
 								{
 									p1.setString(4,"PASS");
-									
-									
-								}
+									p1.setInt(5,sum);
+					
+										//TODO pramote student
+										
+										if(semid%2==0)
+										{
+											try(Connection c2=getconnection();
+													PreparedStatement p2=c2.prepareStatement("update user_table set i_semester_id=? where  i_user_id=?");
+												 )
+											{
+												p2.setInt(1,semid+1);
+												p2.setInt(2,studentID);
+												
+												int i1=p2.executeUpdate();
+												
+												if(i1>0)
+												{
+													System.out.println(studentID+" has been pramoted");
+												}
+											}
+										}
+									}								
 								else
 								{
 									p1.setString(4,"FAIL");
+									p1.setInt(5,sum);
+									
+									if(semid%2==0)
+									{
+										try(Connection c2=getconnection();
+												PreparedStatement p2=c2.prepareStatement("update user_table set i_semester_id=? where  i_user_id=?");
+											 )
+										{
+											p2.setInt(1,semid-1);
+											p2.setInt(2,studentID);
+											
+											int i1=p2.executeUpdate();
+											
+											if(i1>0)
+											{
+												System.out.println(studentID+" has been not  pramoted");
+											}
+										}
+									}
 								}
 								
 								int i1=p1.executeUpdate();
@@ -314,6 +353,18 @@ public class ReadExcelFileDemo1 implements Runnable
 					}
 				}
 				System.out.println("");
+				
+				String message=Service.deletnotice_table();
+				System.out.println(message);
+				
+				String message1=Service.deletass_faculty_table();
+				System.out.println(message1);
+				
+				String message2=Service.deletass_student_table();
+				System.out.println(message2);
+				
+				String message3=Service.deletfaculty_notes_table();
+				System.out.println(message3);
 			}  
 		}
 		catch (Exception e)

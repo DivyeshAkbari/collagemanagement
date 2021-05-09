@@ -63,6 +63,9 @@ public class ReadExcelFileDemo1 implements Runnable
 		
 		
 		Map<Integer ,Integer> subjectidcolomidmap = new HashedMap<>();
+		
+		Map<Integer,Integer> subjectcreditmap = new HashedMap<>();
+		
 		try 
 		{
 			//FileInputStream fis = new FileInputStream(new File("S:Book1.xlsx"));
@@ -81,8 +84,8 @@ public class ReadExcelFileDemo1 implements Runnable
 				int gradecount = 0;
 				int gradearr[] = new int[10];
 				
-				int cigi[] = new int[10];
 				int cigicount = 0;
+				int cigi[] = new int[20];
 				
 				int finalspi = 0;
 				
@@ -117,7 +120,7 @@ public class ReadExcelFileDemo1 implements Runnable
 								PreparedStatement p1=connection.prepareStatement("Select i_stream_id from stream_table where c_stream=?");
 								  )
 							{
-								System.out.println("Stream name is "+streamname);
+								System.out.println("Stream name is "+streamname);  
 								p1.setString(1, streamname);
 								System.out.println("Try ma aavi gaya ");
 								//int subjectid=0;
@@ -153,7 +156,7 @@ public class ReadExcelFileDemo1 implements Runnable
 								p1.setString(1, subjectname);
 								p1.setInt(2, Streamid);
 								p1.setInt(3, semid);
-								int subjectid=0;
+								int subjectid=0; 
 														
 								try(ResultSet resultset=p1.executeQuery();
 									  )
@@ -167,13 +170,14 @@ public class ReadExcelFileDemo1 implements Runnable
 										System.out.println("Subject  id is "+subjectid);
 										System.out.println("Subject Credit is "+subjectcredit);
 										
-										subject[subjectcount] = subjectcredit; //aaya error ave 6
+										subject[subjectcount] = subjectcredit; 
 										subjectcount++;
 									
-										System.out.println("Sum1 is "+sum1); // 
+										System.out.println("Sum1 is "+sum1); 
+												
+										//subjectcreditmap.put(cell.getColumnIndex(),subjectcredit);
 										
 										System.out.println("Subject Credit" +subjectcredit);
-										
 									}
 								}
 								subjectidcolomidmap.put(cell.getColumnIndex(),subjectid);								
@@ -269,7 +273,7 @@ public class ReadExcelFileDemo1 implements Runnable
 							
 							Marks marks = new Marks();
 							
-							
+									
 							/* SPI(SEMESTER PERFORMANCE INDEX) Calculation using GTU Pattern Start Here */
 										
 							
@@ -321,21 +325,40 @@ public class ReadExcelFileDemo1 implements Runnable
 								gradecount++;
 								marks.setGrade("FF");
 							}
-							
 
-							for(int spi=0;i<subject.length;spi++)
+							subjectcreditmap.get(cell.getColumnIndex());
+							
+							for(int spi=0;spi<subject.length;spi++)   //For Subject Credit
 							{
-								int creditofsub = subject[spi];  //2,3,2,3,3,3,3,3,3 error line
+								 System.out.println("Element at index " + spi + 
+	                                      " : "+ subject[spi]);    
+								
+								int creditofsub = subject[spi];  //2,3,2,3,3,3,3,3,3 
 								
 								for(int j=0;j<gradearr.length;j++)
 								{
+									
+									System.out.println("Element at index[student get credit] " + j + 
+		                                      " : "+ gradearr[j]); 
+									
 									int grade = gradearr[j];  //8,9,0,9,9,9,10,10,9
 									
 									int spicredit = creditofsub * grade; //8*2,3*9,2*0,3*9,3*9,3*9,3*10,3*10,3*9
 									
-									cigi[cigicount] = spicredit;   //16,27,0,27,27,27,30,30,27
-									cigicount++;		
-									marks.setMarksvalue(spicredit);
+									System.out.println("Spi Credit ->" +spicredit);
+										
+									
+									/*
+									 * for(int w=0;w<cigi.length;w++) { cigi[cigicount] = spicredit;
+									 * 
+									 * cigicount++; }
+									 */
+									 // cigi[cigicount] = spicredit; //16,27,0,27,27,27,30,30,27
+									  
+									  //cigicount++;
+									  
+									//  marks.setMarksvalue(spicredit);
+									  
 									break;									
 								}
 							}
@@ -349,15 +372,19 @@ public class ReadExcelFileDemo1 implements Runnable
 							
 							finalspi = sum / sum1;   // 211/25 = 8.44
 							
+							System.out.println("Final Spi -> "+finalspi);
+							
 							/* Ecigi sum end */
+							
+							
 							
 							/* SPI(SEMESTER PERFORMANCE INDEX) Calculation using GTU Pattern End Here */
 							
 							
-							/* marks.setMarksvalue(marksvalue); */
+							marks.setMarksvalue(marksvalue); 
 							
 							
-							//sum = sum + marksvalue;
+							sum = sum + marksvalue;
 							
 							marks.setSemId(semid);
 							marks.setStudentId(studentID);
@@ -396,7 +423,7 @@ public class ReadExcelFileDemo1 implements Runnable
 					default:
 						break;
 					}
-				}
+				}                  
 				
 				if(studentID!=0)
 				{
@@ -412,7 +439,7 @@ public class ReadExcelFileDemo1 implements Runnable
 								if(sum/count>=33)
 								{
 									p1.setString(4,"PASS");
-									p1.setInt(5,finalspi);
+									p1.setInt(5,sum);
 					
 										//TODO pramote student
 										
@@ -429,7 +456,7 @@ public class ReadExcelFileDemo1 implements Runnable
 								else
 								{
 									p1.setString(4,"FAIL");
-									p1.setInt(5,finalspi);
+									p1.setInt(5,sum);
 									
 									/*
 									 * if(semid%2==0) { try(Connection c2=getconnection(); PreparedStatement p2=c2.

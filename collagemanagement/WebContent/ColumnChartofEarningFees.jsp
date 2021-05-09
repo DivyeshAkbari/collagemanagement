@@ -9,6 +9,7 @@
 <%@page import="com.collagemanagement.service1.AdminPanel"%>
 <%@page import="com.collagemanagement.service.impl.AdminPanelServiceImpl"%>
 
+
 <%	
 	AdminPanel adminpanelService = new AdminPanelServiceImpl();
 
@@ -16,24 +17,27 @@
 	
 	List<FeesDetails>  chartlist =(List)request.getAttribute("chartlist");
 
-%>
- 
-<%
-Gson gsonObj = new Gson();
 
-Map<Object,Object> map = null;
-
-List<Map<Object,Object>> list2 = new ArrayList<Map<Object,Object>>();
-
-for(int i=0 ;i<chartlist.size();i++){
+	Gson gsonObj = new Gson();
 	
-	FeesDetails fees = new FeesDetails();
- 
-map = new HashMap<Object,Object>(); map.put("label",fees.getPaymentdate()); map.put("y",count); list2.add(map);
-
-map = new HashMap<Object,Object>(); map.put("label", "2022"); map.put("y",7000); list2.add(map);
-
-}
+	Map<Object,Object> map = null;
+	
+	List<Map<Object,Object>> list2 = new ArrayList<Map<Object,Object>>();
+	
+	for(int i=0;i<chartlist.size();i++)
+	{
+		FeesDetails fees = chartlist.get(i);
+	
+		map = new HashMap<Object,Object>(); 
+		map.put("label",fees.getPaymentdate()); 
+		map.put("y",count); 
+		list2.add(map);
+		
+		map = new HashMap<Object,Object>();
+		map.put("labe2","2021"); 
+		map.put("y",7000); list2.add(map);
+	
+	}
 
 String dataPoints = gsonObj.toJson(list2);
 %>

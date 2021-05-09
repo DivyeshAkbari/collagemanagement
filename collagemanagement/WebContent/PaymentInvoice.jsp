@@ -51,9 +51,9 @@
         <tbody>
           <tr>
             <td class="no">01</td>
-            <td class="desc"><h3>Fees Payment</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-            <td class="unit"  <%=fees.getAmount() %> ></td>
-            <td class="total" <%=fees.getAmount() %> ></td>
+            <td class="desc"><h3>Fees Payment</h3>Payment of Student-Fees</td>
+            <td class="unit"><%=fees.getAmount() %></td>
+            <td class="total"><%=fees.getAmount() %></td>
           </tr>
         </tbody>
         <tfoot>           
@@ -62,11 +62,13 @@
             <td colspan="2">TAX 25%</td>
             <td>$1,300.00</td>
           </tr> -->
+          
           <tr>
             <td colspan="2"></td>
             <td colspan="2">GRAND TOTAL</td>
             <td><%=fees.getAmount() %></td>
           </tr>
+          
         </tfoot>
       </table>
       <div id="thanks">Thank you!</div>

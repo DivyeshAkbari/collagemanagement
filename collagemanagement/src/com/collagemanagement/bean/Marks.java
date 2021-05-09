@@ -57,3 +57,10 @@ public class Marks
 	private int subjectId;
 	private int marksvalue;
 }
+
+
+/*
+ * cigi[cigicount] = spicredit; //16,27,0,27,27,27,30,30,27 cigicount++;
+ * marks.setMarksvalue(spicredit);
+ */
+//173,174 and this

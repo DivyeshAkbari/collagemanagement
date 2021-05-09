@@ -87,12 +87,12 @@ function fileValidation()
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
-                    <h3>Previous year papers</h3>
+                    <h3>Upload Excel File</h3>
                     <ul>
                         <li>
                             <a href="Admin.jsp">Home</a>
                         </li>
-                        <li>Papers</li>
+                        <li>Excel File</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -103,7 +103,7 @@ function fileValidation()
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Upload Paper here</h3>
+                                        <h3>Upload File here</h3>
                                     </div>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"

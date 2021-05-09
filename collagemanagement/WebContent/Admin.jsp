@@ -1,5 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@page import="com.collagemanagement.bean.User"%>
+<%@page import="com.collagemanagement.service1.AdminPanel"%>
+<%@page import="com.collagemanagement.service.impl.AdminPanelServiceImpl"%>
+
+<%@ page import="java.util.*" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
+
+<%
+	
+	AdminPanel adminpanelService = new AdminPanelServiceImpl();
+
+	int count = adminpanelService.fetchTotalStudent();
+	
+	int count1 = adminpanelService.fetchTotalTeacher();
+	
+	int count2 = adminpanelService.fetchTotalEarning();
+	
+	int count3 = adminpanelService.fetchStudent();
+	
+	int count4 = adminpanelService.fetchfemaleStudent();
+	
+	int count5 = adminpanelService.fetchfemaleTeacher();
+	
+	int count6 = adminpanelService.fetchmaleTeacher();
+	
+	System.out.println("Student From JSP "+count);
+	
+%>    
+
+<%
+Gson gsonObj = new Gson();
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+ 
+map = new HashMap<Object,Object>(); map.put("label", "MaleStudents"); map.put("y", count3); list.add(map);
+
+map = new HashMap<Object,Object>(); map.put("label", "FeMaleStudents"); map.put("y", count4); list.add(map);
+
+map = new HashMap<Object,Object>(); map.put("label", "FeMaleFaculties"); map.put("y", count5); list.add(map);
+
+map = new HashMap<Object,Object>(); map.put("label", "MaleFaculties"); map.put("y", count6); list.add(map);
+ 
+String dataPoints = gsonObj.toJson(list);
+%>
+
+
+    
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -31,7 +80,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Modernize js -->
-    <script src="js/modernizr-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -40,7 +89,7 @@
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
        <!-- Header Menu Area Start Here -->
-            <%@include file="dashboard-header.jsp" %>
+        <%@include file="dashboard-header.jsp" %>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -74,7 +123,7 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Students</div>
-                                        <div class="item-number"><span class="counter" data-num="150000">1,50,000</span></div>
+                                        <div class="item-number"><span class="counter" data-num="<%=count %>"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -91,29 +140,12 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Teachers</div>
-                                        <div class="item-number"><span class="counter" data-num="2250">2,250</span></div>
+                                        <div class="item-number"><span class="counter" data-num="<%=count1%>"></span></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-one mg-b-20">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <div class="item-icon bg-light-yellow">
-                                        <i class="flaticon-couple text-orange"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="item-content">
-                                        <div class="item-title">Parents</div>
-                                        <div class="item-number"><span class="counter" data-num="5690">5,690</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="dashboard-summery-one mg-b-20">
                             <div class="row align-items-center">
@@ -125,7 +157,7 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Earnings</div>
-                                        <div class="item-number"><span>$</span><span class="counter" data-num="193000">1,93,000</span></div>
+                                        <div class="item-number"><span class="counter" data-num="<%=count2%>"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +166,12 @@
                 </div>
                 <!-- Dashboard summery End Here -->
                 <!-- Dashboard Content Start Here -->
-                <div class="row gutters-20">
+                
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                
+                <br>
+                
+                <!--<div class="row gutters-20">
                     <div class="col-12 col-xl-8 col-6-xxxl">
                         <div class="card dashboard-card-one pd-b-20">
                             <div class="card-body">
@@ -224,7 +261,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-6 col-3-xxxl">
+                    <!-- <div class="col-12 col-xl-6 col-3-xxxl">
                         <div class="card dashboard-card-three pd-b-20">
                             <div class="card-body">
                                 <div class="heading-layout1">
@@ -287,8 +324,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6 col-4-xxxl">
+                    </div> 
+                     <div class="col-lg-6 col-xl-6 col-4-xxxl">
                         <div class="card dashboard-card-five pd-b-20">
                             <div class="card-body pd-b-14">
                                 <div class="heading-layout1">
@@ -408,11 +445,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Dashboard Content End Here -->
                 <!-- Social Media Start Here -->
                 <div class="row gutters-20">
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-3 col-sm-6 col-12" hidden="hidden">
                         <div class="card dashboard-card-seven">
                             <div class="social-media bg-fb hover-fb">
                                 <div class="media media-none--lg">
@@ -423,7 +460,7 @@
                                         <h6 class="item-title">Like us on facebook</h6>
                                     </div>
                                 </div>
-                                <div class="social-like">30,000</div>
+                                <!-- <div class="social-like">30,000</div> -->
                             </div>
                         </div>
                     </div>
@@ -438,11 +475,11 @@
                                             <h6 class="item-title">Follow us on twitter</h6>
                                         </div>
                                 </div>
-                                <div class="social-like">1,11,000</div>
+                                <!-- <div class="social-like">1,11,000</div> -->
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
+                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="card dashboard-card-seven">
                             <div class="social-media bg-gplus hover-gplus">
                                 <div class="media media-none--lg">
@@ -453,11 +490,11 @@
                                         <h6 class="item-title">Follow us on googleplus</h6>
                                     </div>
                                 </div>
-                                <div class="social-like">19,000</div>
+                               <!--  <div class="social-like">19,000</div> -->
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    </div> 
+                    <div class="col-lg-3 col-sm-6 col-12" hidden="hidden">
                         <div class="card dashboard-card-seven">
                             <div class="social-media bg-linkedin hover-linked">
                                 <div class="media media-none--lg">
@@ -468,11 +505,13 @@
                                         <h6 class="item-title">Follow us on linked</h6>
                                     </div>
                                 </div>
-                                <div class="social-like">45,000</div>
+                                <!-- <div class="social-like">45,000</div> -->
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                
                 <!-- Social Media End Here -->
                 <!-- Footer Area Start Here -->
                 <footer class="footer-wrap-layout1">
@@ -506,6 +545,49 @@
     <script src="js/Chart.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    
+    <script src="assets/js/canvasjs.min.js"></script>
+    
+        <script src="js/modernizr-3.6.0.min.js"></script>
+    
+    <script type="text/javascript">
+			window.onload = function() { 
+			 
+			var chart = new CanvasJS.Chart("chartContainer", {
+				theme: "light2",
+				title: {
+					text: "Registered Alumnies-Facuties"
+				},
+				subtitles: [{
+					text: "March 2021"
+				}],
+				axisY: {
+					title: "Number of Users",
+					labelFormatter: addSymbols
+				},
+				data: [{
+					type: "bar",
+					indexLabel: "{y}",
+					indexLabelFontColor: "#444",
+					indexLabelPlacement: "inside",
+					dataPoints: <%out.print(dataPoints);%>
+				}]
+			});
+			chart.render();
+			 
+			function addSymbols(e) {
+				var suffixes = ["", "K", "M", "B"];
+			 
+				var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+				if(order > suffixes.length - 1)
+				order = suffixes.length - 1;
+			 
+				var suffix = suffixes[order];
+				return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
+			}
+			 
+			}
+</script>
 
 </body>
 

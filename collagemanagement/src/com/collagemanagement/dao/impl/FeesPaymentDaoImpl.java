@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -226,7 +227,7 @@ public class FeesPaymentDaoImpl implements FeesPaymentDao {
 		String s1="STUDENT";
 		List<User> userlist = new ArrayList<>();
 		
-		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_roll='"+s1+"'");
+		try(PreparedStatement p1=connection.prepareStatement("Select * from user_table where c_roll='"+s1+"' AND i_status1=1 AND i_status=1");
 				ResultSet r1=p1.executeQuery();
 			  )
 		{
@@ -241,6 +242,11 @@ public class FeesPaymentDaoImpl implements FeesPaymentDao {
 				user.setEmail(r1.getString(5));
 				user.setXender(r1.getString(6));
 				user.setDivision(r1.getString("c_division"));
+				byte[] imagedata = r1.getBytes("image");
+				if (null != imagedata && imagedata.length > 0) {
+					String imagestr = Base64.getEncoder().encodeToString(imagedata);
+					user.setUserProfilepicString(imagestr);
+				}
 				
 				int Streamid = r1.getInt("i_stream_id");
 				

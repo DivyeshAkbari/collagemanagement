@@ -39,7 +39,9 @@
 
 <jsp:include page ="/FeesPayStudentDataDisplay"/>
 
-<% List<User> userList =(List)request.getAttribute("user"); %>
+<% List<User> userList =(List)request.getAttribute("user");
+int userid1=0;
+%>
 
 
 <body>
@@ -48,7 +50,7 @@
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
          <!-- Header Menu Area Start Here -->
-   <%@include file="AkhoorHeader.jsp" %>
+   			<%@include file="dashboard-header.jsp" %>
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -88,21 +90,21 @@
                         <form class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by ID ..." class="form-control">
+                                    <input id="searchId" type="text" onkeyup="myFunction1()" placeholder="Search by ID ..." class="form-control">
                                 </div>
                                 <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                    <input id="searchName" type="text" onkeyup="myFunction()" placeholder="Search by Name ..." class="form-control">
                                 </div>
                                 <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Phone" class="form-control">
+                                    <input id="searchMail" type="text" onkeyup="myFunction2()" placeholder="Search by Mail id ..." class="form-control">
                                 </div>
-                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                </div>
+<!--                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group"> -->
+<!--                                     <button id="btnExport" type="submit" class="fw-btn-fill btn-gradient-yellow">Generate Report</button> -->
+<!--                                 </div> -->
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table data-table text-nowrap">
+                            <table id="myTable" class="table data-table text-nowrap">
                                 <thead>
                                     <tr>
                                         <th> 
@@ -111,41 +113,54 @@
                                                 <label class="form-check-label">ID</label>
                                             </div>
                                         </th>
-                                        <th>First Name</th>
-                                                <th>Middle Name</th>
-                                               <th>Last Name</th>
-                                               <!-- <th>Email</th> -->
-                                            <!--     <th>Gender</th> -->                                                
-                                                <th>Stream</th>
-                                                <th>Semester</th>
-                                                <th>Division</th>
-                                            	<th>Status</th>
+                                        	<th>Photo</th>
+                                        	<th>First Name</th>                                          
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                           	<th>Gender</th>                                              
+                                            <th>Stream</th>
+                                            <th>Semester</th>
+                                            <th>Division</th>
+                                            <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <% int counter=1;%>
+                                <% int paymentstatus=0; %>
                                             <% for(int i=0;i<userList.size();i++)
 												{ %>
-												<% User u1=userList.get(i); %>
+												<% User u1=userList.get(i);
+												userid1 = u1.getId();
+												%>
+												
                                     <tr>
-                                        <td>
+                                       <td>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label">#0021</label>
+                                                <label class="form-check-label"><%=u1.getId() %></label>
                                             </div>
                                         </td>
                                         <!-- <td><img src="img/figure/student2.png" alt="student"></td> -->
-                                        
-                                        <td><%=u1.getFirstname()%></td>
-														<td><%=u1.getMiddlename() %></td>
-														<td><%=u1.getLastname() %></td>
-														<%-- <td><%=u1.getEmail()%></td> --%>
+                                        <td class="text-center"><img style="border-radius: 50%;" src="data:image/png;base64,<%= u1.getUserProfilepicString()  %>" alt="student"></td>
+                                       <td><%= u1.getFirstname() %> <%=u1.getMiddlename() %></td>										
+										<td><%=u1.getLastname() %></td>
+										<td><%=u1.getEmail()%></td>
+										<td><%=u1.getXender() %></td>
                                         <td><%=u1.getStream()%></td>
-														<td><%=u1.getSemester() %>
-														<td><%=u1.getDivision()%></td>
-														<td class="badge badge-pill badge-danger d-block mg-t-8"><%=u1.getPaymentstatus() %></td>
-                                        
+										<td><%=u1.getSemester() %>
+										<td><%=u1.getDivision()%></td>
+										<%-- <td class="badge badge-pill badge-danger d-block mg-t-8"><%=u1.getPaymentstatus() %></td> --%>
+										<%if(u1.getPaymentstatus() != "0") { %>
+											<%System.out.println("if Executed"); %>  
+											
+											<td class="badge badge-pill badge-success d-block mg-t-8"><%=u1.getPaymentstatus() %></td>
+                                        <%}
+										else{ %>     
+											<%System.out.println("else Executed"); %>                                 
+                                        	
+                                        	<td class="badge badge-pill badge-danger d-block mg-t-8"><%=u1.getPaymentstatus() %></td>
+                                        <%} %>
                                          <td>
                                             <div hidden="hidden" class="dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -186,6 +201,63 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+    
+<script>
+    function myFunction() {
+    	  var input, filter, table, tr, td, i, txtValue;
+    	  input = document.getElementById("searchName");
+    	  filter = input.value.toUpperCase();
+    	  table = document.getElementById("myTable");
+    	  tr = table.getElementsByTagName("tr");
+    	  for (i = 0; i < tr.length; i++) {
+    	    td = tr[i].getElementsByTagName("td")[2];
+    	    if (td) {
+    	      txtValue = td.textContent || td.innerText;
+    	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    	        tr[i].style.display = "";
+    	      } else {
+    	        tr[i].style.display = "none";
+    	      }
+    	    }       
+    	  }
+    	}//first fun
+    	function myFunction1() {
+      	  var input, filter, table, tr, td, i, txtValue;
+      	  input = document.getElementById("searchId");
+      	  filter = input.value.toUpperCase();
+      	  table = document.getElementById("myTable");
+      	  tr = table.getElementsByTagName("tr");
+      	  for (i = 0; i < tr.length; i++) {
+      	    td = tr[i].getElementsByTagName("td")[0];
+      	    if (td) {
+      	      txtValue = td.textContent || td.innerText;
+      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      	        tr[i].style.display = "";
+      	      } else {
+      	        tr[i].style.display = "none";
+      	      }
+      	    }       
+      	  }
+      	}//second 
+      	function myFunction2() {
+      	  var input, filter, table, tr, td, i, txtValue;
+      	  input = document.getElementById("searchMail");
+      	  filter = input.value.toUpperCase();
+      	  table = document.getElementById("myTable");
+      	  tr = table.getElementsByTagName("tr");
+      	  for (i = 0; i < tr.length; i++) {
+      	    td = tr[i].getElementsByTagName("td")[4];
+      	    if (td) {
+      	      txtValue = td.textContent || td.innerText;
+      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      	        tr[i].style.display = "";
+      	      } else {
+      	        tr[i].style.display = "none";
+      	      }
+      	    }       
+      	  }
+      	}
+    </script>
 
 </body>
 

@@ -6,7 +6,7 @@
 	
 
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -37,6 +37,53 @@
     <link rel="stylesheet" href="style4.css">
     <!-- Modernizr Js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    
+    	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	
+	
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.min.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- All PLUGINS CSS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/assets.css">
+	
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/typography.css">
+	
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/shortcodes/shortcodes.css">
+	
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
+	
+	<!-- REVOLUTION SLIDER CSS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/layers.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/settings.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/navigation.css">
+	<!-- REVOLUTION SLIDER END -->	
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+    
+    
+    
     <style type="text/css">
     	
     	.formerror{
@@ -110,6 +157,30 @@ function validateForm()
 <jsp:include page ="/FetchTag"/>
 <% List<QuoraSession>  taglist =(List)request.getAttribute("taglist"); %>
 <body>
+
+	 <%@include file="header.jsp" %>
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Asking a good Question</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+				<p>You are ready to ask your first programming-related question and the community is here to help! To get you the best answers, we have provided some guidance:
+                  </p>
+              <p><h1>1</h1>Summarize the problem
+                </p>
+                  <p><h1>2</h1>Describe what you have tried
+                </p>
+   
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
@@ -135,211 +206,7 @@ function validateForm()
             <div class="container">
                 <div class="row gutters-60">
                     <div class="col-lg-8">
-                        <div class="single-blog-box">
-                            <!-- <div class="main-figure">
-                                <a href="single-blog.html"><img src="img/blog/blog9.jpg" alt="Blog"></a>
-                            </div> -->
-                            <!-- <div class="blog-content">
-                                <ul class="entry-meta">
-                                    <li><a href="#"><i class="fas fa-clock"></i>15 December, 2018</a></li>
-                                    <li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-                                    <li><a href="#"><i class="fas fa-comments"></i>Comments <span>(03)</span></a></li>
-                                    <li><a href="#"><i class="fas fa-heart"></i><span>59</span></a></li>
-                                </ul>
-                                <h3 class="item-title"><a href="single-blog.html">Tomatoes Stuffed with Foieand Chanter
-                                        ellesdressed your designers
-                                        had would if everyone theup still primaril</a></h3>
-                                <p class="item-details">Rmply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the
-                                    industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                                    galley of type and scrambledsimply dummy text of the printing and typesetting
-                                    industry. Lorem Ipsum has been the industry's standard.Nulla neque dolor, sagittis
-                                    eget, iaculis quis, molestie non, velit. Mauris turpis nunc, blandit et, volutpat
-                                    molestie, porta ut, ligula. Fusce pharetra convallis urna. Quisque ut nisi. Donec
-                                    mi odio, faucibus at, scelerisque quis, convallis in, nisi. Suspendisse non nisl
-                                    sit amet velit hendrerit rutrum. Ut leo. Ut a nisl id ante tempus hendrerit. Proin
-                                    pretium.</p>
-                                <blockquote>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s.<span></span></blockquote>
-                                <p class="item-details">Rmply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the
-                                    industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                                    galley of type and scrambledsimply dummy text of the printing and typesetting
-                                    industry. Lorem Ipsum has been the industry's standard.Nulla neque dolor, sagittis
-                                    eget, iaculis quisaerty molestie non, velit. Mauris turpis nunc, blandit et,
-                                    volutpat molestie, porta ut, ligula. Fusce pharetra convallis urna are. Qisque ut
-                                    nisi. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Suspendisse
-                                    non nisl sit amet velit hendrerit rutrum. Ut leo. Ut a nisl id ante tempus
-                                    hendrerit. Proin pretium.</p>
-                                <div class="details-figure-box">
-                                    <div class="row gutters-2">
-                                        <div class="col-sm-6 col-12">
-                                            <img src="img/blog/sub-blog1.jpg" alt="Blog">
-                                        </div>
-                                        <div class="col-sm-6 col-12">
-                                            <img src="img/blog/sub-blog2.jpg" alt="Blog">
-                                        </div>
-                                    </div>
-                                </div>
-                                <h4 class="description-deading">Rmply dummy text of the printing and typesetting:</h4>
-                                <p class="item-details">Rmply dummy text of the printing and typesetting industryorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                    unknown printer took.</p>
-                                <ul class="description-list">
-                                    <li><span>01.</span>Id eleifend odio malesuada.</li>
-                                    <li><span>02.</span>Suspendisse et fermentum elit.</li>
-                                    <li><span>03.</span>Phasellus eget tristique ligula</li>
-                                </ul>
-                                <p class="item-details">Amply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                                    an unknown printer took a galley of type and scrambledsimply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard.Nulla neque dolor, sagittis eget iaculis quisaerty molestie nonvelitauris
-                                    turpis nunc.</p>
-                            </div> -->
-                            <!-- <div class="tag-share">
-                                <ul>
-                                    <li>
-                                        <ul class="inner-tag">
-                                            <li>
-                                                <a href="#">Burger</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Dinner</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Pizza</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Salad</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="inner-share">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fab fa-linkedin-in"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fab fa-google-plus-g"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fab fa-pinterest"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div> -->
-                            <!-- <div class="recipe-author">
-                                <div class="media media-none--xs">
-                                    <img src="img/blog/author9.jpg" alt="Blog Author" class="rounded-circle media-img-auto">
-                                    <div class="media-body">
-                                        <h4 class="author-title">Michel Jack</h4>
-                                        <h5 class="author-sub-title">Written by</h5>
-                                        <p>I love cooking and blogging. Using a fork, break salmon. Halve reserved
-                                            potatoes and eggs crosswise. The of something of did require met of
-                                            help have someone.</p>
-                                        <ul class="author-social">
-                                            <li>
-                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="fab fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="next-prev-post">
-                                <div class="prev-post">
-                                    <a href="#" class="item-figure"><img src="img/blog/prev-post.jpg" alt="Post"></a>
-                                    <div class="item-content">
-                                        <p>PREVIOUS POST</p>
-                                        <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
-                                    </div>
-                                </div>
-                                <div class="next-post">
-                                    <div class="item-content">
-                                        <p>NEXT POST</p>
-                                        <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
-                                    </div>
-                                    <a href="#" class="item-figure"><img src="img/blog/next-post.jpg" alt="Post"></a>
-                                </div>
-                            </div> -->
-                            <!-- <div class="recipe-reviews">
-                                <div class="section-heading3 heading-dark">
-                                    <h2 class="item-heading">RECIPE REVIEWS</h2>
-                                </div>
-                                <ul>
-                                    <li class="reviews-single-item">
-                                        <div class="media media-none--xs">
-                                            <img src="img/blog/comment1.jpg" alt="Comment" class="media-img-auto">
-                                            <div class="media-body">
-                                                <h4 class="comment-title">Liza Zaman</h4>
-                                                <span class="post-date">September 27, 2018</span>
-                                                <p>Absolutely great recipe. I cooked it for my kids and they loved it,
-                                                    even
-                                                    asked for more, can you believe it?</p>
-                                                <ul class="item-rating">
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-empty"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item"><span>9<span> / 10</span></span> </li>
-                                                </ul>
-                                                <a href="#" class="item-btn">REPLY<i class="fas fa-long-arrow-alt-right"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="reviews-single-item">
-                                        <div class="media media-none--xs">
-                                            <img src="img/blog/comment2.jpg" alt="Comment" class="media-img-auto">
-                                            <div class="media-body">
-                                                <h4 class="comment-title">John Martin</h4>
-                                                <span class="post-date">September 12, 2018</span>
-                                                <p>Absolutely great recipe. I cooked it for my kids and they loved it,
-                                                    even
-                                                    asked for more, can you believe it?</p>
-                                                <ul class="item-rating">
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-fill"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item star-empty"><i class="fas fa-star"></i></li>
-                                                    <li class="single-item"><span>7<span> / 10</span></span> </li>
-                                                </ul>
-                                                <a href="#" class="item-btn">REPLY<i class="fas fa-long-arrow-alt-right"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> -->
+                        <div class="single-blog-box">               
                             <div class="leave-review">
                                 <div class="section-heading3 heading-dark">
                                     <h2 class="item-heading">Post Your Question</h2>
@@ -348,20 +215,10 @@ function validateForm()
                                     <div class="row">
                                         <div class="col-md-4 form-group" id="topicid">
                                             <label>Topic Name :</label>
-                                            <input type="text" placeholder="topic" class="form-control" name="topicname"
-                                                ><span  class="formerror"><b></b></span>
+                                            <input type="text" placeholder="Topic" class="form-control" name="topicname"
+                                              style="width:627px"  ><span  class="formerror"><b></b></span>
                                             <div class="help-block with-errors"></div>
                                         </div>
-                                        <div class="col-md-4 form-group" id="categoryid">
-                                            <label>Category :</label>
-                                            <select class="filter-box" name="ctype" data-error="Category field is required" required>
-                                                <option class="hidden" value="none" selected="" >Catogary Type</option>
-                                                <option>M.Sc (CA&IT)</option>
-                                                <option>MBA</option>
-                                            </select><span  class="formerror"><b></b></span>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        
                                         <div class="col-12 form-group" id="descriptionid">
                                             <label>Description :</label>
                                             <textarea placeholder="" class="textarea form-control" name="tdescription" rows="7"
@@ -372,6 +229,15 @@ function validateForm()
                                             <label>Tag :</label>
                                             <input type="text" placeholder="e.g Python" class="form-control" name="tagname"
                                                 ><span  class="formerror"><b></b></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="col-md-4 form-group" id="categoryid">
+                                            <label>Category :</label>
+                                            <select class="filter-box" name="ctype" data-error="Category field is required" required>
+                                                <option class="hidden" value="none" selected="" >Catogary Type</option>
+                                                <option>M.Sc (CA&IT)</option>
+                                                <option>MBA</option>
+                                            </select><span  class="formerror"><b></b></span>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="col-12 form-group mb-0">
@@ -394,40 +260,31 @@ function validateForm()
                             <div class="widget-categories">
                                 <ul>
                                     <li>
-                                        <a href="#">BreakFast
-                                            <span>25</span>
+                                        <a href="#">M.Sc
+                                            
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Lunch
-                                            <span>15</span>
+                                        <a href="#">MBA
+                                          
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Pasta
-                                            <span>22</span>
+                                        <a href="#">B.Tech
+                                            
+                                        </a>
+                                    </li>
+                                   <li>
+                                        <a href="#">M.Tech
+                                            
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Dinner
-                                            <span>18</span>
+                                        <a href="#">BCA
+                                            
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">Dessert
-                                            <span>36</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Drinks
-                                            <span>12</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fruits
-                                            <span>05</span>
-                                        </a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>                 
@@ -458,7 +315,7 @@ function validateForm()
     </div>
     <!-- Search Box Start Here -->
     <div id="search" class="search-wrap">
-        <button type="button" class="close">×</button>
+        <button type="button" class="close">Ã—</button>
         <form class="search-form">
             <input type="search" value="" placeholder="Type here........" />
             <button type="submit" class="search-btn"><i class="flaticon-search"></i></button>
@@ -504,7 +361,8 @@ function validateForm()
     </div>
     <!-- Modal End-->
     <!-- Jquery Js -->
-
+	
+<%-- 	<%@include file="footer.jsp" %> --%>
 
     <script src="assets/assets4/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap Js -->

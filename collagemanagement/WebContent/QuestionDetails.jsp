@@ -36,7 +36,7 @@
     
 	<script src="assets/js/jquery.min.js"></script>
 
-<script>
+<!-- <script>
 	$(document).ready(function()
 {
 	$("#searchid").click(function(){
@@ -59,7 +59,7 @@
 			});
 		});
 });
-</script>
+</script> -->
 </head>
 
 <jsp:include page ="/SelectQueryDetails"/>
@@ -83,20 +83,24 @@
     <div id="wrapper" class="wrapper">
         <!-- Header Area Start Here -->
         
+        
         <!-- Header Area End Here -->
         <!-- Inne Page Banner Area Start Here -->
         
-        </section> 
+      
         <!-- Inne Page Banner Area End Here -->
+        
         <!-- Author Area Start Here -->
+        
         <section class="author-page-wrap padding-top-80 padding-bottom-50">
             <div class="container">
                 <div class="row gutters-60">
                     <div class="col-lg-8">
                         <div class="author-box-layout1">
+                   
                             <div class="adv-search-wrap">
                                 <div class="input-group">
-                                    <input type="text"  id="searchid" class="form-control" placeholder="Question Search . . ." />
+                                    <input type="text"  id="searchid" class="form-control" onkeyup="myFunction2()" placeholder="Question Search . . ." />
                                     <div class="btn-group">
                                         <div class="input-group-btn">
                                             <button type="submit" class="btn-search"><i class="flaticon-search"></i></button>
@@ -104,7 +108,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="table-responsive">
+                            
+                            <!-- <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tbody>
                                         <tr>
@@ -138,10 +143,10 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <h3 class="author-section-title">Total 1,050 Authors</h3>
+                            </div> -->
+                            <h3 class="author-section-title">Total 12 Alumnies</h3>
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table id="myTable" class="table table-striped">
                                     <tbody>
                                      <% for(int i=0;i<queryList.size();i++)
                                      { %>
@@ -339,6 +344,28 @@
     <script src="assets/assets4/js/smoothscroll.min.js"></script>
     <!-- Custom Js -->
     <script src="assets/assets4/js/main.js"></script>
+    
+    <script>
+  
+      	function myFunction2() {
+      	  var input, filter, table, tr, td, i, txtValue;
+      	  input = document.getElementById("searchid");
+      	  filter = input.value.toUpperCase();
+      	  table = document.getElementById("myTable");
+      	  tr = table.getElementsByTagName("tr");
+      	  for (i = 0; i < tr.length; i++) {
+      	    td = tr[i].getElementsByTagName("td")[2];
+      	    if (td) {
+      	      txtValue = td.textContent || td.innerText;
+      	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      	        tr[i].style.display = "";
+      	      } else {
+      	        tr[i].style.display = "none";
+      	      }
+      	    }       
+      	  }
+      	}
+    </script>
 </body>
 
 </html>

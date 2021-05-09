@@ -11785,22 +11785,10 @@ ul {
 /*=======================================================================
 15. Footer Css
 =========================================================================*/
-footer {
-	padding: 10rem 0;
-	background-color: #111111;
-	text-align: center;
-	color: #989898;
-}
 
-footer.ranna-bg-light {
-	background-color: #ffffff;
-	color: #646464;
-}
 
-footer.ranna-bg-dark {
-	background-color: #111111;
-	color: #989898;
-}
+
+
 
 .footer-logo {
 	margin-bottom: 50px;

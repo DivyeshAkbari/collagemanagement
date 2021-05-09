@@ -96,16 +96,16 @@
                 <div class="row gutters-60">
                     <div class="col-lg-8">
                         <div class="single-blog-box">
-                            <div class="main-figure">
+                            <!-- <div class="main-figure">
                                 <a href="single-blog.html"><img src="assets/assets4/img/blog/blog9.jpg" alt="Blog"></a>
-                            </div>
+                            </div> -->
                             <div class="blog-content">
-                                <ul class="entry-meta">
+                               <!--  <ul class="entry-meta">
                                     <li><a href="#"><i class="fas fa-clock"></i>15 December, 2018</a></li>
                                     <li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
                                     <li><a href="#"><i class="fas fa-comments"></i>Comments <span>(03)</span></a></li>
                                     <li><a href="#"><i class="fas fa-heart"></i><span>59</span></a></li>
-                                </ul>
+                                </ul> -->
                                 <h3 class="item-title"><a href="single-blog.html">
                                     <% for(int i=0;i<questionlist.size();i++)
                                     { %>
@@ -113,10 +113,10 @@
                                          <%=q1.getTopicname()%>  
                                     <% } %>    
                                 </a></h3>
-                                <blockquote>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s.<span></span></blockquote>
+                                <!-- <blockquote>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                    been the industry's standard dummy text ever since the 1500s.<span></span></blockquote> -->
                             </div>
-                            <div class="tag-share">
+                           <!--  <div class="tag-share">
                                 <ul>
                                     <li>
                                         <ul class="inner-tag">
@@ -136,7 +136,7 @@
                                     </li>
                                     
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="recipe-author">
                                 <div class="media media-none--xs">
                                 <% for(int i=0;i<questionlist.size();i++)
@@ -165,7 +165,7 @@
                             </div>
                             <div class="next-prev-post">
                                 <div class="prev-post">
-                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/prev-post.jpg"  alt="Post"></a>
+                                    <a href="#" class="item-figure"><img src="assets/images/gallery/pic1.jpg"  alt="Post"></a>
                                     <div class="item-content">
                                         <p>PREVIOUS POST</p>
                                         <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
@@ -176,13 +176,13 @@
                                         <p>NEXT POST</p>
                                         <h3 class="post-title"><a href="#">Old school pancake next area so goody</a></h3>
                                     </div>
-                                    <a href="#" class="item-figure"><img src="assets/assets4/img/blog/next-post.jpg" alt="Post"></a>
+                                    <a href="#" class="item-figure"><img src="assets/images/gallery/pic2.jpg" alt="Post"></a>
                                 </div>
                             </div>
                     <%if(answerList!=null) {%>
                             <div class="recipe-reviews">
                                 <div class="section-heading3 heading-dark">
-                                    <h2 class="item-heading">RECIPE REVIEWS</h2>
+                                    <h2 class="item-heading">Answers</h2>
                                 </div>
                                   <% for(int i=0;i<answerList.size();i++)
                                   { %>
@@ -224,12 +224,12 @@
                             </div>
                             <div class="leave-review">
                                 <div class="section-heading3 heading-dark">
-                                    <h2 class="item-heading">LEAVE A REVIEW</h2>
+                                    <h2 class="item-heading">Your Answer</h2>
                                 </div>
                                 <form class="leave-form-box" action="InsertAnswerDescription" method="post">
                                     <div class="row">
                                         <div class="col-12 form-group">
-                                            <label>Comment :</label>
+                                            <label>Post Answer :</label>
                                             <textarea placeholder="" class="textarea form-control"  value="<%=query.getTdescription() %>" name="answerdescription" rows="7"
                                                 cols="20" data-error="Message field is required" required></textarea>
                                             <div class="help-block with-errors"></div>
@@ -249,72 +249,12 @@
                         </div>
                     </div>
                     <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-                        <div class="widget">
-                            <div class="section-heading heading-dark">
-                                <h3 class="item-heading">LATEST BLOG</h3>
-                            </div>
-                            <div class="widget-blog-post">
-                                <ul class="block-list">
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="assets/assets4/img/product/latest1.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
-                                                    2018</a></div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="assets/assets4/img/product/latest2.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
-                                                    2018</a></div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="assets/assets4/img/product/latest3.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
-                                                    2018</a></div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                    <li class="single-item">
-                                        <div class="item-img">
-                                            <a href="#"><img src="assets/assets4/img/product/latest4.jpg" alt="Post"></a>
-                                        </div>
-                                        <div class="item-content">
-                                            <div class="item-post-date"><a href="#"><i class="fas fa-clock"></i>15 Dec,
-                                                    2018</a></div>
-                                            <h4 class="item-title"><a href="#">Salami Oven Roasted are
-                                                    Mozzarella Oelette</a></h4>
-                                            <div class="item-post-by"><a href="single-blog.html"><i class="fas fa-user"></i><span>by</span>
-                                                    John Martin</a></div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="widget">
+                        
+                       <!--  <div class="widget">
                             <div class="widget-ad">
                                 <a href="#"><img src="assets/assets4/img/figure/figure6.jpg" alt="Ad" class="img-fluid"></a>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="widget">
                             <div class="section-heading heading-dark">
                                 <h3 class="item-heading">CATEGORIES</h3>
@@ -322,40 +262,16 @@
                             <div class="widget-categories">
                                 <ul>
                                     <li>
-                                        <a href="#">BreakFast
-                                            <span>25</span>
+                                        <a href="#">M.Sc(CA&IT)
+                                           
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Lunch
-                                            <span>15</span>
+                                        <a href="#">MBA
+                                            
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">Pasta
-                                            <span>22</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dinner
-                                            <span>18</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dessert
-                                            <span>36</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Drinks
-                                            <span>12</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fruits
-                                            <span>05</span>
-                                        </a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -375,11 +291,11 @@
                                     data-r-extra-large-nav="true" data-r-extra-large-dots="false">
                                     <div class="featured-box-layout1">
                                         <div class="item-img">
-                                            <img src="assets/assets4/img/product/product17.jpg" alt="Brand" class="img-fluid">
+                                            <img src="assets/images/gallery/pic8.jpg" alt="Brand" class="img-fluid">
                                         </div>
                                         <div class="item-content">
-                                            <span class="ctg-name">BREAKFAST</span>
-                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
+                                            <span class="ctg-name">Questions</span>
+                                            <h4 class="item-title"><a href="single-recipe1.html"></a></h4>
                                             <p>Definitiones noel ei verear intelle
                                                 gatpri civibus consequat area
                                                 refund efficiantue.</p>
@@ -387,32 +303,20 @@
                                     </div>
                                     <div class="featured-box-layout1">
                                         <div class="item-img">
-                                            <img src="assets/assets4/img/product/product18.jpg" alt="Brand" class="img-fluid">
+                                            <img src="assets/images/gallery/pic7.jpg" alt="Brand" class="img-fluid">
                                         </div>
                                         <div class="item-content">
-                                            <span class="ctg-name">DINNER</span>
-                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
+                                            <span class="ctg-name">Question</span>
+                                            <h4 class="item-title"><a href="single-recipe1.html"></a></h4>
                                             <p>Definitiones noel ei verear intelle
                                                 gatpri civibus consequat area
                                                 refund efficiantue.</p>
                                         </div>
-                                    </div>
-                                    <div class="featured-box-layout1">
-                                        <div class="item-img">
-                                            <img src="assets/assets4/img/product/product19.jpg" alt="Brand" class="img-fluid">
-                                        </div>
-                                        <div class="item-content">
-                                            <span class="ctg-name">SALAD</span>
-                                            <h4 class="item-title"><a href="single-recipe1.html">Baked Garlic Prawn</a></h4>
-                                            <p>Definitiones noel ei verear intelle
-                                                gatpri civibus consequat area
-                                                refund efficiantue.</p>
-                                        </div>
-                                    </div>
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="widget">
+                       <!--  <div class="widget">
                             <div class="section-heading heading-dark">
                                 <h3 class="item-heading">INSTAGRAM</h3>
                             </div>
@@ -456,7 +360,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="widget">
                             <div class="section-heading heading-dark">
                                 <h3 class="item-heading">POPULAR TAGS</h3>
@@ -464,32 +368,23 @@
                             <div class="widget-tag">
                                 <ul>
                                     <li>
-                                        <a href="#">DESERT</a>
+                                        <a href="#">Tomcate7</a>
                                     </li>
                                     <li>
-                                        <a href="#">CAKE</a>
+                                        <a href="#">Java</a>
                                     </li>
                                     <li>
-                                        <a href="#">BREAKFAST</a>
+                                        <a href="#">JQuery</a>
                                     </li>
                                     <li>
-                                        <a href="#">BURGER</a>
+                                        <a href="#">C</a>
                                     </li>
                                     <li>
-                                        <a href="#">DINNER</a>
+                                        <a href="#">C++</a>
                                     </li>
                                     <li>
-                                        <a href="#">PIZZA</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">SEA FOOD</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">SALAD</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">JUICE</a>
-                                    </li>
+                                        <a href="#">Python</a>
+                                    </li>                                 
                                 </ul>
                             </div>
                         </div>

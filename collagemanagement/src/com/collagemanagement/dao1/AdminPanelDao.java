@@ -43,5 +43,9 @@ public interface AdminPanelDao {
 
 	int concludeEvent(Connection c1, String id);
 
+	int fetchactiveuserdetails(Connection connection);
+
+	int fetchactivefemaleuserdetails(Connection connection);
+
 
 }

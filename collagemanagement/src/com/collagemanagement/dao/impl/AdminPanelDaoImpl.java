@@ -183,7 +183,7 @@ public class AdminPanelDaoImpl implements AdminPanelDao {
 		List<FeesDetails> chartlist = null;
 		try (PreparedStatement preparedStatement = connection
 				.prepareStatement("select d_payment_date,c_amount from student_fees_table")) {
-
+			
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
 					FeesDetails feesDetails = new FeesDetails();
@@ -509,5 +509,55 @@ public class AdminPanelDaoImpl implements AdminPanelDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public int fetchactiveuserdetails(Connection connection) {
+		// TODO Auto-generated method stub
+		
+		String s1 = "STUDENT";
+		String s2 = "male";
+
+		int count = 0;
+
+		try (PreparedStatement p1 = connection.prepareStatement(
+				"Select c_gender from user_table where c_roll='" + s1 + "' AND c_gender='" + s2 + "' AND i_status1=1");) {
+			try (ResultSet r1 = p1.executeQuery();) {
+				while (r1.next()) {
+					count++;
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return count;
+		
+	}
+
+	@Override
+	public int fetchactivefemaleuserdetails(Connection connection) {
+		// TODO Auto-generated method stub
+		
+		String s1 = "STUDENT";
+		String s2 = "female";
+
+		int count = 0;
+
+		try (PreparedStatement p1 = connection.prepareStatement(
+				"Select c_gender from user_table where c_roll='" + s1 + "' AND c_gender='" + s2 + "' AND i_status1=1");) {
+			try (ResultSet r1 = p1.executeQuery();) {
+				while (r1.next()) {
+					count++;
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return count;
+		
 	}
 }

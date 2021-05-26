@@ -40,5 +40,9 @@ public interface AdminPanel {
 	public String activateEvent(String id);
 
 	public String expireEvent(String id);
+	
+	public int fetchactivemaleStudent();
+	
+	public int fetchactivefemaleStudent();
 
 }

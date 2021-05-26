@@ -139,7 +139,7 @@ String dataPoints = gsonObj.toJson(list);
                                 </div>
                                 <div class="col-6">
                                     <div class="item-content">
-                                        <div class="item-title">Teachers</div>
+                                        <div class="item-title">Faculties</div>
                                         <div class="item-number"><span class="counter" data-num="<%=count1%>"></span></div>
                                     </div>
                                 </div>

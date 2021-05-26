@@ -331,4 +331,38 @@ public class AdminPanelServiceImpl implements AdminPanel {
 		}
 		return null;
 	}
+
+	@Override
+	public int fetchactivemaleStudent() {
+		// TODO Auto-generated method stub
+		
+		try(Connection connection = getConnection();
+				   )
+				{
+					return adminPanelDao.fetchactiveuserdetails(connection);
+				}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+		return 0;
+	}
+
+	@Override
+	public int fetchactivefemaleStudent() {
+		// TODO Auto-generated method stub
+		
+		try(Connection connection = getConnection();
+				   )
+				{
+					return adminPanelDao.fetchactivefemaleuserdetails(connection);
+				}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+		return 0;
+	}
 }

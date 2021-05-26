@@ -87,6 +87,9 @@ int userid1=0;
                                 </div>
                             </div>
                         </div>
+                        <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                   <a id="exportBtn" class="fw-btn-fill btn-gradient-yellow">Download .CSV</a> 
+                         </div> 
                         <form class="mg-b-20">
                             <div class="row gutters-8">
                                 <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
@@ -97,12 +100,9 @@ int userid1=0;
                                 </div>
                                 <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
                                     <input id="searchMail" type="text" onkeyup="myFunction2()" placeholder="Search by Mail id ..." class="form-control">
-                                </div>
-<!--                                 <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group"> -->
-<!--                                     <button id="btnExport" type="submit" class="fw-btn-fill btn-gradient-yellow">Generate Report</button> -->
-<!--                                 </div> -->
+                                </div>                                
                             </div>
-                        </form>
+                        </form>                      
                         <div class="table-responsive">
                             <table id="myTable" class="table data-table text-nowrap">
                                 <thead>
@@ -258,6 +258,36 @@ int userid1=0;
       	  }
       	}
     </script>
+    
+<script type="text/javascript">
+
+var exportBtn = document.getElementById("exportBtn");
+
+exportBtn.addEventListener("click", function(e){
+const rows = [];
+let tableRow="";
+<%int i = 1;
+for (User customer : userList) {
+%>
+		tableRow=["<%=i++%>","<%=customer.getFirstname()%>","<%=customer.getLastname()%>","<%=customer.getPaymentstatus()%>","<%=customer.getSemester()%>","<%=customer.getStream()%>","<%=customer.getXender()%>","<%=customer.getDivision()%>"];
+		rows.push(tableRow);
+		tableRow="";
+<% }%>
+let csvContent = "data:text/csv;charset=utf-8,Sr No,First Name, Last Name, Paymentstatus, Semester, Stream, Gender, Division\r\n";
+
+rows.forEach(function(rowArray) {
+	 let row = rowArray.join(" andSperator ");
+	 row=row.replace(/,/g , ' ');
+	 row=row.replace(/ andSperator /g , ',');
+	 csvContent += row + "\r\n";
+});
+var encodedUri = encodeURI(csvContent);
+exportBtn.setAttribute("href", encodedUri);
+let today=new Date();
+exportBtn.setAttribute("download", "Students_" + today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() + ".csv");
+});
+  
+</script>
 
 </body>
 

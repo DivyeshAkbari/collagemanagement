@@ -768,5 +768,5 @@ public class Collagedaoimpl implements CollageDao
 			return p1.executeUpdate();
 		}
 		//return 0;
-	}	
+	}	      
 }

@@ -18,7 +18,7 @@
 	
 	/* int count2 = adminpanelService.fetchfemaleTeacher();
 	
-	int count3 = adminpanelService.fetchmaleTeacher(); */
+	int count3 = adminpanelService.fetchmaleTeacher();; */
 	
 %>
 

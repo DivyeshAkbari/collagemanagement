@@ -49,7 +49,7 @@
 	<!-- Header Menu Area Start Here -->
             <%@include file="dashboard-header.jsp" %>
         <!-- Header Menu Area End Here -->
-        
+        <div class="dashboard-page-one">
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
             <!-- Sidebar Area Start Here -->

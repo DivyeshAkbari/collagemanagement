@@ -52,7 +52,7 @@ List<Notice> noticelist = (List)request.getAttribute("noticelist"); 	%>
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
        <!-- Header Menu Area Start Here -->
-
+			<div class="dashboard-page-one">
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">

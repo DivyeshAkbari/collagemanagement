@@ -556,7 +556,7 @@ String dataPoints = gsonObj.toJson(list);
 			var chart = new CanvasJS.Chart("chartContainer", {
 				theme: "light2",
 				title: {
-					text: "Registered Alumnies-Facuties"
+					text: "Registered Alumnies-Faculties"
 				},
 				subtitles: [{
 					text: "March 2021"

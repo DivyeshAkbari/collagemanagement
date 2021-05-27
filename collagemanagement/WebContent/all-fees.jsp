@@ -88,7 +88,7 @@ int userid1=0;
                             </div>
                         </div>
                         <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                                   <a id="exportBtn" class="fw-btn-fill btn-gradient-yellow">Download .CSV</a> 
+                                   <a id="exportBtn" class="fw-btn-fill btn-gradient-yellow">.CSV</a> 
                          </div> 
                         <form class="mg-b-20">
                             <div class="row gutters-8">

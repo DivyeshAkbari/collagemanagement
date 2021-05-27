@@ -37,7 +37,14 @@
    
 </head>
 
-<% List<Notice> noticelist = (List)request.getAttribute("noticelist"); 	%>
+<jsp:include page ="/InsertNoticeDetail"/>
+
+<% 
+
+
+List<Notice> noticelist = (List)request.getAttribute("noticelist"); 	%>
+
+
 
 <body>
     <!-- Preloader Start Here  -->
@@ -45,7 +52,7 @@
     <!-- Preloader End Here -->
     <div id="wrapper" class="wrapper bg-ash">
        <!-- Header Menu Area Start Here -->
-        <%@include file="AkhoorHeader.jsp" %>
+
         <!-- Header Menu Area End Here -->
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">

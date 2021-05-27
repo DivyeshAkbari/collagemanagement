@@ -24,12 +24,10 @@
 	
 	List<Map<Object,Object>> list2 = new ArrayList<Map<Object,Object>>();
 	
-	for(int i=0;i<chartlist.size();i++)
-	{
-		FeesDetails fees = chartlist.get(i);
+	
 	
 		map = new HashMap<Object,Object>(); 
-		map.put("label",fees.getPaymentdate()); 
+		map.put("label",2020); 
 		map.put("y",count); 
 		list2.add(map);
 		
@@ -37,7 +35,7 @@
 		map.put("labe2","2021"); 
 		map.put("y",7000); list2.add(map);
 	
-	}
+	
 
 String dataPoints = gsonObj.toJson(list2);
 %>
@@ -64,6 +62,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "area",
+		
 		yValueFormatString: "Rs#,##0.0# Rupees",
 		dataPoints: <%out.print(dataPoints);%>
 	}]

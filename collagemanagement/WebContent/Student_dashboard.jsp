@@ -154,7 +154,7 @@ String message = (String)httpSession.getAttribute("notification");
                                                 
                                                 <tr>
                                                     <td>Stream:</td>
-                                                    <td class="font-medium text-dark-medium"><%= u1.getStream() %></td>
+                                                    <td class="font-medium text-dark-medium"><%= u1.getStream() %></td>    
                                                 </tr>
                                                 <tr>
                                                     <td>Semester:</td>

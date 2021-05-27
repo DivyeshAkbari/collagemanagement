@@ -53,7 +53,7 @@
                             <a href="student-result.jsp" class="nav-link"><i class="flaticon-percentage-discount"></i><span>Result</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-user"></i><span>View Faculty</span></a>
+                            <a href="trainers.jsp" class="nav-link"><i class="flaticon-user"></i><span>View Faculty</span></a>
                         </li>
                         
                          <!-- <li class="nav-item sidebar-nav-item">

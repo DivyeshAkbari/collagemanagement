@@ -67,7 +67,7 @@
         <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner2.jpg);">
             <div class="container">
                 <div class="page-banner-entry">
-                    <h1 class="text-white">Contact Us 2</h1>
+                    <h1 class="text-white">Contact Us</h1>
 				 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
 			<div class="container">
 				<ul class="list-inline">
 					<li><a href="#">Home</a></li>
-					<li>Contact Us 2</li>
+					<li>Contact Us</li>
 				</ul>
 			</div>
 		</div>

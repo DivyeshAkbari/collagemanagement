@@ -931,7 +931,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	@Override
 	public int removeNote(String assid, Connection connection, String userid) throws Exception {
 		// TODO Auto-generated method stub
-		String query = "delete from faculty_notes_table where i_user_id=? and i_Subject_id=?";
+		String query = "delete from faculty_notes_table where i_user_id=? and i_faculty_notes_id=?";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
 			ps.setInt(1, Integer.parseInt(userid));
 			ps.setInt(2, Integer.parseInt(assid));

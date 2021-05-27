@@ -1195,4 +1195,8 @@
     <servlet-name>UpdateAdmin</servlet-name>
     <url-pattern>/UpdateAdmin</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <exception-type>java.lang.NullPointerException</exception-type>
+    <location>/error-404.jsp</location>
+  </error-page>
 </web-app>

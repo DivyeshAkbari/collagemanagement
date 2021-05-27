@@ -60,222 +60,12 @@
 <body id="bg">
 
 
-<% HttpSession httpSession = request.getSession(false);%>
-<% User u1 = (User) httpSession.getAttribute("uname");%>
+
 
 <div class="page-wraper">
 <div id="loading-icon-bx"></div>
 	<!-- Header Top ==== -->
-<header class="header rs-nav header-transparent">
-		<div class="top-bar">
-			<div class="container">
-				<div class="row d-flex justify-content-between">
-					<div class="topbar-left">
-						<ul>
-							<li><a href="faq-1.jsp"><i class="fa fa-question-circle"></i>Ask a Question</a></li>
-							<li><a href="javascript:;"><i class="fa fa-envelope-o"></i>Support@website.com</a></li>
-						</ul>
-					</div>
-					<div class="topbar-right">
-					
-						<ul>
-							<!-- <li>
-								<select class="header-lang-bx">
-									<option data-icon="flag flag-uk">English UK</option>
-									<option data-icon="flag flag-us">English US</option>
-								</select>
-							</li> -->
-							
-							
-							<%if(null!=httpSession && null==u1){%>
-                               <li><a href="login.jsp">Login </a> </li>                                    
-                             <%}else{ %>
-                                <li><a href="Logout">Logout </a></li>
-                                <li><a href="#">Welcome <%=u1.getMiddlename() %></a></li>
-                                
-                                <%if(u1.getRole().equals("STUDENT") || u1.getRole().equals("ADMIN"))
-                                {%>
-                                
-                                <li><a href="EditStudentDetails">Edit</a></li>
-                                <%}else{ %>
-                                <li><a href="EditFacultyDetails">Edit</a></li>
-                                <%} %>
-                             <%} %>
-                             
-                             
-                             <%if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
-                             {%>
-                                	<li><a href="StudentData">StudentDetails</a></li>
-                                	<li><a href="FacultyData">FacultyDetails</a></li>
-                                	<li><a href="register1.jsp"> As a Faculty</a></li>
-                              <%}else{ %>  
-							<li><a href="register.jsp">As a Student</a></li>
-			 				 
-			 				 <%} %>
-							<!-- <li>
-								<select class="header-lang-bx">
-									<option><a href="register.jsp">As a Student</a></option>
-									<option><a href="register1.jsp">As a Faculty</a></option> 
-								</select>
-							</li> -->
-							
-						
-						</ul>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="sticky-header navbar-expand-lg">
-            <div class="menu-bar clearfix">
-                <div class="container clearfix">
-					<!-- Header Logo ==== -->
-					<div class="menu-logo">
-						<a href="index.jsp"><img  height="100px" width="100px" src="assets/images/Educhamp_logo.png" alt=""></a>
-						<a href="index.jsp"><img    src="assets/images/logo-whiteeeee.png" alt=""></a>
-					</div>
-					<!-- Mobile Nav Button ==== -->
-                    <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
-						<span></span>
-						<span></span>
-						<span></span>
-					</button>
-					<!-- Author Nav ==== -->
-                    
-					<!-- Search Box ==== -->
-                    <div class="nav-search-bar">
-                        <form action="#">
-                            <input name="search" value="" type="text" class="form-control" placeholder="Type to search">
-                            <span><i class="ti-search"></i></span>
-                        </form>
-						<span id="search-remove"><i class="ti-close"></i></span>
-                    </div>
-					<!-- Navigation Menu ==== -->
-                    <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
-						<div class="menu-logo">
-							<a href="index.jsp"><img src="assets/images/logo.png" alt=""></a>
-						</div>
-						
-                        <ul class="nav navbar-nav">
-							<li class="active"><a href="index.jsp">Home </a>
-								<!-- <ul class="sub-menu">
-									<li><a href="index.jsp">Home 1</a></li>
-								</ul> -->
-							</li>
-							<li><a href="trainers.jsp">Our Faculty </a> </li>
-							<li><a href="javascript:;">Pages <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="about-1.jsp">About</a></li>
-									<!-- <li><a href="javascript:;">About<i class="fa fa-angle-right"></i></a>
-										<ul class="sub-menu">
-											<li><a href="about-1.jsp">About 1</a></li>
-											 <li><a href="about-2.jsp">About 2</a></li> -->
-										<!-- </ul> -->
-									<!-- </li> --> 
-									<li><a href="event.jsp">Event</a></li>
-									<!-- <li><a href="javascript:;">Event<i class="fa fa-angle-right"></i></a>
-										<ul class="sub-menu">
-											<li><a href="event.jsp">Event</a></li> -->
-											<!-- <li><a href="events-details.jsp">Events Details</a></li> -->
-										<!-- </ul>
-									</li> -->
-									<li><a href="faq-1.jsp">FAQ's</a></li>
-									<!-- <li><a href="javascript:;">FAQ's<i class="fa fa-angle-right"></i></a>
-										<ul class="sub-menu">
-											<li><a href="faq-1.jsp">FAQ's 1</a></li> -->
-											<!-- <li><a href="faq-2.jsp">FAQ's 2</a></li> -->
-										<!-- </ul>
-									</li> -->
-									<li><a href="contact-2.jsp">Contact Us</a></li>
-									<!-- <li><a href="javascript:;">Contact Us<i class="fa fa-angle-right"></i></a>
-										<ul class="sub-menu"> -->
-											<!-- <li><a href="contact-1.jsp">Contact Us 1</a></li> -->
-											<!-- <li><a href="contact-2.jsp">Contact Us 1</a></li>
-										</ul>
-									</li> -->
-									<li><a href="portfolio.jsp">Gallery</a></li>
-									<!-- <li><a href="profile.jsp">Profile</a></li> -->
-									<li><a href="membership.jsp">Membership</a></li>
-									<li><a href="error-404.jsp">404 Page</a></li>
-									<li><a href="Unanswered.jsp">Unanswered</a></li>
-									
-									<li><a href="Result.jsp">Result</a></li>
-									<li><a target="_blank" href="QuestionDetails.jsp" >Question Display</a></li>					
-										<% if(null!=u1 && "STUDENT".equalsIgnoreCase(u1.getRole()))
-										{%>
-									
-											<li><a href="AddQuestion.jsp">Add Question</a></li>
-										<%} %>
-				
-									
-										<% if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
-					{%>
-						 <li><a href="ResultFileUpload.jsp">Upload Result File </a></li>
-					<%} %>
-				
-									
-									
-								</ul>
-							</li>
-							<li class="add-mega-menu"><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li class="add-menu-left">
-										<h5 class="menu-adv-title">Our Courses</h5>
-										<ul>
-											<li><a href="courses.jsp">Courses </a></li>
-											<!-- <li><a href="courses-details.jsp">Courses Details</a></li> -->
-											<!-- <li><a href="profile.jsp">Instructor Profile</a></li> -->
-											<li><a href="event.jsp">Upcoming Event</a></li>
-											<!-- <li><a href="membership.jsp">Membership</a></li> -->
-										</ul>
-									</li>
-									<!-- <li class="add-menu-right">
-										<img src="assets/images/adv/adv.jpg" alt=""/>
-									</li> -->
-								</ul>
-							</li>
-							<li><a href="javascript:;">Blog <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
-									<!-- <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li> -->
-									<!-- <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li> -->
-									<!-- <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li> -->
-									<li><a href="blog-details.jsp">Blog Details</a></li>
-								</ul>
-							</li>
-							<li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="akkhor/index.jsp">Admin</a></li>
-									<li><a href="akkhor/index3.jsp">student</a></li>
-									<li><a href="akkhor/index4.jsp">Parent</a></li>
-									<li><a href="akkhor/index5.jsp">Teacher</a></li>
-									<!-- <li><a href="akkhor/">Review</a></li> -->
-									<!-- <li><a href="admin/teacher-profile.jsp">Teacher Profile</a></li> -->
-									<!-- <li><a href="admin/user-profile.jsp">User Profile</a></li> -->
-									<!-- <li><a href="javascript:;">Calendar<i class="fa fa-angle-right"></i></a> -->
-										<!-- <ul class="sub-menu">
-											<li><a href="admin/basic-calendar.jsp">Basic Calendar</a></li>
-											<li><a href="admin/list-view-calendar.jsp">List View Calendar</a></li>
-										</ul>
-									</li>
-									<li><a href="javascript:;">Mailbox<i class="fa fa-angle-right"></i></a>
-										<ul class="sub-menu">
-											<li><a href="admin/mailbox.jsp">Mailbox</a></li>
-											<li><a href="admin/mailbox-compose.jsp">Compose</a></li>
-											<li><a href="admin/mailbox-read.jsp">Mail Read</a></li>
-										</ul>
-									</li> -->
-								</ul>
-							</li>
-						</ul>
-						
-                    </div>
-					<!-- Navigation Menu END ==== -->
-                </div>
-            </div>
-        </div>
-    </header>
-    
+    <%@include file="header.jsp" %>   
     <!-- Header Top END ==== -->
     <!-- Content -->
     <div class="page-content bg-white">
@@ -355,7 +145,7 @@
 								data-paddingbottom="[10,10,10,10]"
 								data-paddingleft="[0,0,0,0]"
 								style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;">
-									Welcome To University
+									Welcome To Campus
 							</div>
 
 							<!-- LAYER NR. 3 -->
@@ -399,47 +189,48 @@
 								data-paddingbottom="[0,0,0,0]"
 								data-paddingleft="[0,0,0,0]"
 								style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
-									 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+									May the well-being of all people be protected By the powerful and mighty leaders be with law and justice.
+May the success be with all divinity and scholars, May all (samastāḥ) the worlds (lokāḥ) become (bhavantu)
 							</div>
 							<!-- LAYER NR. 4 -->
-							<div class="tp-caption Newspaper-Button rev-btn " 
-								id="slide-100-layer-5" 
-								data-x="['center','center','center','center']" 
-								data-hoffset="['90','80','75','90']" 
-								data-y="['top','top','top','top']" 
-								data-voffset="['400','400','400','420']" 
-								data-width="none"
-								data-height="none"
-								data-whitespace="nowrap"
-								data-type="button" 
-								data-responsive_offset="on" 
-								data-responsive="off"
-								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
-								data-textAlign="['center','center','center','center']"
-								data-paddingtop="[12,12,12,12]"
-								data-paddingright="[30,35,35,15]"
-								data-paddingbottom="[12,12,12,12]"
-								data-paddingleft="[30,35,35,15]"
-								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div>
-							<div class="tp-caption Newspaper-Button rev-btn" 
-								id="slide-100-layer-6" 
-								data-x="['center','center','center','center']" 
-								data-hoffset="['-90','-80','-75','-90']" 
-								data-y="['top','top','top','top']" 
-								data-voffset="['400','400','400','420']" 
-								data-width="none"
-								data-height="none"
-								data-whitespace="nowrap"
-								data-type="button" 
-								data-responsive_offset="on" 
-								data-responsive="off"
-								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
-								data-textAlign="['center','center','center','center']"
-								data-paddingtop="[12,12,12,12]"
-								data-paddingright="[30,35,35,15]"
-								data-paddingbottom="[12,12,12,12]"
-								data-paddingleft="[30,35,35,15]"
-								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div>
+<!-- 							<div class="tp-caption Newspaper-Button rev-btn "  -->
+<!-- 								id="slide-100-layer-5"  -->
+<!-- 								data-x="['center','center','center','center']"  -->
+<!-- 								data-hoffset="['90','80','75','90']"  -->
+<!-- 								data-y="['top','top','top','top']"  -->
+<!-- 								data-voffset="['400','400','400','420']"  -->
+<!-- 								data-width="none" -->
+<!-- 								data-height="none" -->
+<!-- 								data-whitespace="nowrap" -->
+<!-- 								data-type="button"  -->
+<!-- 								data-responsive_offset="on"  -->
+<!-- 								data-responsive="off" -->
+<!-- 								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]' -->
+<!-- 								data-textAlign="['center','center','center','center']" -->
+<!-- 								data-paddingtop="[12,12,12,12]" -->
+<!-- 								data-paddingright="[30,35,35,15]" -->
+<!-- 								data-paddingbottom="[12,12,12,12]" -->
+<!-- 								data-paddingleft="[30,35,35,15]" -->
+<!-- 								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div> -->
+<!-- 							<div class="tp-caption Newspaper-Button rev-btn"  -->
+<!-- 								id="slide-100-layer-6"  -->
+<!-- 								data-x="['center','center','center','center']"  -->
+<!-- 								data-hoffset="['-90','-80','-75','-90']"  -->
+<!-- 								data-y="['top','top','top','top']"  -->
+<!-- 								data-voffset="['400','400','400','420']"  -->
+<!-- 								data-width="none" -->
+<!-- 								data-height="none" -->
+<!-- 								data-whitespace="nowrap" -->
+<!-- 								data-type="button"  -->
+<!-- 								data-responsive_offset="on"  -->
+<!-- 								data-responsive="off" -->
+<!-- 								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]' -->
+<!-- 								data-textAlign="['center','center','center','center']" -->
+<!-- 								data-paddingtop="[12,12,12,12]" -->
+<!-- 								data-paddingright="[30,35,35,15]" -->
+<!-- 								data-paddingbottom="[12,12,12,12]" -->
+<!-- 								data-paddingleft="[30,35,35,15]" -->
+<!-- 								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div> -->
 						</li>
 						<li data-index="rs-200" 
 						data-transition="parallaxvertical" 
@@ -513,7 +304,7 @@
 								data-paddingbottom="[10,10,10,10]"
 								data-paddingleft="[0,0,0,0]"
 								style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;text-transform:uppercase;">
-									Welcome To University
+									Welcome To Campus
 							</div>
 
 							<!-- LAYER NR. 3 -->
@@ -557,47 +348,48 @@
 								data-paddingbottom="[0,0,0,0]"
 								data-paddingleft="[0,0,0,0]"
 								style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
-									 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+									 May the well-being of all people be protected By the powerful and mighty leaders be with law and justice.
+May the success be with all divinity and scholars, May all (samastāḥ) the worlds (lokāḥ) become (bhavantu)
 							</div>
 							<!-- LAYER NR. 4 -->
-							<div class="tp-caption Newspaper-Button rev-btn " 
-								id="slide-200-layer-5" 
-								data-x="['center','center','center','center']" 
-								data-hoffset="['90','80','75','90']" 
-								data-y="['top','top','top','top']" 
-								data-voffset="['400','400','400','420']" 
-								data-width="none"
-								data-height="none"
-								data-whitespace="nowrap"
-								data-type="button" 
-								data-responsive_offset="on" 
-								data-responsive="off"
-								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
-								data-textAlign="['center','center','center','center']"
-								data-paddingtop="[12,12,12,12]"
-								data-paddingright="[30,35,35,15]"
-								data-paddingbottom="[12,12,12,12]"
-								data-paddingleft="[30,35,35,15]"
-								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div>
-							<div class="tp-caption Newspaper-Button rev-btn" 
-								id="slide-200-layer-6" 
-								data-x="['center','center','center','center']" 
-								data-hoffset="['-90','-80','-75','-90']" 
-								data-y="['top','top','top','top']" 
-								data-voffset="['400','400','400','420']" 
-								data-width="none"
-								data-height="none"
-								data-whitespace="nowrap"
-								data-type="button" 
-								data-responsive_offset="on" 
-								data-responsive="off"
-								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
-								data-textAlign="['center','center','center','center']"
-								data-paddingtop="[12,12,12,12]"
-								data-paddingright="[30,35,35,15]"
-								data-paddingbottom="[12,12,12,12]"
-								data-paddingleft="[30,35,35,15]"
-								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div>
+<!-- 							<div class="tp-caption Newspaper-Button rev-btn "  -->
+<!-- 								id="slide-200-layer-5"  -->
+<!-- 								data-x="['center','center','center','center']"  -->
+<!-- 								data-hoffset="['90','80','75','90']"  -->
+<!-- 								data-y="['top','top','top','top']"  -->
+<!-- 								data-voffset="['400','400','400','420']"  -->
+<!-- 								data-width="none" -->
+<!-- 								data-height="none" -->
+<!-- 								data-whitespace="nowrap" -->
+<!-- 								data-type="button"  -->
+<!-- 								data-responsive_offset="on"  -->
+<!-- 								data-responsive="off" -->
+<!-- 								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]' -->
+<!-- 								data-textAlign="['center','center','center','center']" -->
+<!-- 								data-paddingtop="[12,12,12,12]" -->
+<!-- 								data-paddingright="[30,35,35,15]" -->
+<!-- 								data-paddingbottom="[12,12,12,12]" -->
+<!-- 								data-paddingleft="[30,35,35,15]" -->
+<!-- 								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div> -->
+<!-- 							<div class="tp-caption Newspaper-Button rev-btn"  -->
+<!-- 								id="slide-200-layer-6"  -->
+<!-- 								data-x="['center','center','center','center']"  -->
+<!-- 								data-hoffset="['-90','-80','-75','-90']"  -->
+<!-- 								data-y="['top','top','top','top']"  -->
+<!-- 								data-voffset="['400','400','400','420']"  -->
+<!-- 								data-width="none" -->
+<!-- 								data-height="none" -->
+<!-- 								data-whitespace="nowrap" -->
+<!-- 								data-type="button"  -->
+<!-- 								data-responsive_offset="on"  -->
+<!-- 								data-responsive="off" -->
+<!-- 								data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]' -->
+<!-- 								data-textAlign="['center','center','center','center']" -->
+<!-- 								data-paddingtop="[12,12,12,12]" -->
+<!-- 								data-paddingright="[30,35,35,15]" -->
+<!-- 								data-paddingbottom="[12,12,12,12]" -->
+<!-- 								data-paddingleft="[30,35,35,15]" -->
+<!-- 								style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div> -->
 						</li>
 						<!-- SLIDE  -->
 					</ul>
@@ -659,132 +451,6 @@
             <!-- Our Services END -->
 			
 			<!-- Popular Courses -->
-			<div class="section-area section-sp2 popular-courses-bx">
-                <div class="container">
-					<div class="row">
-						<div class="col-md-12 heading-bx left">
-							<h2 class="title-head">Popular <span>Courses</span></h2>
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
-						</div>
-					</div>
-					<div class="row">
-					<div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
-						<div class="item">
-							<div class="cours-bx">
-								<div class="action-box">
-									<img src="assets/images/courses/pic1.jpg" alt="">
-									<a href="#" class="btn">Read More</a>
-								</div>
-								<div class="info-bx text-center">
-									<h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-									<span>Programming</span>
-								</div>
-								<div class="cours-more-info">
-									<div class="review">
-										<span>3 Review</span>
-										<ul class="cours-star">
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-										</ul>
-									</div>
-									<div class="price">
-										<del>$190</del>
-										<h5>$120</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cours-bx">
-								<div class="action-box">
-									<img src="assets/images/courses/pic2.jpg" alt="">
-									<a href="#" class="btn">Read More</a>
-								</div>
-								<div class="info-bx text-center">
-									<h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-									<span>Programming</span>
-								</div>
-								<div class="cours-more-info">
-									<div class="review">
-										<span>3 Review</span>
-										<ul class="cours-star">
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-										</ul>
-									</div>
-									<div class="price">
-										<del>$190</del>
-										<h5>$120</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cours-bx">
-								<div class="action-box">
-									<img src="assets/images/courses/pic3.jpg" alt="">
-									<a href="#" class="btn">Read More</a>
-								</div>
-								<div class="info-bx text-center">
-									<h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-									<span>Programming</span>
-								</div>
-								<div class="cours-more-info">
-									<div class="review">
-										<span>3 Review</span>
-										<ul class="cours-star">
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-										</ul>
-									</div>
-									<div class="price">
-										<del>$190</del>
-										<h5>$120</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cours-bx">
-								<div class="action-box">
-									<img src="assets/images/courses/pic4.jpg" alt="">
-									<a href="#" class="btn">Read More</a>
-								</div>
-								<div class="info-bx text-center">
-									<h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-									<span>Programming</span>
-								</div>
-								<div class="cours-more-info">
-									<div class="review">
-										<span>3 Review</span>
-										<ul class="cours-star">
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li class="active"><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-										</ul>
-									</div>
-									<div class="price">
-										<del>$190</del>
-										<h5>$120</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
 			<!-- Popular Courses END -->
 			
 			<!-- Form -->
@@ -1029,7 +695,7 @@
 										<li><a href="#"><i class="fa fa-user"></i>By William</a></li>
 									</ul>
 									<h5 class="post-title"><a href="blog-details.jsp">This Story Behind Education Will Haunt You Forever.</a></h5>
-									<p>Knowing that, you’ve optimised your pages countless amount of times, written tons.</p>
+									<p>Knowing that, youâve optimised your pages countless amount of times, written tons.</p>
 									<div class="post-extra">
 										<a href="#" class="btn-link">READ MORE</a>
 										<a href="#" class="comments-bx"><i class="fa fa-comments-o"></i>20 Comment</a>

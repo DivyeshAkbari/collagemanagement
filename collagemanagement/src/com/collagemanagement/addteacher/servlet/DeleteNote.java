@@ -35,7 +35,7 @@ public class DeleteNote extends HttpServlet {
 		String message = ts.deleteNote(assid,userid);
 		System.out.println(message);
 		
-		response.sendRedirect("manage-material.jsp");
+		response.sendRedirect("index.jsp");
 		
 	}
 

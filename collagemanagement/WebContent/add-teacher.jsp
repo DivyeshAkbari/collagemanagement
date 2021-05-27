@@ -477,7 +477,7 @@ function fileValidation() {
 <!--                                 <input name="streamInputArray" type="checkbox" style="opacity:0; position:absolute; left:9999px;"> -->
                                 <div class="col-12 form-group mg-t-8">
                                    <button type="button" class="btn-fill-lg bg-blue-dark btn-hover-yellow" id="edit-previous">Edit Previous Options</button>
-     								<button id="submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" disabled>Save</button>
+     								<button id="submit" type="submit" onclick="myFunction()" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" >Save</button>
      								
                          			<button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
 <!--                          			<button id="check11" disabled>Check</button> -->

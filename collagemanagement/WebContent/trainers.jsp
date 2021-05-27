@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -50,6 +51,13 @@
 	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
 	
 </head>
+
+<jsp:include page ="/SelectFacultyDetails"/>
+ 
+<% List<User> facultylist = (List)request.getAttribute("facultylist");
+int userid1=0;
+%>
+
 <body id="bg">
 <div class="page-wraper">
 <div id="loading-icon-bx"></div>
@@ -82,16 +90,21 @@
 			<div class="container">
 	  
 			  <div class="row">
-	  
+	  			
+	  			<% for(int i=0; i<facultylist.size(); i++){
+                        User user = facultylist.get(i);
+                        userid1 = user.getId();
+                 %>
 				<div class="col-lg-6">
 				  <div class="member d-flex align-items-start">
-					<div class="pic"><img src="assets/images/trainer/pic1.jpg" class="img-fluid" alt=""></div>
+					<div class="pic"><img src="data:image/png;base64,<%= user.getUserProfilepicString()  %>" class="img-fluid" alt=""></div>
 					<div class="member-info">
-					  <h4>Walter White</h4>
-					  <span>Chief Executive Officer</span>
+					  <h4><%= user.getFirstname() %> <%= user.getMiddlename() %></h4>
+					  <span><%= user.getQualification() %></span>
 					  <p>Explicabo voluptatem mollitia et repellat</p>
 					  <div class="social">
-						<a href=""><i class="fa fa-twitter"></i></a>
+					  <i class="fa fa-gmail"></i>
+						<a href="<%= user.getEmail() %>"><i class="fa fa-twitter"></i></a>
 						<a href=""><i class="fa fa-facebook"></i></a>
 						<a href=""><i class="fa fa-instagram"></i></a>
 						<a href=""> <i class="fa fa-linkedin"></i> </a>
@@ -99,57 +112,9 @@
 					</div>
 				  </div>
 				</div>
+				<% } %>
 	  
-				<div class="col-lg-6 mt-4 mt-lg-0">
-				  <div class="member d-flex align-items-start">
-					<div class="pic"><img src="assets/images/trainer/pic1.jpg" class="img-fluid" alt=""></div>
-					<div class="member-info">
-					  <h4>Sarah Jhonson</h4>
-					  <span>Product Manager</span>
-					  <p>Aut maiores voluptates amet et quis</p>
-					  <div class="social">
-						<a href=""><i class="fa fa-twitter"></i></a>
-						<a href=""><i class="fa fa-facebook"></i></a>
-						<a href=""><i class="fa fa-instagram"></i></a>
-						<a href=""> <i class="fa fa-linkedin"></i> </a>
-					  </div>
-					</div>
-				  </div>
-				</div>
-	  
-				<div class="col-lg-6 mt-4">
-				  <div class="member d-flex align-items-start">
-					<div class="pic"><img src="assets/images/trainer/pic1.jpg" class="img-fluid" alt=""></div>
-					<div class="member-info">
-					  <h4>William Anderson</h4>
-					  <span>CTO</span>
-					  <p>Quisquam facilis cum velit laborum corrupti</p>
-					  <div class="social">
-						<a href=""><i class="fa fa-twitter"></i></a>
-						<a href=""><i class="fa fa-facebook"></i></a>
-						<a href=""><i class="fa fa-instagram"></i></a>
-						<a href=""> <i class="fa fa-linkedin"></i> </a>
-					  </div>
-					</div>
-				  </div>
-				</div>
-	  
-				<div class="col-lg-6 mt-4">
-				  <div class="member d-flex align-items-start">
-					<div class="pic"><img src="assets/images/trainer/pic1.jpg" class="img-fluid" alt=""></div>
-					<div class="member-info">
-					  <h4>Amanda Jepson</h4>
-					  <span>Accountant</span>
-					  <p>Dolorum tempora officiis odit laborum officiis</p>
-					  <div class="social">
-						<a href=""><i class="fa fa-twitter"></i></a>
-						<a href=""><i class="fa fa-facebook"></i></a>
-						<a href=""><i class="fa fa-instagram"></i></a>
-						<a href=""> <i class="fa fa-linkedin"></i> </a>
-					  </div>
-					</div>
-				  </div>
-				</div>
+				
 	  
 			  </div>
 	  

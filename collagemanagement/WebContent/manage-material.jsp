@@ -40,7 +40,7 @@
 
 </head>
 <%
-List<Assignment> notes =  (List)request.getAttribute("notes");
+List<Assignment> notes =  (List)request.getSession(false).getAttribute("notes");
 
 %>
 
@@ -106,7 +106,7 @@ List<Assignment> notes =  (List)request.getAttribute("notes");
 
 									<%
 										//System.out.println("asslis: "+asslist);
-									if (notes.isEmpty() == false) {
+									if (notes.isEmpty() == false || notes != null) {
 									%>
 									<thead>
 										<tr>

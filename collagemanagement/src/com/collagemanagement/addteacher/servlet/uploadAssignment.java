@@ -107,9 +107,8 @@ public class uploadAssignment extends HttpServlet {
 				String studentMail = userlist.get(j).getEmail();
 				String studentName = userlist.get(j).getFirstname() + " "+ userlist.get(j).getMiddlename();
 				String code = "<div>"
-						+ "<img height=\"63px\" width=\"63px\" src=\"assets/images/Educhamp_logo12.png\" alt=\"logo\">"
-						+ "<img height=\"127px\" width=\"127px\" src=\"assets/images/Black.png\" alt=\"logo\">"
-						+ "<h3> EduChamp</h3></div>"
+						
+						+ "<h2> EduChamp</h2></div>"
 						+ "<div>"
 						+ "<h3>HI, "
 						+ studentName

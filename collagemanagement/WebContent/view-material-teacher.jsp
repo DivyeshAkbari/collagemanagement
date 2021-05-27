@@ -40,7 +40,7 @@
 
 </head>
 <%
-List<Assignment> notes =  (List)request.getAttribute("notes");
+List<Assignment> notes =  (List)request.getSession(false).getAttribute("notes");
 
 %>
 

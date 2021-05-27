@@ -55,7 +55,8 @@ public class GetNotes extends HttpServlet {
 				notes.add(a1);
 			}
 		}
-		request.setAttribute("notes", notes);
+		//request.setAttribute("notes", notes);
+		httpsession.setAttribute("notes", notes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view-material-teacher.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -70,7 +71,9 @@ public class GetNotes extends HttpServlet {
 		//int subId = Integer.parseInt(id);
 		
 		List<Assignment> notes = ts.getNotes(id);
-		request.setAttribute("notes", notes);
+		HttpSession httpsession = request.getSession(false);
+		httpsession.setAttribute("notes", notes);
+		//request.setAttribute("notes", notes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("manage-material.jsp");
 		dispatcher.forward(request, response);
 	}

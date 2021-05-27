@@ -1,3 +1,6 @@
+<%@page import="com.collagemanagement.bean.User"%>
+<% HttpSession httpSession = request.getSession(false);%>
+<% User u1 = (User) httpSession.getAttribute("uname");%>
 <header class="header rs-nav">
 		<div class="top-bar">
 			<div class="container">
@@ -16,9 +19,44 @@
 <!-- 									<option data-icon="flag flag-us">English US</option> -->
 <!-- 								</select> -->
 <!-- 							</li> -->
-							<li><a href="login.jsp">Login</a></li>
-							<li><a href="register.jsp">As a Student</a></li>
-							 <li><a href="register1.jsp">As a Faculty</a></li>
+								<%if(null!=httpSession && null==u1){%>
+                               <li><a href="login.jsp">Login </a> </li>                                    
+                             <%}else{ %>
+                                <li><a href="Logout">Logout </a></li>
+                                <li><a href="#">Welcome <%=u1.getMiddlename() %></a></li>
+                                
+                                <%if(u1.getRole().equals("STUDENT"))
+                                {%>
+                                
+                                <li><a href="EditStudentDetails">Edit</a></li>
+                                <%}else if(u1.getRole().equals("ADMIN")){%>
+                                <li><a href="EditAdminDetails">Edit</a></li>
+                                	<%}else{ %>
+                                <li><a href="EditFacultyDetail?id=<%= u1.getId() %>">Edit</a></li>
+                                <%} %>
+                             <%} %>
+                               <%if(null!=u1 && "STUDENT".equalsIgnoreCase(u1.getRole()))
+                             {%>
+                             		<li><a href="Student_dashboard.jsp">Dashboard</a></li>
+                             <%} %>
+                             <%if(null!=u1 && "FACULTY".equalsIgnoreCase(u1.getRole()))
+                             {%>
+                             		<li><a href="Teacher_dashboard.jsp">Dashboard</a></li>
+                             <%} %>
+                             
+                             <%if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
+                             {%>
+                                	<li><a href="StudentData">StudentDetails</a></li>
+                                	<li><a href="FacultyData">FacultyDetails</a></li>
+                                	<li><a href="Admin.jsp">Dashboard</a></li>
+                                	<li><a href="register1.jsp"> As a Faculty</a></li>
+                              <%}else{ %>  
+							<li><a href="add-student.jsp">As a Student</a></li>
+			 				 
+			 				 <%} %>
+<!-- 							<li><a href="login.jsp">Login</a></li> -->
+<!-- 							<li><a href="register.jsp">As a Student</a></li> -->
+<!-- 							 <li><a href="register1.jsp">As a Faculty</a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -75,47 +113,43 @@
 									
 									<li><a href="portfolio.jsp">Gallery</a></li>
 									
-									<li><a href="membership.jsp">Membership</a></li>
-									<li><a href="error-404.jsp">404 Page</a></li>
-									<li><a href="Result.jsp">Result</a></li>
-								</ul>
-							</li>
-							<li class="add-mega-menu"><a href="javascript:;">Our Courses <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li class="add-menu-left">
-										<h5 class="menu-adv-title">Our Courses</h5>
-										<ul>
-											<li><a href="courses.jsp">Courses </a></li>
-											
-											<li><a href="event.jsp">Upcoming Event</a></li>
-											
-										</ul>
-									</li>
+<!-- 									<li><a href="membership.jsp">Membership</a></li> -->
+<!-- 									<li><a href="error-404.jsp">404 Page</a></li> -->
+									<li><a href="Unanswered.jsp">Unanswered</a></li>
+<!-- 									<li><a href="Result.jsp">Result</a></li> -->
+									<li><a target="_blank" href="QuestionDetails.jsp" >Question Display</a></li>					
+										<% if(null!=u1 && "STUDENT".equalsIgnoreCase(u1.getRole()))
+										{%>
 									
-								</ul>
-							</li>
-							<li><a href="javascript:;">Blog <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
+											<li><a href="AddQuestion.jsp">Add Question</a></li>
+										<%} %>
+				
 									
-									<li><a href="blog-details.jsp">Blog Details</a></li>
+										<% if(null!=u1 && "ADMIN".equalsIgnoreCase(u1.getRole()))
+					{%>
+						 <li><a href="ResultFileUpload.jsp">Upload Result File </a></li>
+					<%} %>
 								</ul>
 							</li>
-							<li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="akkhor/index.jsp">Admin</a></li>
-									<li><a href="akkhor/index3.jsp">student</a></li>
-									<li><a href="akkhor/index4.jsp">Parent</a></li>
-									<li><a href="akkhor/index5.jsp">Teacher</a></li>
+							
+<!-- 							<li><a href="javascript:;">Blog <i class="fa fa-chevron-down"></i></a> -->
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="blog-classic-grid.jsp">Blog Classic</a></li> -->
 									
-								</ul>
-							</li>
+<!-- 									<li><a href="blog-details.jsp">Blog Details</a></li> -->
+<!-- 								</ul> -->
+<!-- 							</li> -->
+<!-- 							<li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a> -->
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="akkhor/index.jsp">Admin</a></li> -->
+<!-- 									<li><a href="akkhor/index3.jsp">student</a></li> -->
+<!-- 									<li><a href="akkhor/index4.jsp">Parent</a></li> -->
+<!-- 									<li><a href="akkhor/index5.jsp">Teacher</a></li> -->
+									
+<!-- 								</ul> -->
+<!-- 							</li> -->
 						</ul>
-						<div class="nav-social-link">
-							<a href="javascript:;"><i class="fa fa-facebook"></i></a>
-							<a href="javascript:;"><i class="fa fa-google-plus"></i></a>
-							<a href="javascript:;"><i class="fa fa-linkedin"></i></a>
-						</div>
+						
                     </div>
 					<!-- Navigation Menu END ==== -->
                 </div>

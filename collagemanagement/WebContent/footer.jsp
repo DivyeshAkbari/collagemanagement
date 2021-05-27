@@ -98,7 +98,7 @@ loreum
 										<li><a href="index.jsp">Home</a></li>
 										<li><a href="about-1.jsp">About</a></li>
 										<li><a href="faq-1.jsp">FAQs</a></li>
-										<li><a href="contact-1.jsp">Contact</a></li>
+										<li><a href="contact-2.jsp">Contact</a></li>
 									</ul>
 								</div>
 							</div>
@@ -106,9 +106,9 @@ loreum
 								<div class="widget footer_widget">
 									<h5 class="footer-title">Get In Touch</h5>
 									<ul>
-										<li><a href="http://educhamp.themetrades.com/admin/index.jsp">Dashboard</a></li>
-										<li><a href="blog-classic-grid.jsp">Blog</a></li>
-										<li><a href="portfolio.jsp">Portfolio</a></li>
+<!-- 										<li><a href="http://educhamp.themetrades.com/admin/index.jsp">Dashboard</a></li> -->
+<!-- 										<li><a href="blog-classic-grid.jsp">Blog</a></li> -->
+<!-- 										<li><a href="portfolio.jsp">Portfolio</a></li> -->
 										<li><a href="event.jsp">Event</a></li>
 									</ul>
 								</div>
@@ -118,9 +118,9 @@ loreum
 									<h5 class="footer-title">Courses</h5>
 									<ul>
 										<li><a href="courses.jsp">Courses</a></li>
-										<li><a href="courses-details.jsp">Details</a></li>
-										<li><a href="membership.jsp">Membership</a></li>
-										<li><a href="profile.jsp">Profile</a></li>
+<!-- 										<li><a href="courses-details.jsp">Details</a></li> -->
+<!-- 										<li><a href="membership.jsp">Membership</a></li> -->
+<!-- 										<li><a href="profile.jsp">Profile</a></li> -->
 									</ul>
 								</div>
 							</div>

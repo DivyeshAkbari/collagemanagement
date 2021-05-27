@@ -218,6 +218,32 @@ int userid1=0;
     <script src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+<!--     https://www.jqueryscript.net/table/export-table-json-csv-txt-pdf.html -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+    <script src="js/tableHTMLExport.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+    <script>
+    $("#myTable").tableHTMLExport({type:'pdf',orientation: 'p' filename:'sample.pdf'});
+//      $("#myTable").tableHTMLExport({ 
+//      		  type:'pdf',
+//      		  orientation: 'p' 
+
+//      	  // file name
+//      	  filename:'report.pdf'
+    	  
+//      	htmlContent:false,
+    	  
+//      	});
+     </script>
+<!-- <!--     <script> -->
+<!-- //     	var doc = new jsPDF() -->
+<!-- //     	var h1 = document.querySelector('#myTable') -->
+<!-- //     	doc.fromHTML(h1,15,15) -->
+<!-- //     	doc.save("report.pdf") -->
+<!-- <!--     </script> -->
     <script>
     function reloadPage(){
         location.reload(true);

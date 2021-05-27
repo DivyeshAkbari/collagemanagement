@@ -11,7 +11,9 @@ public class User
 	private String middlename;
 	private String lastname;
 	private String stream;
+	private int streamValue;
 	private int semester;
+	private int semValue;
 	private String division;
 	private String xender;
 	private String email;
@@ -71,13 +73,14 @@ public class User
 	@Override
 	public String toString() {
 		return "User [firstname=" + firstname + ", middlename=" + middlename + ", lastname=" + lastname + ", stream="
-				+ stream + ", semester=" + semester + ", division=" + division + ", xender=" + xender + ", email="
-				+ email + ", password=" + password + ", userProfilepicStream=" + userProfilepicStream
-				+ ", userProfilepicString=" + userProfilepicString + ", confirm_password=" + confirm_password
-				+ ", qualification=" + qualification + ", myHash=" + myHash + ", id=" + id + ", URL=" + URL
-				+ ", streamList=" + streamList + ", semesterList=" + semesterList + ", subjectList=" + subjectList
-				+ ", imagedata=" + imagedata + ", contactno=" + contactno + ", address=" + address + ", image=" + image
-				+ ", role=" + role + ", paymentstatus=" + paymentstatus + "]";
+				+ stream + ", streamValue=" + streamValue + ", semester=" + semester + ", semValue=" + semValue
+				+ ", division=" + division + ", xender=" + xender + ", email=" + email + ", password=" + password
+				+ ", userProfilepicStream=" + userProfilepicStream + ", userProfilepicString=" + userProfilepicString
+				+ ", confirm_password=" + confirm_password + ", qualification=" + qualification + ", myHash=" + myHash
+				+ ", id=" + id + ", URL=" + URL + ", streamList=" + streamList + ", semesterList=" + semesterList
+				+ ", subjectList=" + subjectList + ", imagedata=" + imagedata + ", contactno=" + contactno
+				+ ", address=" + address + ", image=" + image + ", role=" + role + ", paymentstatus=" + paymentstatus
+				+ "]";
 	}
 	public String getRole() {
 		return role;
@@ -205,4 +208,16 @@ public class User
 //	public void setAssStudentId(List<Integer> assStudentId) {
 //		this.assStudentId = assStudentId;
 //	}
+	public int getSemValue() {
+		return semValue;
+	}
+	public void setSemValue(int semValue) {
+		this.semValue = semValue;
+	}
+	public int getStreamValue() {
+		return streamValue;
+	}
+	public void setStreamValue(int streamValue) {
+		this.streamValue = streamValue;
+	}
 }

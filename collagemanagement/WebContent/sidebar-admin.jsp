@@ -127,10 +127,10 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="manage-queries.jsp" class="nav-link"><i
-                                    class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i><span>Manage Queries</span></a>
-                        </li>
+<!--                         <li class="nav-item"> -->
+<!--                             <a href="manage-queries.jsp" class="nav-link"><i -->
+<!--                                     class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i><span>Manage Queries</span></a> -->
+<!--                         </li> -->
                         <li class="nav-item">
                             <a href="manage-papers.jsp" class="nav-link"><i
                                     class="flaticon-list"></i><span>Previous year papers</span></a>
@@ -218,10 +218,10 @@
                             <a href="notice-board.jsp" class="nav-link"><i
                                     class="flaticon-script"></i><span>Notice</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a href="messaging.jsp" class="nav-link"><i
-                                    class="flaticon-chat"></i><span>Messeage</span></a>
-                        </li>
+<!--                         <li class="nav-item"> -->
+<!--                             <a href="messaging.jsp" class="nav-link"><i -->
+<!--                                     class="flaticon-chat"></i><span>Messeage</span></a> -->
+<!--                         </li> -->
 <!--                         <li class="nav-item sidebar-nav-item"> -->
 <!--                             <a href="#" class="nav-link"><i class="flaticon-menu-1"></i><span>UI Elements</span></a> -->
 <!--                             <ul class="nav sub-group-menu"> -->

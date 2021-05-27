@@ -28,14 +28,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="teacher-query.jsp" class="nav-link"><i
-                                class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i><span>Query session</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="teacher-all-student.jsp" class="nav-link"><i
-                                class="flaticon-multiple-users-silhouette"></i><span>All Students</span></a>
-                        </li>
+<!--                         <li class="nav-item"> -->
+<!--                             <a href="Unanswered.jsp" class="nav-link"><i -->
+<!--                                 class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i><span>Query session</span></a> -->
+<!--                         </li> -->
+<!--                         <li class="nav-item"> -->
+<!--                             <a href="teacher-all-student.jsp" class="nav-link"><i -->
+<!--                                 class="flaticon-multiple-users-silhouette"></i><span>All Students</span></a> -->
+<!--                         </li> -->
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Assignment</span></a>
                             <ul class="nav sub-group-menu">

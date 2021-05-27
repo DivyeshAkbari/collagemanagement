@@ -98,15 +98,44 @@ public class Collagedaoimpl implements CollageDao
 						u1.setPassword(r1.getString("c_password"));	
 						u1.setMiddlename(r1.getString("c_middle_name"));
 						u1.setRole(r1.getString("c_roll"));
+						String role = r1.getString("c_roll");
 						u1.setSemester(r1.getInt("i_semester_id"));
+						
 						u1.setId(r1.getInt("i_user_id"));
 						u1.setFirstname(r1.getString("c_First_Name"));
 						u1.setStream(r1.getString("i_stream_id"));
+						
 						u1.setAddress(r1.getString("c_address"));
 						u1.setContactno(r1.getString("c_contact"));
 						u1.setDivision(r1.getString("c_division"));
 						u1.setLastname(r1.getString("c_last_name"));
 						u1.setXender(r1.getString("c_gender"));
+						
+						//getting sem value from sem id
+						//System.out.println("sem id is: "+semid);
+						if(role.equalsIgnoreCase("STUDENT")) {
+							int semid = r1.getInt("i_semester_id");
+							int stream = Integer.parseInt(r1.getString("i_stream_id"));	
+						try(PreparedStatement p2 = connection.prepareStatement("select i_semester_value from semester_table where i_Semester_id=? and i_stream_id=?")){
+							
+							p2.setInt(1, semid);
+							p2.setInt(2, stream);
+							try(ResultSet r2 = p2.executeQuery()){
+								while(r2.next()) {
+									u1.setSemValue(r2.getInt("i_semester_value"));
+								}
+							}
+						}
+						try(PreparedStatement p3 = connection.prepareStatement("select c_stream from stream_table where i_stream_id=?")){
+							p3.setInt(1, stream);
+							try(ResultSet r3 = p3.executeQuery()){
+								while(r3.next()) {
+									//u1.setStreamValue(r3.getInt("c_stream"));
+									u1.setStream(r3.getString("c_stream"));
+								}
+							}
+						}
+						}
 						
 						byte[] imagedata = r1.getBytes("image");
 						if(imagedata!=null && imagedata.length>0)
